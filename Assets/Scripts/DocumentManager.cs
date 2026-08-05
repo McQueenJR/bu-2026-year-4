@@ -1,25 +1,27 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DocumentManager : MonoBehaviour
 {
     public GameObject panel;
-    public Image documentImage;
 
-    public Sprite[] documents;
+    public TMP_Text nameText;
+    public TMP_Text ageText;
+    public TMP_Text villageText;
 
-    public void OpenPanel()
+    public void ShowDocument(GameObject npc)
     {
+        NPCData data = npc.GetComponent<NPCData>();
+
+        nameText.text = data.npcName;
+        ageText.text = data.age.ToString();
+        villageText.text = data.village;
+
         panel.SetActive(true);
     }
 
-    public void ClosePanel()
+    public void CloseDocument()
     {
         panel.SetActive(false);
-    }
-
-    public void ShowDocument(int index)
-    {
-        documentImage.sprite = documents[index];
     }
 }
