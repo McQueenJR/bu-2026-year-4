@@ -18,8 +18,10 @@ public class NPCSpawner : MonoBehaviour
             spawnPoint.position,
             Quaternion.identity);
 
-        npc.GetComponent<NPCMovement>().MoveTo(stopPoint.position);
-
+        
         gameManager.currentNPC = npc;
+        gameManager.currentState = GameManager.NPCState.WalkingToCheckpoint;
+        
+        npc.GetComponent<NPCMovement>().MoveTo(stopPoint.position);
     }
 }

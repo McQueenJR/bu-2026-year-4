@@ -15,13 +15,16 @@ public class GameManager : MonoBehaviour
     public int currentDay = 1;
     public int currentHour = 12;
 
-    // จำนวน NPC ต่อวัน
+    [Header("Emergency")]
+    public bool emergencyMode = false;
+    
     public int npcPerDay = 8;
 
-    // จำนวน NPC ที่ผ่านไปแล้ว
+   
     private int currentNPCCount = 0;
 
     public ClockManager clockManager;
+    public NPCState currentState;
 
     void Awake()
     {
@@ -80,7 +83,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        // อนุญาตให้กดปุ่มอีกครั้ง
+        
         isProcessing = false;
 
         if (currentNPCCount < npcPerDay)
@@ -99,5 +102,35 @@ public class GameManager : MonoBehaviour
 
         // ตอนนี้ยังไม่ทำ Day2
         // ไว้ทำทีหลัง
+    }
+    public enum NPCState
+    {
+        WalkingToCheckpoint, 
+        WaitingDecision,     
+        Inspecting,          
+        Leaving              
+    }
+    public void GreenButton()
+    {
+        if (currentState != NPCState.WaitingDecision)
+            return;
+
+        currentState = NPCState.Leaving;
+
+        currentNPC.GetComponent<NPCMovement>()
+            .MoveTo(enterPoint.position);
+
+        StartCoroutine(RemoveNPC());
+    }
+    public void RedButton()
+    {
+        if (currentState != NPCState.WaitingDecision)
+            return;
+
+        currentState = NPCState.Inspecting;
+
+        Debug.Log("เปิดกระจก");
+        Debug.Log("ส่งกระเป๋า");
+        Debug.Log("เริ่มคุย");
     }
 }

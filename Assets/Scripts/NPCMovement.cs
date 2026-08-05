@@ -25,6 +25,14 @@ public class NPCMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, target) < 0.05f)
         {
             moving = false;
+
+           
+            if (GameManager.Instance.currentState == GameManager.NPCState.WalkingToCheckpoint)
+            {
+                GameManager.Instance.currentState = GameManager.NPCState.WaitingDecision;
+
+                Debug.Log("NPC มาถึงจุดตรวจ รอผู้เล่นตัดสินใจ");
+            }
         }
     }
 

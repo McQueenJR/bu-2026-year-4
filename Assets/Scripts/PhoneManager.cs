@@ -6,6 +6,13 @@ public class PhoneManager : MonoBehaviour
 
     public void OpenPhone()
     {
+        if (!GameManager.Instance.emergencyMode)
+        {
+            Debug.Log("ต้องปิดประตูก่อน");
+
+            return;
+        }
+
         phonePanel.SetActive(true);
     }
 
@@ -13,4 +20,5 @@ public class PhoneManager : MonoBehaviour
     {
         phonePanel.SetActive(false);
     }
+    
 }
