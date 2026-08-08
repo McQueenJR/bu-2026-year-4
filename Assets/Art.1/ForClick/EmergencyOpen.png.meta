@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9b7eaae817d5a8940a878110e1bc293f
+guid: d614c39be311fc44e912e1d777580d3e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 497550831612788670
-    second: post it_0
+      213: -8361336087449608229
+    second: EmergencyOpen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: post it_0
+      name: EmergencyOpen_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 300
+        y: 85
+        width: 178
+        height: 120
+      alignment: 9
+      pivot: {x: 0.27725443, y: 0.4953575}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ebffaff58d7a7e600800000000000000
-      internalID: 497550831612788670
+      spriteID: bdf59e3f02196fb80800000000000000
+      internalID: -8361336087449608229
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0a2cc504bf84bbc4d9f7e1f743511b07
+    spriteID: 8437bfdf018dfbf4399bf90ee67dd98d
     internalID: 0
     vertices: []
     indices: 
@@ -133,11 +133,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1920.0,"y":1080.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      post it_0: 497550831612788670
+      EmergencyOpen_0: -8361336087449608229
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

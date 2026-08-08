@@ -110,6 +110,10 @@ public class GameManager : MonoBehaviour
         Inspecting,          
         Leaving              
     }
+    [Header("Button Visuals")]
+    public ButtonVisual greenButtonVisual;
+    public ButtonVisual redButtonVisual;
+
     public void GreenButton()
     {
         if (currentState != NPCState.WaitingDecision)
@@ -117,17 +121,26 @@ public class GameManager : MonoBehaviour
 
         currentState = NPCState.Leaving;
 
+        // สลับภาพ: เขียว active, แดงกลับปกติ
+        greenButtonVisual.SetActive(true);
+        redButtonVisual.SetActive(false);
+
         currentNPC.GetComponent<NPCMovement>()
             .MoveTo(enterPoint.position);
 
         StartCoroutine(RemoveNPC());
     }
+
     public void RedButton()
     {
         if (currentState != NPCState.WaitingDecision)
             return;
 
         currentState = NPCState.Inspecting;
+
+        // สลับภาพ: แดง active, เขียวกลับปกติ
+        redButtonVisual.SetActive(true);
+        greenButtonVisual.SetActive(false);
 
         Debug.Log("เปิดกระจก");
         Debug.Log("ส่งกระเป๋า");

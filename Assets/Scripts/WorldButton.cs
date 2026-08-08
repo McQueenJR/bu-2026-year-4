@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class WorldButton : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         transform.localScale = originalScale * hoverScale;
     }
 
@@ -29,12 +33,18 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         transform.localScale = originalScale * pressScale;
         Debug.Log("Clicked!");
     }
 
     private void OnMouseUpAsButton()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         transform.localScale = originalScale * hoverScale;
 
         onClick?.Invoke();
