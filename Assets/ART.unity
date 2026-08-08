@@ -715,8 +715,9 @@ GameObject:
   - component: {fileID: 154888037}
   - component: {fileID: 154888038}
   - component: {fileID: 154888039}
+  - component: {fileID: 154888040}
   m_Layer: 0
-  m_Name: openDoor
+  m_Name: green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -861,6 +862,21 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.18
+--- !u!114 &154888040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154888035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db5b47837daad84e8a977be354cc645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonVisual
+  spriteRenderer: {fileID: 154888037}
+  normalSprite: {fileID: -6099873399732076034, guid: 68c23d378dd75974fb184d9629a6324c, type: 3}
+  activeSprite: {fileID: 2022049939702120555, guid: 9f4169b391b257d4b8f0544ec700f896, type: 3}
 --- !u!1 &163098237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,7 +1286,7 @@ Transform:
   m_GameObject: {fileID: 216281995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 476.53, y: -91.624, z: 0}
+  m_LocalPosition: {x: 476.47, y: -91.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1325,7 +1341,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4402409914689582303, guid: e640e2d16060c684d91b36f5eb1b9502, type: 3}
+  m_Sprite: {fileID: -3343719080742930468, guid: a6b274cccfd900246b5c1bd88d0da5d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1373,7 +1389,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.05, y: 0.97}
+    oldSize: {x: 1.23, y: 1.14}
     newSize: {x: 19.2, y: 10.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1938,8 +1954,9 @@ GameObject:
   - component: {fileID: 365158345}
   - component: {fileID: 365158346}
   - component: {fileID: 365158347}
+  - component: {fileID: 365158348}
   m_Layer: 0
-  m_Name: closeDoor
+  m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2084,6 +2101,21 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.18
+--- !u!114 &365158348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365158343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db5b47837daad84e8a977be354cc645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonVisual
+  spriteRenderer: {fileID: 365158345}
+  normalSprite: {fileID: 8166710274925509176, guid: 388871bf07742b444b7a712912e17e7d, type: 3}
+  activeSprite: {fileID: 7489529326523575892, guid: a400afbc58820324cb3a63fd3a942aee, type: 3}
 --- !u!1 &402942681
 GameObject:
   m_ObjectHideFlags: 0
@@ -5025,7 +5057,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3611951696392398232, guid: 2afa982293f4b0746a9944962ac1796a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5637,6 +5669,8 @@ MonoBehaviour:
   npcPerDay: 8
   clockManager: {fileID: 1062139395}
   currentState: 0
+  greenButtonVisual: {fileID: 154888040}
+  redButtonVisual: {fileID: 365158348}
 --- !u!4 &1304983902
 Transform:
   m_ObjectHideFlags: 0
@@ -6291,7 +6325,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5913495621597087249, guid: 11b2d03ffe1cc9e43b416a59bb4b3429, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -6755,8 +6789,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e295069cedc63647acebde220ea150f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EmergencyManager
-  emergencyDoor: {fileID: 2667523440982359888, guid: 3fe1154580bcb0c45823e29f06f78b11, type: 3}
+  doorAnimator: {fileID: 719378640}
   gameManager: {fileID: 1304983901}
+  buttonRenderer: {fileID: 216281999}
+  coverClosedSprite: {fileID: -3343719080742930468, guid: a6b274cccfd900246b5c1bd88d0da5d0, type: 3}
+  coverOpenSprite: {fileID: -8361336087449608229, guid: d614c39be311fc44e912e1d777580d3e, type: 3}
 --- !u!4 &1653924425
 Transform:
   m_ObjectHideFlags: 0
@@ -8978,6 +9015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhoneManager
   phonePanel: {fileID: 890596249}
+  telaphone: {fileID: 1180526000}
 --- !u!4 &2061456608
 Transform:
   m_ObjectHideFlags: 0
@@ -9023,8 +9061,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCSpawner
   npcPrefabs:
-  - {fileID: 1429213743967753332, guid: 03f41f22587b58e48940738aed1b5f53, type: 3}
-  - {fileID: 37347008744544750, guid: 72b837d0b91453a4cb1dda2be371c95f, type: 3}
+  - {fileID: 9030751808653253318, guid: 093bcc26790f39b4490fe572664dea14, type: 3}
+  - {fileID: 2630372590865414851, guid: 4e4478972fb739e4293e3e8f24217825, type: 3}
+  - {fileID: 7007486066151835508, guid: 3f1921102ff120f40a1cea855242c6cf, type: 3}
   spawnPoint: {fileID: 1783206952}
   stopPoint: {fileID: 2134447594}
   gameManager: {fileID: 1304983901}
