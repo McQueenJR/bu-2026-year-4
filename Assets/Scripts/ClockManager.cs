@@ -5,24 +5,8 @@ public class ClockManager : MonoBehaviour
 {
     public TMP_Text timeText;
 
-    public int currentHour = 12;
-
-    void Start()
+    public void SetHour(int hour)
     {
-        UpdateClock();
-    }
-
-    public void NextHour()
-    {
-        currentHour++;
-
-        UpdateClock();
-
-        Debug.Log(currentHour + ":00");
-    }
-
-    void UpdateClock()
-    {
-        timeText.text = currentHour.ToString("00") + ":00";
+        timeText.text = hour.ToString("00") + ":00";
     }
 }

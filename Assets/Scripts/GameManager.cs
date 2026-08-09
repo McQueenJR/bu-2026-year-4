@@ -1,30 +1,48 @@
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private bool isProcessing = false;
-    public GameObject currentNPC;
 
+    public GameObject currentNPC;
     public NPCSpawner spawner;
 
-    public Transform enterPoint;
-    public Transform exitPoint;
+    public Transform enterPoint;   // จุดเดินไปตอนกดเขียว (ผ่านการตรวจ)
+    public Transform exitPoint;    // จุดเดินไปตอนตรวจไม่ผ่าน (ยังไม่มีเงื่อนไขเรียกใช้)
 
     [Header("Day System")]
-    public int currentDay = 1;
-    public int currentHour = 12;
+    public int currentHour;
+    public int startHour = 20;
+    public int endHour = 6;
+
+    public ClockManager clockManager;
 
     [Header("Emergency")]
     public bool emergencyMode = false;
-    
-    public int npcPerDay = 8;
 
-   
-    private int currentNPCCount = 0;
-
-    public ClockManager clockManager;
+    public enum NPCState
+    {
+        WalkingToCheckpoint,
+        WaitingDecision,
+        Inspecting,
+        Leaving
+    }
     public NPCState currentState;
+
+    public enum ButtonChoice { Green, Red }
+    public ButtonChoice currentButtonChoice = ButtonChoice.Red;
+
+    [Header("Button Visuals")]
+    public ButtonVisual greenButtonVisual;
+    public ButtonVisual redButtonVisual;
+
+    [Header("Bag Spawn")]
+    public GameObject bagPrefab;
+    public Transform spawnPointBag;
+    public SlidingPanel windowPanel;
+
+    private GameObject currentBag;
 
     void Awake()
     {
@@ -33,117 +51,135 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Game Start");
+        currentHour = startHour;
+        clockManager.SetHour(currentHour);
 
-        currentNPCCount = 0;
-        currentHour = 12;
-
+        SetButtonChoice(ButtonChoice.Red);
         spawner.SpawnNPC();
     }
 
-    public void AllowNPC()
-    {
-        if (currentNPC == null) return;
-        if (isProcessing) return;
-
-        isProcessing = true;
-
-        currentNPC.GetComponent<NPCMovement>()
-            .MoveTo(enterPoint.position);
-
-        StartCoroutine(RemoveNPC());
-    }
-
-    public void RejectNPC()
-    {
-        if (currentNPC == null) return;
-        if (isProcessing) return;
-
-        isProcessing = true;
-
-        currentNPC.GetComponent<NPCMovement>()
-            .MoveTo(exitPoint.position);
-
-        StartCoroutine(RemoveNPC());
-    }
-
-    System.Collections.IEnumerator RemoveNPC()
-    {
-        NPCMovement move = currentNPC.GetComponent<NPCMovement>();
-
-        while (move.IsMoving())
-            yield return null;
-
-        Destroy(currentNPC);
-        currentNPC = null;
-
-        currentNPCCount++;
-
-        clockManager.NextHour();
-
-        yield return new WaitForSeconds(1f);
-
-        
-        isProcessing = false;
-
-        if (currentNPCCount < npcPerDay)
-        {
-            spawner.SpawnNPC();
-        }
-        else
-        {
-            EndDay();
-        }
-    }
-
-    public void EndDay()
-    {
-        Debug.Log("Day " + currentDay + " จบ");
-
-        // ตอนนี้ยังไม่ทำ Day2
-        // ไว้ทำทีหลัง
-    }
-    public enum NPCState
-    {
-        WalkingToCheckpoint, 
-        WaitingDecision,     
-        Inspecting,          
-        Leaving              
-    }
-    [Header("Button Visuals")]
-    public ButtonVisual greenButtonVisual;
-    public ButtonVisual redButtonVisual;
-
     public void GreenButton()
     {
-        if (currentState != NPCState.WaitingDecision)
-            return;
+        SetButtonChoice(ButtonChoice.Green);
 
-        currentState = NPCState.Leaving;
-
-        // สลับภาพ: เขียว active, แดงกลับปกติ
-        greenButtonVisual.SetActive(true);
-        redButtonVisual.SetActive(false);
-
-        currentNPC.GetComponent<NPCMovement>()
-            .MoveTo(enterPoint.position);
-
-        StartCoroutine(RemoveNPC());
+        if (currentState == NPCState.Inspecting && currentNPC != null)
+        {
+            ReleaseCurrentNPC();
+        }
     }
 
     public void RedButton()
     {
-        if (currentState != NPCState.WaitingDecision)
+        SetButtonChoice(ButtonChoice.Red);
+    }
+
+    private void SetButtonChoice(ButtonChoice choice)
+    {
+        currentButtonChoice = choice;
+
+        greenButtonVisual.SetActive(choice == ButtonChoice.Green);
+        redButtonVisual.SetActive(choice == ButtonChoice.Red);
+    }
+
+    // NPCMovement เรียกตอนเดินถึงจุดกลางจอ (stopPoint)
+    public void NPCReachedCheckpoint(GameObject npc)
+    {
+        currentNPC = npc;
+        currentState = NPCState.WaitingDecision;
+        StartCoroutine(CheckDecisionAfterDelay());
+    }
+
+    private IEnumerator CheckDecisionAfterDelay()
+    {
+        yield return new WaitForSeconds(2f);
+
+        if (currentButtonChoice == ButtonChoice.Green)
+        {
+            ReleaseCurrentNPC();
+        }
+        else
+        {
+            currentState = NPCState.Inspecting;
+            Debug.Log("NPC หยุดรอการตรวจสอบ (ปุ่มแดง active) — รอผู้เล่นกดเขียวเพื่อปล่อย");
+
+            windowPanel.SlideOut(() => SpawnBag());
+        }
+    }
+
+    private void SpawnBag()
+    {
+        if (bagPrefab == null || spawnPointBag == null) return;
+
+        currentBag = Instantiate(bagPrefab, spawnPointBag.position, Quaternion.identity);
+    }
+
+    private void DestroyBagAndSlideBack()
+    {
+        if (currentBag != null)
+        {
+            Destroy(currentBag);
+            currentBag = null;
+
+            windowPanel.SlideBack();
+        }
+    }
+
+    // ผ่านการตรวจ (กดเขียว) → เดินไป enterPoint
+    private void ReleaseCurrentNPC()
+    {
+        if (currentNPC == null) return;
+
+        currentState = NPCState.Leaving;
+
+        DestroyBagAndSlideBack();
+
+        currentNPC.GetComponent<NPCMovement>().MoveTo(enterPoint.position);
+        StartCoroutine(WaitForExitThenAdvanceHour(currentNPC));
+    }
+
+    // TODO: เรียกจุดนี้เมื่อมีเงื่อนไข "ตรวจไม่ผ่าน" — ยังไม่ได้ผูกจากที่ไหน
+    private void RejectCurrentNPC()
+    {
+        if (currentNPC == null) return;
+
+        currentState = NPCState.Leaving;
+
+        DestroyBagAndSlideBack();
+
+        currentNPC.GetComponent<NPCMovement>().MoveTo(exitPoint.position);
+        StartCoroutine(WaitForExitThenAdvanceHour(currentNPC));
+    }
+
+    private IEnumerator WaitForExitThenAdvanceHour(GameObject npc)
+    {
+        NPCMovement move = npc.GetComponent<NPCMovement>();
+
+        while (move.IsMoving())
+            yield return null;
+
+        Destroy(npc);
+        currentNPC = null;
+
+        AdvanceHour();
+    }
+
+    private void AdvanceHour()
+    {
+        currentHour = (currentHour + 1) % 24;
+        clockManager.SetHour(currentHour);
+
+        if (currentHour == endHour)
+        {
+            EndGame();
             return;
+        }
 
-        currentState = NPCState.Inspecting;
+        spawner.SpawnNPC();
+    }
 
-        // สลับภาพ: แดง active, เขียวกลับปกติ
-        redButtonVisual.SetActive(true);
-        greenButtonVisual.SetActive(false);
-
-        Debug.Log("เปิดกระจก");
-        Debug.Log("ส่งกระเป๋า");
-        Debug.Log("เริ่มคุย");
+    public void EndGame()
+    {
+        Debug.Log("จบเกม (ถึงเวลา " + endHour.ToString("00") + ":00)");
+        // TODO: ใส่ logic จบเกมจริง
     }
 }

@@ -11,6 +11,8 @@ public class NPCSpawner : MonoBehaviour
 
     public void SpawnNPC()
     {
+        if (gameManager.currentNPC != null) return;   // มี NPC อยู่แล้ว ห้าม spawn ซ้อน
+
         int randomIndex = Random.Range(0, npcPrefabs.Length);
 
         GameObject npc = Instantiate(
@@ -18,10 +20,9 @@ public class NPCSpawner : MonoBehaviour
             spawnPoint.position,
             Quaternion.identity);
 
-        
         gameManager.currentNPC = npc;
         gameManager.currentState = GameManager.NPCState.WalkingToCheckpoint;
-        
+
         npc.GetComponent<NPCMovement>().MoveTo(stopPoint.position);
     }
 }

@@ -26,12 +26,9 @@ public class NPCMovement : MonoBehaviour
         {
             moving = false;
 
-           
             if (GameManager.Instance.currentState == GameManager.NPCState.WalkingToCheckpoint)
             {
-                GameManager.Instance.currentState = GameManager.NPCState.WaitingDecision;
-
-                Debug.Log("NPC มาถึงจุดตรวจ รอผู้เล่นตัดสินใจ");
+                GameManager.Instance.NPCReachedCheckpoint(gameObject);
             }
         }
     }
