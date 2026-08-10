@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Emergency")]
     public bool emergencyMode = false;
+    public EmergencyManager emergencyManager;
 
     public enum NPCState
     {
@@ -52,6 +53,15 @@ public class GameManager : MonoBehaviour
     public SlidingPanel windowPanel;
 
     private GameObject currentBag;
+
+    [Header("Police Call")]
+    public GameObject policePrefab;
+    public Transform spawnPolice;
+    public Transform exitPolicePoint;
+    public AudioSource policeSound;
+    public bool isPoliceSequenceActive = false;
+
+    private GameObject currentPolice;
 
     void Awake()
     {
@@ -327,5 +337,70 @@ public class GameManager : MonoBehaviour
             "จบเกม เวลา " +
             currentHour.ToString("00") +
             ":00");
+    }
+
+    // =========================
+    // POLICE CALL
+    // =========================
+
+    // เรียกจาก PhoneDialer.Call() หลังกด 191 ถูกต้อง และโชว์ "Calling..." ค้างไว้แล้ว
+    public void OnPoliceCalled()
+    {
+        StartCoroutine(PoliceSequence());
+    }
+
+    private IEnumerator PoliceSequence()
+    {
+        isPoliceSequenceActive = true;
+
+        // 1. NPC ปัจจุบันเดินไป exitPoint (เร็วขึ้น)
+        if (currentNPC != null)
+        {
+            NPCMovement npcMove = currentNPC.GetComponent<NPCMovement>();
+            npcMove.MoveTo(exitPoint.position, 6f);
+
+            while (npcMove.IsMoving())
+                yield return null;
+
+            Destroy(currentNPC);
+            currentNPC = null;
+        }
+
+        // 2. เล่นเสียง
+        policeSound.Play();
+
+        // 3. ระหว่างเสียงเล่น สปาวตำรวจแล้วเดินมาจุด spawnPolice
+        currentPolice = Instantiate(policePrefab, spawner.spawnPoint.position, Quaternion.identity);
+        NPCMovement policeMove = currentPolice.GetComponent<NPCMovement>();
+        policeMove.MoveTo(spawnPolice.position);
+
+        while (policeMove.IsMoving())
+            yield return null;
+
+        while (policeSound.isPlaying)
+            yield return null;
+
+        // 4. สั่งเปิดประตู
+        emergencyManager.ForceOpenDoor();
+
+        // 5. ตำรวจยืนรอ 2 วิ
+        yield return new WaitForSeconds(2f);
+
+        // 6. ลบกระเป๋า + ปิดหน้าต่าง (เหมือนตอนกดปุ่มเขียว) ก่อนตำรวจเดินออก
+        DestroyBagAndSlideBack();
+
+        // 7. ตำรวจเดินออกไปที่ ExitPolicePoint
+        policeMove.MoveTo(exitPolicePoint.position);
+
+        while (policeMove.IsMoving())
+            yield return null;
+
+        Destroy(currentPolice);
+        currentPolice = null;
+
+        // 8. กลับเข้าลูปเกมปกติ ต่อไปชม.ถัดไป (spawn NPC ตัวใหม่)
+        AdvanceHour();
+
+        isPoliceSequenceActive = false;
     }
 }
