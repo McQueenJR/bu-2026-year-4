@@ -63,6 +63,21 @@ public class GameManager : MonoBehaviour
 
     private GameObject currentPolice;
 
+    
+    [Header("Day Stats")]
+    public int npcProcessedCount = 0;
+    public int npcPerDay = 8;
+
+    public int score = 0;
+    public int villagerPassed = 0;
+    public int villagerArrested = 0;
+    public int robberPassed = 0;
+    public int robberArrested = 0;
+
+    [Header("End Day UI")]
+    public EndDayUI endDayUI;
+    
+    
     void Awake()
     {
         Instance = this;
@@ -243,6 +258,8 @@ public class GameManager : MonoBehaviour
     {
         if (currentNPC == null)
             return;
+        
+        RecordDecision(currentNPC, wasArrested: false);   // <-- โอ๊ตเพิ่มบรรทัดนี้
 
         currentState = NPCState.Leaving;
 
@@ -312,16 +329,24 @@ public class GameManager : MonoBehaviour
 
         clockManager.SetHour(currentHour);
 
-        Debug.Log(
+        /*Debug.Log(
             "เวลา : " +
             currentHour.ToString("00") +
-            ":00");
+            ":00"); */
 
-        if (currentHour == endHour)
+        // จบวันเมื่อครบ 8 คน (แทนที่จะดูแค่ currentHour == endHour)
+        if (npcProcessedCount >= npcPerDay)
         {
             EndGame();
             return;
         }
+        /*if (currentHour == endHour)
+        {
+            EndGame();
+            return;
+        }*/
+        
+
 
         // Spawn NPC คนใหม่
         spawner.SpawnNPC();
@@ -330,13 +355,57 @@ public class GameManager : MonoBehaviour
     // =========================
     // END
     // =========================
-
-    public void EndGame()
+    
+    //อันเก่า
+    /* public void EndGame()
     {
         Debug.Log(
             "จบเกม เวลา " +
             currentHour.ToString("00") +
             ":00");
+    } */
+    
+    public void EndGame()
+    {
+        Debug.Log("จบวัน คะแนนรวม: " + score);
+
+        if (endDayUI != null)
+        {
+            endDayUI.Show(score, villagerPassed, villagerArrested, robberPassed, robberArrested);
+        }
+    }
+    
+    // =========================
+    // NEXT DAY
+    // =========================
+
+    public void StartNextDay()
+    {
+        // รีเซ็ตสถิติ
+        npcProcessedCount = 0;
+        score = 0;
+        villagerPassed = 0;
+        villagerArrested = 0;
+        robberPassed = 0;
+        robberArrested = 0;
+
+        // ปิด UI สรุปผล
+        if (endDayUI != null)
+            endDayUI.Hide();
+
+        // รีเซ็ตเวลากลับไปเริ่มต้น
+        currentHour = startHour;
+        clockManager.SetHour(currentHour);
+
+        // รีเซ็ตปุ่มเป็นแดง (ค่าเริ่มต้น)
+        SetButtonChoice(ButtonChoice.Red);
+
+        // เคลียร์ NPC ค้าง (กันเหนียว เผื่อมี object หลงเหลือ)
+        currentNPC = null;
+        currentState = NPCState.WalkingToCheckpoint;
+
+        // เริ่ม spawn คนแรกของวันใหม่
+        spawner.SpawnNPC();
     }
 
     // =========================
@@ -361,6 +430,8 @@ public class GameManager : MonoBehaviour
 
             while (npcMove.IsMoving())
                 yield return null;
+            
+            RecordDecision(currentNPC, wasArrested: true);   // <-- โอ๊คเพิ่มบรรทัดนี้
 
             Destroy(currentNPC);
             currentNPC = null;
@@ -402,5 +473,46 @@ public class GameManager : MonoBehaviour
         AdvanceHour();
 
         isPoliceSequenceActive = false;
+    }
+    
+    //โอ๊ค
+    // เรียกตอนที่ตัดสินใจ NPC 1 คนเสร็จแล้ว (ปล่อย หรือ จับ)
+    private void RecordDecision(GameObject npcObj, bool wasArrested)
+    {
+        NPC npc = npcObj.GetComponent<NPC>();
+        if (npc == null) return;
+
+        bool isRobber = npc.npcType == NPCType.Robber;
+
+        if (!wasArrested)
+        {
+            // ปล่อยเข้าไปในหมู่บ้าน
+            if (isRobber)
+            {
+                robberPassed++;
+                score -= 1;
+            }
+            else
+            {
+                villagerPassed++;
+                score += 1;
+            }
+        }
+        else
+        {
+            // เรียกตำรวจจับ
+            if (isRobber)
+            {
+                robberArrested++;
+                score += 1;
+            }
+            else
+            {
+                villagerArrested++;
+                score -= 1;
+            }
+        }
+
+        npcProcessedCount++;
     }
 }
