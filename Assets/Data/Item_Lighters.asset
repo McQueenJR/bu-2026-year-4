@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998d7f631386b2348b4407daddef4eea, type: 3}
   m_Name: Item_Lighters
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  itemImage: {fileID: 0}
+  itemName: Lighters
+  itemImage: {fileID: 169478562208632356, guid: 7867589bb5d22dd4483508b6ba9ff0a4, type: 3}
   description: 

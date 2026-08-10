@@ -17,8 +17,5 @@ MonoBehaviour:
   dialogs:
   - Hi, the stars look beautiful tonight.
   bagItems:
-  - Lighter
-  - incense
-  - candles
-  - amulets
-  - water bottle
+  - {fileID: 11400000, guid: 668b6380556d5304d9186e23b774bb1e, type: 2}
+  - {fileID: 11400000, guid: 2bfba8673eff9594cb86dfd53ac77282, type: 2}

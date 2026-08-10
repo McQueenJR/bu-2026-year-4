@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998d7f631386b2348b4407daddef4eea, type: 3}
   m_Name: amulets
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  itemImage: {fileID: 0}
+  itemName: amulets
+  itemImage: {fileID: 8957324059118975939, guid: fa86c616b59ce204a946a6776e8811e1, type: 3}
   description: 

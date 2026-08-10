@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998d7f631386b2348b4407daddef4eea, type: 3}
   m_Name: Item_incense sticks
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
+  itemName: incense sticks
   itemImage: {fileID: 0}
   description: 
