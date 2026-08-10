@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class PhoneDialer : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class PhoneDialer : MonoBehaviour
 
     public void PressNumber(string number)
     {
-        
         if (currentNumber.Length >= 8)
             return;
 
@@ -24,16 +24,26 @@ public class PhoneDialer : MonoBehaviour
 
     public void Call()
     {
-        if(currentNumber == "191")
+        if (currentNumber == "191")
         {
             displayText.text = "Calling...";
-            Debug.Log("Calling Polist");
+            Debug.Log("Calling Police");
+
+            StartCoroutine(CallPoliceSequence());
         }
         else
         {
             displayText.text = "Wrong Number";
         }
     }
+
+    private IEnumerator CallPoliceSequence()
+    {
+        yield return new WaitForSeconds(2f);   // ระยะเวลาโชว์ "Calling..." ก่อนเริ่มลำดับเหตุการณ์
+
+        GameManager.Instance.OnPoliceCalled();
+    }
+
     public void Backspace()
     {
         if (currentNumber.Length > 0)

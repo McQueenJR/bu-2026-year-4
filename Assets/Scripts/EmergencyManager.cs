@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class EmergencyManager : MonoBehaviour
 {
-   // public GameObject emergencyDoor;
     public Animator doorAnimator;
 
     public GameManager gameManager;
 
     [Header("Button Visual")]
     [SerializeField] private SpriteRenderer buttonRenderer;
-    [SerializeField] private Sprite coverClosedSprite;
-    [SerializeField] private Sprite coverOpenSprite;
+    [SerializeField] private Sprite coverClosedSprite;   // ฝาปิด — สถานะเริ่มต้น และหลังประตูเปิดสำเร็จ
+    [SerializeField] private Sprite coverOpenSprite;     // ฝาเปิด — ตั้งแต่กด arm จนถึงประตูปิดค้างอยู่
 
-    private bool coverOpened = false;
+    private bool coverOpened = false;   // สถานะฝา (arm) — ใช้เฉพาะตอนประตูเปิดอยู่
+    private bool isDoorClosed = false;  // สถานะประตูจริง
 
     private void Start()
     {
@@ -21,26 +21,64 @@ public class EmergencyManager : MonoBehaviour
 
     public void EmergencyButton()
     {
-        // เช็คก่อนว่าปุ่มแดงกำลังทำงานอยู่ (currentState == Inspecting) เท่านั้นถึงกดปุ่มนี้ได้
+        // กันกดระหว่าง police sequence กำลังทำงานอยู่
+        if (gameManager.isPoliceSequenceActive)
+        {
+            Debug.Log("กำลังอยู่ระหว่างเรียกตำรวจ กดฉุกเฉินไม่ได้ตอนนี้");
+            return;
+        }
+
+        // กดได้เฉพาะตอนปุ่มแดง active
         if (gameManager.currentState != GameManager.NPCState.Inspecting)
         {
             Debug.Log("ปุ่มแดงยังไม่ทำงาน กดฉุกเฉินไม่ได้");
             return;
         }
 
-        if (gameManager.emergencyMode) return; // กันกดซ้ำหลัง active แล้ว
-
-        if (!coverOpened)
+        if (!isDoorClosed)
         {
-            coverOpened = true;
-            buttonRenderer.sprite = coverOpenSprite;
-            return;
+            // ประตูเปิดอยู่ → ต้องผ่าน 2-step confirm ก่อนสั่งปิด
+            if (!coverOpened)
+            {
+                coverOpened = true;
+                buttonRenderer.sprite = coverOpenSprite;
+                return;
+            }
+
+            // กดรอบสอง (ฝาเปิดอยู่แล้ว): ยืนยัน → สั่งปิดประตูจริง
+            coverOpened = false;
+            isDoorClosed = true;
+
+            gameManager.emergencyMode = true;
+            doorAnimator.SetTrigger("CloseDoor");
+
+            Debug.Log("Emergency Activated - Door Closed");
         }
+        else
+        {
+            // ประตูปิดอยู่ → กดครั้งเดียวจบ สั่งเปิดทันที ไม่ต้อง 2-step
+            isDoorClosed = false;
 
-        //emergencyDoor.SetActive(true);
-        gameManager.emergencyMode = true;
-        doorAnimator.SetTrigger("CloseDoor");
+            gameManager.emergencyMode = false;
+            doorAnimator.SetTrigger("OpenDoor");
 
-        Debug.Log("Emergency Activated");
+            buttonRenderer.sprite = coverClosedSprite;
+
+            Debug.Log("Emergency Deactivated - Door Open");
+        }
+    }
+
+    // เปิดประตูแบบบังคับจากระบบอื่น (เช่นหลังโทร 191 สำเร็จ) โดยไม่ต้องผ่านการกดปุ่ม
+    public void ForceOpenDoor()
+    {
+        isDoorClosed = false;
+        coverOpened = false;
+
+        gameManager.emergencyMode = false;
+        doorAnimator.SetTrigger("OpenDoor");
+
+        buttonRenderer.sprite = coverClosedSprite;
+
+        Debug.Log("Door force-opened after police call");
     }
 }
