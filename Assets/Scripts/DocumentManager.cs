@@ -15,7 +15,7 @@ public class DocumentManager : MonoBehaviour
 
         nameText.text = data.npcName;
         ageText.text = data.age.ToString();
-        villageText.text = data.village;
+        //villageText.text = data.village;
 
         panel.SetActive(true);
     }

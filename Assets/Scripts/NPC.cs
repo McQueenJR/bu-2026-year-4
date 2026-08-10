@@ -9,4 +9,6 @@ public enum NPCType
 public class NPC : MonoBehaviour
 {
     public NPCType npcType;
+    public NPCData data;
 }
+

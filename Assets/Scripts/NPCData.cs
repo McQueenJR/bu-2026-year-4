@@ -1,13 +1,16 @@
 using UnityEngine;
 
-
-
-public class NPCData : MonoBehaviour
+[CreateAssetMenu(fileName = "New NPC Data", menuName = "Game/NPC Data")]
+public class NPCData : ScriptableObject
 {
-    [Header("ข้อมูล NPC")]
+    [Header("Character")]
     public string npcName;
     public int age;
-    public string village;
 
-    public NPCType npcType;
+    [Header("Dialog")]
+    [TextArea(2, 5)]
+    public string[] dialogs;
+
+    [Header("Bag")]
+    public ItemData[] bagItems;
 }

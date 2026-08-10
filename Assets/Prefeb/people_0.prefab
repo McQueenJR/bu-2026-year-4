@@ -118,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb00b7e6213de4d4aa15e3ecc66c1158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  npcType: 1
+  npcType: 0
+  data: {fileID: 11400000, guid: e4a2df7f6c8300b449423a8f29e18161, type: 2}

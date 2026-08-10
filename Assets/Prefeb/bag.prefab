@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5484124400458825477}
   - component: {fileID: 551168910697574976}
   - component: {fileID: 3271065557096588341}
+  - component: {fileID: 5975870059582437315}
   m_Layer: 0
   m_Name: bag
   m_TagString: Untagged
@@ -156,3 +157,16 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5975870059582437315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771226198540687560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a6f61e09c67424b9b7469b712ddab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BagInteract
+  bagManager: {fileID: 0}
