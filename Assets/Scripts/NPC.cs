@@ -3,7 +3,8 @@ using UnityEngine;
 public enum NPCType
 {
     Villager,
-    Robber
+    Robber,
+    Monk
 }
 
 public class NPC : MonoBehaviour
@@ -11,4 +12,3 @@ public class NPC : MonoBehaviour
     public NPCType npcType;
     public NPCData data;
 }
-

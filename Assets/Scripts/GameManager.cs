@@ -50,9 +50,20 @@ public class GameManager : MonoBehaviour
     [Header("Bag")]
     public GameObject bagPrefab;
     public Transform spawnPointBag;
+    public Vector3 bagScale = Vector3.one;
+    public Vector3 bagRotation = Vector3.zero;   // ใส่เป็นองศา (Euler angles)
     public SlidingPanel windowPanel;
 
     private GameObject currentBag;
+
+    [Header("ID Card")]
+    public GameObject idCardPrefab;        // บัตรคนทั่วไป
+    public GameObject monkIdCardPrefab;    // บัตรพระ
+    public Transform spawnPointIDCard;
+    public Vector3 idCardScale = Vector3.one;
+    public Vector3 idCardRotation = Vector3.zero;
+
+    private GameObject currentIDCard;
 
     [Header("Police Call")]
     public GameObject policePrefab;
@@ -63,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject currentPolice;
 
-    
+
     [Header("Day Stats")]
     public int npcProcessedCount = 0;
     public int npcPerDay = 8;
@@ -76,8 +87,8 @@ public class GameManager : MonoBehaviour
 
     [Header("End Day UI")]
     public EndDayUI endDayUI;
-    
-    
+
+
     void Awake()
     {
         Instance = this;
@@ -232,8 +243,48 @@ public class GameManager : MonoBehaviour
         currentBag = Instantiate(
             bagPrefab,
             spawnPointBag.position,
-            Quaternion.identity
+            Quaternion.Euler(bagRotation)
         );
+
+        currentBag.transform.localScale = bagScale;
+
+        SpawnIDCard();
+    }
+
+    private void SpawnIDCard()
+    {
+        if (spawnPointIDCard == null)
+        {
+            Debug.LogError("ไม่ได้ใส่ Spawn Point ID Card");
+            return;
+        }
+
+        // เช็คว่า NPC ตรงหน้าเป็น Monk ไหม เพื่อเลือก prefab บัตรให้ตรง
+        GameObject prefabToSpawn = idCardPrefab;
+
+        if (currentNPC != null)
+        {
+            NPC npc = currentNPC.GetComponent<NPC>();
+
+            if (npc != null && npc.npcType == NPCType.Monk)
+            {
+                prefabToSpawn = monkIdCardPrefab;
+            }
+        }
+
+        if (prefabToSpawn == null)
+        {
+            Debug.LogError("ไม่ได้ใส่ ID Card Prefab ที่ตรงกับ NPC ตัวนี้");
+            return;
+        }
+
+        currentIDCard = Instantiate(
+            prefabToSpawn,
+            spawnPointIDCard.position,
+            Quaternion.Euler(idCardRotation)
+        );
+
+        currentIDCard.transform.localScale = idCardScale;
     }
 
     private void DestroyBagAndSlideBack()
@@ -242,6 +293,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(currentBag);
             currentBag = null;
+        }
+
+        if (currentIDCard != null)
+        {
+            Destroy(currentIDCard);
+            currentIDCard = null;
         }
 
         if (windowPanel != null)
@@ -258,7 +315,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentNPC == null)
             return;
-        
+
         RecordDecision(currentNPC, wasArrested: false);   // <-- โอ๊ตเพิ่มบรรทัดนี้
 
         currentState = NPCState.Leaving;
@@ -345,7 +402,7 @@ public class GameManager : MonoBehaviour
             EndGame();
             return;
         }*/
-        
+
 
 
         // Spawn NPC คนใหม่
@@ -355,7 +412,7 @@ public class GameManager : MonoBehaviour
     // =========================
     // END
     // =========================
-    
+
     //อันเก่า
     /* public void EndGame()
     {
@@ -364,7 +421,7 @@ public class GameManager : MonoBehaviour
             currentHour.ToString("00") +
             ":00");
     } */
-    
+
     public void EndGame()
     {
         Debug.Log("จบวัน คะแนนรวม: " + score);
@@ -374,7 +431,7 @@ public class GameManager : MonoBehaviour
             endDayUI.Show(score, villagerPassed, villagerArrested, robberPassed, robberArrested);
         }
     }
-    
+
     // =========================
     // NEXT DAY
     // =========================
@@ -457,7 +514,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator PoliceSequence()
     {
         isPoliceSequenceActive = true;
-        
+
 
         // 1. NPC ปัจจุบันออกไปก่อน
         if (currentNPC != null)
@@ -528,7 +585,7 @@ public class GameManager : MonoBehaviour
 
         isPoliceSequenceActive = false;
     }
-    
+
     //โอ๊ค
     // เรียกตอนที่ตัดสินใจ NPC 1 คนเสร็จแล้ว (ปล่อย หรือ จับ)
     private void RecordDecision(GameObject npcObj, bool wasArrested)
