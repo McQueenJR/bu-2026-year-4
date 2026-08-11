@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 998d7f631386b2348b4407daddef4eea, type: 3}
-  m_Name: amulets
+  m_Name: IDCard
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: amulets
-  itemImage: {fileID: 8957324059118975939, guid: fa86c616b59ce204a946a6776e8811e1, type: 3}
+  itemName: IDCard
+  itemImage: {fileID: -4093297795861308153, guid: b8ae0b80bda5bca4285e5197e0d15d83, type: 3}
   description: 
