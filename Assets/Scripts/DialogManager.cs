@@ -15,9 +15,6 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(NPCData data)
     {
-        if (data == null)
-            return;
-
         dialogs = data.dialogs;
         currentIndex = 0;
 
@@ -27,6 +24,22 @@ public class DialogManager : MonoBehaviour
 
         ShowCurrentDialog();
     }
+    public bool IsDialogOpen()
+    {
+        return dialogPanel.activeSelf;
+    }
+    public void StartSimpleDialog(string speaker, string[] messages)
+    {
+        dialogs = messages;
+        currentIndex = 0;
+
+        nameText.text = speaker;
+
+        dialogPanel.SetActive(true);
+
+        ShowCurrentDialog();
+    }
+    
 
     public void NextDialog()
     {

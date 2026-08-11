@@ -39,8 +39,17 @@ public class PhoneDialer : MonoBehaviour
 
     private IEnumerator CallPoliceSequence()
     {
-        yield return new WaitForSeconds(2f);   // ระยะเวลาโชว์ "Calling..." ก่อนเริ่มลำดับเหตุการณ์
+        yield return new WaitForSeconds(2f);
 
+        // แสดง Dialog ตอนโทร 191
+        GameManager.Instance.StartPoliceCallDialog();
+
+        // รอจน Dialog จบ
+        yield return new WaitUntil(() =>
+            !GameManager.Instance.dialogManager.IsDialogOpen()
+        );
+
+        // หลัง Dialog จบ → เริ่มกระบวนการตำรวจ
         GameManager.Instance.OnPoliceCalled();
     }
 

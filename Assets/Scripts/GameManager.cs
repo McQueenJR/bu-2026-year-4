@@ -407,6 +407,42 @@ public class GameManager : MonoBehaviour
         // เริ่ม spawn คนแรกของวันใหม่
         spawner.SpawnNPC();
     }
+    private void StartPoliceDialog()
+    {
+        if (currentPolice == null)
+        {
+            Debug.LogError("ไม่มี Police");
+            return;
+        }
+
+        NPC npc = currentPolice.GetComponent<NPC>();
+
+        if (npc == null)
+        {
+            Debug.LogError("Police Prefab ไม่มี NPC.cs");
+            return;
+        }
+
+        if (npc.data == null)
+        {
+            Debug.LogError("Police ไม่มี NPCData");
+            return;
+        }
+
+        Debug.Log("เปิด Dialog ของ " + npc.data.npcName);
+
+        dialogManager.StartDialog(npc.data);
+    }
+    public void StartPoliceCallDialog()
+    {
+        dialogManager.StartSimpleDialog(
+            "191",
+            new string[]
+            {
+                "coming soon"
+            }
+        );
+    }
 
     // =========================
     // POLICE CALL
@@ -421,46 +457,64 @@ public class GameManager : MonoBehaviour
     private IEnumerator PoliceSequence()
     {
         isPoliceSequenceActive = true;
+        
 
-        // 1. NPC ปัจจุบันเดินไป exitPoint (เร็วขึ้น)
+        // 1. NPC ปัจจุบันออกไปก่อน
         if (currentNPC != null)
         {
-            NPCMovement npcMove = currentNPC.GetComponent<NPCMovement>();
+            NPCMovement npcMove =
+                currentNPC.GetComponent<NPCMovement>();
+
             npcMove.MoveTo(exitPoint.position, 6f);
 
             while (npcMove.IsMoving())
                 yield return null;
-            
-            RecordDecision(currentNPC, wasArrested: true);   // <-- โอ๊คเพิ่มบรรทัดนี้
+
+            RecordDecision(currentNPC, wasArrested: true);
 
             Destroy(currentNPC);
             currentNPC = null;
         }
 
-        // 2. เล่นเสียง
-        policeSound.Play();
+        // 2. เล่นเสียงสัญญาณเตือน
+        if (policeSound != null)
+        {
+            policeSound.Play();
 
-        // 3. ระหว่างเสียงเล่น สปาวตำรวจแล้วเดินมาจุด spawnPolice
-        currentPolice = Instantiate(policePrefab, spawner.spawnPoint.position, Quaternion.identity);
-        NPCMovement policeMove = currentPolice.GetComponent<NPCMovement>();
+            // รอจนเสียงจบ
+            while (policeSound.isPlaying)
+                yield return null;
+        }
+
+        // 3. เปิดประตูฉุกเฉิน
+        if (emergencyManager != null)
+            emergencyManager.ForceOpenDoor();
+
+        // 4. Spawn ตำรวจ
+        currentPolice = Instantiate(
+            policePrefab,
+            spawner.spawnPoint.position,
+            Quaternion.identity
+        );
+
+        NPCMovement policeMove =
+            currentPolice.GetComponent<NPCMovement>();
+
+        // 5. ตำรวจเดินเข้ามากลางจอ
         policeMove.MoveTo(spawnPolice.position);
 
         while (policeMove.IsMoving())
             yield return null;
 
-        while (policeSound.isPlaying)
-            yield return null;
+        // 6. ตำรวจมาถึงแล้ว → เปิด Dialog
+        StartPoliceDialog();
 
-        // 4. สั่งเปิดประตู
-        emergencyManager.ForceOpenDoor();
+        // รอจน Dialog จบ
+        yield return new WaitUntil(() =>
+            !dialogManager.IsDialogOpen()
+        );
 
-        // 5. ตำรวจยืนรอ 2 วิ
-        yield return new WaitForSeconds(2f);
-
-        // 6. ลบกระเป๋า + ปิดหน้าต่าง (เหมือนตอนกดปุ่มเขียว) ก่อนตำรวจเดินออก
-        DestroyBagAndSlideBack();
-
-        // 7. ตำรวจเดินออกไปที่ ExitPolicePoint
+        // 7. ตำรวจเดินออก
         policeMove.MoveTo(exitPolicePoint.position);
 
         while (policeMove.IsMoving())
@@ -469,7 +523,7 @@ public class GameManager : MonoBehaviour
         Destroy(currentPolice);
         currentPolice = null;
 
-        // 8. กลับเข้าลูปเกมปกติ ต่อไปชม.ถัดไป (spawn NPC ตัวใหม่)
+        // 8. กลับเข้าสู่เกมปกติ
         AdvanceHour();
 
         isPoliceSequenceActive = false;
