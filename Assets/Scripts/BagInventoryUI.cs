@@ -23,7 +23,7 @@ public class BagInventoryUI : MonoBehaviour
 
         ClearInventory();
 
-        foreach (ItemData item in npcData.bagItems)
+        foreach (GameObject item in npcData.bagItems)
         {
             if (item == null)
                 continue;
@@ -34,13 +34,20 @@ public class BagInventoryUI : MonoBehaviour
                     itemGrid
                 );
 
-            // แสดงรูป Item
-            UnityEngine.UI.Image image =
-                slot.GetComponentInChildren<UnityEngine.UI.Image>();
+            // หา Image ใน Slot
+            Image image =
+                slot.GetComponentInChildren<Image>();
 
             if (image != null)
             {
-                image.sprite = item.itemImage;
+                // ดึง Sprite จาก GameObject ของ Item
+                SpriteRenderer spriteRenderer =
+                    item.GetComponent<SpriteRenderer>();
+
+                if (spriteRenderer != null)
+                {
+                    image.sprite = spriteRenderer.sprite;
+                }
             }
         }
     }

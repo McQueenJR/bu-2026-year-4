@@ -8,6 +8,8 @@ public class BagManager : MonoBehaviour
     public Transform itemContainer;
     public GameObject itemSlotPrefab;
 
+    private NPCData currentData;
+
     void Start()
     {
         bagPanel.SetActive(false);
@@ -36,16 +38,20 @@ public class BagManager : MonoBehaviour
             return;
         }
 
+        currentData = npc.data;
+
         bagPanel.SetActive(true);
 
-        ShowItems(npc.data);
+        // ถ้ายังไม่มีของใน UI ให้สร้าง
+        if (itemContainer.childCount == 0)
+        {
+            ShowItems(currentData);
+        }
     }
 
     void ShowItems(NPCData data)
     {
-        ClearItems();
-
-        foreach (ItemData item in data.bagItems)
+        foreach (GameObject item in data.bagItems)
         {
             if (item == null)
                 continue;
@@ -57,27 +63,37 @@ public class BagManager : MonoBehaviour
                 );
 
             Image image =
-                slot.GetComponent<Image>();
+                slot.GetComponentInChildren<Image>();
 
-            if (image != null)
+            if (image == null)
+                continue;
+
+            SpriteRenderer spriteRenderer =
+                item.GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer != null)
             {
-                image.sprite = item.itemImage;
+                image.sprite = spriteRenderer.sprite;
+                image.preserveAspect = true;
             }
-        }
-    }
-
-    void ClearItems()
-    {
-        for (int i = itemContainer.childCount - 1; i >= 0; i--)
-        {
-            Destroy(itemContainer.GetChild(i).gameObject);
         }
     }
 
     public void CloseBag()
     {
-        ClearItems();
-
+        // แค่ปิด UI
+        // ไม่ลบ Item Slot
         bagPanel.SetActive(false);
+    }
+
+    public void ClearBag()
+    {
+        // ใช้เมื่อต้องการล้างจริง ๆ
+        for (int i = itemContainer.childCount - 1; i >= 0; i--)
+        {
+            Destroy(itemContainer.GetChild(i).gameObject);
+        }
+
+        currentData = null;
     }
 }

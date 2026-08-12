@@ -253,28 +253,34 @@ public class GameManager : MonoBehaviour
 
     private void SpawnIDCard()
     {
-        if (spawnPointIDCard == null)
+        if (currentNPC == null)
         {
-            Debug.LogError("ไม่ได้ใส่ Spawn Point ID Card");
+            Debug.LogError("ไม่มี NPC ปัจจุบัน");
             return;
         }
 
-        // เช็คว่า NPC ตรงหน้าเป็น Monk ไหม เพื่อเลือก prefab บัตรให้ตรง
-        GameObject prefabToSpawn = idCardPrefab;
+        NPC npc = currentNPC.GetComponent<NPC>();
 
-        if (currentNPC != null)
+        if (npc == null)
         {
-            NPC npc = currentNPC.GetComponent<NPC>();
-
-            if (npc != null && npc.npcType == NPCType.Monk)
-            {
-                prefabToSpawn = monkIdCardPrefab;
-            }
+            Debug.LogError("NPC ไม่มี NPC.cs");
+            return;
         }
+
+        if (npc.data == null)
+        {
+            Debug.LogError("NPC ไม่มี NPCData");
+            return;
+        }
+
+        GameObject prefabToSpawn = npc.data.idCardPrefab;
 
         if (prefabToSpawn == null)
         {
-            Debug.LogError("ไม่ได้ใส่ ID Card Prefab ที่ตรงกับ NPC ตัวนี้");
+            Debug.LogError(
+                "NPC " + npc.data.npcName +
+                " ยังไม่ได้ใส่ ID Card Prefab"
+            );
             return;
         }
 

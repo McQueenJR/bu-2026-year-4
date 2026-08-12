@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1685142660713703359}
   - component: {fileID: 2463561127567108068}
   - component: {fileID: 4473514466423323380}
+  - component: {fileID: 2395714320232510346}
   m_Layer: 0
   m_Name: IdCard_0
   m_TagString: Untagged
@@ -182,3 +183,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IDCardDisplay
   displayPrefab: {fileID: 6072333215724701038, guid: 65cd858e8e171ff4086ae662ddb2abe1, type: 3}
+--- !u!114 &2395714320232510346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274761181057386041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e9a30ac696c64bafa398980cc9c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BagItemSize
+  slotSize: {x: 100, y: 100}

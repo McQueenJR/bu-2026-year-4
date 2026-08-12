@@ -12,5 +12,9 @@ public class NPCData : ScriptableObject
     public string[] dialogs;
 
     [Header("Bag")]
-    public ItemData[] bagItems;
+    public GameObject[] bagItems;
+    
+    [Header("ID Card")]
+    public GameObject idCardPrefab;
+    public GameObject idCardDisplayPrefab;
 }

@@ -17,5 +17,8 @@ MonoBehaviour:
   dialogs:
   - Hi, the stars look beautiful tonight.
   bagItems:
-  - {fileID: 11400000, guid: 668b6380556d5304d9186e23b774bb1e, type: 2}
-  - {fileID: 11400000, guid: 2bfba8673eff9594cb86dfd53ac77282, type: 2}
+  - {fileID: 2274761181057386041, guid: f7bfc95610f7a414f92c3bfdfaff6a85, type: 3}
+  - {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
+  - {fileID: 3686393784096012498, guid: 306641b2d318a3d49891c4c526222b31, type: 3}
+  idCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
+  idCardDisplayPrefab: {fileID: 4251546616849642322, guid: c27846605e1ee33448783ae2ea2f464c, type: 3}
