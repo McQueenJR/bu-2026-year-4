@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BagInteract : MonoBehaviour
 {
     private void OnMouseDown()
     {
+        // ถ้าเมาส์อยู่บน UI (เช่น โทรศัพท์เปิดอยู่) ไม่ต้องทำอะไร
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        
         if (GameManager.Instance == null)
             return;
 
