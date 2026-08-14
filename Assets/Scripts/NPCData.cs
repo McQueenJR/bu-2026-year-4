@@ -17,4 +17,12 @@ public class NPCData : ScriptableObject
     [Header("ID Card")]
     public GameObject idCardPrefab;
     public GameObject idCardDisplayPrefab;
+    
+    [Header("Green Button Dialog")]
+    [TextArea(2, 5)]
+    public string[] greenDialogs;
+
+    [Header("Emergency Dialog")]
+    [TextArea(2, 5)]
+    public string[] emergencyDialogs;
 }

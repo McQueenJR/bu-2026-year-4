@@ -113,12 +113,41 @@ public class GameManager : MonoBehaviour
     {
         SetButtonChoice(ButtonChoice.Green);
 
-        // ถ้ากำลังตรวจอยู่
-        if (currentState == NPCState.Inspecting && currentNPC != null)
+        if (currentNPC == null)
+            return;
+
+        // ถ้ากำลังตรวจอยู่ ให้กดเขียวเพื่อปล่อยได้เลย
+        if (currentState == NPCState.Inspecting)
         {
             ReleaseCurrentNPC();
+            return;
         }
+
+        // ถ้า NPC กำลังรอการตัดสินใจ
+        if (currentState != NPCState.WaitingDecision)
+            return;
+
+        NPC npc = currentNPC.GetComponent<NPC>();
+
+        if (npc == null || npc.data == null)
+            return;
+
+        currentState = NPCState.Inspecting;
+
+        // เริ่ม Dialog ขอบคุณ
+        dialogManager.StartGreenDialog(npc.data);
     }
+    public void GreenDialogFinished()
+    {
+        if (currentNPC == null)
+            return;
+
+        Debug.Log("Green Dialog จบ → ปล่อย NPC");
+
+        ReleaseCurrentNPC();
+    }
+    
+    
 
     public void RedButton()
     {
@@ -151,30 +180,37 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CheckDecisionAfterDelay()
     {
-        // NPC หยุดรอ 2 วินาที
+        // NPC หยุดกลางจอ 2 วินาที
         yield return new WaitForSeconds(2f);
 
         if (currentNPC == null)
             yield break;
 
+        NPC npc = currentNPC.GetComponent<NPC>();
+
+        if (npc == null || npc.data == null)
+            yield break;
+
         // =========================
         // GREEN
         // =========================
-
         if (currentButtonChoice == ButtonChoice.Green)
         {
-            ReleaseCurrentNPC();
+            currentState = NPCState.Inspecting;
+
+            Debug.Log("เลือกสีเขียว → เริ่ม Green Dialog");
+
+            dialogManager.StartGreenDialog(npc.data);
         }
 
         // =========================
         // RED
         // =========================
-
         else
         {
             currentState = NPCState.Inspecting;
 
-            Debug.Log("เริ่มตรวจสอบ NPC");
+            Debug.Log("เลือกสีแดง → เริ่มตรวจสอบ NPC");
 
             StartNPCDialog();
         }
@@ -220,6 +256,31 @@ public class GameManager : MonoBehaviour
         {
             SpawnBag();
         });
+    }
+    
+    public void StartEmergencyDialog()
+    {
+        if (currentNPC == null)
+        {
+            Debug.Log("ไม่มี NPC สำหรับ Emergency Dialog");
+            return;
+        }
+
+        NPC npc = currentNPC.GetComponent<NPC>();
+
+        if (npc == null)
+        {
+            Debug.LogError("NPC ไม่มี NPC.cs");
+            return;
+        }
+
+        if (npc.data == null)
+        {
+            Debug.LogError("NPC ไม่มี NPCData");
+            return;
+        }
+
+        dialogManager.StartEmergencyDialog(npc.data);
     }
 
     // =========================
