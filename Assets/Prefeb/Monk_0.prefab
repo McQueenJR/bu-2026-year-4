@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3220497716765380814}
   - component: {fileID: 7227567478768477948}
-  - component: {fileID: 195060253165492604}
   - component: {fileID: 4947861173289588010}
+  - component: {fileID: 195060253165492604}
   m_Layer: 0
   m_Name: Monk_0
   m_TagString: Untagged
@@ -93,6 +93,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &4947861173289588010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630372590865414851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00bba66190f38a24f93bf2cc561fd4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
+  speed: 2
 --- !u!114 &195060253165492604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,16 +120,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   npcType: 2
   data: {fileID: 11400000, guid: 4631a5c5d855e2c449d99c3beae7dfa2, type: 2}
---- !u!114 &4947861173289588010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2630372590865414851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00bba66190f38a24f93bf2cc561fd4f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
-  speed: 2

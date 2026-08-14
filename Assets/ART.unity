@@ -11627,7 +11627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCSpawner
   npcPrefabs:
   - {fileID: 7007486066151835508, guid: 3f1921102ff120f40a1cea855242c6cf, type: 3}
-  - {fileID: 2630372590865414851, guid: 4e4478972fb739e4293e3e8f24217825, type: 3}
   spawnPoint: {fileID: 1783206952}
   stopPoint: {fileID: 2134447594}
   gameManager: {fileID: 1304983901}
