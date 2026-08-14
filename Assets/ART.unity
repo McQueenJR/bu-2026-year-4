@@ -7043,8 +7043,8 @@ MonoBehaviour:
   idCardPrefab: {fileID: 2274761181057386041, guid: f7bfc95610f7a414f92c3bfdfaff6a85, type: 3}
   monkIdCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
   spawnPointIDCard: {fileID: 1031564446}
-  idCardScale: {x: 1, y: 1, z: 1}
-  idCardRotation: {x: 0, y: 0, z: 0}
+  idCardScale: {x: 0.4, y: 0.4, z: 0.4}
+  idCardRotation: {x: 0, y: 0, z: -55}
   policePrefab: {fileID: 9030751808653253318, guid: 093bcc26790f39b4490fe572664dea14, type: 3}
   spawnPolice: {fileID: 2133219928}
   exitPolicePoint: {fileID: 1580498738}
