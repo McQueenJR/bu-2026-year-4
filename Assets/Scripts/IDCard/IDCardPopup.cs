@@ -7,34 +7,19 @@ public class IDCardPopup : MonoBehaviour
     public GameObject popupPanel;
     public Transform spawnPointDisplay;
 
+    [Header("Blocker (กันคลิกทะลุ)")]
+    public GameObject blocker;   // ลาก IDCardBlocker มาใส่
+
     private GameObject currentDisplayObj;
-    private bool isShowing = false;
 
     void Awake()
     {
         Instance = this;
+
         popupPanel.SetActive(false);
-    }
 
-    void Update()
-    {
-        if (!isShowing) return;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            // เช็คว่าคลิกโดน object ที่ spawn ไว้ไหม
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
-
-            bool clickedOnCard = hit.collider != null &&
-                                 currentDisplayObj != null &&
-                                 hit.collider.transform.IsChildOf(currentDisplayObj.transform);
-
-            if (!clickedOnCard)
-            {
-                Hide();
-            }
-        }
+        if (blocker != null)
+            blocker.SetActive(false);
     }
 
     public void Show(GameObject prefab)
@@ -46,20 +31,26 @@ public class IDCardPopup : MonoBehaviour
         }
 
         if (currentDisplayObj != null)
-        {
             Destroy(currentDisplayObj);
-        }
 
-        currentDisplayObj = Instantiate(prefab, spawnPointDisplay.position, Quaternion.identity);
+        currentDisplayObj = Instantiate(
+            prefab,
+            spawnPointDisplay.position,
+            Quaternion.identity
+        );
 
         popupPanel.SetActive(true);
-        isShowing = true;
+
+        if (blocker != null)
+            blocker.SetActive(true);
     }
 
     public void Hide()
     {
         popupPanel.SetActive(false);
-        isShowing = false;
+
+        if (blocker != null)
+            blocker.SetActive(false);
 
         if (currentDisplayObj != null)
         {

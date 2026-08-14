@@ -16,8 +16,7 @@ MonoBehaviour:
   age: 23
   dialogs:
   - Hello
-  bagItems:
-  - {fileID: 0}
+  bagItems: []
   idCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
   idCardDisplayPrefab: {fileID: 4251546616849642322, guid: c27846605e1ee33448783ae2ea2f464c, type: 3}
   greenDialogs:
