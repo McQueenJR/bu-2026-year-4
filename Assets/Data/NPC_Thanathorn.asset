@@ -22,7 +22,3 @@ MonoBehaviour:
   - {fileID: 3686393784096012498, guid: 306641b2d318a3d49891c4c526222b31, type: 3}
   idCardPrefab: {fileID: 2274761181057386041, guid: f7bfc95610f7a414f92c3bfdfaff6a85, type: 3}
   idCardDisplayPrefab: {fileID: 6072333215724701038, guid: 65cd858e8e171ff4086ae662ddb2abe1, type: 3}
-  greenDialogs:
-  - THX
-  emergencyDialogs:
-  - FireQQQ
