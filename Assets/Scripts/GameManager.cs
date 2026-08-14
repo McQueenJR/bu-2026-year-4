@@ -111,6 +111,13 @@ public class GameManager : MonoBehaviour
 
     public void GreenButton()
     {
+        // ถ้าอยู่ในโหมดฉุกเฉิน (ประตูปิด) ห้ามกดปุ่มเขียว
+        if (emergencyMode)
+        {
+            Debug.Log("อยู่ในโหมดฉุกเฉิน กดปุ่มเขียวไม่ได้");
+            return;
+        }
+        
         SetButtonChoice(ButtonChoice.Green);
 
         if (currentNPC == null)
@@ -586,6 +593,9 @@ public class GameManager : MonoBehaviour
         // 1. NPC ปัจจุบันออกไปก่อน
         if (currentNPC != null)
         {
+            // ลบกระเป๋า/บัตร ที่ค้างอยู่บนโต๊ะ และเลื่อนหน้าต่างกลับ
+            DestroyBagAndSlideBack();
+            
             NPCMovement npcMove =
                 currentNPC.GetComponent<NPCMovement>();
 
