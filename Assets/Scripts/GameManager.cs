@@ -593,8 +593,6 @@ public class GameManager : MonoBehaviour
         // 1. NPC ปัจจุบันออกไปก่อน
         if (currentNPC != null)
         {
-            // ลบกระเป๋า/บัตร ที่ค้างอยู่บนโต๊ะ และเลื่อนหน้าต่างกลับ
-            DestroyBagAndSlideBack();
             
             NPCMovement npcMove =
                 currentNPC.GetComponent<NPCMovement>();
@@ -647,6 +645,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() =>
             !dialogManager.IsDialogOpen()
         );
+        // ตำรวจเดินออกแล้ว → ค่อยลบกระเป๋า/บัตรออกจากโต๊ะ
+        DestroyBagAndSlideBack();
 
         // 7. ตำรวจเดินออก
         policeMove.MoveTo(exitPolicePoint.position);
@@ -656,6 +656,7 @@ public class GameManager : MonoBehaviour
 
         Destroy(currentPolice);
         currentPolice = null;
+        
 
         // 8. กลับเข้าสู่เกมปกติ
         AdvanceHour();
