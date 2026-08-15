@@ -54,10 +54,7 @@ public class DialogManager : MonoBehaviour
     public void StartEmergencyDialog(NPCData data)
     {
         if (data == null)
-        {
-            Debug.LogError("ไม่มี NPCData");
             return;
-        }
 
         if (data.emergencyDialogs == null ||
             data.emergencyDialogs.Length == 0)
@@ -66,7 +63,6 @@ public class DialogManager : MonoBehaviour
                 "NPC " + data.npcName +
                 " ไม่มี Emergency Dialog"
             );
-
             return;
         }
 

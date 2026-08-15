@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Dialog")]
     public DialogManager dialogManager;
+    private GameObject emergencyDialogNPC;
 
     [Header("Bag")]
     public GameObject bagPrefab;
@@ -273,6 +274,13 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // NPC ตัวนี้เคยพูด Emergency แล้ว
+        if (emergencyDialogNPC == currentNPC)
+        {
+            Debug.Log("NPC ตัวนี้เคยพูด Emergency Dialog แล้ว");
+            return;
+        }
+
         NPC npc = currentNPC.GetComponent<NPC>();
 
         if (npc == null)
@@ -286,6 +294,17 @@ public class GameManager : MonoBehaviour
             Debug.LogError("NPC ไม่มี NPCData");
             return;
         }
+
+        // ไม่มี Dialog → ข้ามไปเลย
+        if (npc.data.emergencyDialogs == null ||
+            npc.data.emergencyDialogs.Length == 0)
+        {
+            Debug.Log("NPC " + npc.data.npcName + " ไม่มี Emergency Dialog");
+            return;
+        }
+
+        // จำ NPC ตัวนี้ไว้ว่าเคยพูดแล้ว
+        emergencyDialogNPC = currentNPC;
 
         dialogManager.StartEmergencyDialog(npc.data);
     }

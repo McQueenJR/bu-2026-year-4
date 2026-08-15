@@ -45,12 +45,15 @@ public class EmergencyManager : MonoBehaviour
                 return;
             }
 
-            // กดรอบสอง (ฝาเปิดอยู่แล้ว): ยืนยัน → สั่งปิดประตูจริง
+            // กดรอบสอง → ปิดประตู
             coverOpened = false;
             isDoorClosed = true;
 
             gameManager.emergencyMode = true;
             doorAnimator.SetTrigger("CloseDoor");
+
+            // 🔥 เรียก Dialog ตาม NPC
+            gameManager.StartEmergencyDialog();
 
             Debug.Log("Emergency Activated - Door Closed");
         }
