@@ -1,56 +1,94 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BagInventoryUI : MonoBehaviour
 {
+    [Header("UI")]
     public GameObject inventoryPanel;
 
-    public Transform itemGrid;
+    [Header("Spawn Points")]
+    public Transform[] spawnPoints;
 
-    public GameObject itemSlotPrefab;
+    private GameObject[] spawnedItems;
 
     private void Start()
     {
         inventoryPanel.SetActive(false);
     }
 
+    // =========================
+    // OPEN INVENTORY
+    // =========================
+
     public void OpenInventory(NPCData npcData)
     {
         if (npcData == null)
+        {
+            Debug.LogError("ไม่มี NPCData");
             return;
+        }
 
         inventoryPanel.SetActive(true);
 
+        // ล้างของเก่าก่อน
         ClearInventory();
 
-        foreach (GameObject item in npcData.bagItems)
+        if (npcData.bagItems == null ||
+            npcData.bagItems.Length == 0)
         {
-            if (item == null)
+            Debug.Log("NPC ตัวนี้ไม่มีของในกระเป๋า");
+            return;
+        }
+
+        int count = Mathf.Min(
+            npcData.bagItems.Length,
+            spawnPoints.Length
+        );
+
+        spawnedItems = new GameObject[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject itemPrefab = npcData.bagItems[i];
+
+            if (itemPrefab == null)
                 continue;
 
-            GameObject slot =
-                Instantiate(
-                    itemSlotPrefab,
-                    itemGrid
+            Transform spawnPoint = spawnPoints[i];
+
+            if (spawnPoint == null)
+            {
+                Debug.LogWarning(
+                    "Spawn Point ช่อง " + i + " ยังไม่ได้ใส่"
                 );
 
-            // หา Image ใน Slot
-            Image image =
-                slot.GetComponentInChildren<Image>();
-
-            if (image != null)
-            {
-                // ดึง Sprite จาก GameObject ของ Item
-                SpriteRenderer spriteRenderer =
-                    item.GetComponent<SpriteRenderer>();
-
-                if (spriteRenderer != null)
-                {
-                    image.sprite = spriteRenderer.sprite;
-                }
+                continue;
             }
+
+            // Spawn ของ
+            GameObject item = Instantiate(
+                itemPrefab,
+                spawnPoint.position,
+                itemPrefab.transform.rotation,
+                spawnPoint.parent
+            );
+
+            // ให้ใช้ขนาดที่ตั้งไว้ใน Prefab
+            item.transform.localScale =
+                itemPrefab.transform.localScale;
+
+            spawnedItems[i] = item;
+
+            Debug.Log(
+                "Spawn ของ: " +
+                itemPrefab.name +
+                " → ช่อง " + i
+            );
         }
     }
+
+    // =========================
+    // CLOSE
+    // =========================
 
     public void CloseInventory()
     {
@@ -59,11 +97,23 @@ public class BagInventoryUI : MonoBehaviour
         inventoryPanel.SetActive(false);
     }
 
+    // =========================
+    // CLEAR
+    // =========================
+
     private void ClearInventory()
     {
-        for (int i = itemGrid.childCount - 1; i >= 0; i--)
+        if (spawnedItems == null)
+            return;
+
+        for (int i = 0; i < spawnedItems.Length; i++)
         {
-            Destroy(itemGrid.GetChild(i).gameObject);
+            if (spawnedItems[i] != null)
+            {
+                Destroy(spawnedItems[i]);
+            }
         }
+
+        spawnedItems = null;
     }
 }
