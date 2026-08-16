@@ -65,6 +65,7 @@ public class DialogManager : MonoBehaviour
             );
             return;
         }
+        currentDialogType = DialogType.Emergency;   // ← เพิ่มบรรทัดนี้
 
         dialogs = data.emergencyDialogs;
         currentIndex = 0;
