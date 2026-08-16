@@ -109,72 +109,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChackListAsk_0
-      rect:
-        serializedVersion: 2
-        x: 619
-        y: 960
-        width: 13
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63cc53d1205e2f1f0800000000000000
-      internalID: -1012495168962180042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ChackListAsk_1
-      rect:
-        serializedVersion: 2
-        x: 624
-        y: 979
-        width: 10
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ce5da0faf5d5f2ff0800000000000000
-      internalID: -58725604592527892
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ChackListAsk_2
-      rect:
-        serializedVersion: 2
-        x: 573
-        y: 924
-        width: 21
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 235b241e7d8ea1000800000000000000
-      internalID: 7574363289335090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ChackListAsk_3
       rect:
         serializedVersion: 2
@@ -183,7 +117,7 @@ TextureImporter:
         width: 773
         height: 735
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,7 +134,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ccfa2c50082278e40bc78d671decaf67
     internalID: 0
     vertices: []
     indices: 
