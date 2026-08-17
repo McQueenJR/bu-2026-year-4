@@ -59,14 +59,15 @@ public class ChecklistPopup : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
         popupPanel.SetActive(false);
+        if (blocker != null) blocker.SetActive(false);
 
-        if (blocker != null)
-            blocker.SetActive(false);
+        // โพสต์อิททั้งสองอันต้อง active ตลอดเวลา ไม่ผูกกับ SetActive ของหน้า
+        if (postItGoToPage2 != null) postItGoToPage2.gameObject.SetActive(true);
+        if (postItGoToPage1 != null) postItGoToPage1.gameObject.SetActive(true);
 
-        if (postItGoToPage2 != null) postItGoToPage2.onClick.AddListener(ShowPage2);
-        if (postItGoToPage1 != null) postItGoToPage1.onClick.AddListener(ShowPage1);
+        if (postItGoToPage2 != null) postItGoToPage2.onClick.AddListener(ShowPage1);
+        if (postItGoToPage1 != null) postItGoToPage1.onClick.AddListener(ShowPage2);
         if (submitButton != null)    submitButton.onClick.AddListener(OnSubmit);
     }
 
@@ -106,6 +107,14 @@ public class ChecklistPopup : MonoBehaviour
         if (page1_AskQuestions != null) page1_AskQuestions.SetActive(true);
         if (page2_Evaluate != null)     page2_Evaluate.SetActive(false);
 
+        // จัดเลเยอร์ให้เหมือนเปิดหนังสือมาอยู่หน้า 1:
+        // - หน้ากระดาษหน้า 1 ต้องอยู่บนสุดของกลุ่มเนื้อหา (คลุมโพสต์อิทหน้า2 ที่จมไปข้างหลัง)
+        // - โพสต์อิทหน้า1 (สีฟ้า, ปุ่มไป Page2) ลอยหน้าสุด เพราะเป็นแท็บของหน้าที่กำลังเปิดอยู่
+        // - โพสต์อิทหน้า2 (สีม่วง, ปุ่มกลับ Page1) จมไปด้านหลังกระดาษหน้า1
+        if (page1_AskQuestions != null) page1_AskQuestions.transform.SetAsLastSibling();
+        if (postItGoToPage1 != null)    postItGoToPage1.transform.SetAsFirstSibling(); // ม่วง -> จมหลังสุด
+        if (postItGoToPage2 != null)    postItGoToPage2.transform.SetAsLastSibling();  // ฟ้า  -> ลอยหน้าสุด
+
         // เล่นเสียงตอนเปลี่ยนกลับหน้า 1
         PlaySound(changePageSound);
     }
@@ -114,6 +123,11 @@ public class ChecklistPopup : MonoBehaviour
     {
         if (page1_AskQuestions != null) page1_AskQuestions.SetActive(false);
         if (page2_Evaluate != null)     page2_Evaluate.SetActive(true);
+
+        // จัดเลเยอร์ตอนเปิดมาหน้า 2: สลับกันกับด้านบน
+        if (page2_Evaluate != null)     page2_Evaluate.transform.SetAsLastSibling();
+        if (postItGoToPage2 != null)    postItGoToPage2.transform.SetAsFirstSibling(); // ฟ้า -> จมหลังสุด
+        if (postItGoToPage1 != null)    postItGoToPage1.transform.SetAsLastSibling();  // ม่วง -> ลอยหน้าสุด
 
         // เล่นเสียงตอนเปลี่ยนไปหน้า 2
         PlaySound(changePageSound);
