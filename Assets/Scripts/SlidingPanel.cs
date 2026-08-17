@@ -8,6 +8,9 @@ public class SlidingPanel : MonoBehaviour
     public Vector3 offScreenOffset = new Vector3(-8f, 0f, 0f); // ระยะเลื่อนไปทางซ้าย (หน่วย world unit ไม่ใช่ pixel)
     public float slideSpeed = 5f;
 
+    [Header("Sound")]
+    public AudioSource slideSound;
+
     private Coroutine slideRoutine;
 
     void Start()
@@ -17,12 +20,16 @@ public class SlidingPanel : MonoBehaviour
 
     public void SlideOut(System.Action onComplete = null)
     {
+        if (slideSound != null) slideSound.Play();
+
         if (slideRoutine != null) StopCoroutine(slideRoutine);
         slideRoutine = StartCoroutine(SlideTo(originalPos + offScreenOffset, onComplete));
     }
 
     public void SlideBack(System.Action onComplete = null)
     {
+        if (slideSound != null) slideSound.Play();
+
         if (slideRoutine != null) StopCoroutine(slideRoutine);
         slideRoutine = StartCoroutine(SlideTo(originalPos, onComplete));
     }

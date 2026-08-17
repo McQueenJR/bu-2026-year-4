@@ -14,7 +14,9 @@ public class PhoneDialer : MonoBehaviour
     // true ตั้งแต่กด Call ถูกต้อง จนกว่า dialog แรกของตำรวจจะปิดและระบบปิดโทรศัพท์ให้เองแล้ว
     private bool isCalling = false;
     public bool IsCalling => isCalling;
-    
+    public AudioSource audioSource;
+    public AudioClip numberButtonSound;
+    public AudioClip callingSound;
 
     void Start()
     {
@@ -26,12 +28,18 @@ public class PhoneDialer : MonoBehaviour
         // กำลังโทรอยู่ ห้ามกดเลขเพิ่ม
         if (isCalling)
             return;
-        
+    
         if (currentNumber.Length >= 8)
             return;
 
         currentNumber += number;
         displayText.text = currentNumber;
+
+        // เล่นเสียงตอนกดตัวเลข
+        if (audioSource != null && numberButtonSound != null)
+        {
+            audioSource.PlayOneShot(numberButtonSound);
+        }
     }
 
     public void Call()
@@ -43,8 +51,15 @@ public class PhoneDialer : MonoBehaviour
         if (currentNumber == "191")
         {
             isCalling = true;
-            
+
             displayText.text = "Calling...";
+    
+            // เล่นเสียงตอนขึ้น Calling...
+            if (audioSource != null && callingSound != null)
+            {
+                audioSource.PlayOneShot(callingSound);
+            }
+
             Debug.Log("Calling Police");
 
             StartCoroutine(CallPoliceSequence());

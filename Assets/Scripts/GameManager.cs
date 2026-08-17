@@ -44,6 +44,14 @@ public class GameManager : MonoBehaviour
     public ButtonVisual greenButtonVisual;
     public ButtonVisual redButtonVisual;
 
+    // =========================
+    // BUTTON SOUNDS
+    // =========================
+    [Header("Button Sounds")]
+    public AudioSource buttonSound;
+    public AudioClip greenButtonSound;
+    public AudioClip redButtonSound;
+
     [Header("Dialog")]
     public DialogManager dialogManager;
     private GameObject emergencyDialogNPC;
@@ -66,6 +74,12 @@ public class GameManager : MonoBehaviour
 
     private GameObject currentIDCard;
 
+    // =========================
+    // SPAWN SOUNDS
+    // =========================
+    [Header("Spawn Sounds")]
+    public AudioClip bagAndCardSpawnSound;
+
     [Header("Police Call")]
     public GameObject policePrefab;
     public Transform spawnPolice;
@@ -74,7 +88,6 @@ public class GameManager : MonoBehaviour
     public bool isPoliceSequenceActive = false;
 
     private GameObject currentPolice;
-
 
     [Header("Day Stats")]
     public int npcProcessedCount = 0;
@@ -118,8 +131,14 @@ public class GameManager : MonoBehaviour
             Debug.Log("อยู่ในโหมดฉุกเฉิน กดปุ่มเขียวไม่ได้");
             return;
         }
-        
+
         SetButtonChoice(ButtonChoice.Green);
+
+        // เล่นเสียงตอนกดปุ่มเขียว
+        if (buttonSound != null && greenButtonSound != null)
+        {
+            buttonSound.PlayOneShot(greenButtonSound);
+        }
 
         if (currentNPC == null)
             return;
@@ -145,6 +164,7 @@ public class GameManager : MonoBehaviour
         // เริ่ม Dialog ขอบคุณ
         dialogManager.StartGreenDialog(npc.data);
     }
+
     public void GreenDialogFinished()
     {
         if (currentNPC == null)
@@ -154,12 +174,18 @@ public class GameManager : MonoBehaviour
 
         ReleaseCurrentNPC();
     }
-    
-    
+
+
 
     public void RedButton()
     {
         SetButtonChoice(ButtonChoice.Red);
+
+        // เล่นเสียงตอนกดปุ่มแดง
+        if (buttonSound != null && redButtonSound != null)
+        {
+            buttonSound.PlayOneShot(redButtonSound);
+        }
     }
 
     private void SetButtonChoice(ButtonChoice choice)
@@ -378,6 +404,12 @@ public class GameManager : MonoBehaviour
         );
 
         currentIDCard.transform.localScale = idCardScale;
+
+        // เล่นเสียงเมื่อกระเป๋า + บัตร Spawn ครบแล้ว
+        if (buttonSound != null && bagAndCardSpawnSound != null)
+        {
+            buttonSound.PlayOneShot(bagAndCardSpawnSound);
+        }
     }
 
     private void DestroyBagAndSlideBack()
@@ -497,7 +529,6 @@ public class GameManager : MonoBehaviour
         }*/
 
 
-
         // Spawn NPC คนใหม่
         spawner.SpawnNPC();
     }
@@ -557,6 +588,7 @@ public class GameManager : MonoBehaviour
         // เริ่ม spawn คนแรกของวันใหม่
         spawner.SpawnNPC();
     }
+
     private void StartPoliceDialog()
     {
         if (currentPolice == null)
@@ -583,6 +615,7 @@ public class GameManager : MonoBehaviour
 
         dialogManager.StartDialog(npc.data);
     }
+
     public void StartPoliceCallDialog()
     {
         dialogManager.StartSimpleDialog(

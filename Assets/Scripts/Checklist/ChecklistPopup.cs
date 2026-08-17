@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// โครงสร้าง Hierarchy ที่แนะนำใต้ popupPanel:
 ///   ChecklistPanel (มี ChecklistPopup script นี้ติดอยู่ หรือแยกไปอีก GameObject ก็ได้)
 ///     - Blocker            <- ChecklistBlocker.cs, Image alpha 0, raycastTarget=true, sibling แรกสุด (index 0)
-///     - NotebookBackground  <- ChecklistClickAbsorber.cs ติดไว้กันคลิกทะลุ, sibling หลัง Blocker
+///     - NotebookBackground <- ChecklistClickAbsorber.cs ติดไว้กันคลิกทะลุ, sibling หลัง Blocker
 ///     - Page1_AskQuestions  <- Toggle 4 อัน (กระเป๋า/รูปร่างหน้าตา/บัตรประชาชน/เอกสารขอเข้า)
 ///     - Page2_Evaluate      <- Toggle คู่ ผิดปกติ/ไม่ผิดปกติ ต่อแถว (ใช้ ToggleGroup ต่อแถว)
 ///     - PostIt (ปุ่มบนภาพโพสต์อิท ใช้สลับหน้า)
@@ -48,6 +48,12 @@ public class ChecklistPopup : MonoBehaviour
     [Header("ช่องเก็บรูปภาพ (ถ้ามี)")]
     public Image photoSlot;
 
+    [Header("Checklist Sounds")]
+    public AudioSource checklistAudioSource;
+    public AudioClip openChecklistSound;
+    public AudioClip changePageSound;
+    public AudioClip submitSound;
+
     private NPCData currentNpc;
 
     void Awake()
@@ -67,6 +73,8 @@ public class ChecklistPopup : MonoBehaviour
     // เรียกจาก WorldButton.OnClick() ของกระดาษบนโต๊ะ (ยังไม่ผูก NPC คนไหน)
     public void OpenChecklist()
     {
+        PlaySound(openChecklistSound);
+
         Show(null);
     }
 
@@ -97,12 +105,18 @@ public class ChecklistPopup : MonoBehaviour
     {
         if (page1_AskQuestions != null) page1_AskQuestions.SetActive(true);
         if (page2_Evaluate != null)     page2_Evaluate.SetActive(false);
+
+        // เล่นเสียงตอนเปลี่ยนกลับหน้า 1
+        PlaySound(changePageSound);
     }
 
     public void ShowPage2()
     {
         if (page1_AskQuestions != null) page1_AskQuestions.SetActive(false);
         if (page2_Evaluate != null)     page2_Evaluate.SetActive(true);
+
+        // เล่นเสียงตอนเปลี่ยนไปหน้า 2
+        PlaySound(changePageSound);
     }
 
     public struct EvaluationResult
@@ -136,6 +150,9 @@ public class ChecklistPopup : MonoBehaviour
         Debug.Log($"[Checklist] กระเป๋า:{result.bagOk} รูปร่าง:{result.appearanceOk} " +
                   $"บัตร:{result.idOk} เอกสาร:{result.docOk} สรุป: {(result.AllNormal ? "ปกติทั้งหมด" : "มีจุดผิดปกติ")}");
 
+        // เล่นเสียงตอนกด Submit
+        PlaySound(submitSound);
+
         Hide();
     }
 
@@ -161,5 +178,17 @@ public class ChecklistPopup : MonoBehaviour
         if (idNormal != null)           idNormal.isOn = false;
         if (docAbnormal != null)        docAbnormal.isOn = false;
         if (docNormal != null)          docNormal.isOn = false;
+    }
+
+    // =========================
+    // SOUND
+    // =========================
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (checklistAudioSource != null && clip != null)
+        {
+            checklistAudioSource.PlayOneShot(clip);
+        }
     }
 }

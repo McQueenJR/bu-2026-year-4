@@ -11,6 +11,14 @@ public class EmergencyManager : MonoBehaviour
     [SerializeField] private Sprite coverClosedSprite;   // ฝาปิด — สถานะเริ่มต้น และหลังประตูเปิดสำเร็จ
     [SerializeField] private Sprite coverOpenSprite;     // ฝาเปิด — ตั้งแต่กด arm จนถึงประตูปิดค้างอยู่
 
+    [Header("Sound")]
+    public AudioSource doorSound;
+
+    // เสียงตอนกดปุ่ม Emergency
+    public AudioSource emergencyButtonSound;
+    public AudioClip emergencyButtonClip;
+
+
     private bool coverOpened = false;   // สถานะฝา (arm) — ใช้เฉพาะตอนประตูเปิดอยู่
     private bool isDoorClosed = false;  // สถานะประตูจริง
 
@@ -42,6 +50,13 @@ public class EmergencyManager : MonoBehaviour
             {
                 coverOpened = true;
                 buttonRenderer.sprite = coverOpenSprite;
+
+                // เล่นเสียงตอนเปิดฝาปุ่ม Emergency
+                if (emergencyButtonSound != null && emergencyButtonClip != null)
+                {
+                    emergencyButtonSound.PlayOneShot(emergencyButtonClip);
+                }
+
                 return;
             }
 
@@ -50,6 +65,14 @@ public class EmergencyManager : MonoBehaviour
             isDoorClosed = true;
 
             gameManager.emergencyMode = true;
+
+            // เล่นเสียงตอนกด Emergency ครั้งที่ 2
+            if (emergencyButtonSound != null && emergencyButtonClip != null)
+            {
+                emergencyButtonSound.PlayOneShot(emergencyButtonClip);
+            }
+
+            if (doorSound != null) doorSound.Play();
             doorAnimator.SetTrigger("CloseDoor");
 
             // 🔥 เรียก Dialog ตาม NPC
@@ -63,6 +86,14 @@ public class EmergencyManager : MonoBehaviour
             isDoorClosed = false;
 
             gameManager.emergencyMode = false;
+
+            // เล่นเสียงตอนกด Emergency เพื่อเปิดประตู
+            if (emergencyButtonSound != null && emergencyButtonClip != null)
+            {
+                emergencyButtonSound.PlayOneShot(emergencyButtonClip);
+            }
+
+            if (doorSound != null) doorSound.Play();
             doorAnimator.SetTrigger("OpenDoor");
 
             buttonRenderer.sprite = coverClosedSprite;
@@ -78,6 +109,8 @@ public class EmergencyManager : MonoBehaviour
         coverOpened = false;
 
         gameManager.emergencyMode = false;
+
+        if (doorSound != null) doorSound.Play();
         doorAnimator.SetTrigger("OpenDoor");
 
         buttonRenderer.sprite = coverClosedSprite;
