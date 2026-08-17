@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
+  m_Name: NPC_ Thanathorn Kaprao
+  m_EditorClassIdentifier: Assembly-CSharp::NPCData
+  npcName: 'Thanathorn LukKaphao(Robber) '
+  age: 40
+  dialogs:
+  - 
+  bagItems:
+  - {fileID: 428272106668646039, guid: 441245bd005f414409e704406161460a, type: 3}
+  - {fileID: 4326028031383017160, guid: 488e8149f57343e49832a9ef75fc66ab, type: 3}
+  - {fileID: 178329950057042882, guid: ae6533b08215c8b4daa00da5f5c2dee2, type: 3}
+  - {fileID: 4754033316676718758, guid: 25349fcbdbc962b45a7071f8ac8d5b6b, type: 3}
+  idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
+  idCardDisplayPrefab: {fileID: 0}
+  greenDialogs:
+  - So, this is your first night on the job, huh? Good. Very good.
+  emergencyDialogs:
+  - "For fuck\u2019s sake! Open the damn door, you idiot!"

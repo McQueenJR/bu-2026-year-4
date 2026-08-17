@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
+  m_Name: NPC_Thitikorn
+  m_EditorClassIdentifier: Assembly-CSharp::NPCData
+  npcName: 'Thitikorn Opasapunyo '
+  age: 23
+  dialogs:
+  - Please hurry, layman. I really need to use the bathroom.
+  bagItems:
+  - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
+  - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
+  - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
+  - {fileID: 4002949390651873329, guid: aff07aa22b6ee3f419791c44b835c714, type: 3}
+  - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
+  idCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
+  idCardDisplayPrefab: {fileID: 4251546616849642322, guid: c27846605e1ee33448783ae2ea2f464c, type: 3}
+  greenDialogs:
+  - "I really need to go now! I\u2019m about to shit myself!"
+  emergencyDialogs:
+  - "Wait, please! I\u2019m about to shit myself! T_T"
