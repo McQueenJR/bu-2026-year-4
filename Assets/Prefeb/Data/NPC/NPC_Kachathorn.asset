@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
-  m_Name: NPC_ Mongkol
+  m_Name: NPC_Kachathorn
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  npcName: 'Mongkol Pladaeng '
-  age: 32
+  npcName: Kachatorn Boonphet
+  age: 45
   dialogs:
   - 
-  bagItems:
-  - {fileID: 428272106668646039, guid: 441245bd005f414409e704406161460a, type: 3}
-  - {fileID: 4754033316676718758, guid: 25349fcbdbc962b45a7071f8ac8d5b6b, type: 3}
-  - {fileID: 4326028031383017160, guid: 488e8149f57343e49832a9ef75fc66ab, type: 3}
-  - {fileID: 178329950057042882, guid: ae6533b08215c8b4daa00da5f5c2dee2, type: 3}
+  bagItems: []
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
-  idCardDisplayPrefab: {fileID: 0}
+  idCardDisplayPrefab: {fileID: 1528112238560909589, guid: 8eca292021ee3d24698acf87f1c3342b, type: 3}
   greenDialogs:
-  - Thanks. This place sure is packed with valuables.
+  - 
   emergencyDialogs:
-  - "Come on! I\u2019m a monk! Just let me in!"
+  - 
+  checkQuestions:
+  - 
+  - 
+  - 
+  - 
+  correctAnswers: 00000000

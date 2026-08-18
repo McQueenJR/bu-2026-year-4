@@ -10,16 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
-  m_Name: NPC_ Chaiyo
+  m_Name: NPC_ Prasong
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  npcName: Chaiyo Hoihiw
-  age: 64
+  npcName: Prasong Raikhat
+  age: 0
   dialogs:
   - 
-  bagItems: []
+  bagItems:
+  - {fileID: 4326028031383017160, guid: 488e8149f57343e49832a9ef75fc66ab, type: 3}
+  - {fileID: 178329950057042882, guid: ae6533b08215c8b4daa00da5f5c2dee2, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
-  idCardDisplayPrefab: {fileID: 0}
+  idCardDisplayPrefab: {fileID: 6679251541010110780, guid: 446fa038ba5cae44aa0d8f2ef5fe2c5b, type: 3}
   greenDialogs:
   - 
   emergencyDialogs:
   - 
+  checkQuestions:
+  - 
+  - 
+  - 
+  - 
+  correctAnswers: 00000000

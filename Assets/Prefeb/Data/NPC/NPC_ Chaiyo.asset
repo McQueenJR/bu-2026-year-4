@@ -10,16 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
-  m_Name: NPC_Kachathorn
+  m_Name: NPC_ Chaiyo
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  npcName: Kachatorn Boonphet
-  age: 45
+  npcName: Chaiyo Hoihiw
+  age: 64
   dialogs:
   - 
   bagItems: []
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
-  idCardDisplayPrefab: {fileID: 0}
+  idCardDisplayPrefab: {fileID: 1917609254117910250, guid: d6ea171670c99d041af21712414caea9, type: 3}
   greenDialogs:
   - 
   emergencyDialogs:
   - 
+  checkQuestions:
+  - 
+  - 
+  - 
+  - 
+  correctAnswers: 00000000
