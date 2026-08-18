@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: NPC_ Thanathorn Kaprao
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
   npcName: 'Thanathorn LukKaphao(Robber) '
-  age: 40
+  age: 45
   dialogs:
-  - 
+  - "\"Those items? They\u2019re totally normal, everyone carries them around.\""
   bagItems:
   - {fileID: 428272106668646039, guid: 441245bd005f414409e704406161460a, type: 3}
   - {fileID: 4326028031383017160, guid: 488e8149f57343e49832a9ef75fc66ab, type: 3}
@@ -24,9 +24,9 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 8667820343509435601, guid: f81d36c3c95a0744096d31b44a919148, type: 3}
   greenDialogs:
-  - So, this is your first night on the job, huh? Good. Very good.
+  - '"This is your first night on the job, right? Good work."'
   emergencyDialogs:
-  - "For fuck\u2019s sake! Open the damn door, you idiot!"
+  - '"Damn it! Open up, you idiot!"'
   checkQuestions:
   - 
   - 

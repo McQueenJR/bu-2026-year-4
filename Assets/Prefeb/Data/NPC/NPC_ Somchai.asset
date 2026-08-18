@@ -15,19 +15,20 @@ MonoBehaviour:
   npcName: 'Somchai Deemak '
   age: 34
   dialogs:
-  - 
+  - '"I just returned from Pathum Thani after teaching Dhamma."'
   bagItems:
-  - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
-  - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
+  - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
   - {fileID: 4002949390651873329, guid: aff07aa22b6ee3f419791c44b835c714, type: 3}
   - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
+  - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
+  - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
   idCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
   idCardDisplayPrefab: {fileID: 802873425452566401, guid: 900064669ede4594081980c518d25da9, type: 3}
   greenDialogs:
-  - See you later, layman. I have to go talk to the abbot about some work.
+  - Alright, I'm very tired, going to sleep now."
   emergencyDialogs:
-  - "Huh? What\u2019s going on here?"
+  - '"Oh, hey!"'
   checkQuestions:
   - 
   - 

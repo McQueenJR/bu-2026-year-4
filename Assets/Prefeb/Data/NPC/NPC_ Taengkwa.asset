@@ -15,14 +15,20 @@ MonoBehaviour:
   npcName: 'Taengkwa Lukkraprao '
   age: 20
   dialogs:
-  - 
-  bagItems: []
+  - '"A fortune teller told me I''m having bad luck lately."'
+  bagItems:
+  - {fileID: 87406941769464242, guid: f03156bd57c56c040803870dea6241e8, type: 3}
+  - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
+  - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
+  - {fileID: 4002949390651873329, guid: aff07aa22b6ee3f419791c44b835c714, type: 3}
+  - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
+  - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 3759295625749290864, guid: e209cf43654f965499499a4a96e23519, type: 3}
   greenDialogs:
-  - 
+  - '"Eight more temples to go, sigh..."'
   emergencyDialogs:
-  - 
+  - '"Where am I supposed to make merit now?"'
   checkQuestions:
   - 
   - 

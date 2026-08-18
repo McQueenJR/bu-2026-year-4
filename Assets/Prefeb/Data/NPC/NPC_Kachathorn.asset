@@ -15,14 +15,18 @@ MonoBehaviour:
   npcName: Kachatorn Boonphet
   age: 45
   dialogs:
-  - 
-  bagItems: []
+  - '"Don''t judge a book by its cover. I''m just here to pray like everyone else."'
+  bagItems:
+  - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
+  - {fileID: 4002949390651873329, guid: aff07aa22b6ee3f419791c44b835c714, type: 3}
+  - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
+  - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 1528112238560909589, guid: 8eca292021ee3d24698acf87f1c3342b, type: 3}
   greenDialogs:
-  - 
+  - '"Thanks for being fair. Have a good shift tonight!"'
   emergencyDialogs:
-  - 
+  - '"Hey! What''s wrong with you?! I haven''t done anything wrong!"'
   checkQuestions:
   - 
   - 
