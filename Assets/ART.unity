@@ -10273,6 +10273,75 @@ Transform:
   - {fileID: 1783206952}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &947236652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 947236654}
+  - component: {fileID: 947236653}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &947236653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947236652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c83294c603bd4e4bb44a524893fef43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  roles:
+  - roleName: Vill
+    npcType: 0
+    spawnChance: 70
+    prefabs:
+    - {fileID: 2619488083792421844, guid: d9aee6a408a152b4494166dd50487821, type: 3}
+    - {fileID: 9053630947943947750, guid: 003cc0aa76ffc6a4da269b915c6acb1d, type: 3}
+    - {fileID: 6466161845176888155, guid: 76347f9023eac3a4e9a169faefdbff52, type: 3}
+    - {fileID: 2630372590865414851, guid: 4e4478972fb739e4293e3e8f24217825, type: 3}
+    - {fileID: 4613846861793862613, guid: 380f2dcfad4ab664ea71c02a30642b43, type: 3}
+    - {fileID: 1335766430191492171, guid: c619146e78b36704e9d74b3f474036b8, type: 3}
+    - {fileID: 8388612852650734570, guid: d6c897cf6d891aa4e8e0bab91d14d9fd, type: 3}
+  - roleName: Rob
+    npcType: 0
+    spawnChance: 30
+    prefabs:
+    - {fileID: 1916892052378479223, guid: 2af2ffbdcfe0afb45919920712ba9185, type: 3}
+    - {fileID: 7075563784666361136, guid: 9104f3462d2a7be42899a2070ca855c4, type: 3}
+    - {fileID: 7160732695135787067, guid: d098b860e6ff6e347afb6fd8ee893fb9, type: 3}
+    - {fileID: 5965931762339639402, guid: cbb9bc69ee8864449b3024d57a6bcf81, type: 3}
+  spawnPoint: {fileID: 1783206952}
+  stopPoint: {fileID: 2134447594}
+  gameManager: {fileID: 1304983901}
+  checkWindow: 4
+  minRobberInWindow: 1
+--- !u!4 &947236654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947236652}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2452, y: -0, z: -5.00749}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &953515499
 GameObject:
   m_ObjectHideFlags: 0
@@ -13438,7 +13507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   currentNPC: {fileID: 0}
-  spawner: {fileID: 2062134710}
+  spawner: {fileID: 947236653}
   enterPoint: {fileID: 1167339265}
   exitPoint: {fileID: 728459411}
   currentHour: 12
@@ -21130,7 +21199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2062134710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21950,7 +22019,6 @@ SceneRoots:
   - {fileID: 1388448289}
   - {fileID: 603867670}
   - {fileID: 216559034}
-  - {fileID: 2062134711}
   - {fileID: 845128475}
   - {fileID: 554417815}
   - {fileID: 1031564446}
@@ -21961,3 +22029,5 @@ SceneRoots:
   - {fileID: 1342637029}
   - {fileID: 1518607563}
   - {fileID: 75466536}
+  - {fileID: 947236654}
+  - {fileID: 2062134711}

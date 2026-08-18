@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
   speed: 2
+  bounceHeight: 0.05
+  bounceSpeed: 8
 --- !u!114 &195060253165492604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,5 +120,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb00b7e6213de4d4aa15e3ecc66c1158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  npcType: 2
+  npcType: 0
   data: {fileID: 11400000, guid: 4631a5c5d855e2c449d99c3beae7dfa2, type: 2}

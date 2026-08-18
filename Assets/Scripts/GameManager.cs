@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject currentNPC;
-    public NPCSpawner spawner;
+    public SpawnManager spawner;
 
     public Transform enterPoint;
     public Transform exitPoint;
@@ -585,6 +585,7 @@ public class GameManager : MonoBehaviour
         currentNPC = null;
         currentState = NPCState.WalkingToCheckpoint;
 
+        spawner.ResetHistory();   // เพิ่มบรรทัดนี้
         // เริ่ม spawn คนแรกของวันใหม่
         spawner.SpawnNPC();
     }
