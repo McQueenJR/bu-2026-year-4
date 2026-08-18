@@ -28,3 +28,9 @@ MonoBehaviour:
   - "I really need to go now! I\u2019m about to shit myself!"
   emergencyDialogs:
   - "Wait, please! I\u2019m about to shit myself! T_T"
+  checkQuestions:
+  - 
+  - 
+  - 
+  - 
+  correctAnswers: 00000000

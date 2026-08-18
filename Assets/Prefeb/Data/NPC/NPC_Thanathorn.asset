@@ -27,3 +27,9 @@ MonoBehaviour:
   - THX
   emergencyDialogs:
   - "This has to be a mistake. I\u2019m not a bad person, I swear!"
+  checkQuestions:
+  - dada
+  - aa
+  - adaaaa
+  - scc
+  correctAnswers: 01010101

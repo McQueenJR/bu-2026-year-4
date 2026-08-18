@@ -334,6 +334,8 @@ public class GameManager : MonoBehaviour
 
         dialogManager.StartEmergencyDialog(npc.data);
     }
+    
+    
 
     // =========================
     // BAG
@@ -569,7 +571,11 @@ public class GameManager : MonoBehaviour
         villagerArrested = 0;
         robberPassed = 0;
         robberArrested = 0;
-
+        
+// ★ เคลียร์คะแนน checklist ของวันเก่าทั้งหมด ไม่ให้ปนกับวันใหม่
+        if (ChecklistManager.Instance != null)
+            ChecklistManager.Instance.ResetAllChecklistScores();
+        
         // ปิด UI สรุปผล
         if (endDayUI != null)
             endDayUI.Hide();
@@ -732,7 +738,7 @@ public class GameManager : MonoBehaviour
             if (isRobber)
             {
                 robberPassed++;
-                score -= 1;
+                score = 0;
             }
             else
             {
@@ -751,8 +757,20 @@ public class GameManager : MonoBehaviour
             else
             {
                 villagerArrested++;
-                score -= 1;
+                score = 0;
             }
+        }
+        // ★ บวกคะแนน checklist ล่าสุดที่ส่งของ NPC คนนี้เข้า score รวม
+        if (ChecklistManager.Instance != null)
+        {
+            int checklistPoints = ChecklistManager.Instance.GetChecklistScore(npcObj);
+            Debug.Log("ดึงคะแนน checklist ของ npcObj (key = " + npcObj.GetInstanceID() + ") ได้ = " + checklistPoints);
+            score += checklistPoints;
+            ChecklistManager.Instance.ConsumeChecklistScore(npcObj);
+        }
+        else
+        {
+            Debug.LogWarning("ChecklistManager.Instance เป็น null!");
         }
 
         npcProcessedCount++;
