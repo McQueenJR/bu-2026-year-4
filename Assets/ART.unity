@@ -13716,7 +13716,7 @@ MonoBehaviour:
   policeSound: {fileID: 1304983905}
   isPoliceSequenceActive: 0
   npcProcessedCount: 0
-  npcPerDay: 1
+  npcPerDay: 10
   score: 0
   villagerPassed: 0
   villagerArrested: 0

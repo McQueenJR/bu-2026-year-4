@@ -47,12 +47,15 @@ public class EndDayUI : MonoBehaviour
 
     private string GetRank(int score)
     {
-        if (score <= 1) return "F";
-        if (score <= 3) return "D";
-        if (score <= 5) return "C";
-        if (score == 6) return "B";
-        if (score == 7) return "A";
-        if (score >= 8) return "S";
+        if (score <= 30) return "F";
+        if (score <= 32) return "D";
+        if (score <= 33) return "D+";
+        if (score <= 36) return "C";
+        if (score <= 39) return "C+";
+        if (score <= 42) return "B";
+        if (score <= 45) return "B+";
+        if (score <= 48) return "A";
+        if (score >= 55) return "S";
 
         return "F";
     }
