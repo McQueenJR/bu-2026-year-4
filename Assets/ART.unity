@@ -729,7 +729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &49742665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2073,7 +2073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &164951233
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3684,7 +3684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &295593392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4385,7 +4385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5709514239434687895, guid: 9a692fe3c7ef3c24bae73f63b5df1e7b, type: 3}
+  m_Sprite: {fileID: -295237328723202723, guid: a61ecc1ab9a36eb4a83170027fa75c40, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4754,7 +4754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &385105943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4830,7 +4830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &385318762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6186,7 +6186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &578899849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6734,7 +6734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &606308513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7097,7 +7097,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &626947555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8683,7 +8683,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8278060804094534942, guid: 48928507a3048c4438908b90e4de5f38, type: 3}
+  m_Sprite: {fileID: 7521007556373260137, guid: d65456a0a9febd549a0c37f57a3aab06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10490,8 +10490,8 @@ MonoBehaviour:
     prefabs:
     - {fileID: 1335766430191492171, guid: c619146e78b36704e9d74b3f474036b8, type: 3}
   - roleName: Rob
-    npcType: 0
-    spawnChance: 0
+    npcType: 1
+    spawnChance: 30
     prefabs:
     - {fileID: 1916892052378479223, guid: 2af2ffbdcfe0afb45919920712ba9185, type: 3}
     - {fileID: 7075563784666361136, guid: 9104f3462d2a7be42899a2070ca855c4, type: 3}
@@ -11586,7 +11586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1079044401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12552,8 +12552,8 @@ MonoBehaviour:
   displayText: {fileID: 1180177354}
   phoneManager: {fileID: 2061456607}
   audioSource: {fileID: 1180177357}
-  numberButtonSound: {fileID: 0}
-  callingSound: {fileID: 0}
+  numberButtonSound: {fileID: 8300000, guid: acfb655fb7d613c40ab1dce8ee7239b5, type: 3}
+  callingSound: {fileID: 8300000, guid: d959393e3d951f04b94e4db69f7275cf, type: 3}
 --- !u!114 &1180177354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13072,7 +13072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1226455310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13696,8 +13696,8 @@ MonoBehaviour:
   greenButtonVisual: {fileID: 154888040}
   redButtonVisual: {fileID: 365158348}
   buttonSound: {fileID: 1304983905}
-  greenButtonSound: {fileID: 0}
-  redButtonSound: {fileID: 0}
+  greenButtonSound: {fileID: 8300000, guid: 674d83a4af0275b4eba989c4f666a9c1, type: 3}
+  redButtonSound: {fileID: 8300000, guid: 674d83a4af0275b4eba989c4f666a9c1, type: 3}
   dialogManager: {fileID: 766519928}
   bagPrefab: {fileID: 771226198540687560, guid: f3d956b97285b9144bb150fce5582314, type: 3}
   spawnPointBag: {fileID: 554417815}
@@ -13709,7 +13709,7 @@ MonoBehaviour:
   spawnPointIDCard: {fileID: 1031564446}
   idCardScale: {x: 1, y: 1, z: 1}
   idCardRotation: {x: 0, y: 0, z: 0}
-  bagAndCardSpawnSound: {fileID: 0}
+  bagAndCardSpawnSound: {fileID: 8300000, guid: 75c503485052e9e438860f688d40a5a4, type: 3}
   policePrefab: {fileID: 9030751808653253318, guid: 093bcc26790f39b4490fe572664dea14, type: 3}
   spawnPolice: {fileID: 2133219928}
   exitPolicePoint: {fileID: 1580498738}
@@ -16966,7 +16966,7 @@ MonoBehaviour:
   coverOpenSprite: {fileID: -8361336087449608229, guid: a52952588e4474049b87424422ffef99, type: 3}
   doorSound: {fileID: 1653924426}
   emergencyButtonSound: {fileID: 1653924426}
-  emergencyButtonClip: {fileID: 0}
+  emergencyButtonClip: {fileID: 8300000, guid: 3689ba0d9d521f348b4f6dce74288fbf, type: 3}
 --- !u!4 &1653924425
 Transform:
   m_ObjectHideFlags: 0
@@ -16993,8 +16993,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 0c6a0b6d5ec7be345962e6a5fb7404a0, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -20019,7 +20019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1915069088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20095,7 +20095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1942855206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21466,7 +21466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2061483500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21945,7 +21945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2093305887
 RectTransform:
   m_ObjectHideFlags: 0
