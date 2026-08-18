@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: e31a528d46331b449b6e1512a3b3de0e
+guid: 65e4201bf13e1ec44aa2b08e027e8ad7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6695950386315148514
-    second: BG_0
+      213: -6156296539098328754
+    second: F2Villager_0
+  - first:
+      213: -1340235058214798088
+    second: F2Villager_1
+  - first:
+      213: 3298386396953513485
+    second: F2Villager_2
+  - first:
+      213: 1147451343252787208
+    second: F2Villager_3
+  - first:
+      213: -4679319141921683022
+    second: F2Villager_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +60,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -72,10 +84,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 2
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,23 +112,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BG_0
+      name: F2Villager_4
       rect:
         serializedVersion: 2
-        x: 69
-        y: 88
-        width: 1782
-        height: 992
+        x: 276
+        y: 130
+        width: 1442
+        height: 818
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e13cb0ea9943313a0800000000000000
-      internalID: -6695950386315148514
+      spriteID: 2b982135808bf0fb0800000000000000
+      internalID: -4679319141921683022
       vertices: []
       indices: 
       edges: []
@@ -125,7 +137,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c5519ce1fa7cf134da72efc26eede540
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +147,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BG_0: -6695950386315148514
+      F2Villager_0: -6156296539098328754
+      F2Villager_1: -1340235058214798088
+      F2Villager_2: 3298386396953513485
+      F2Villager_3: 1147451343252787208
+      F2Villager_4: -4679319141921683022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
