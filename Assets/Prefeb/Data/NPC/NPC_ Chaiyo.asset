@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: Chaiyo Hoihiw
   age: 64
   dialogs:
-  - '"How are things tonight?"'
+  - How are things tonight?
   bagItems:
   - {fileID: 3420998903630219059, guid: 50b6cba4f5058b140888f99bd5f9bf91, type: 3}
   - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
@@ -27,9 +27,9 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 1917609254117910250, guid: d6ea171670c99d041af21712414caea9, type: 3}
   greenDialogs:
-  - '"See you later, young man."'
+  - See you later, young man.
   emergencyDialogs:
-  - '"I''m way too old to go to jail, kiddo!"'
+  - I'm way too old to go to jail, kiddo!
   checkQuestions:
   - '"It''s normal."'
   - '"So I''m bald, what of it? How rude."'

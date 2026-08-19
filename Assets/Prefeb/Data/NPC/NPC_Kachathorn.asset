@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: Kachatorn Boonphet
   age: 45
   dialogs:
-  - '"I came to ask for holy water."'
+  - I came to ask for holy water.
   bagItems:
   - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
   - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
@@ -25,12 +25,12 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 1528112238560909589, guid: 8eca292021ee3d24698acf87f1c3342b, type: 3}
   greenDialogs:
-  - '"It''s quite chilly tonight."'
+  - It's quite chilly tonight.
   emergencyDialogs:
-  - '"Hey, why are you doing this?"'
+  - Hey, why are you doing this?
   checkQuestions:
-  - '"It''s normal."'
-  - '"Isn''t my beard handsome?"'
-  - '"Take another look, will you."'
-  - '"This document was made properly, you know."'
+  - It's normal.
+  - Isn't my beard handsome?
+  - Take another look, will you.
+  - This document was made properly, you know.
   correctAnswers: 00000000

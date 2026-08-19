@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: 'Imjai Nonnae '
   age: 35
   dialogs:
-  - '"I''m here to fix the Wi-Fi."'
+  - I'm here to fix the Wi-Fi.
   bagItems:
   - {fileID: 178329950057042882, guid: ae6533b08215c8b4daa00da5f5c2dee2, type: 3}
   - {fileID: 4754033316676718758, guid: 25349fcbdbc962b45a7071f8ac8d5b6b, type: 3}
@@ -26,12 +26,12 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 6258882663174409096, guid: 13b15af74097ef149b8d7769d321b27c, type: 3}
   greenDialogs:
-  - '"Thanks, pal! Hahaha!"'
+  - Thanks, pal! Hahaha!
   emergencyDialogs:
-  - '"I hope we have elections real soon!"'
+  - I hope we have elections real soon!
   checkQuestions:
-  - '"I''m here to fix the WiFi."'
-  - "\"So my nose is big \u2014 is that wrong? You want to fight, huh?\""
-  - '"I don''t know, but it''s not fake."'
-  - '"What''s wrong with it?"'
+  - I'm here to fix the WiFi.
+  - "So my nose is big \u2014 is that wrong? You want to fight, huh?"
+  - I don't know, but it's not fake.
+  - What's wrong with it?
   correctAnswers: 01000101

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
   m_Name: NPC_ Thanathorn Kaprao
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  npcName: 'Thanathorn LukKaphao(Robber) '
+  npcName: Thanathorn Lukkaphao
   age: 45
   dialogs:
-  - "\"Those items? They\u2019re totally normal, everyone carries them around.\""
+  - "Those items? They\u2019re totally normal, everyone carries them around."
   bagItems:
   - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
   - {fileID: 6809535376647278758, guid: fd5795aa9f3b442458b4a75fa04b9851, type: 3}
@@ -27,13 +27,13 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 8667820343509435601, guid: f81d36c3c95a0744096d31b44a919148, type: 3}
   greenDialogs:
-  - '"This is your first night on the job, right? Good work."'
+  - This is your first night on the job, right? Good work.
   emergencyDialogs:
-  - '"Damn it! Open up, you idiot!"'
+  - Damn it! Open up, you idiot!
   checkQuestions:
-  - "\"I'm here to pay respects to the monk \u2014 having incense and candles isn't
-    strange.\""
-  - '"I''m handsome, aren''t I?"'
-  - '"There''s nothing wrong with it."'
-  - '"The document should be correct."'
+  - "I'm here to pay respects to the monk \u2014 having incense and candles isn't
+    strange."
+  - I'm handsome, aren't I?
+  - There's nothing wrong with it.
+  - The document should be correct.
   correctAnswers: 00000000

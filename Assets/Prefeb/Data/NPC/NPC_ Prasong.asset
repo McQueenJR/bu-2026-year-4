@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: Prasong Raikhat
   age: 0
   dialogs:
-  - '"Hm-mph!!!"'
+  - Hm-mph!!!
   bagItems:
   - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
   - {fileID: 4326028031383017160, guid: 488e8149f57343e49832a9ef75fc66ab, type: 3}
@@ -26,12 +26,12 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 6679251541010110780, guid: 446fa038ba5cae44aa0d8f2ef5fe2c5b, type: 3}
   greenDialogs:
-  - '"Thank you."'
+  - Thank you.
   emergencyDialogs:
-  - '"You will regret this!"'
+  - You will regret this!
   checkQuestions:
-  - '"This knife? It''s for peeling mangoes."'
-  - '"What about my face? Are you trying to pick a fight with me?"'
-  - '"I didn''t bring it, but that''s not a problem."'
-  - "\"This document is definitely genuine \u2014 you're just reading it wrong.\""
+  - This knife? It's for peeling mangoes.
+  - What about my face? Are you trying to pick a fight with me?
+  - I didn't bring it, but that's not a problem.
+  - "This document is definitely genuine \u2014 you're just reading it wrong."
   correctAnswers: 01000101

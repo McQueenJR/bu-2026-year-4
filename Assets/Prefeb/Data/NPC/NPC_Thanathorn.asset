@@ -31,9 +31,9 @@ MonoBehaviour:
   emergencyDialogs:
   - "This has to be a mistake. I\u2019m not a bad person, I swear!"
   checkQuestions:
-  - "\"I'm here to pay respects to the monk \u2014 having incense and candles isn't
-    strange.\""
-  - '"I''m handsome, aren''t I?"'
-  - '"There''s nothing wrong with it."'
-  - '"The document should be correct."'
+  - "I'm here to pay respects to the monk \u2014 having incense and candles isn't
+    strange."
+  - I'm handsome, aren't I?
+  - There's nothing wrong with it.
+  - The document should be correct.
   correctAnswers: 00000000

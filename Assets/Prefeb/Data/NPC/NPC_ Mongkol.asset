@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: 'Mongkol Pladaeng '
   age: 32
   dialogs:
-  - '"I''m a friend of the monks here."'
+  - I'm a friend of the monks here.
   bagItems:
   - {fileID: 428272106668646039, guid: 441245bd005f414409e704406161460a, type: 3}
   - {fileID: 4754033316676718758, guid: 25349fcbdbc962b45a7071f8ac8d5b6b, type: 3}
@@ -26,12 +26,12 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 6199115512350675490, guid: 395c88491ce55bb4386667dacf94341c, type: 3}
   greenDialogs:
-  - '"May you be blessed, young man."'
+  - May you be blessed, young man.
   emergencyDialogs:
-  - '"I''ll call the abbot and get you fired for sure!"'
+  - I'll call the abbot and get you fired for sure!
   checkQuestions:
-  - '"This screwdriver? It''s for poking the eyes of people who ask too many questions."'
-  - '"My robe got stained with red soda, so I washed it and the color changed."'
-  - '"What about my ID card?"'
-  - "\"I folded it into a paper bird \u2014 what of it?\""
+  - This screwdriver? It's for poking the eyes of people who ask too many questions.
+  - My robe got stained with red soda, so I washed it and the color changed.
+  - What about my ID card?
+  - "I folded it into a paper bird \u2014 what of it?"
   correctAnswers: 01010101

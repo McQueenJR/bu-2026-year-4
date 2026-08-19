@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: 'Taengkwa Lukkraprao '
   age: 20
   dialogs:
-  - '"A fortune teller told me I''m having bad luck lately."'
+  - A fortune teller told me I'm having bad luck lately.
   bagItems:
   - {fileID: 87406941769464242, guid: f03156bd57c56c040803870dea6241e8, type: 3}
   - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
@@ -26,12 +26,12 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 3759295625749290864, guid: e209cf43654f965499499a4a96e23519, type: 3}
   greenDialogs:
-  - '"Eight more temples to go, sigh..."'
+  - Eight more temples to go, sigh...
   emergencyDialogs:
-  - '"Where am I supposed to make merit now?"'
+  - Where am I supposed to make merit now?
   checkQuestions:
-  - '"Lipstick, for my lips."'
-  - '"I''m pretty, aren''t I?"'
-  - '"What''s wrong with it?"'
-  - '"Take another look."'
+  - Lipstick, for my lips.
+  - I'm pretty, aren't I?
+  - What's wrong with it?
+  - Take another look.
   correctAnswers: 00000000

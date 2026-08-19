@@ -15,7 +15,7 @@ MonoBehaviour:
   npcName: Angkoon Tonsak
   age: 33
   dialogs:
-  - '"Hello."'
+  - Hello.
   bagItems:
   - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
   - {fileID: 3420998903630219059, guid: 50b6cba4f5058b140888f99bd5f9bf91, type: 3}
@@ -26,14 +26,12 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 7313911009344790203, guid: 6c33f559cb47ed545ab620f96c81228c, type: 3}
   greenDialogs:
-  - '"Thank you, see you later."'
+  - Thank you, see you later.
   emergencyDialogs:
-  - '"I just came to get my fortune told!"
-
-'
+  - I just came to get my fortune told!
   checkQuestions:
-  - '"It''s normal."'
-  - '"This hairstyle is just my style."'
-  - '"Isn''t it normal? I just had it made recently."'
-  - '"Take another look at it."'
+  - It's normal.
+  - This hairstyle is just my style.
+  - Isn't it normal? I just had it made recently.
+  - Take another look at it.
   correctAnswers: 00000000
