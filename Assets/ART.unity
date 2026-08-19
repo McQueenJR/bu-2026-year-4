@@ -13709,7 +13709,7 @@ MonoBehaviour:
   bagScale: {x: 1, y: 1, z: 1}
   bagRotation: {x: 0, y: 0, z: 0}
   windowPanel: {fileID: 318465955}
-  idCardPrefab: {fileID: 2274761181057386041, guid: f7bfc95610f7a414f92c3bfdfaff6a85, type: 3}
+  idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   monkIdCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
   spawnPointIDCard: {fileID: 1031564446}
   idCardScale: {x: 1, y: 1, z: 1}

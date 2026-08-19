@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 4002949390651873329, guid: aff07aa22b6ee3f419791c44b835c714, type: 3}
   - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
   idCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
-  idCardDisplayPrefab: {fileID: 4251546616849642322, guid: c27846605e1ee33448783ae2ea2f464c, type: 3}
+  idCardDisplayPrefab: {fileID: 4815995796601625567, guid: a6beaf8c2d1fa8649aee8e7723bd6314, type: 3}
   greenDialogs:
   - "I really need to go now! I\u2019m about to shit myself!"
   emergencyDialogs:
