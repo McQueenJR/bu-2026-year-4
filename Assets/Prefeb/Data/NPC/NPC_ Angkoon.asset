@@ -15,24 +15,25 @@ MonoBehaviour:
   npcName: Angkoon Tonsak
   age: 33
   dialogs:
-  - '"Good evening,Everything in my bag is clear, right?"'
+  - '"Hello."'
   bagItems:
-  - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
-  - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
-  - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
+  - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
+  - {fileID: 3420998903630219059, guid: 50b6cba4f5058b140888f99bd5f9bf91, type: 3}
+  - {fileID: 3498479560977062270, guid: 39bf27665c952ff41ac048f5b0802988, type: 3}
   - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
-  - {fileID: 7495406601032001701, guid: 1fa355821aa271746847546b8a113418, type: 3}
+  - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
+  - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 7313911009344790203, guid: 6c33f559cb47ed545ab620f96c81228c, type: 3}
   greenDialogs:
-  - '"Thank you. Stay safe on duty tonight."'
+  - '"Thank you, see you later."'
   emergencyDialogs:
-  - '"Wait! Why did you press the red button?! There must be a misunderstanding!"
+  - '"I just came to get my fortune told!"
 
 '
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
+  - '"It''s normal."'
+  - '"This hairstyle is just my style."'
+  - '"Isn''t it normal? I just had it made recently."'
+  - '"Take another look at it."'
   correctAnswers: 00000000

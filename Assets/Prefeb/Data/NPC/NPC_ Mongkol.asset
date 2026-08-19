@@ -30,8 +30,8 @@ MonoBehaviour:
   emergencyDialogs:
   - '"I''ll call the abbot and get you fired for sure!"'
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
-  correctAnswers: 00000000
+  - '"This screwdriver? It''s for poking the eyes of people who ask too many questions."'
+  - '"My robe got stained with red soda, so I washed it and the color changed."'
+  - '"What about my ID card?"'
+  - "\"I folded it into a paper bird \u2014 what of it?\""
+  correctAnswers: 01010101

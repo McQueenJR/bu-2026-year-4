@@ -31,8 +31,8 @@ MonoBehaviour:
   emergencyDialogs:
   - '"I''m way too old to go to jail, kiddo!"'
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
+  - '"It''s normal."'
+  - '"So I''m bald, what of it? How rude."'
+  - '"Oh, I forgot to bring it."'
+  - '"My eyesight may be poor, but there''s nothing wrong with it."'
   correctAnswers: 00000000

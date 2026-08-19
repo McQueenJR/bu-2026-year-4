@@ -30,8 +30,8 @@ MonoBehaviour:
   emergencyDialogs:
   - '"Oh, hey!"'
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
-  correctAnswers: 00000000
+  - '"This pen is for signing documents."'
+  - '"My face? Why do you ask?"'
+  - '"Does the certificate look too old?"'
+  - (no line given in the original document)
+  correctAnswers: 01010101

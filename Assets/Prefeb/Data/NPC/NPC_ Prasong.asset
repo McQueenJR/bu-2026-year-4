@@ -30,8 +30,8 @@ MonoBehaviour:
   emergencyDialogs:
   - '"You will regret this!"'
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
-  correctAnswers: 00000000
+  - '"This knife? It''s for peeling mangoes."'
+  - '"What about my face? Are you trying to pick a fight with me?"'
+  - '"I didn''t bring it, but that''s not a problem."'
+  - "\"This document is definitely genuine \u2014 you're just reading it wrong.\""
+  correctAnswers: 01000101

@@ -29,8 +29,8 @@ MonoBehaviour:
   emergencyDialogs:
   - "Wait, please! I\u2019m about to shit myself! T_T"
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
+  - '"Take a good look."'
+  - '"What''s wrong with my face?"'
+  - '"It shouldn''t be wrong, take a good look."'
+  - '"I reside at this temple."'
   correctAnswers: 00000000

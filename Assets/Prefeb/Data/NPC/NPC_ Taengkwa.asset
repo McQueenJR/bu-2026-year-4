@@ -30,8 +30,8 @@ MonoBehaviour:
   emergencyDialogs:
   - '"Where am I supposed to make merit now?"'
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
+  - '"Lipstick, for my lips."'
+  - '"I''m pretty, aren''t I?"'
+  - '"What''s wrong with it?"'
+  - '"Take another look."'
   correctAnswers: 00000000

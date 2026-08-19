@@ -21,6 +21,9 @@ MonoBehaviour:
   - {fileID: 7799310543913843729, guid: 9dca5269612e9484088eb1ee0c0d238e, type: 3}
   - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
   - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
+  - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
+  - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
+  - {fileID: 3498479560977062270, guid: 39bf27665c952ff41ac048f5b0802988, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 6072333215724701038, guid: 65cd858e8e171ff4086ae662ddb2abe1, type: 3}
   greenDialogs:
@@ -28,8 +31,9 @@ MonoBehaviour:
   emergencyDialogs:
   - "This has to be a mistake. I\u2019m not a bad person, I swear!"
   checkQuestions:
-  - dada
-  - aa
-  - adaaaa
-  - scc
-  correctAnswers: 01010101
+  - "\"I'm here to pay respects to the monk \u2014 having incense and candles isn't
+    strange.\""
+  - '"I''m handsome, aren''t I?"'
+  - '"There''s nothing wrong with it."'
+  - '"The document should be correct."'
+  correctAnswers: 00000000

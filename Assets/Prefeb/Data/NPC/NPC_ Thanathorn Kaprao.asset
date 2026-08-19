@@ -17,10 +17,13 @@ MonoBehaviour:
   dialogs:
   - "\"Those items? They\u2019re totally normal, everyone carries them around.\""
   bagItems:
-  - {fileID: 428272106668646039, guid: 441245bd005f414409e704406161460a, type: 3}
-  - {fileID: 4326028031383017160, guid: 488e8149f57343e49832a9ef75fc66ab, type: 3}
-  - {fileID: 178329950057042882, guid: ae6533b08215c8b4daa00da5f5c2dee2, type: 3}
-  - {fileID: 4754033316676718758, guid: 25349fcbdbc962b45a7071f8ac8d5b6b, type: 3}
+  - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
+  - {fileID: 6809535376647278758, guid: fd5795aa9f3b442458b4a75fa04b9851, type: 3}
+  - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
+  - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
+  - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
+  - {fileID: 7799310543913843729, guid: 9dca5269612e9484088eb1ee0c0d238e, type: 3}
+  - {fileID: 3498479560977062270, guid: 39bf27665c952ff41ac048f5b0802988, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 8667820343509435601, guid: f81d36c3c95a0744096d31b44a919148, type: 3}
   greenDialogs:
@@ -28,8 +31,9 @@ MonoBehaviour:
   emergencyDialogs:
   - '"Damn it! Open up, you idiot!"'
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
+  - "\"I'm here to pay respects to the monk \u2014 having incense and candles isn't
+    strange.\""
+  - '"I''m handsome, aren''t I?"'
+  - '"There''s nothing wrong with it."'
+  - '"The document should be correct."'
   correctAnswers: 00000000

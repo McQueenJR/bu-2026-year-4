@@ -30,8 +30,8 @@ MonoBehaviour:
   emergencyDialogs:
   - '"I hope we have elections real soon!"'
   checkQuestions:
-  - 
-  - 
-  - 
-  - 
-  correctAnswers: 00000000
+  - '"I''m here to fix the WiFi."'
+  - "\"So my nose is big \u2014 is that wrong? You want to fight, huh?\""
+  - '"I don''t know, but it''s not fake."'
+  - '"What''s wrong with it?"'
+  correctAnswers: 01000101
