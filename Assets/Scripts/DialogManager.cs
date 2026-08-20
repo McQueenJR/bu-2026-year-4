@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class DialogManager : MonoBehaviour
 {
@@ -12,6 +13,61 @@ public class DialogManager : MonoBehaviour
 
     private string[] dialogs;
     private int currentIndex;
+
+    // NPC ที่กำลังพูดอยู่
+    private NPCMouthAnimation currentMouth;
+
+
+    // =====================================================
+    // TYPEWRITER
+    // =====================================================
+
+    [Header("Typewriter")]
+    [SerializeField] private float typeSpeed = 0.03f;
+
+    [Header("Dialog Auto Close")]
+    [SerializeField] private float autoNextDelay = 2f;
+
+    private Coroutine typewriterCoroutine;
+    private Coroutine autoNextCoroutine;
+
+    // true = กำลังพิมพ์ข้อความอยู่
+    private bool isTyping = false;
+
+
+    // =====================================================
+    // DIALOG SOUND
+    // =====================================================
+
+    [Header("Dialog Sound")]
+    [SerializeField] private AudioSource voiceAudioSource;
+
+    // เสียงพูดของตัวละคร
+    [SerializeField] private AudioClip voiceClip;
+
+    // ระดับเสียง
+    [SerializeField, Range(0f, 1f)]
+    private float voiceVolume = 1f;
+
+
+    // =====================================================
+    // DIALOG POSITION
+    // =====================================================
+
+    // ใช้ตรวจสอบว่าข้อความปัจจุบันเป็นข้อความแรกหรือไม่
+    private bool IsFirstDialog()
+    {
+        return currentIndex == 0;
+    }
+
+
+    // ใช้ตรวจสอบว่าข้อความปัจจุบันเป็นข้อความสุดท้ายหรือไม่
+    private bool IsLastDialog()
+    {
+        return dialogs != null &&
+               dialogs.Length > 0 &&
+               currentIndex == dialogs.Length - 1;
+    }
 
 
     // =====================================================
@@ -28,6 +84,40 @@ public class DialogManager : MonoBehaviour
     }
 
     private DialogType currentDialogType;
+
+
+    // =====================================================
+    // NPC MOUTH
+    // =====================================================
+
+    // ใช้กำหนดว่า NPC ตัวไหนกำลังพูด
+    public void SetTalkingNPC(NPCMouthAnimation mouth)
+    {
+        // หยุด NPC ตัวเก่าก่อน
+        if (currentMouth != null)
+        {
+            currentMouth.StopTalking();
+        }
+
+        currentMouth = mouth;
+
+        // เริ่มขยับปาก NPC ตัวใหม่
+        if (currentMouth != null)
+        {
+            currentMouth.StartTalking();
+        }
+    }
+
+
+    // หยุดปาก NPC ที่กำลังพูด
+    private void StopTalkingNPC()
+    {
+        if (currentMouth != null)
+        {
+            currentMouth.StopTalking();
+            currentMouth = null;
+        }
+    }
 
 
     // =====================================================
@@ -185,34 +275,215 @@ public class DialogManager : MonoBehaviour
             currentIndex >= dialogs.Length)
             return;
 
-        dialogText.text = dialogs[currentIndex];
+        // หยุด Coroutine เก่าก่อน
+        if (typewriterCoroutine != null)
+        {
+            StopCoroutine(typewriterCoroutine);
+            typewriterCoroutine = null;
+        }
 
-        Debug.Log(
-            "Dialog : " +
-            dialogs[currentIndex]
+        if (autoNextCoroutine != null)
+        {
+            StopCoroutine(autoNextCoroutine);
+            autoNextCoroutine = null;
+        }
+
+        isTyping = true;
+
+        // ตรวจว่าข้อความนี้เป็นข้อความแรกหรือไม่
+        bool isFirst = IsFirstDialog();
+
+        // ตรวจว่าข้อความนี้เป็นข้อความสุดท้ายหรือไม่
+        bool isLast = IsLastDialog();
+
+        // ส่งข้อมูลไปใช้กับระบบเสียง / Animation
+        OnDialogStarted(isFirst, isLast);
+
+        // เริ่ม Typewriter
+        typewriterCoroutine = StartCoroutine(
+            TypeText(dialogs[currentIndex])
         );
     }
 
 
     // =====================================================
-    // NEXT
+    // TYPEWRITER EFFECT
     // =====================================================
 
-    public void NextDialog()
+    private IEnumerator TypeText(string text)
     {
-        if (dialogs == null ||
-            dialogs.Length == 0)
+        dialogText.text = "";
+
+        foreach (char letter in text)
+        {
+            dialogText.text += letter;
+
+            yield return new WaitForSeconds(typeSpeed);
+        }
+
+        isTyping = false;
+        typewriterCoroutine = null;
+
+        // ข้อความพิมพ์ครบแล้ว
+        OnDialogFinishedTyping();
+
+        // รอ 2 วินาที แล้วไปข้อความถัดไป
+        autoNextCoroutine = StartCoroutine(
+            AutoNextDialog()
+        );
+    }
+
+
+    // =====================================================
+    // SKIP
+    // =====================================================
+
+    public void SkipDialog()
+    {
+        // ถ้ากำลัง Typewriter
+        // ให้ข้ามทันทีและแสดงข้อความทั้งหมด
+        if (isTyping)
+        {
+            SkipTypewriter();
             return;
+        }
+    }
+
+
+    // =====================================================
+    // SKIP TYPEWRITER
+    // =====================================================
+
+    private void SkipTypewriter()
+    {
+        if (typewriterCoroutine != null)
+        {
+            StopCoroutine(typewriterCoroutine);
+            typewriterCoroutine = null;
+        }
+
+        if (dialogs != null &&
+            currentIndex >= 0 &&
+            currentIndex < dialogs.Length)
+        {
+            dialogText.text = dialogs[currentIndex];
+        }
+
+        isTyping = false;
+
+        // ข้อความถูกแสดงครบแล้ว
+        OnDialogFinishedTyping();
+
+        // เริ่มนับ 2 วินาที
+        if (autoNextCoroutine != null)
+        {
+            StopCoroutine(autoNextCoroutine);
+        }
+
+        autoNextCoroutine = StartCoroutine(
+            AutoNextDialog()
+        );
+    }
+
+
+    // =====================================================
+    // AUTO NEXT
+    // =====================================================
+
+    private IEnumerator AutoNextDialog()
+    {
+        yield return new WaitForSeconds(autoNextDelay);
 
         currentIndex++;
 
         if (currentIndex >= dialogs.Length)
         {
             EndDialog();
-            return;
+            yield break;
         }
 
         ShowCurrentDialog();
+    }
+
+
+    // =====================================================
+    // DIALOG START EVENT
+    // =====================================================
+
+    private void OnDialogStarted(
+        bool isFirst,
+        bool isLast)
+    {
+        Debug.Log(
+            "Dialog Started | " +
+            "First: " + isFirst +
+            " | Last: " + isLast
+        );
+
+        // =================================================
+        // เริ่มเสียงพูด
+        // =================================================
+
+        StartVoice();
+
+        // =================================================
+        // เริ่ม Animation ปาก
+        // =================================================
+
+        if (currentMouth != null)
+        {
+            currentMouth.StartTalking();
+        }
+
+        // =================================================
+        // อนาคตสามารถใส่ระบบอื่นตรงนี้
+        // =================================================
+        //
+        // if (isFirst)
+        // {
+        //     // เริ่มเสียงเฉพาะตอนข้อความแรก
+        // }
+        //
+        // if (isLast)
+        // {
+        //     // เตรียม Animation ตอนข้อความสุดท้าย
+        // }
+    }
+
+
+    // =====================================================
+    // DIALOG FINISHED TYPING EVENT
+    // =====================================================
+
+    private void OnDialogFinishedTyping()
+    {
+        bool isFirst = IsFirstDialog();
+        bool isLast = IsLastDialog();
+
+        Debug.Log(
+            "Dialog Typed Complete | " +
+            "First: " + isFirst +
+            " | Last: " + isLast
+        );
+
+        // =================================================
+        // หยุดเสียง
+        // =================================================
+
+        StopVoice();
+
+        // =================================================
+        // หยุด Animation ปาก
+        // =================================================
+
+        if (currentMouth != null)
+        {
+            currentMouth.StopTalking();
+        }
+
+        // =================================================
+        // อนาคตสามารถใส่ระบบปากตรงนี้
+        // =================================================
     }
 
 
@@ -222,6 +493,12 @@ public class DialogManager : MonoBehaviour
 
     private void EndDialog()
     {
+        // หยุดเสียง
+        StopVoice();
+
+        // หยุด Animation ปาก
+        StopTalkingNPC();
+
         dialogPanel.SetActive(false);
 
         switch (currentDialogType)
@@ -281,5 +558,40 @@ public class DialogManager : MonoBehaviour
     {
         return dialogPanel != null &&
                dialogPanel.activeSelf;
+    }
+
+
+    // =====================================================
+    // PLAY VOICE
+    // =====================================================
+
+    private void StartVoice()
+    {
+        if (voiceAudioSource == null)
+            return;
+
+        if (voiceClip == null)
+            return;
+
+        voiceAudioSource.clip = voiceClip;
+        voiceAudioSource.volume = voiceVolume;
+
+        // ให้เสียงวนระหว่างที่ Dialog กำลังแสดง
+        voiceAudioSource.loop = true;
+
+        voiceAudioSource.Play();
+    }
+
+
+    // =====================================================
+    // STOP VOICE
+    // =====================================================
+
+    private void StopVoice()
+    {
+        if (voiceAudioSource == null)
+            return;
+
+        voiceAudioSource.Stop();
     }
 }
