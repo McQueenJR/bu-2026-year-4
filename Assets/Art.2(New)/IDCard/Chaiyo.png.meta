@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fd1d529f4ea280d46988fe1d10e5834c
+guid: ec8b20ec8281cf14182bffb30605405f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6210703188559381927
-    second: Chaiyo_0
+      213: -1274726569525891319
+    second: 8-Photoroom_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chaiyo_0
+      name: 8-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 9
-        width: 459
-        height: 291
+        x: 142
+        y: 35
+        width: 1778
+        height: 1045
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95a38801b562fc9a0800000000000000
-      internalID: -6210703188559381927
+      spriteID: 90f28a550f24f4ee0800000000000000
+      internalID: -1274726569525891319
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chaiyo_0: -6210703188559381927
+      8-Photoroom_0: -1274726569525891319
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

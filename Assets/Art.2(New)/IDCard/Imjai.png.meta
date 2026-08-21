@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e542faf9fbd75740907fe4b39d89b89
+guid: 50a0a016a0a8b5b4ea0f3a63f6bfe2dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5993858210639775531
-    second: Imjai_0
+      213: 7453213341464752863
+    second: 7-Photoroom_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Imjai_0
+      name: 7-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 9
-        width: 459
-        height: 291
+        x: 142
+        y: 35
+        width: 1778
+        height: 1045
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d8f1c8d6b981dca0800000000000000
-      internalID: -5993858210639775531
+      spriteID: fd275359b022f6760800000000000000
+      internalID: 7453213341464752863
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Imjai_0: -5993858210639775531
+      7-Photoroom_0: 7453213341464752863
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

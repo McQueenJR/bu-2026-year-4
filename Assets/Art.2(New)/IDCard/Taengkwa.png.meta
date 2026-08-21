@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cd2ee5ebe496b0f43a72cd165daa5cac
+guid: 199969dc9fa45bc4a911c8c7e05bc771
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -487077588025187195
-    second: Taengkwa_0
+      213: 4130640169021434097
+    second: 5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Taengkwa_0
+      name: 5_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 9
-        width: 459
-        height: 291
+        x: 143
+        y: 35
+        width: 1618
+        height: 1022
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 58464bba38d8d39f0800000000000000
-      internalID: -487077588025187195
+      spriteID: 1f86b71495bf25930800000000000000
+      internalID: 4130640169021434097
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Taengkwa_0: -487077588025187195
+      5_0: 4130640169021434097
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

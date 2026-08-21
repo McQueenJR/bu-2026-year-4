@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e59fb1091c09acc4f8ed28089c2a05f9
+guid: 8ae8602bfe8519b4eb39ecacc8835694
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3483692845746428595
-    second: Mongkol_0
+      213: -6267049540752861472
+    second: 9-Photoroom_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mongkol_0
+      name: 9-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 9
-        width: 459
-        height: 291
+        x: 142
+        y: 35
+        width: 1778
+        height: 1045
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d45e6be60df67afc0800000000000000
-      internalID: -3483692845746428595
+      spriteID: 0e696ad95a7f609a0800000000000000
+      internalID: -6267049540752861472
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mongkol_0: -3483692845746428595
+      9-Photoroom_0: -6267049540752861472
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
