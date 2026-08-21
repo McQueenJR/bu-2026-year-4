@@ -18,6 +18,12 @@ public class NPCData : ScriptableObject
     public GameObject idCardPrefab;
     public GameObject idCardDisplayPrefab;
     
+    [Header("Applicant Photo")]
+    public GameObject applicantPhotoPrefab;
+    
+    [Header("Temple Entry Document")]
+    public GameObject templeDocumentPrefab;
+    
     [Header("Green Button Dialog")]
     [TextArea(2, 5)]
     public string[] greenDialogs;
