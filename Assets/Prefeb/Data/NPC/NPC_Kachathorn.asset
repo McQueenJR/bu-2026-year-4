@@ -23,7 +23,9 @@ MonoBehaviour:
   - {fileID: 6204213535755125214, guid: badc1b30ebb5b5f47a47ee0d91fb3efc, type: 3}
   - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
-  idCardDisplayPrefab: {fileID: 1528112238560909589, guid: 8eca292021ee3d24698acf87f1c3342b, type: 3}
+  idCardDisplayPrefab: {fileID: 873507153396013311, guid: 0c9d04b24cae94045a58e939638ba6e5, type: 3}
+  applicantPhotoPrefab: {fileID: 0}
+  templeDocumentPrefab: {fileID: 0}
   greenDialogs:
   - It's quite chilly tonight.
   emergencyDialogs:

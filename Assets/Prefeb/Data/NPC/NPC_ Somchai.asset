@@ -24,7 +24,9 @@ MonoBehaviour:
   - {fileID: 3209536216496018159, guid: 514a7bfb687b96548b8dc674210c7a38, type: 3}
   - {fileID: 7624626519014822115, guid: afc8163ec7b4ffc4ca45a1289df59586, type: 3}
   idCardPrefab: {fileID: 3482507905840480017, guid: 10152f696a48bb6488d4cf9775d9bd8f, type: 3}
-  idCardDisplayPrefab: {fileID: 802873425452566401, guid: 900064669ede4594081980c518d25da9, type: 3}
+  idCardDisplayPrefab: {fileID: 5448244896858809388, guid: 093d87c696750cd4e9aa7fb6e47d2930, type: 3}
+  applicantPhotoPrefab: {fileID: 0}
+  templeDocumentPrefab: {fileID: 0}
   greenDialogs:
   - Alright, I'm very tired, going to sleep now.
   emergencyDialogs:

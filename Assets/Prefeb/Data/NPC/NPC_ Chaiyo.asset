@@ -25,7 +25,9 @@ MonoBehaviour:
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
-  idCardDisplayPrefab: {fileID: 1917609254117910250, guid: d6ea171670c99d041af21712414caea9, type: 3}
+  idCardDisplayPrefab: {fileID: 7961298404794232173, guid: 799f351eb1acc254bb5c7ee7f303cc1b, type: 3}
+  applicantPhotoPrefab: {fileID: 0}
+  templeDocumentPrefab: {fileID: 0}
   greenDialogs:
   - See you later, young man.
   emergencyDialogs:

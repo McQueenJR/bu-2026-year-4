@@ -24,7 +24,9 @@ MonoBehaviour:
   - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
-  idCardDisplayPrefab: {fileID: 3759295625749290864, guid: e209cf43654f965499499a4a96e23519, type: 3}
+  idCardDisplayPrefab: {fileID: 3070534522946652621, guid: 8ad56cf40bd347849bad060b7b5082bf, type: 3}
+  applicantPhotoPrefab: {fileID: 0}
+  templeDocumentPrefab: {fileID: 0}
   greenDialogs:
   - Eight more temples to go, sigh...
   emergencyDialogs:
