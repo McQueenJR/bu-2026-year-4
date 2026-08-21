@@ -162,6 +162,7 @@ public class GameManager : MonoBehaviour
         currentState = NPCState.Inspecting;
 
         // เริ่ม Dialog ขอบคุณ
+        SetCurrentNPCMouthTalking();
         dialogManager.StartGreenDialog(npc.data);
     }
 
@@ -233,7 +234,8 @@ public class GameManager : MonoBehaviour
             currentState = NPCState.Inspecting;
 
             Debug.Log("เลือกสีเขียว → เริ่ม Green Dialog");
-
+            
+            SetCurrentNPCMouthTalking();
             dialogManager.StartGreenDialog(npc.data);
         }
 
@@ -273,6 +275,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        SetCurrentNPCMouthTalking();
         dialogManager.StartDialog(npc.data);
     }
 
@@ -331,8 +334,33 @@ public class GameManager : MonoBehaviour
 
         // จำ NPC ตัวนี้ไว้ว่าเคยพูดแล้ว
         emergencyDialogNPC = currentNPC;
-
+        SetCurrentNPCMouthTalking();
         dialogManager.StartEmergencyDialog(npc.data);
+    }
+    
+    // =========================
+    // DIALOG MOUTH ANIMATION
+    // =========================
+
+    private void SetCurrentNPCMouthTalking()
+    {
+        if (currentNPC == null)
+            return;
+
+        NPCMouthAnimation mouth =
+            currentNPC.GetComponentInChildren<NPCMouthAnimation>();
+
+        if (mouth == null)
+        {
+            Debug.LogWarning(
+                "NPC " + currentNPC.name +
+                " ไม่มี NPCMouthAnimation"
+            );
+
+            return;
+        }
+
+        dialogManager.SetTalkingNPC(mouth);
     }
     
     
@@ -619,12 +647,13 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("เปิด Dialog ของ " + npc.data.npcName);
-
+        SetPoliceMouthTalking();
         dialogManager.StartDialog(npc.data);
     }
 
     public void StartPoliceCallDialog()
     {
+        SetPoliceMouthTalking();
         dialogManager.StartSimpleDialog(
             "191",
             new string[]
@@ -721,6 +750,26 @@ public class GameManager : MonoBehaviour
         AdvanceHour();
 
         isPoliceSequenceActive = false;
+    }
+    private void SetPoliceMouthTalking()
+    {
+        if (currentPolice == null)
+            return;
+
+        NPCMouthAnimation mouth =
+            currentPolice.GetComponentInChildren<NPCMouthAnimation>();
+
+        if (mouth == null)
+        {
+            Debug.LogWarning(
+                "Police " + currentPolice.name +
+                " ไม่มี NPCMouthAnimation"
+            );
+
+            return;
+        }
+
+        dialogManager.SetTalkingNPC(mouth);
     }
 
     //โอ๊ค

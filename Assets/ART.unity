@@ -2583,19 +2583,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Next
+  m_text: 'Skip
 
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b13f700296808a47a5ad55c24e9253f, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -8082122375092211229, guid: 8b13f700296808a47a5ad55c24e9253f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2612,8 +2612,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2654,7 +2654,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &210582330
@@ -6734,7 +6734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &606308513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8925,6 +8925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 766519927}
   - component: {fileID: 766519928}
+  - component: {fileID: 766519929}
   m_Layer: 0
   m_Name: DialogManager
   m_TagString: Untagged
@@ -8963,6 +8964,108 @@ MonoBehaviour:
   nameText: {fileID: 1876887757}
   dialogText: {fileID: 1001117643}
   bagManager: {fileID: 1408072863}
+  typeSpeed: 0.03
+  autoNextDelay: 2
+  voiceAudioSource: {fileID: 766519929}
+  voiceClip: {fileID: 8300000, guid: b4a4910f813872645ae57fc2ccf374cc, type: 3}
+  voiceVolume: 1
+--- !u!82 &766519929
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766519926}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &800280192
 GameObject:
   m_ObjectHideFlags: 0
@@ -10488,12 +10591,12 @@ MonoBehaviour:
     npcType: 0
     spawnChance: 70
     prefabs:
-    - {fileID: 1335766430191492171, guid: c619146e78b36704e9d74b3f474036b8, type: 3}
-    - {fileID: 2619488083792421844, guid: d9aee6a408a152b4494166dd50487821, type: 3}
-    - {fileID: 9053630947943947750, guid: 003cc0aa76ffc6a4da269b915c6acb1d, type: 3}
-    - {fileID: 6466161845176888155, guid: 76347f9023eac3a4e9a169faefdbff52, type: 3}
-    - {fileID: 4613846861793862613, guid: 380f2dcfad4ab664ea71c02a30642b43, type: 3}
-    - {fileID: 8388612852650734570, guid: d6c897cf6d891aa4e8e0bab91d14d9fd, type: 3}
+    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
+    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
+    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
+    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
+    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
+    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
   - roleName: Rob
     npcType: 1
     spawnChance: 30
@@ -10845,7 +10948,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b13f700296808a47a5ad55c24e9253f, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -8082122375092211229, guid: 8b13f700296808a47a5ad55c24e9253f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14139,7 +14242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1315404112
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19588,7 +19691,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b13f700296808a47a5ad55c24e9253f, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -8082122375092211229, guid: 8b13f700296808a47a5ad55c24e9253f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21471,7 +21574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2061483500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22112,7 +22215,7 @@ RectTransform:
   m_GameObject: {fileID: 2131401561}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.55, z: 1}
+  m_LocalScale: {x: 1.84141, y: 2.8541853, z: 1.84141}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 210582328}
@@ -22120,7 +22223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 440, y: -270}
+  m_AnchoredPosition: {x: 405, y: -261}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2131401563
@@ -22148,7 +22251,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -22169,7 +22272,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 766519928}
         m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
-        m_MethodName: NextDialog
+        m_MethodName: SkipDialog
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22192,7 +22295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

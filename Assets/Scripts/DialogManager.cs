@@ -10,12 +10,13 @@ public class DialogManager : MonoBehaviour
     public TMP_Text dialogText;
 
     public BagManager bagManager;
-
+    // NPC ที่กำลังพูดอยู่
+    private NPCMouthAnimation currentMouth;
+    
     private string[] dialogs;
     private int currentIndex;
 
-    // NPC ที่กำลังพูดอยู่
-    private NPCMouthAnimation currentMouth;
+
 
 
     // =====================================================
@@ -93,7 +94,7 @@ public class DialogManager : MonoBehaviour
     // ใช้กำหนดว่า NPC ตัวไหนกำลังพูด
     public void SetTalkingNPC(NPCMouthAnimation mouth)
     {
-        // หยุด NPC ตัวเก่าก่อน
+        // ปิดปาก NPC ตัวเก่าก่อน
         if (currentMouth != null)
         {
             currentMouth.StopTalking();
@@ -101,7 +102,7 @@ public class DialogManager : MonoBehaviour
 
         currentMouth = mouth;
 
-        // เริ่มขยับปาก NPC ตัวใหม่
+        // เปิดปาก NPC ตัวใหม่
         if (currentMouth != null)
         {
             currentMouth.StartTalking();
