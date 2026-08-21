@@ -25,7 +25,7 @@ MonoBehaviour:
   - {fileID: 413890824459768212, guid: 672fb2fbf00a6c040bf8e2b9046dc290, type: 3}
   - {fileID: 3498479560977062270, guid: 39bf27665c952ff41ac048f5b0802988, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
-  idCardDisplayPrefab: {fileID: 474936612762684229, guid: e31ed0ae6f6c5214bab334095bb2f263, type: 3}
+  idCardDisplayPrefab: {fileID: 4153981411942899390, guid: b734e995db8591a40b51c5391d69de1c, type: 3}
   applicantPhotoPrefab: {fileID: 0}
   templeDocumentPrefab: {fileID: 0}
   greenDialogs:
