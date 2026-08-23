@@ -11072,12 +11072,12 @@ RectTransform:
   m_LocalScale: {x: 1.2162983, y: 0.99693024, z: 0.92670345}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 518485442}
   - {fileID: 250305264}
   - {fileID: 1074539807}
   - {fileID: 844993632}
   - {fileID: 1342989700}
   - {fileID: 509757338}
-  - {fileID: 518485442}
   m_Father: {fileID: 144572524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -14234,7 +14234,6 @@ GameObject:
   - component: {fileID: 1315404112}
   - component: {fileID: 1315404114}
   - component: {fileID: 1315404113}
-  - component: {fileID: 1315404115}
   - component: {fileID: 1315404116}
   m_Layer: 5
   m_Name: ChecklistPanel
@@ -14302,42 +14301,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315404111}
   m_CullTransparentMesh: 1
---- !u!114 &1315404115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1315404111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7780aa05128c7e4458612c4fd5ddc1b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChecklistPopup
-  popupPanel: {fileID: 1315404111}
-  blocker: {fileID: 1091288343}
-  page1_AskQuestions: {fileID: 1319406423}
-  page2_Evaluate: {fileID: 1010254392}
-  toggleBag: {fileID: 1125752664}
-  toggleAppearance: {fileID: 1355236617}
-  toggleIDCard: {fileID: 1578570296}
-  toggleEntryDoc: {fileID: 386345202}
-  bagAbnormal: {fileID: 913902643}
-  bagNormal: {fileID: 1309063285}
-  appearanceAbnormal: {fileID: 1671003872}
-  appearanceNormal: {fileID: 907486127}
-  idAbnormal: {fileID: 377327824}
-  idNormal: {fileID: 726744273}
-  docAbnormal: {fileID: 2143580934}
-  docNormal: {fileID: 252094648}
-  postItGoToPage2: {fileID: 896437982}
-  postItGoToPage1: {fileID: 1773523372}
-  submitButton: {fileID: 518485443}
-  photoSlot: {fileID: 1519146583}
-  checklistAudioSource: {fileID: 1315404116}
-  openChecklistSound: {fileID: 0}
-  changePageSound: {fileID: 0}
-  submitSound: {fileID: 0}
 --- !u!82 &1315404116
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14463,12 +14426,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1980929528}
   - {fileID: 2086193999}
   - {fileID: 1125752663}
   - {fileID: 1355236616}
   - {fileID: 1578570295}
   - {fileID: 386345201}
-  - {fileID: 1980929528}
   m_Father: {fileID: 144572524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16196,8 +16159,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChecklistManager
   checklistPanel: {fileID: 1315404111}
+  blocker: {fileID: 1091288343}
   page1: {fileID: 1319406423}
   page2: {fileID: 1010254392}
+  postItGoToPage2: {fileID: 896437982}
+  postItGoToPage1: {fileID: 1773523372}
   toggleBag: {fileID: 1125752664}
   toggleAppearance: {fileID: 1355236617}
   toggleID: {fileID: 1578570296}
@@ -16212,6 +16178,10 @@ MonoBehaviour:
   entryDocNormal: {fileID: 726744273}
   dialogManager: {fileID: 766519928}
   checklistScore: 0
+  checklistAudioSource: {fileID: 0}
+  openChecklistSound: {fileID: 0}
+  changePageSound: {fileID: 0}
+  submitSound: {fileID: 0}
 --- !u!1 &1548510601
 GameObject:
   m_ObjectHideFlags: 0
@@ -20531,7 +20501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 46.340942, y: -50.584503}
+  m_AnchoredPosition: {x: 36, y: -50.584503}
   m_SizeDelta: {x: 38.944, y: 12.5117}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1980929529

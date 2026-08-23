@@ -6,12 +6,19 @@ public class ChecklistManager : MonoBehaviour
 {
     public static ChecklistManager Instance;
 
-    [Header("Checklist Panel")]
+    [Header("Checklist Panel ")]
     public GameObject checklistPanel;
-
+ 
+    [Header("Blocker")]
+    public GameObject blocker;
+    
     [Header("Page")]
     public GameObject page1;
     public GameObject page2;
+    
+    [Header("Post-It SwapLayer1-2")]
+    public Button postItGoToPage2;
+    public Button postItGoToPage1;
 
     [Header("Question Toggles")]
     public Toggle toggleBag;
@@ -37,6 +44,13 @@ public class ChecklistManager : MonoBehaviour
     
     [Header("Score")]
     public int checklistScore = 0; // ใช้แสดงผลคะแนนรอบล่าสุดที่ตอบ (ไม่ใช่ตัวสะสมจริงแล้ว)
+    
+    [Header("Checklist Sounds")]
+    public AudioSource checklistAudioSource;
+    public AudioClip openChecklistSound;
+    public AudioClip changePageSound;
+    public AudioClip submitSound;
+
     
     private bool[] playerAnswers = new bool[4];
 
@@ -72,6 +86,9 @@ public class ChecklistManager : MonoBehaviour
     {
         if (checklistPanel != null)
             checklistPanel.SetActive(false);
+        
+        if (blocker != null)           
+            blocker.SetActive(false); 
 
         // -------------------------
         // Toggle
@@ -125,7 +142,8 @@ public class ChecklistManager : MonoBehaviour
         entryDocNormal.onValueChanged.AddListener(
             value => SetAnswer(3, false, value)
         );
-        
+        if (postItGoToPage2 != null) postItGoToPage2.onClick.AddListener(ShowPage1);
+        if (postItGoToPage1 != null) postItGoToPage1.onClick.AddListener(ShowPage2);
     }
     // =====================================================
 // รับคำตอบจากผู้เล่น (หน้า 2)
@@ -218,11 +236,14 @@ public class ChecklistManager : MonoBehaviour
             "เปิด Checklist NPC : " +
             currentNPC.data.npcName
         );
-
         checklistPanel.SetActive(true);
+        
+        if (blocker != null)       
+            blocker.SetActive(true);     
+
+        PlaySound(openChecklistSound); 
 
         ShowPage1();
-
         ResetChecklist();
     }
 
@@ -298,6 +319,9 @@ public class ChecklistManager : MonoBehaviour
         if (checklistPanel != null)
             checklistPanel.SetActive(false);
 
+        if (blocker != null)             
+            blocker.SetActive(false);      
+        
         // =========================
         // เริ่ม Dialog
         // =========================
@@ -426,7 +450,8 @@ public class ChecklistManager : MonoBehaviour
 
         Debug.Log(currentNPC.data.npcName + " ส่ง checklist ได้ " + scoreThisNPC + " คะแนน (ล่าสุด)");
         
-
+        PlaySound(submitSound); 
+        
         CloseChecklist();
     }
 
@@ -442,6 +467,12 @@ public class ChecklistManager : MonoBehaviour
 
         if (page2 != null)
             page2.SetActive(false);
+        
+        if (page1 != null) page1.transform.SetAsLastSibling();
+        if (postItGoToPage1 != null) postItGoToPage1.transform.SetAsFirstSibling(); // ม่วง -> จมหลังสุด
+        if (postItGoToPage2 != null) postItGoToPage2.transform.SetAsLastSibling();  // ฟ้า  -> ลอยหน้าสุด
+
+        PlaySound(changePageSound);       
     }
 
 
@@ -452,6 +483,12 @@ public class ChecklistManager : MonoBehaviour
 
         if (page2 != null)
             page2.SetActive(true);
+        
+        if (page2 != null) page2.transform.SetAsLastSibling();
+        if (postItGoToPage2 != null) postItGoToPage2.transform.SetAsFirstSibling(); // ฟ้า -> จมหลังสุด
+        if (postItGoToPage1 != null) postItGoToPage1.transform.SetAsLastSibling();  // ม่วง -> ลอยหน้าสุด
+
+        PlaySound(changePageSound);
     }
 
 
@@ -499,7 +536,21 @@ public class ChecklistManager : MonoBehaviour
     {
         if (checklistPanel != null)
             checklistPanel.SetActive(false);
+        
+        if (blocker != null)             
+            blocker.SetActive(false);     
 
         currentNPC = null;
     }
+    
+    
+    private void PlaySound(AudioClip clip)
+    {
+        if (checklistAudioSource != null && clip != null)
+        {
+            checklistAudioSource.PlayOneShot(clip);
+        }
+    }
+    
+    
 }

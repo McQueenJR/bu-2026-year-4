@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         if (currentNPC == null)
             return;
 
-        // ถ้ากำลังตรวจอยู่ ให้กดเขียวเพื่อปล่อยได้เลย
+        /* // ถ้ากำลังตรวจอยู่ ให้กดเขียวเพื่อปล่อยได้เลย
         if (currentState == NPCState.Inspecting)
         {
             ReleaseCurrentNPC();
@@ -152,15 +152,24 @@ public class GameManager : MonoBehaviour
 
         // ถ้า NPC กำลังรอการตัดสินใจ
         if (currentState != NPCState.WaitingDecision)
-            return;
+            return; */
 
         NPC npc = currentNPC.GetComponent<NPC>();
-
         if (npc == null || npc.data == null)
             return;
 
-        currentState = NPCState.Inspecting;
+        //currentState = NPCState.Inspecting;
+        //oakgreen
+        if (currentState == NPCState.Inspecting ||
+            currentState == NPCState.WaitingDecision)
+        {
+            currentState = NPCState.Inspecting;
 
+            SetCurrentNPCMouthTalking();
+            dialogManager.StartGreenDialog(npc.data);
+            return;
+        }
+        
         // เริ่ม Dialog ขอบคุณ
         SetCurrentNPCMouthTalking();
         dialogManager.StartGreenDialog(npc.data);
@@ -170,6 +179,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentNPC == null)
             return;
+        if (currentState != NPCState.Inspecting) return; 
 
         Debug.Log("Green Dialog จบ → ปล่อย NPC");
 
@@ -219,6 +229,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         if (currentNPC == null)
+            yield break;
+        
+        if (currentState != NPCState.WaitingDecision)
             yield break;
 
         NPC npc = currentNPC.GetComponent<NPC>();
@@ -470,6 +483,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentNPC == null)
             return;
+        if (currentState == NPCState.Leaving) return;  
 
         RecordDecision(currentNPC, wasArrested: false);   // <-- โอ๊ตเพิ่มบรรทัดนี้
 
