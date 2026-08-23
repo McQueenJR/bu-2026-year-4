@@ -10591,20 +10591,20 @@ MonoBehaviour:
     npcType: 0
     spawnChance: 70
     prefabs:
-    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
-    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
-    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
-    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
-    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
-    - {fileID: 910058632569975752, guid: 07ed985e2567c4742bb1b2c6b184d543, type: 3}
+    - {fileID: 5855728944880710142, guid: 944734de7ea487d40ac94bd56804bd41, type: 3}
+    - {fileID: 6921070265129965008, guid: 5cc324bea413c9e4db6ae6c2a36477b4, type: 3}
+    - {fileID: 3607157650715848043, guid: 203c1b96dcd1ffe4ca2ad602aff58eee, type: 3}
+    - {fileID: 5522980251794501397, guid: cf3549fb2a50a2946ba7c09057934d6d, type: 3}
+    - {fileID: 3104076616371308598, guid: cc9e81b4943e3a44e9e887be36ec9b7f, type: 3}
+    - {fileID: 5855728944880710142, guid: 944734de7ea487d40ac94bd56804bd41, type: 3}
   - roleName: Rob
     npcType: 1
     spawnChance: 30
     prefabs:
-    - {fileID: 1916892052378479223, guid: 2af2ffbdcfe0afb45919920712ba9185, type: 3}
-    - {fileID: 7075563784666361136, guid: 9104f3462d2a7be42899a2070ca855c4, type: 3}
-    - {fileID: 7160732695135787067, guid: d098b860e6ff6e347afb6fd8ee893fb9, type: 3}
-    - {fileID: 5965931762339639402, guid: cbb9bc69ee8864449b3024d57a6bcf81, type: 3}
+    - {fileID: 5781366618935943864, guid: 9c02f33fc1a778542af4b7e93229a80c, type: 3}
+    - {fileID: 6947768652430597422, guid: f620129ebbc3f3b40a22682019a32d2e, type: 3}
+    - {fileID: 4489518453649102923, guid: cc5b21f6e552134478461787ec058634, type: 3}
+    - {fileID: 2291785865687251296, guid: cdaaaa4406142f949a4dd7b5c6d60d7c, type: 3}
   spawnPoint: {fileID: 1783206952}
   stopPoint: {fileID: 2134447594}
   gameManager: {fileID: 1304983901}
@@ -12615,7 +12615,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -4
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1806553410650308376, guid: 198b5eb40e8899f4f8f3f6f97b338e2c, type: 3}
+  m_Sprite: {fileID: -6695950386315148514, guid: e31a528d46331b449b6e1512a3b3de0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13818,7 +13818,7 @@ MonoBehaviour:
   idCardScale: {x: 1, y: 1, z: 1}
   idCardRotation: {x: 0, y: 0, z: 0}
   bagAndCardSpawnSound: {fileID: 8300000, guid: 75c503485052e9e438860f688d40a5a4, type: 3}
-  policePrefab: {fileID: 9030751808653253318, guid: 093bcc26790f39b4490fe572664dea14, type: 3}
+  policePrefab: {fileID: 743815656934588422, guid: 3c90295918d21594692c6015cb0b7b26, type: 3}
   spawnPolice: {fileID: 2133219928}
   exitPolicePoint: {fileID: 1580498738}
   policeSound: {fileID: 1304983905}
