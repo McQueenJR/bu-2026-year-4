@@ -10,13 +10,12 @@ public class DialogManager : MonoBehaviour
     public TMP_Text dialogText;
 
     public BagManager bagManager;
+    
     // NPC ที่กำลังพูดอยู่
     private NPCMouthAnimation currentMouth;
     
     private string[] dialogs;
     private int currentIndex;
-
-
 
 
     // =====================================================
@@ -26,11 +25,7 @@ public class DialogManager : MonoBehaviour
     [Header("Typewriter")]
     [SerializeField] private float typeSpeed = 0.03f;
 
-    [Header("Dialog Auto Close")]
-    [SerializeField] private float autoNextDelay = 2f;
-
     private Coroutine typewriterCoroutine;
-    private Coroutine autoNextCoroutine;
 
     // true = กำลังพิมพ์ข้อความอยู่
     private bool isTyping = false;
@@ -283,12 +278,6 @@ public class DialogManager : MonoBehaviour
             typewriterCoroutine = null;
         }
 
-        if (autoNextCoroutine != null)
-        {
-            StopCoroutine(autoNextCoroutine);
-            autoNextCoroutine = null;
-        }
-
         isTyping = true;
 
         // ตรวจว่าข้อความนี้เป็นข้อความแรกหรือไม่
@@ -328,10 +317,8 @@ public class DialogManager : MonoBehaviour
         // ข้อความพิมพ์ครบแล้ว
         OnDialogFinishedTyping();
 
-        // รอ 2 วินาที แล้วไปข้อความถัดไป
-        autoNextCoroutine = StartCoroutine(
-            AutoNextDialog()
-        );
+        // ไม่มี Auto Next แล้ว
+        // ผู้เล่นต้องกดปุ่ม Close Dialog เอง
     }
 
 
@@ -375,35 +362,30 @@ public class DialogManager : MonoBehaviour
         // ข้อความถูกแสดงครบแล้ว
         OnDialogFinishedTyping();
 
-        // เริ่มนับ 2 วินาที
-        if (autoNextCoroutine != null)
-        {
-            StopCoroutine(autoNextCoroutine);
-        }
-
-        autoNextCoroutine = StartCoroutine(
-            AutoNextDialog()
-        );
+        // ไม่มี Auto Next แล้ว
+        // ผู้เล่นต้องกด Close Dialog เอง
     }
 
 
     // =====================================================
-    // AUTO NEXT
+    // CLOSE DIALOG
     // =====================================================
 
-    private IEnumerator AutoNextDialog()
+    // เรียกจากปุ่ม Close Dialogue
+    public void CloseDialog()
     {
-        yield return new WaitForSeconds(autoNextDelay);
-
-        currentIndex++;
-
-        if (currentIndex >= dialogs.Length)
+        // ถ้ายังพิมพ์ไม่เสร็จ
+        // ไม่ให้ปิดทันที
+        if (isTyping)
         {
-            EndDialog();
-            yield break;
+            Debug.Log(
+                "ข้อความกำลังพิมพ์อยู่ → กด Skip ก่อน"
+            );
+
+            return;
         }
 
-        ShowCurrentDialog();
+        EndDialog();
     }
 
 
@@ -494,6 +476,15 @@ public class DialogManager : MonoBehaviour
 
     private void EndDialog()
     {
+        // หยุด Typewriter ถ้ายังมีอยู่
+        if (typewriterCoroutine != null)
+        {
+            StopCoroutine(typewriterCoroutine);
+            typewriterCoroutine = null;
+        }
+
+        isTyping = false;
+
         // หยุดเสียง
         StopVoice();
 
