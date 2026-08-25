@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BagInventoryUI : MonoBehaviour
 {
+    public static BagInventoryUI Instance;
+
     [Header("UI")]
     public GameObject inventoryPanel;
 
@@ -9,6 +11,11 @@ public class BagInventoryUI : MonoBehaviour
     public Transform[] spawnPoints;
 
     private GameObject[] spawnedItems;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -72,7 +79,7 @@ public class BagInventoryUI : MonoBehaviour
                 spawnPoint.parent
             );
 
-            // ให้ใช้ขนาดที่ตั้งไว้ใน Prefab
+            // ใช้ Scale จาก Prefab
             item.transform.localScale =
                 itemPrefab.transform.localScale;
 
