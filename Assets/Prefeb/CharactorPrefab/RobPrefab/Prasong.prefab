@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80134aebce9ea6846ac82b010b05577b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
-  animator: {fileID: 0}
+  animator: {fileID: 8737359522189199879}
 --- !u!210 &3938702581201951350
 SortingGroup:
   m_ObjectHideFlags: 0
