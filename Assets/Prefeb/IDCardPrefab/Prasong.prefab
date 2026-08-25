@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 387949310639086604}
   - component: {fileID: 9066364270092144851}
   - component: {fileID: -3519225704643127429}
+  - component: {fileID: 1992617015950838638}
   m_Layer: 0
   m_Name: Prasong
   m_TagString: Untagged
@@ -138,3 +139,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 16.18, y: 10.22}
   m_EdgeRadius: 0
+--- !u!114 &1992617015950838638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2899407884729998150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574aaa5c210fd5340a699025f94b1d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IDCardDisplayClick

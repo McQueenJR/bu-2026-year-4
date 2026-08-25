@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7639813939822326030}
   - component: {fileID: 3665441032187416075}
   - component: {fileID: 8050945413391417696}
+  - component: {fileID: 624272593916544456}
   m_Layer: 0
   m_Name: Mongkol
   m_TagString: Untagged
@@ -138,3 +139,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 17.78, y: 10.45}
   m_EdgeRadius: 0
+--- !u!114 &624272593916544456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199367307429805877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574aaa5c210fd5340a699025f94b1d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IDCardDisplayClick

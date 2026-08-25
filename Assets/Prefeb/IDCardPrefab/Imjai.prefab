@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8450356491032426601}
   - component: {fileID: 1873664389969902626}
   - component: {fileID: -8206198763155873014}
+  - component: {fileID: -890261791123061362}
   m_Layer: 0
   m_Name: Imjai
   m_TagString: Untagged
@@ -138,3 +139,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 17.78, y: 10.45}
   m_EdgeRadius: 0
+--- !u!114 &-890261791123061362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7864365728377382617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574aaa5c210fd5340a699025f94b1d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IDCardDisplayClick

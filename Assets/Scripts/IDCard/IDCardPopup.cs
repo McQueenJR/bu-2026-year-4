@@ -7,9 +7,6 @@ public class IDCardPopup : MonoBehaviour
     public GameObject popupPanel;
     public Transform spawnPointDisplay;
 
-    [Header("Blocker (กันคลิกทะลุ)")]
-    public GameObject blocker;   // ลาก IDCardBlocker มาใส่
-
     private GameObject currentDisplayObj;
 
     void Awake()
@@ -17,11 +14,9 @@ public class IDCardPopup : MonoBehaviour
         Instance = this;
 
         popupPanel.SetActive(false);
-
-        if (blocker != null)
-            blocker.SetActive(false);
     }
 
+    // เปิด Display
     public void Show(GameObject prefab)
     {
         if (prefab == null)
@@ -40,17 +35,12 @@ public class IDCardPopup : MonoBehaviour
         );
 
         popupPanel.SetActive(true);
-
-        if (blocker != null)
-            blocker.SetActive(true);
     }
 
+    // ปิด Display
     public void Hide()
     {
         popupPanel.SetActive(false);
-
-        if (blocker != null)
-            blocker.SetActive(false);
 
         if (currentDisplayObj != null)
         {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6179234359853858843}
   - component: {fileID: 484604446662172727}
   - component: {fileID: -5124043477731260544}
+  - component: {fileID: 4956663067564251914}
   m_Layer: 0
   m_Name: Thanathron
   m_TagString: Untagged
@@ -138,3 +139,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 16.18, y: 10.22}
   m_EdgeRadius: 0
+--- !u!114 &4956663067564251914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8536396101837371919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574aaa5c210fd5340a699025f94b1d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IDCardDisplayClick
