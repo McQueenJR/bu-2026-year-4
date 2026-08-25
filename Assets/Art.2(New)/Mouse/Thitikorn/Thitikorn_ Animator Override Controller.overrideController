@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Thitikorn_ Animator Override Controller
+  m_Controller: {fileID: 9100000, guid: ce207f171ad4040499ddab138ed2ff45, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 75663a1faaea2ac4f8acd0720404cd75, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 92fcb201160649449b5ff5c1e3608c05, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f4be5d23961f1d6438c94a9c786a0f84, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9d6211e2427005f479b27ad912d3f741, type: 2}
