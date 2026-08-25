@@ -626,7 +626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &41202489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10723,22 +10723,21 @@ MonoBehaviour:
     npcType: 0
     spawnChance: 70
     prefabs:
-    - {fileID: 5855728944880710142, guid: 944734de7ea487d40ac94bd56804bd41, type: 3}
-    - {fileID: 6921070265129965008, guid: 5cc324bea413c9e4db6ae6c2a36477b4, type: 3}
-    - {fileID: 3607157650715848043, guid: 203c1b96dcd1ffe4ca2ad602aff58eee, type: 3}
-    - {fileID: 5522980251794501397, guid: cf3549fb2a50a2946ba7c09057934d6d, type: 3}
-    - {fileID: 3104076616371308598, guid: cc9e81b4943e3a44e9e887be36ec9b7f, type: 3}
-    - {fileID: 5855728944880710142, guid: 944734de7ea487d40ac94bd56804bd41, type: 3}
-    - {fileID: 9053630947943947750, guid: 003cc0aa76ffc6a4da269b915c6acb1d, type: 3}
-    - {fileID: 6466161845176888155, guid: 76347f9023eac3a4e9a169faefdbff52, type: 3}
+    - {fileID: 3292853690249546566, guid: 4d155da41a1a27d40b3c64afab1dd77f, type: 3}
+    - {fileID: 2441002279828010827, guid: 402dc6961eda0c947bff4dd42d3d5adc, type: 3}
+    - {fileID: 7254209440383327652, guid: 05b393b18d66eb044a581df4d2aba8d8, type: 3}
+    - {fileID: 6905247353736317391, guid: fcb5a7befcfd93a409eb17d05ba2b234, type: 3}
+    - {fileID: 2871865033555459023, guid: bdb295112e89be24ead0fc21e16396c1, type: 3}
+    - {fileID: 5300879019179973513, guid: de378d87669c77a4db6f12d2e2614d09, type: 3}
+    - {fileID: 2802988680817215389, guid: 79b92011cf86ff14b84ca7e97f6ab414, type: 3}
   - roleName: Rob
     npcType: 1
     spawnChance: 30
     prefabs:
-    - {fileID: 5781366618935943864, guid: 9c02f33fc1a778542af4b7e93229a80c, type: 3}
-    - {fileID: 6947768652430597422, guid: f620129ebbc3f3b40a22682019a32d2e, type: 3}
-    - {fileID: 4489518453649102923, guid: cc5b21f6e552134478461787ec058634, type: 3}
-    - {fileID: 2291785865687251296, guid: cdaaaa4406142f949a4dd7b5c6d60d7c, type: 3}
+    - {fileID: 6487305604523002399, guid: 87c3bed31ea3892459a3a83be224bbfe, type: 3}
+    - {fileID: 1276097066742078984, guid: 8817d904cd31a814f85b840d86932ab8, type: 3}
+    - {fileID: 5752484823669572784, guid: 7fefe4aa2ab051341af9579b047b1ae5, type: 3}
+    - {fileID: 1674454101161408764, guid: fd3f5d57ffcc28a4e93ead35b9fa834c, type: 3}
   spawnPoint: {fileID: 1783206952}
   stopPoint: {fileID: 2134447594}
   gameManager: {fileID: 1304983901}
@@ -14780,7 +14779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IDCardPopup
   popupPanel: {fileID: 1342637027}
   spawnPointDisplay: {fileID: 1342637029}
-  blocker: {fileID: 41202488}
 --- !u!4 &1342637029
 Transform:
   m_ObjectHideFlags: 0
