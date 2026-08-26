@@ -531,12 +531,10 @@ public class DialogManager : MonoBehaviour
 
                 // บอก ChecklistManager ว่า
                 // Dialog ข้อนี้จบแล้ว
-                if (ChecklistManager.Instance != null)
+                if (NPCQuestionManager.Instance != null)   // ← เปลี่ยนจาก ChecklistManager
                 {
-                    ChecklistManager.Instance
-                        .ChecklistDialogFinished();
+                    NPCQuestionManager.Instance.AskDialogFinished();   // ← เปลี่ยนชื่อเมธอด
                 }
-
                 break;
         }
     }

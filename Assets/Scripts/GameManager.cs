@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    private bool greenDialogTriggered = false;  
     public static GameManager Instance;
 
     public GameObject currentNPC;
@@ -32,26 +33,6 @@ public class GameManager : MonoBehaviour
 
     public NPCState currentState;
 
-    public enum ButtonChoice
-    {
-        Green,
-        Red
-    }
-
-    public ButtonChoice currentButtonChoice = ButtonChoice.Red;
-
-    [Header("Button Visuals")]
-    public ButtonVisual greenButtonVisual;
-    public ButtonVisual redButtonVisual;
-
-    // =========================
-    // BUTTON SOUNDS
-    // =========================
-    [Header("Button Sounds")]
-    public AudioSource buttonSound;
-    public AudioClip greenButtonSound;
-    public AudioClip redButtonSound;
-
     [Header("Dialog")]
     public DialogManager dialogManager;
     private GameObject emergencyDialogNPC;
@@ -78,6 +59,7 @@ public class GameManager : MonoBehaviour
     // SPAWN SOUNDS
     // =========================
     [Header("Spawn Sounds")]
+    public AudioSource spawnAudioSource;
     public AudioClip bagAndCardSpawnSound;
 
     [Header("Police Call")]
@@ -114,8 +96,6 @@ public class GameManager : MonoBehaviour
 
         clockManager.SetHour(currentHour);
 
-        SetButtonChoice(ButtonChoice.Red);
-
         spawner.SpawnNPC();
     }
 
@@ -123,53 +103,13 @@ public class GameManager : MonoBehaviour
     // BUTTON
     // =========================
 
-    public void GreenButton()
-    {
-        // ถ้าอยู่ในโหมดฉุกเฉิน (ประตูปิด) ห้ามกดปุ่มเขียว
-        if (emergencyMode)
-        {
-            Debug.Log("อยู่ในโหมดฉุกเฉิน กดปุ่มเขียวไม่ได้");
-            return;
-        }
-
-        SetButtonChoice(ButtonChoice.Green);
-
-        // เล่นเสียงตอนกดปุ่มเขียว
-        if (buttonSound != null && greenButtonSound != null)
-        {
-            buttonSound.PlayOneShot(greenButtonSound);
-        }
-
-        if (currentNPC == null)
-            return;
-
-        // ถ้ากำลังตรวจอยู่ ให้กดเขียวเพื่อปล่อยได้เลย
-        if (currentState == NPCState.Inspecting)
-        {
-            ReleaseCurrentNPC();
-            return;
-        }
-
-        // ถ้า NPC กำลังรอการตัดสินใจ
-        if (currentState != NPCState.WaitingDecision)
-            return;
-
-        NPC npc = currentNPC.GetComponent<NPC>();
-
-        if (npc == null || npc.data == null)
-            return;
-
-        currentState = NPCState.Inspecting;
-
-        // เริ่ม Dialog ขอบคุณ
-        SetCurrentNPCMouthTalking();
-        dialogManager.StartGreenDialog(npc.data);
-    }
+  
 
     public void GreenDialogFinished()
     {
         if (currentNPC == null)
             return;
+        if (currentState != NPCState.Inspecting) return;   // ← เพิ่มบรรทัดนี้
 
         Debug.Log("Green Dialog จบ → ปล่อย NPC");
 
@@ -177,29 +117,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-    public void RedButton()
-    {
-        SetButtonChoice(ButtonChoice.Red);
-
-        // เล่นเสียงตอนกดปุ่มแดง
-        if (buttonSound != null && redButtonSound != null)
-        {
-            buttonSound.PlayOneShot(redButtonSound);
-        }
-    }
-
-    private void SetButtonChoice(ButtonChoice choice)
-    {
-        currentButtonChoice = choice;
-
-        greenButtonVisual.SetActive(
-            choice == ButtonChoice.Green);
-
-        redButtonVisual.SetActive(
-            choice == ButtonChoice.Red);
-    }
-
+    
     // =========================
     // NPC CHECKPOINT
     // =========================
@@ -207,50 +125,12 @@ public class GameManager : MonoBehaviour
     public void NPCReachedCheckpoint(GameObject npc)
     {
         currentNPC = npc;
-
-        currentState = NPCState.WaitingDecision;
-
-        StartCoroutine(CheckDecisionAfterDelay());
+        currentState = NPCState.Inspecting;   // ← ตั้งเป็น Inspecting ทันที ไม่รอ
+        greenDialogTriggered = false;
+    
+        StartNPCDialog();                      // ← เปิด dialog ปกติเลย ไม่เช็คสีปุ่มแล้ว
     }
-
-    private IEnumerator CheckDecisionAfterDelay()
-    {
-        // NPC หยุดกลางจอ 2 วินาที
-        yield return new WaitForSeconds(2f);
-
-        if (currentNPC == null)
-            yield break;
-
-        NPC npc = currentNPC.GetComponent<NPC>();
-
-        if (npc == null || npc.data == null)
-            yield break;
-
-        // =========================
-        // GREEN
-        // =========================
-        if (currentButtonChoice == ButtonChoice.Green)
-        {
-            currentState = NPCState.Inspecting;
-
-            Debug.Log("เลือกสีเขียว → เริ่ม Green Dialog");
-            
-            SetCurrentNPCMouthTalking();
-            dialogManager.StartGreenDialog(npc.data);
-        }
-
-        // =========================
-        // RED
-        // =========================
-        else
-        {
-            currentState = NPCState.Inspecting;
-
-            Debug.Log("เลือกสีแดง → เริ่มตรวจสอบ NPC");
-
-            StartNPCDialog();
-        }
-    }
+    
 
     // =========================
     // DIALOG
@@ -436,9 +316,9 @@ public class GameManager : MonoBehaviour
         currentIDCard.transform.localScale = idCardScale;
 
         // เล่นเสียงเมื่อกระเป๋า + บัตร Spawn ครบแล้ว
-        if (buttonSound != null && bagAndCardSpawnSound != null)
+        if (spawnAudioSource != null && bagAndCardSpawnSound != null)
         {
-            buttonSound.PlayOneShot(bagAndCardSpawnSound);
+            spawnAudioSource.PlayOneShot(bagAndCardSpawnSound);
         }
     }
 
@@ -466,13 +346,12 @@ public class GameManager : MonoBehaviour
     // RELEASE NPC
     // =========================
 
-    private void ReleaseCurrentNPC()
+    public   void ReleaseCurrentNPC()
     {
         if (currentNPC == null)
             return;
-
+        if (currentState == NPCState.Leaving) return;  
         RecordDecision(currentNPC, wasArrested: false);   // <-- โอ๊ตเพิ่มบรรทัดนี้
-
         currentState = NPCState.Leaving;
 
         DestroyBagAndSlideBack();
@@ -490,7 +369,7 @@ public class GameManager : MonoBehaviour
     // REJECT NPC
     // =========================
 
-    private void RejectCurrentNPC()
+    public   void RejectCurrentNPC()
     {
         if (currentNPC == null)
             return;
@@ -600,7 +479,7 @@ public class GameManager : MonoBehaviour
         robberPassed = 0;
         robberArrested = 0;
         
-// ★ เคลียร์คะแนน checklist ของวันเก่าทั้งหมด ไม่ให้ปนกับวันใหม่
+      // ★ เคลียร์คะแนน checklist ของวันเก่าทั้งหมด ไม่ให้ปนกับวันใหม่
         if (ChecklistManager.Instance != null)
             ChecklistManager.Instance.ResetAllChecklistScores();
         
@@ -612,9 +491,6 @@ public class GameManager : MonoBehaviour
         currentHour = startHour;
         clockManager.SetHour(currentHour);
 
-        // รีเซ็ตปุ่มเป็นแดง (ค่าเริ่มต้น)
-        SetButtonChoice(ButtonChoice.Red);
-
         // เคลียร์ NPC ค้าง (กันเหนียว เผื่อมี object หลงเหลือ)
         currentNPC = null;
         currentState = NPCState.WalkingToCheckpoint;
@@ -622,6 +498,9 @@ public class GameManager : MonoBehaviour
         spawner.ResetHistory();   // เพิ่มบรรทัดนี้
         // เริ่ม spawn คนแรกของวันใหม่
         spawner.SpawnNPC();
+        
+        if (GreenRedButtonManager.Instance != null)
+            GreenRedButtonManager.Instance.HideDecisionButtons();
     }
 
     private void StartPoliceDialog()
