@@ -81,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -462724855
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -764913630833618542, guid: 8505ef9a4a17a154c851bf2d120302c0, type: 3}
@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c28882a96ec304ba62cbefcf5c8ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IDCardDisplay
-  displayPrefab: {fileID: 6072333215724701038, guid: 65cd858e8e171ff4086ae662ddb2abe1, type: 3}
 --- !u!114 &7149428846892657816
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 925076111430945908}
   - component: {fileID: 6951955788923314472}
   - component: {fileID: 4912936205221829807}
-  - component: {fileID: -6184453245073551053}
   - component: {fileID: -7565414324016473082}
   m_Layer: 0
   m_Name: Imjai 1
@@ -197,8 +196,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: 5e531eb520069ca439b17fb4bf275a2a, type: 3}
@@ -253,19 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 4255522567320671750}
---- !u!210 &-6184453245073551053
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6487305604523002399}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &-7565414324016473082
 BoxCollider2D:
   m_ObjectHideFlags: 0

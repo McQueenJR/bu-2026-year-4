@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 384530446204599293}
   - component: {fileID: 6153434943388101429}
   - component: {fileID: 4143021288223765544}
-  - component: {fileID: -2285228125133406882}
   - component: {fileID: -248208145042251827}
   m_Layer: 0
   m_Name: Thanathorn2 1
@@ -83,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: c7386cdc9d6234a4a8ae5b5944996bcc, type: 3}
@@ -139,19 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 8765591282780107991}
---- !u!210 &-2285228125133406882
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1674454101161408764}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &-248208145042251827
 BoxCollider2D:
   m_ObjectHideFlags: 0

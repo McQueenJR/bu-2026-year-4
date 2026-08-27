@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2003499134689330341}
   - component: {fileID: 1288969016429243917}
   - component: {fileID: 5465673471846636578}
-  - component: {fileID: -1394118807485534318}
   - component: {fileID: -5634863015925447286}
   m_Layer: 0
   m_Name: Kachakorn
@@ -83,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: 6e583bf06bb817b4f9376b3d19f83238, type: 3}
@@ -139,19 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 5060699471918349622}
---- !u!210 &-1394118807485534318
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7254209440383327652}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &-5634863015925447286
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 778256869571765957}
   - component: {fileID: 2186769871099566484}
   - component: {fileID: 8189850290321408652}
-  - component: {fileID: 3938702581201951350}
   - component: {fileID: 8003512769350331962}
   m_Layer: 0
   m_Name: Prasong
@@ -83,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: 712750568ce6c5d43895830ad008d6fe, type: 3}
@@ -139,19 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 8737359522189199879}
---- !u!210 &3938702581201951350
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5752484823669572784}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &8003512769350331962
 BoxCollider2D:
   m_ObjectHideFlags: 0

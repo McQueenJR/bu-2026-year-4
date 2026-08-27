@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7741104037429599387}
   - component: {fileID: 7372626545711045779}
   - component: {fileID: 736881055730157874}
-  - component: {fileID: 6372206403013503822}
   - component: {fileID: 3590844957536604551}
   m_Layer: 0
   m_Name: Chaiyo
@@ -83,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: acd2bfafa46fe8646b19ee0ebd9ef977, type: 3}
@@ -139,19 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 4970785721117389326}
---- !u!210 &6372206403013503822
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441002279828010827}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &3590844957536604551
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 6300967240615541721}
   - component: {fileID: 1855170159711084408}
   - component: {fileID: 329888526060585317}
-  - component: {fileID: -1107320994237472390}
   - component: {fileID: 1789634598755373099}
   m_Layer: 0
   m_Name: Somchai
@@ -197,8 +196,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: bc94b57784db0a548b3f9e5959359f94, type: 3}
@@ -253,19 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 3477302598986768211}
---- !u!210 &-1107320994237472390
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6905247353736317391}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &1789634598755373099
 BoxCollider2D:
   m_ObjectHideFlags: 0

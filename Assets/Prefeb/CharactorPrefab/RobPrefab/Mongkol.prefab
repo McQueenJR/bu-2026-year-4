@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 114643822173085218}
   - component: {fileID: 1885855016285983359}
   - component: {fileID: 8966184881606895812}
-  - component: {fileID: -8891301111034914443}
   - component: {fileID: 8610607578104528541}
   m_Layer: 0
   m_Name: Mongkol
@@ -83,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: a3c365c0fb0964e4282e66c505e57b7c, type: 3}
@@ -139,19 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 7171249628848149882}
---- !u!210 &-8891301111034914443
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276097066742078984}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &8610607578104528541
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 3640833100693104344}
   - component: {fileID: 8710782164029151798}
   - component: {fileID: 9148418891369869986}
-  - component: {fileID: 1136052475928139914}
   - component: {fileID: 2644193662394489675}
   m_Layer: 0
   m_Name: Thitikorn
@@ -197,8 +196,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 87016409
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2030362344941826669, guid: 8f7ada4729d905f41b77310768c636ed, type: 3}
@@ -253,19 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMouthAnimation
   animator: {fileID: 5554762821221237304}
---- !u!210 &1136052475928139914
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2802988680817215389}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -3
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!61 &2644193662394489675
 BoxCollider2D:
   m_ObjectHideFlags: 0
