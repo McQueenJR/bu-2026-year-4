@@ -25,8 +25,8 @@ MonoBehaviour:
   - {fileID: 5331310448926620132, guid: 4f33f147dc2bd4e45aa7a2a95151849b, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 2199367307429805877, guid: 981a993fedc3a414bb1b7f332437d8da, type: 3}
-  applicantPhotoPrefab: {fileID: 0}
-  templeDocumentPrefab: {fileID: 0}
+  applicantPhotoPrefab: {fileID: 463188664739563271, guid: b0c3d78a028f4af4e998707e033fef41, type: 3}
+  templeDocumentPrefab: {fileID: 9153522378472177717, guid: fd2e6e389ef971343ba3ac77063656b8, type: 3}
   greenDialogs:
   - May you be blessed, young man.
   emergencyDialogs:

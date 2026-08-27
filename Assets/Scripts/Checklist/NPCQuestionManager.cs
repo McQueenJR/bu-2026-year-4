@@ -8,7 +8,6 @@ public class NPCQuestionManager : MonoBehaviour
 
     [Header("Panel")]
     public GameObject askPanel;   // แผง List/Ask (4 หัวข้อ + ปุ่ม Send)
-    public GameObject blocker;    // กันคลิกทะลุตอนแผงเปิดอยู่ (ถ้ามี)
 
     [Header("Question Toggles")]
     public Toggle toggleBag;
@@ -45,9 +44,6 @@ public class NPCQuestionManager : MonoBehaviour
     {
         if (askPanel != null)
             askPanel.SetActive(false);
-
-        if (blocker != null)
-            blocker.SetActive(false);
 
         toggleBag.onValueChanged.AddListener(v => SelectQuestion(0, v));
         toggleAppearance.onValueChanged.AddListener(v => SelectQuestion(1, v));
@@ -112,9 +108,6 @@ public class NPCQuestionManager : MonoBehaviour
         if (askPanel != null)
             askPanel.SetActive(true);
 
-        if (blocker != null)
-            blocker.SetActive(true);
-
         PlaySound(openPanelSound);
     }
 
@@ -124,8 +117,6 @@ public class NPCQuestionManager : MonoBehaviour
         if (askPanel != null)
             askPanel.SetActive(false);
 
-        if (blocker != null)
-            blocker.SetActive(false);
     }
 
 

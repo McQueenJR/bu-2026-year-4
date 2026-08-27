@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bba66190f38a24f93bf2cc561fd4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
-  speed: 2
+  speed: 3
   bounceHeight: 0.05
   bounceSpeed: 8
 --- !u!114 &7421535565868988788

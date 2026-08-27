@@ -8,9 +8,6 @@ public class ChecklistManager : MonoBehaviour
 
     [Header("Checklist Panel")]
     public GameObject checklistPanel;
-    
-    [Header("Blocker")]
-    public GameObject blocker;
 
     [Header("Checklist Sounds")]
     public AudioSource checklistAudioSource;
@@ -55,9 +52,6 @@ public class ChecklistManager : MonoBehaviour
     {
         if (checklistPanel != null)
             checklistPanel.SetActive(false);
-        
-        if (blocker != null)                    // ← เพิ่มใหม่
-            blocker.SetActive(false);
 
         
         bagAbnormal.onValueChanged.AddListener(
@@ -183,9 +177,6 @@ public class ChecklistManager : MonoBehaviour
 
         checklistPanel.SetActive(true);
 
-        if (blocker != null)              // ← เพิ่ม
-            blocker.SetActive(true);
-
         PlaySound(openChecklistSound);    // ← เพิ่ม
 
         // ไม่มี ShowPage1() แล้ว เพราะไม่มีระบบหน้า 1/2 อีกต่อไป
@@ -270,8 +261,6 @@ public class ChecklistManager : MonoBehaviour
         if (checklistPanel != null)
             checklistPanel.SetActive(false);
         
-        if (blocker != null)            
-            blocker.SetActive(false);
         
 
         currentNPC = null;
