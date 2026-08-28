@@ -54,6 +54,12 @@ public class GameManager : MonoBehaviour
     public Vector3 idCardRotation = Vector3.zero;
 
     private GameObject currentIDCard;
+    
+    [Header("Temple Document")]
+    public GameObject templeDocumentPrefab;     // Prefab เอกสาร
+    public Transform spawnPointDocument;        // จุด Spawn เอกสาร
+
+    private GameObject currentDocument;
 
     // =========================
     // SPAWN SOUNDS
@@ -272,6 +278,7 @@ public class GameManager : MonoBehaviour
         currentBag.transform.localScale = bagScale;
 
         SpawnIDCard();
+        SpawnDocument();
     }
 
     private void SpawnIDCard()
@@ -321,6 +328,27 @@ public class GameManager : MonoBehaviour
             spawnAudioSource.PlayOneShot(bagAndCardSpawnSound);
         }
     }
+    
+    private void SpawnDocument()
+    {
+        if (templeDocumentPrefab == null)
+        {
+            Debug.LogError("ไม่ได้ใส่ Temple Document Prefab");
+            return;
+        }
+
+        if (spawnPointDocument == null)
+        {
+            Debug.LogError("ไม่ได้ใส่ Spawn Point Document");
+            return;
+        }
+
+        currentDocument = Instantiate(
+            templeDocumentPrefab,
+            spawnPointDocument.position,
+            Quaternion.identity
+        );
+    }
 
     private void DestroyBagAndSlideBack()
     {
@@ -334,6 +362,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(currentIDCard);
             currentIDCard = null;
+        }
+        if (currentDocument != null)
+        {
+            Destroy(currentDocument);
+            currentDocument = null;
         }
 
         if (windowPanel != null)

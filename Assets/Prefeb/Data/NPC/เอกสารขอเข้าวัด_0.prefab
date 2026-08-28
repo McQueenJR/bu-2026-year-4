@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 894563128416777276}
   - component: {fileID: -180803304506907533}
   - component: {fileID: 5045547014012362327}
+  - component: {fileID: 3366746345755113107}
   m_Layer: 0
   m_Name: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E02\u0E2D\u0E40\u0E02\u0E49\u0E32\u0E27\u0E31\u0E14_0"
   m_TagString: Untagged
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4070439494403537931, guid: 58814c871bb51e5458ae9717c55209e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -156,15 +157,28 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 3366746345755113107}
+        m_TargetAssemblyTypeName: DocumentButton, Assembly-CSharp
+        m_MethodName: OpenDocument
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3366746345755113107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153522378472177717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e4b3ecff4908a4fb91ee667618a0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DocumentButton
+  documentPopup: {fileID: 463188664739563271, guid: b0c3d78a028f4af4e998707e033fef41, type: 3}
