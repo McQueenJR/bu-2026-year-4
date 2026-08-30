@@ -32,6 +32,10 @@ public class NPCData : ScriptableObject
     [Header("Green Button Dialog")]
     [TextArea(2, 5)]
     public string[] greenDialogs;
+    
+    [Header("Red Button Dialog")]        
+    [TextArea(2, 5)]
+    public string[] redDialogs;   
 
     [Header("Emergency Dialog")]
     [TextArea(2, 5)]

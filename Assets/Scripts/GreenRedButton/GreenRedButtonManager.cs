@@ -47,6 +47,13 @@ public class GreenRedButtonManager : MonoBehaviour
         if (GameManager.Instance.currentState == GameManager.NPCState.Leaving)
             return;
 
+        NPC npc = GameManager.Instance.currentNPC.GetComponent<NPC>();
+        if (npc == null || npc.data == null)
+        {
+            Debug.LogError("NPC ไม่มีข้อมูลสำหรับ Green Dialog");
+            return;
+        }
+        
         greenButtonVisual.SetActive(true);
         redButtonVisual.SetActive(false);
 
@@ -54,8 +61,9 @@ public class GreenRedButtonManager : MonoBehaviour
             buttonSound.PlayOneShot(greenButtonSound);
 
         HideDecisionButtons();
-
-        GameManager.Instance.ReleaseCurrentNPC();
+        // เริ่ม Green Dialog แทนการปล่อย NPC ตรงๆ
+        GameManager.Instance.dialogManager.StartGreenDialog(npc.data);
+        
     }
 
     public void RedButton()
@@ -65,6 +73,13 @@ public class GreenRedButtonManager : MonoBehaviour
 
         if (GameManager.Instance.currentState == GameManager.NPCState.Leaving)
             return;
+        
+        NPC npc = GameManager.Instance.currentNPC.GetComponent<NPC>();
+        if (npc == null || npc.data == null)
+        {
+            Debug.LogError("NPC ไม่มีข้อมูลสำหรับ Red Dialog");
+            return;
+        }
 
         greenButtonVisual.SetActive(false);
         redButtonVisual.SetActive(true);
@@ -74,7 +89,7 @@ public class GreenRedButtonManager : MonoBehaviour
 
         HideDecisionButtons();
 
-        GameManager.Instance.RejectCurrentNPC();
+        GameManager.Instance.dialogManager.StartRedDialog(npc.data);
     }
     
 

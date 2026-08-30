@@ -74,6 +74,7 @@ public class DialogManager : MonoBehaviour
     {
         Normal,
         Green,
+        Red,
         Emergency,
         Simple,
         Checklist
@@ -128,8 +129,12 @@ public class DialogManager : MonoBehaviour
         currentDialogType = DialogType.Normal;
 
         dialogs = data.dialogs;
-        currentIndex = 0;
-
+        
+        // สุ่มเลือกบทพูด 1 ชุด จากที่มีอยู่ทั้งหมด
+        currentIndex = (dialogs != null && dialogs.Length > 0)
+            ? Random.Range(0, dialogs.Length)
+            : 0;
+        
         nameText.text = data.npcName;
 
         dialogPanel.SetActive(true);
@@ -150,7 +155,10 @@ public class DialogManager : MonoBehaviour
         currentDialogType = DialogType.Green;
 
         dialogs = data.greenDialogs;
-        currentIndex = 0;
+        
+        currentIndex = (dialogs != null && dialogs.Length > 0)
+            ? Random.Range(0, dialogs.Length)
+            : 0;
 
         nameText.text = data.npcName;
 
@@ -158,6 +166,33 @@ public class DialogManager : MonoBehaviour
 
         ShowCurrentDialog();
     }
+    
+    
+    // =====================================================
+    // RED
+    // =====================================================
+
+    public void StartRedDialog(NPCData data)
+    {
+        if (data == null)
+            return;
+
+        currentDialogType = DialogType.Red;
+
+        dialogs = data.redDialogs;
+
+        // สุ่มเลือกบทพูด 1 ชุด
+        currentIndex = (dialogs != null && dialogs.Length > 0)
+            ? Random.Range(0, dialogs.Length)
+            : 0;
+
+        nameText.text = data.npcName;
+
+        dialogPanel.SetActive(true);
+
+        ShowCurrentDialog();
+    }
+    
 
 
     // =====================================================
@@ -184,8 +219,7 @@ public class DialogManager : MonoBehaviour
         currentDialogType = DialogType.Emergency;
 
         dialogs = data.emergencyDialogs;
-        currentIndex = 0;
-
+        currentIndex = Random.Range(0, dialogs.Length);
         nameText.text = data.npcName;
 
         dialogPanel.SetActive(true);
@@ -512,6 +546,11 @@ public class DialogManager : MonoBehaviour
                     GameManager.Instance.GreenDialogFinished();
                 }
 
+                break;
+            
+            case DialogType.Red:                        
+                if (GameManager.Instance != null)
+                    GameManager.Instance.RedDialogFinished();
                 break;
 
 

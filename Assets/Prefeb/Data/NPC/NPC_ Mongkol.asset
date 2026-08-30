@@ -15,7 +15,11 @@ MonoBehaviour:
   npcName: 'Mongkol Pladaeng '
   age: 32
   dialogs:
-  - I'm a friend of the monks here.
+  - "\u0E40\u0E17\u0E2A1"
+  - "\u0E42\u0E01\u0E492"
+  - "\u0E14\u0E35\u0E1F\u0E2B\u0E0133333"
+  - 44444444
+  - 555555555555
   bagItems:
   - {fileID: 428272106668646039, guid: 441245bd005f414409e704406161460a, type: 3}
   - {fileID: 4754033316676718758, guid: 25349fcbdbc962b45a7071f8ac8d5b6b, type: 3}
@@ -30,6 +34,7 @@ MonoBehaviour:
   TodayPhotoPrefab: {fileID: 1376501712073892629, guid: 4b57576929f82ca479e5bc50f882b027, type: 3}
   greenDialogs:
   - May you be blessed, young man.
+  redDialogs: []
   emergencyDialogs:
   - I'll call the abbot and get you fired for sure!
   checkQuestions:

@@ -116,13 +116,24 @@ public class GameManager : MonoBehaviour
     {
         if (currentNPC == null)
             return;
-        if (currentState != NPCState.Inspecting) return;   // ← เพิ่มบรรทัดนี้
+        if (currentState != NPCState.Inspecting) return;   
 
         Debug.Log("Green Dialog จบ → ปล่อย NPC");
 
         ReleaseCurrentNPC();
     }
 
+    public void RedDialogFinished()                  
+    {
+        if (currentNPC == null)
+            return;
+        if (currentState != NPCState.Inspecting) return;
+
+        Debug.Log("Red Dialog จบ → ปฏิเสธ NPC");
+
+        RejectCurrentNPC();
+    }
+    
 
     
     // =========================
@@ -191,11 +202,13 @@ public class GameManager : MonoBehaviour
         }
 
         // NPC ตัวนี้เคยพูด Emergency แล้ว
+        
         if (emergencyDialogNPC == currentNPC)
         {
             Debug.Log("NPC ตัวนี้เคยพูด Emergency Dialog แล้ว");
             return;
         }
+        
 
         NPC npc = currentNPC.GetComponent<NPC>();
 

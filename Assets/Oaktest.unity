@@ -11957,10 +11957,10 @@ MonoBehaviour:
   roles:
   - roleName: Vill
     npcType: 0
-    spawnChance: 70
+    spawnChance: 100
     prefabs:
-    - {fileID: 3292853690249546566, guid: 4d155da41a1a27d40b3c64afab1dd77f, type: 3}
-    - {fileID: 2441002279828010827, guid: 402dc6961eda0c947bff4dd42d3d5adc, type: 3}
+    - {fileID: 8914167707390193818, guid: 26c54a345d44a2f418ee84423f6244c5, type: 3}
+    - {fileID: 8914167707390193818, guid: 26c54a345d44a2f418ee84423f6244c5, type: 3}
     - {fileID: 8914167707390193818, guid: 26c54a345d44a2f418ee84423f6244c5, type: 3}
     - {fileID: 8914167707390193818, guid: 26c54a345d44a2f418ee84423f6244c5, type: 3}
     - {fileID: 8914167707390193818, guid: 26c54a345d44a2f418ee84423f6244c5, type: 3}
@@ -11968,7 +11968,7 @@ MonoBehaviour:
     - {fileID: 8914167707390193818, guid: 26c54a345d44a2f418ee84423f6244c5, type: 3}
   - roleName: Rob
     npcType: 1
-    spawnChance: 30
+    spawnChance: 0
     prefabs:
     - {fileID: 6487305604523002399, guid: 87c3bed31ea3892459a3a83be224bbfe, type: 3}
     - {fileID: 1276097066742078984, guid: 8817d904cd31a814f85b840d86932ab8, type: 3}
@@ -11977,6 +11977,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 1783206952}
   stopPoint: {fileID: 2134447594}
   gameManager: {fileID: 1304983901}
+  todayListManager: {fileID: 0}
+  todayApplicants: []
   checkWindow: 4
   minRobberInWindow: 1
 --- !u!4 &947236654
@@ -15406,6 +15408,8 @@ MonoBehaviour:
   spawnPointIDCard: {fileID: 1031564446}
   idCardScale: {x: 1, y: 1, z: 1}
   idCardRotation: {x: 0, y: 0, z: 0}
+  templeDocumentPrefab: {fileID: 0}
+  spawnPointDocument: {fileID: 0}
   spawnAudioSource: {fileID: 1304983905}
   bagAndCardSpawnSound: {fileID: 8300000, guid: 75c503485052e9e438860f688d40a5a4, type: 3}
   policePrefab: {fileID: 674145347825307979, guid: b6dc8a7a5b9ecd4418ebf5c43d79b2e9, type: 3}
