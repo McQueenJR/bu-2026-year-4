@@ -105,6 +105,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -112,10 +125,10 @@ TextureImporter:
       name: List of Temple_3
       rect:
         serializedVersion: 2
-        x: 332
-        y: 112
-        width: 1252
-        height: 855
+        x: 1173
+        y: 543
+        width: 295
+        height: 295
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,6 +139,116 @@ TextureImporter:
       bones: []
       spriteID: 96728a6468cff5860800000000000000
       internalID: 7521007556373260137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: List of Temple_1
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 543
+        width: 350
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5d10b4a76b50a64785d95c0ed470717
+      internalID: -736907122601916370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: List of Temple_2
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 543
+        width: 341
+        height: 303
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66ccfbcb3a91fd24bb1fcc012950d731
+      internalID: -1821427306579319755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: List of Temple_5
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 136
+        width: 352
+        height: 390
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c529a5ae6413a499c9c240df7d910c
+      internalID: -1007790433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: List of Temple_6
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 145
+        width: 341
+        height: 380
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbd45c0801701d04e85296b52964ea41
+      internalID: 756743981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: List of Temple_7
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 151
+        width: 297
+        height: 376
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de34dae0959f6994faa573d976f8424f
+      internalID: 786848724
       vertices: []
       indices: 
       edges: []
@@ -142,12 +265,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":391.0,"y":537.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       List of Temple_0: -8619347508114846908
       List of Temple_1: -736907122601916370
       List of Temple_2: -1821427306579319755
       List of Temple_3: 7521007556373260137
+      List of Temple_4: -860877389
+      List of Temple_5: -1007790433
+      List of Temple_6: 756743981
+      List of Temple_7: 786848724
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
