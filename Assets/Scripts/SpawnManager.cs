@@ -21,6 +21,8 @@ public class NPCRole
     // จำ prefab ตัวล่าสุดที่สปาวไปของ role นี้ กันไม่ให้ออกซ้ำติดกัน
     [System.NonSerialized]
     public GameObject lastSpawnedPrefab;
+    
+    
 }
 
 public class SpawnManager : MonoBehaviour
@@ -35,6 +37,14 @@ public class SpawnManager : MonoBehaviour
     [Header("อ้างอิง GameManager")]
     public GameManager gameManager;
 
+    [Header("Today List")]
+    public TodayListManager todayListManager;
+
+// เก็บ Prefab NPC ที่จะเกิดในวันนี้
+    public List<GameObject> todayApplicants = new List<GameObject>();
+
+    private int currentApplicantIndex = 0;
+    
     [Header("กฎบังคับโจร")]
     [Tooltip("ทุกๆ กี่ตัว ต้องมีโจรอย่างน้อย 1 ตัว")]
     public int checkWindow = 4;
@@ -44,6 +54,7 @@ public class SpawnManager : MonoBehaviour
 
     // เก็บ history ของ NPCType ที่สปาวไปแล้วในวันนี้ (เรียงตามลำดับ)
     private List<NPCType> spawnHistory = new List<NPCType>();
+    
 
     // =========================
     // MAIN SPAWN
@@ -53,9 +64,23 @@ public class SpawnManager : MonoBehaviour
         if (gameManager.currentNPC != null)
             return;
 
-        if (roles == null || roles.Length == 0)
+        // ⭐ เพิ่มส่วนนี้
+        // Spawn ตาม Today List ก่อน
+        if (todayApplicants.Count > 0)
         {
-            Debug.LogError("ยังไม่ได้ตั้งค่า Role ใน SpawnManager");
+            if (currentApplicantIndex >= todayApplicants.Count)
+            {
+                Debug.Log("NPC วันนี้ Spawn ครบแล้ว");
+                return;
+            }
+
+            GameObject prefabToday = todayApplicants[currentApplicantIndex];
+
+            Debug.Log("Spawn NPC : " + prefabToday.name);
+
+            currentApplicantIndex++;
+
+            SpawnPrefab(prefabToday, null);
             return;
         }
 
@@ -63,7 +88,7 @@ public class SpawnManager : MonoBehaviour
 
         if (chosenRole == null)
         {
-            Debug.LogError("เลือก Role ไม่ได้ (เช็คว่าใส่ prefab และตั้ง % แล้วหรือยัง)");
+            Debug.LogError("เลือก Role ไม่ได้");
             return;
         }
 
@@ -71,7 +96,7 @@ public class SpawnManager : MonoBehaviour
 
         if (prefab == null)
         {
-            Debug.LogError("ไม่มี prefab ใน role: " + chosenRole.roleName);
+            Debug.LogError("ไม่มี prefab");
             return;
         }
 
@@ -177,8 +202,11 @@ public class SpawnManager : MonoBehaviour
             Quaternion.identity
         );
 
-        role.lastSpawnedPrefab = prefab;
-        spawnHistory.Add(role.npcType);
+        if (role != null)
+        {
+            role.lastSpawnedPrefab = prefab;
+            spawnHistory.Add(role.npcType);
+        }
 
         gameManager.currentNPC = npc;
         gameManager.currentState = GameManager.NPCState.WalkingToCheckpoint;
@@ -187,11 +215,61 @@ public class SpawnManager : MonoBehaviour
 
         if (movement == null)
         {
-            Debug.LogError("NPC Prefab ไม่มี NPCMovement");
+            Debug.LogError(prefab.name + " ไม่มี NPCMovement");
             return;
         }
 
         movement.MoveTo(stopPoint.position);
+    }
+    
+    public void GenerateTodayApplicants()
+    {
+        todayApplicants.Clear();
+        currentApplicantIndex = 0;
+
+        List<NPCData> todayData = new List<NPCData>();
+
+        for (int i = 0; i < gameManager.npcPerDay; i++)
+        {
+            NPCRole role = ChooseRole();
+            GameObject prefab = ChoosePrefabFromRole(role);
+
+            if (prefab == null)
+                continue;
+
+            // เก็บ Prefab สำหรับ Spawn จริง
+            todayApplicants.Add(prefab);
+
+            // เก็บ NPCData สำหรับ Today List
+            NPC npc = prefab.GetComponent<NPC>();
+            if (npc != null && npc.data != null)
+            {
+                todayData.Add(npc.data);
+                Debug.Log("Today NPC : " + npc.data.npcName);
+            }
+
+            // ใช้ history แค่ตอนสุ่มวันนี้
+            role.lastSpawnedPrefab = prefab;
+            spawnHistory.Add(role.npcType);
+        }
+
+        Debug.Log("สุ่ม NPC วันนี้ทั้งหมด = " + todayData.Count);
+
+        // รีเซ็ต history หลังสุ่มเสร็จ
+        spawnHistory.Clear();
+
+        foreach (var role in roles)
+            role.lastSpawnedPrefab = null;
+
+        // ส่งไปสร้าง Today List
+        if (todayListManager != null)
+        {
+            todayListManager.OpenTodayList(todayData);
+        }
+        else
+        {
+            Debug.LogError("TodayListManager ยังไม่ได้ใส่ใน SpawnManager");
+        }
     }
 
     // =========================

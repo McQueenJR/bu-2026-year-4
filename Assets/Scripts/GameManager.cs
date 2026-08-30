@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
 
         clockManager.SetHour(currentHour);
 
+        spawner.GenerateTodayApplicants();
         spawner.SpawnNPC();
     }
 
@@ -528,9 +529,9 @@ public class GameManager : MonoBehaviour
         currentNPC = null;
         currentState = NPCState.WalkingToCheckpoint;
 
-        spawner.ResetHistory();   // เพิ่มบรรทัดนี้
-        // เริ่ม spawn คนแรกของวันใหม่
-        spawner.SpawnNPC();
+        spawner.ResetHistory();              
+        spawner.GenerateTodayApplicants();   
+        spawner.SpawnNPC();     
         
         if (GreenRedButtonManager.Instance != null)
             GreenRedButtonManager.Instance.HideDecisionButtons();

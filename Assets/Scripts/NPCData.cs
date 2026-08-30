@@ -24,6 +24,11 @@ public class NPCData : ScriptableObject
     [Header("Temple Entry Document")]
     public GameObject templeDocumentPrefab;
     
+    [Header("Today List")]
+    public GameObject TodayPhotoPrefab;
+    
+   
+    
     [Header("Green Button Dialog")]
     [TextArea(2, 5)]
     public string[] greenDialogs;
