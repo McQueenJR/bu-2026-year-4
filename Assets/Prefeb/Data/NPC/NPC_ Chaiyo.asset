@@ -28,6 +28,7 @@ MonoBehaviour:
   idCardDisplayPrefab: {fileID: 265778486155606738, guid: 8fdae10450c91694ea6b718eaf0ed570, type: 3}
   applicantPhotoPrefab: {fileID: 463188664739563271, guid: b0c3d78a028f4af4e998707e033fef41, type: 3}
   templeDocumentPrefab: {fileID: 9153522378472177717, guid: fd2e6e389ef971343ba3ac77063656b8, type: 3}
+  TodayPhotoPrefab: {fileID: 6880581098743277260, guid: e211c73d87e6f2a4da59ca3bb517e64e, type: 3}
   greenDialogs:
   - See you later, young man.
   emergencyDialogs:
