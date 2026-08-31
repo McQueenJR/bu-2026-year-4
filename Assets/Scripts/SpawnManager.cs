@@ -228,6 +228,8 @@ public class SpawnManager : MonoBehaviour
         currentApplicantIndex = 0;
 
         List<NPCData> todayData = new List<NPCData>();
+        HashSet<GameObject> usedPrefabs = new HashSet<GameObject>();
+        
 
         for (int i = 0; i < gameManager.npcPerDay; i++)
         {
@@ -236,6 +238,12 @@ public class SpawnManager : MonoBehaviour
 
             if (prefab == null)
                 continue;
+            
+            if (usedPrefabs.Contains(prefab))
+                continue;
+
+            usedPrefabs.Add(prefab);
+
 
             // เก็บ Prefab สำหรับ Spawn จริง
             todayApplicants.Add(prefab);
