@@ -6,6 +6,9 @@ public class IDCardPopup : MonoBehaviour
 
     public GameObject popupPanel;
     public Transform spawnPointDisplay;
+    
+    [Header("กันการ์ดลากออกนอกจอ")]
+    public BoxCollider2D cardDragBoundary;
 
     private GameObject currentDisplayObj;
 
@@ -33,8 +36,16 @@ public class IDCardPopup : MonoBehaviour
             spawnPointDisplay.position,
             Quaternion.identity
         );
+        
+        IDCardDisplayClick dragScript = currentDisplayObj.GetComponent<IDCardDisplayClick>();
+        if (dragScript != null && cardDragBoundary != null)
+        {
+            dragScript.SetDragBoundary(cardDragBoundary);
+        }
 
         popupPanel.SetActive(true);
+        
+        DraggableSortOrder.NotifyOpened();
     }
 
     // ปิด Display
@@ -47,5 +58,6 @@ public class IDCardPopup : MonoBehaviour
             Destroy(currentDisplayObj);
             currentDisplayObj = null;
         }
+        DraggableSortOrder.NotifyClosed(); 
     }
 }

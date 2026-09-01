@@ -35,6 +35,13 @@ public class BagInventoryUI : MonoBehaviour
         }
 
         inventoryPanel.SetActive(true);
+        
+        DraggableSortOrder.NotifyOpened();
+        
+        // ✅ รีเซ็ต sorting order ของตัวกระเป๋าก่อนทุกครั้ง
+        BagDisplayClick bagDisplay = inventoryPanel.GetComponentInChildren<BagDisplayClick>();
+        if (bagDisplay != null)
+            bagDisplay.ResetSortingOrder();
 
         // ล้างของเก่าก่อน
         ClearInventory();
@@ -100,8 +107,9 @@ public class BagInventoryUI : MonoBehaviour
     public void CloseInventory()
     {
         ClearInventory();
-
         inventoryPanel.SetActive(false);
+        
+        DraggableSortOrder.NotifyClosed(); //
     }
 
     // =========================

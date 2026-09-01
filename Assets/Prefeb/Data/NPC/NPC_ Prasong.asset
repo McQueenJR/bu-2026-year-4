@@ -30,6 +30,9 @@ MonoBehaviour:
   TodayPhotoPrefab: {fileID: 1376501712073892629, guid: 4b57576929f82ca479e5bc50f882b027, type: 3}
   greenDialogs:
   - Thank you.
+  redDialogs:
+  - 
+  - 
   emergencyDialogs:
   - You will regret this!
   checkQuestions:

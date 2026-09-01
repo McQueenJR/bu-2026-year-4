@@ -15,11 +15,11 @@ MonoBehaviour:
   npcName: "\u0E27\u0E23\u0E1E\u0E25 \u0E17\u0E2D\u0E07\u0E14\u0E35"
   age: 31
   dialogs:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - awdawd
+  - awdawda
+  - dawdawd
+  - dawdawd
+  - dawdawda
   bagItems:
   - {fileID: 178329950057042882, guid: ae6533b08215c8b4daa00da5f5c2dee2, type: 3}
   - {fileID: 4754033316676718758, guid: 25349fcbdbc962b45a7071f8ac8d5b6b, type: 3}
@@ -33,11 +33,11 @@ MonoBehaviour:
   templeDocumentPrefab: {fileID: 9153522378472177717, guid: fd2e6e389ef971343ba3ac77063656b8, type: 3}
   TodayPhotoPrefab: {fileID: 1376501712073892629, guid: 4b57576929f82ca479e5bc50f882b027, type: 3}
   greenDialogs:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - awdwadwa
+  - dawdawdaw
+  - dwadwad
+  - dawdawdwad
+  - awdawdwad
   redDialogs:
   - 1
   - 2

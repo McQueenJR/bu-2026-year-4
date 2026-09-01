@@ -16,6 +16,7 @@ MonoBehaviour:
   age: 34
   dialogs:
   - I just returned from Pathum Thani after teaching Dhamma.
+  - I just returned from Pathum Thani after teaching Dhamma.
   bagItems:
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   - {fileID: 1621401579073710220, guid: 285af12efddc50d488efac121758b76f, type: 3}
@@ -30,6 +31,7 @@ MonoBehaviour:
   TodayPhotoPrefab: {fileID: 1376501712073892629, guid: 4b57576929f82ca479e5bc50f882b027, type: 3}
   greenDialogs:
   - Alright, I'm very tired, going to sleep now.
+  redDialogs: []
   emergencyDialogs:
   - Oh, hey!
   checkQuestions:

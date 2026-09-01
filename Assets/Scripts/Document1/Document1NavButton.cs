@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Document1NavButton : MonoBehaviour
+public class Document1NavButton : Document1ChildBase
 {
     public Document1Manager manager;
     public bool isNext = true;
 
-    private void OnMouseDown()
+    protected override void OnClick()
     {
         if (manager == null)
         {

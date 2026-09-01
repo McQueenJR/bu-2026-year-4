@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Document1RowButton : MonoBehaviour
+public class Document1RowButton : Document1ChildBase
 {
     public Document1Manager manager;
 
     [Tooltip("ต้องตรงกับลำดับ (index) ของ rows[] ใน Document1Manager เช่น A1=0, A2=1, A3=2, A4=3")]
     public int rowIndex;
 
-    private void OnMouseDown()
+    protected override void OnClick()
     {
         if (manager == null)
         {

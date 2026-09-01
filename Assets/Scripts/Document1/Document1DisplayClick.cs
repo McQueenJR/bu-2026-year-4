@@ -1,112 +1,128 @@
 using UnityEngine;
 
-public class IDCardDisplayClick : MonoBehaviour
+// ติดที่ documentRoot (ตัวที่มี Collider2D ครอบเต็มเอกสาร)
+public class Document1DisplayClick : MonoBehaviour
 {
+    public Document1Manager manager;
+
     private bool isDragging = false;
     private Vector3 offset;
 
     private Camera mainCamera;
-    
+
     [Header("กันลากออกนอกกรอบที่กำหนด")]
     public bool clampToBoundary = true;
     public BoxCollider2D dragBoundary;
 
     private Vector2 halfExtents;
+    private float originalZ;
+    private Vector3 originalPosition;
+
     private SpriteRenderer[] spriteRenderers;
     private int[] baseSortingOrders;
-    private float originalZ;
-    
+
     private void Awake()
     {
         mainCamera = Camera.main;
         halfExtents = CalculateHalfExtents();
-        
+        originalZ = transform.position.z;
+        originalPosition = transform.position;
+
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         baseSortingOrders = new int[spriteRenderers.Length];
         for (int i = 0; i < spriteRenderers.Length; i++)
             baseSortingOrders[i] = spriteRenderers[i].sortingOrder;
 
-        originalZ = transform.position.z;
-        
-        DraggableSortOrder.OnOrderOverflow += ResetSortingOrder; 
-        
+        DraggableSortOrder.OnOrderOverflow += ResetSortingOrder;
     }
-    
+
     private void OnDestroy()
     {
-        DraggableSortOrder.OnOrderOverflow -= ResetSortingOrder; 
+        DraggableSortOrder.OnOrderOverflow -= ResetSortingOrder;
     }
-    
+
     public void ResetSortingOrder()
     {
         for (int i = 0; i < spriteRenderers.Length; i++)
             spriteRenderers[i].sortingOrder = baseSortingOrders[i];
 
-        Vector3 pos = transform.position;
-        pos.z = originalZ;
-        transform.position = pos;
+        transform.position = originalPosition;
     }
 
+    // =========================
+    // คลิกตรง documentRoot เอง (พื้นที่ที่ไม่มีปุ่มบัง)
+    // =========================
     private void OnMouseDown()
     {
-        // คลิกซ้าย → เริ่มลาก
         if (Input.GetMouseButtonDown(0))
-        {
-            isDragging = true;
-            
-            BringToFront();
-
-            Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(
-                Input.mousePosition
-            );
-
-            mouseWorldPos.z = transform.position.z;
-
-            // ทำให้ตอนเริ่มลาก Display ไม่กระโดด
-            offset = transform.position - mouseWorldPos;
-        }
+            BeginDrag(Input.mousePosition);
     }
 
     private void OnMouseDrag()
     {
-        // กำลังลากอยู่
         if (isDragging)
-        {
-            Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = transform.position.z;
-
-            Vector3 targetPos = mouseWorldPos + offset;
-
-            if (clampToBoundary && dragBoundary != null)
-                targetPos = ClampToBoundary(targetPos);
-
-            transform.position = targetPos;
-        }
+            ContinueDrag(Input.mousePosition);
     }
 
     private void OnMouseUp()
     {
-        // ปล่อยเมาส์ซ้าย → หยุดลาก
         if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-        }
+            EndDrag();
     }
 
     private void OnMouseOver()
     {
-        // คลิกขวา → ปิด Display
         if (Input.GetMouseButtonDown(1))
-        {
-            IDCardPopup.Instance.Hide();
-        }
+            RequestClose();
     }
-    
+
+    // =========================
+    // 👇 Public API — ให้ปุ่ม (TopTabs, NavButtons) เรียก forward เข้ามาได้
+    // =========================
+    public void BeginDrag(Vector3 mouseScreenPos)
+    {
+        isDragging = true;
+
+        BringToFront();
+
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        mouseWorldPos.z = transform.position.z;
+
+        offset = transform.position - mouseWorldPos;
+    }
+
+    public void ContinueDrag(Vector3 mouseScreenPos)
+    {
+        if (!isDragging)
+            return;
+
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        mouseWorldPos.z = transform.position.z;
+
+        Vector3 targetPos = mouseWorldPos + offset;
+
+        if (clampToBoundary && dragBoundary != null)
+            targetPos = ClampToBoundary(targetPos);
+
+        transform.position = targetPos;
+    }
+
+    public void EndDrag()
+    {
+        isDragging = false;
+    }
+
+    public void RequestClose()
+    {
+        if (manager != null)
+            manager.CloseDocument();
+    }
+
     public void SetDragBoundary(BoxCollider2D boundary)
     {
         dragBoundary = boundary;
     }
-    
+
     private Vector2 CalculateHalfExtents()
     {
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
@@ -128,7 +144,7 @@ public class IDCardDisplayClick : MonoBehaviour
 
         return pos;
     }
-    
+
     private void BringToFront()
     {
         int order = DraggableSortOrder.GetNextOrder();
@@ -139,10 +155,8 @@ public class IDCardDisplayClick : MonoBehaviour
                 spriteRenderers[i].sortingOrder = order + baseSortingOrders[i];
         }
 
-        // ขยับใกล้กล้องนิดหน่อยตามลำดับ กันเคสคลิกทับกันแล้วโดนตัวข้างหลังแทน
         Vector3 pos = transform.position;
         pos.z = originalZ - (order * 0.0001f);
         transform.position = pos;
     }
-    
 }

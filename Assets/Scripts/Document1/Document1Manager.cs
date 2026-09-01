@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class Document1Manager : MonoBehaviour
 {
     [System.Serializable]
@@ -15,12 +14,13 @@ public class Document1Manager : MonoBehaviour
 
     [Header("Root")]
     public GameObject documentRoot;
-    public GameObject blocker;
+
+    [Header("Drag / Layer (แทน blocker เดิม)")]
+    public Document1DisplayClick displayClick; // ติดอยู่ที่ documentRoot
 
     [Header("Rows (แต่ละแถว = A1, A2, A3, A4 ... เพิ่ม/ลดเต็นท์ที่ pages ของแต่ละแถวได้เลย)")]
     public DocumentRow[] rows;
 
-    // รวมทุกหน้าจากทุกแถวเป็นเส้นเดียว เรียงตามลำดับ row -> page
     private GameObject[] flattenedPages;
     private int[] rowStartIndex;
     private int currentIndex = 0;
@@ -30,7 +30,6 @@ public class Document1Manager : MonoBehaviour
         BuildFlattenedList();
 
         if (documentRoot != null) documentRoot.SetActive(false);
-        if (blocker != null) blocker.SetActive(false);
     }
 
     void BuildFlattenedList()
@@ -62,15 +61,20 @@ public class Document1Manager : MonoBehaviour
     public void OpenDocument()
     {
         if (documentRoot != null) documentRoot.SetActive(true);
-        if (blocker != null) blocker.SetActive(true);
 
-        ShowPage(0); // เปิดมาที่หน้าแรกสุด (แถวแรก เต็นท์แรก)
+        if (displayClick != null)
+            displayClick.ResetSortingOrder(); // รีตำแหน่ง/เลเยอร์ทุกครั้งที่เปิดใหม่
+
+        DraggableSortOrder.NotifyOpened();
+
+        ShowPage(0);
     }
 
     public void CloseDocument()
     {
         if (documentRoot != null) documentRoot.SetActive(false);
-        if (blocker != null) blocker.SetActive(false);
+
+        DraggableSortOrder.NotifyClosed();
     }
 
     // =========================
