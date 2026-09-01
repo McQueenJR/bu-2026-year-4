@@ -11,6 +11,7 @@ public class TodayListManager : MonoBehaviour
 
     private List<GameObject> spawnedPhotos = new List<GameObject>();
 
+
     void Awake()
     {
         Instance = this;
@@ -21,8 +22,11 @@ public class TodayListManager : MonoBehaviour
     {
         popup.SetActive(true);
 
-        ClearTodayList();
-
+        //ClearTodayList();
+        
+        if (spawnedPhotos.Count > 0)
+            return;
+        
         for (int i = 0; i < todayNPCs.Count && i < slots.Length; i++)
         {
             GameObject photo = Instantiate(
@@ -35,11 +39,20 @@ public class TodayListManager : MonoBehaviour
 
             spawnedPhotos.Add(photo);
         }
+        TodayListDisplayClick display = popup.GetComponentInChildren<TodayListDisplayClick>();
+        if (display != null)
+            display.RefreshSpriteCache();
+        
     }
 
     public void CloseTodayList()
     {
         popup.SetActive(false);
+        //ClearTodayList();
+    }
+    
+    public void ResetForNewDay()
+    {
         ClearTodayList();
     }
 

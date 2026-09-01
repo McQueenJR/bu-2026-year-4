@@ -42,7 +42,7 @@ public class TodayListDisplayClick : MonoBehaviour
     public void ResetSortingOrder()
     {
         for (int i = 0; i < spriteRenderers.Length; i++)
-            spriteRenderers[i].sortingOrder = baseSortingOrders[i];
+            spriteRenderers[i].sortingOrder = baseSortingOrders[i];   
 
         transform.position = originalPosition;
     }
@@ -142,4 +142,13 @@ public class TodayListDisplayClick : MonoBehaviour
         pos.z = originalZ - (order * 0.0001f);
         transform.position = pos;
     }
+    
+    public void RefreshSpriteCache()
+    {
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        baseSortingOrders = new int[spriteRenderers.Length];
+        for (int i = 0; i < spriteRenderers.Length; i++)
+            baseSortingOrders[i] = spriteRenderers[i].sortingOrder;
+    }
+    
 }
