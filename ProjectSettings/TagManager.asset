@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - MagnifyingGlass
+  - XRay_Clothes
+  - XRay_Body
+  - XRay_Outer
+  - XRay_Inner
   layers:
   - Default
   - TransparentFX
