@@ -76,9 +76,9 @@ public class EmergencyManager : MonoBehaviour
             doorAnimator.SetTrigger("CloseDoor");
 
             // 🔥 เรียก Dialog ตาม NPC
-            gameManager.StartEmergencyDialog();
+            gameManager.OnPoliceCalled();
 
-            Debug.Log("Emergency Activated - Door Closed");
+            Debug.Log("Emergency Activated - Police Called");
         }
         else
         {
