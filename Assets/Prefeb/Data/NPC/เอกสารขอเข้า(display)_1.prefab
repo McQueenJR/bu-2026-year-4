@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5244255372512268429}
   - component: {fileID: 3755290072053625815}
   - component: {fileID: 9148490331393630971}
+  - component: {fileID: -3242408683285020396}
   m_Layer: 0
   m_Name: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E02\u0E2D\u0E40\u0E02\u0E49\u0E32(display)_1"
   m_TagString: Untagged
@@ -138,3 +139,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.66, y: 9.04}
   m_EdgeRadius: 0
+--- !u!114 &-3242408683285020396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463188664739563271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bbc2e8491cf0149a5b48f11b174d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DocumentDisplayClick
+  clampToBoundary: 0
+  dragBoundary: {fileID: 0}

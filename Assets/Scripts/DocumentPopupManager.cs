@@ -7,6 +7,9 @@ public class DocumentPopupManager : MonoBehaviour
     public GameObject popup;
     public Transform holder;
 
+    [Header("กันเอกสารลากออกนอกจอ")]
+    public BoxCollider2D documentDragBoundary;
+    
     GameObject currentDocument;
 
     void Awake()
@@ -23,6 +26,12 @@ public class DocumentPopupManager : MonoBehaviour
             Destroy(currentDocument);
 
         currentDocument = Instantiate(documentPrefab, holder);
+        
+        DocumentDisplayClick dragScript = currentDocument.GetComponent<DocumentDisplayClick>();
+        if (dragScript != null && documentDragBoundary != null)
+        {
+            dragScript.SetDragBoundary(documentDragBoundary);
+        }
     }
 
     public void Close()
