@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 735279320056341658}
   m_Layer: 0
   m_Name: "\u0E2B\u0E39_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +120,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
-  m_SortingOrder: 2
-  m_MaskInteraction: 0
+  m_SortingOrder: -1
+  m_MaskInteraction: 2
   m_Sprite: {fileID: 6705992523775054531, guid: 7eb7e7be9ab3e9b4d8620073c5aba7b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 4746416850007961224}
   m_Layer: 0
   m_Name: "\u0E2B\u0E19\u0E49\u0E32_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,7 +212,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: 1920247156810515429, guid: c0efda53398a2704f9999f74ba2900d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -233,6 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7029640538962595712}
   - component: {fileID: 5303543592031029161}
+  - component: {fileID: 5080832067302618764}
   m_Layer: 0
   m_Name: "\u0E40\u0E2A\u0E37\u0E49\u0E2D_0"
   m_TagString: XRay_Outer
@@ -302,8 +303,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
-  m_SortingOrder: 1
-  m_MaskInteraction: 0
+  m_SortingOrder: 2
+  m_MaskInteraction: 2
   m_Sprite: {fileID: -1253429324063291201, guid: 218a320ad3b3da149bdcf3d987144f23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -314,6 +315,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &5080832067302618764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959249777775760530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
+  breathingAmount: 0.04
+  breathingSpeed: 1.5
+  smoothBreathing: 1
 --- !u!1 &2052859455292630259
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +342,7 @@ GameObject:
   - component: {fileID: 4366191599095188541}
   m_Layer: 0
   m_Name: "\u0E04\u0E34\u0E49\u0E27_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,7 +410,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: 6550224175216089606, guid: 5f3a9bea0cec717488ce86efb08a59de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -417,7 +433,7 @@ GameObject:
   - component: {fileID: 5343658400019166092}
   m_Layer: 0
   m_Name: "\u0E15\u0E32_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -485,7 +501,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: -1043040171600580483, guid: e500238e886a02f4daa24671a0bf4600, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -506,6 +522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9052465056230011998}
   - component: {fileID: 9147845540331116554}
+  - component: {fileID: 2103697486476028757}
   m_Layer: 0
   m_Name: "\u0E25\u0E33\u0E15\u0E31\u0E27_0"
   m_TagString: XRay_Body
@@ -575,8 +592,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
-  m_SortingOrder: -1
-  m_MaskInteraction: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: 5813371204196106217, guid: 1c0c1da7bfab9154db2da04d06bc9752, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -587,6 +604,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2103697486476028757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2957916479369062286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
+  breathingAmount: 0.04
+  breathingSpeed: 1.5
+  smoothBreathing: 1
 --- !u!1 &4307906772886433474
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +631,7 @@ GameObject:
   - component: {fileID: 8752215378277908305}
   m_Layer: 0
   m_Name: "\u0E2B\u0E21\u0E27\u0E01_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -667,7 +699,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: -4087656163519524110, guid: f106834f700555e458541fd242934d88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -688,6 +720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6259688536306364631}
   - component: {fileID: 3662619727865179053}
+  - component: {fileID: 7166944421928554515}
   m_Layer: 0
   m_Name: "\u0E41\u0E02\u0E19_0"
   m_TagString: XRay_Body
@@ -757,7 +790,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3563179199658230996, guid: 2685885a5a695b74b9480f08cbdbe802, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -769,6 +802,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &7166944421928554515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206213536529164786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
+  breathingAmount: 0.04
+  breathingSpeed: 1.5
+  smoothBreathing: 1
 --- !u!1 &5646606654608804731
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +829,7 @@ GameObject:
   - component: {fileID: 3603207532125119552}
   m_Layer: 0
   m_Name: "\u0E1C\u0E21_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -849,7 +897,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: -3904740165300576757, guid: 620683f88c71cb541a2024a397be9fe3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -872,7 +920,7 @@ GameObject:
   - component: {fileID: 9109128418428726665}
   m_Layer: 0
   m_Name: "\u0E08\u0E21\u0E39\u0E01_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -940,7 +988,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: -7248924385744413128, guid: 93b506fa838c62e429ba6f3e7b8436c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -965,7 +1013,6 @@ GameObject:
   - component: {fileID: 4232056782569123725}
   - component: {fileID: 3831698121347327121}
   - component: {fileID: 99645501198166120}
-  - component: {fileID: 8968458452670147201}
   m_Layer: 0
   m_Name: "\u0E20\u0E32\u0E19\u0E38\u0E27\u0E31\u0E12\u0E19\u0E4C \u0E41\u0E2A\u0E07\u0E17\u0E2D\u0E07"
   m_TagString: Untagged
@@ -1066,7 +1113,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.42423797, y: 1.01022}
+  m_Offset: {x: -0.42423797, y: 1.7907515}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1076,7 +1123,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.949908, y: 8.037505}
+  m_Size: {x: 4.949908, y: 6.4764423}
   m_EdgeRadius: 0
 --- !u!114 &99645501198166120
 MonoBehaviour:
@@ -1090,21 +1137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1ffbe7d31a26e48ae1571fd4f1b131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCXRayTarget
---- !u!114 &8968458452670147201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6495539038219323651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
-  breathingAmount: 0.015
-  breathingSpeed: 1.5
-  smoothBreathing: 1
 --- !u!1 &6650447200784126082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1150,7 @@ GameObject:
   - component: {fileID: 1425746184817863364}
   m_Layer: 0
   m_Name: "\u0E1B\u0E32\u0E01"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1186,7 +1218,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: 2030362344941826669, guid: 8411ae01350a1c445a36ef04d3289433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

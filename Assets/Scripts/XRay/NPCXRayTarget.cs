@@ -1,270 +1,286 @@
-
 using UnityEngine;
 
 public class NPCXRayTarget : MonoBehaviour
-{
-    // =========================================
-    // X-RAY PARTS
-    // =========================================
 
-    private SpriteRenderer[] outerParts;
-    private SpriteRenderer[] bodyParts;
-    private SpriteRenderer[] innerParts;
+{
+
+    // ==========================================
+
+    // X-RAY PARTS
+
+    // ==========================================
+
+    private SpriteRenderer[] outerParts; // เสื้อผ้า / ของชั้นนอกสุด
+
+    private SpriteRenderer[] faceParts;  // หน้า / ตา / ปาก / หู / ผม (เพิ่มใหม่)
+
+    private SpriteRenderer[] bodyParts;  // ลำตัว / แขน / คอ
+
+    private SpriteRenderer[] innerParts; // สมอง / กะโหลก / กระดูก
 
     private XRaySystem xraySystem;
+
     private MagnifyingGlass magnifyingGlass;
 
-    // =========================================
+    // ==========================================
+
     // AWAKE
-    // =========================================
+
+    // ==========================================
 
     private void Awake()
+
     {
+
         FindParts();
 
-        // เริ่มต้นเป็นปกติ
+        // เริ่มต้นเป็นปกติ (Level 0)
+
         SetXRayLevel(0);
+
     }
 
-    // =========================================
+    // ==========================================
+
     // FIND PARTS
-    // =========================================
+
+    // ==========================================
 
     private void FindParts()
+
     {
+
         outerParts = null;
+
+        faceParts = null;
+
         bodyParts = null;
+
         innerParts = null;
 
-        SpriteRenderer[] renderers =
-            GetComponentsInChildren<SpriteRenderer>(true);
+        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>(true);
 
         foreach (SpriteRenderer renderer in renderers)
+
         {
+
             if (renderer.CompareTag("XRay_Outer"))
+
             {
-                AddRenderer(
-                    ref outerParts,
-                    renderer
-                );
+
+                AddRenderer(ref outerParts, renderer);
+
             }
+
+            else if (renderer.CompareTag("XRay_Face")) // ค้นหา Tag หน้า
+
+            {
+
+                AddRenderer(ref faceParts, renderer);
+
+            }
+
             else if (renderer.CompareTag("XRay_Body"))
+
             {
-                AddRenderer(
-                    ref bodyParts,
-                    renderer
-                );
+
+                AddRenderer(ref bodyParts, renderer);
+
             }
+
             else if (renderer.CompareTag("XRay_Inner"))
+
             {
-                AddRenderer(
-                    ref innerParts,
-                    renderer
-                );
+
+                AddRenderer(ref innerParts, renderer);
+
             }
+
         }
 
-        Debug.Log(
-            gameObject.name +
-            " | Outer = " + Count(outerParts) +
-            " | Body = " + Count(bodyParts) +
-            " | Inner = " + Count(innerParts)
-        );
     }
 
-    // =========================================
+    // ==========================================
+
     // MOUSE ENTER
-    // =========================================
+
+    // ==========================================
 
     private void OnMouseEnter()
+
     {
+
         if (xraySystem == null)
+
         {
-            xraySystem =
-                FindFirstObjectByType<XRaySystem>();
+
+            xraySystem = FindFirstObjectByType<XRaySystem>();
+
         }
 
         if (magnifyingGlass == null)
+
         {
-            magnifyingGlass =
-                FindFirstObjectByType<MagnifyingGlass>();
+
+            magnifyingGlass = FindFirstObjectByType<MagnifyingGlass>();
+
         }
 
-        if (xraySystem == null)
-            return;
+        if (xraySystem == null || magnifyingGlass == null) return;
 
-        if (magnifyingGlass == null)
-            return;
+        // ต้องถือแว่นก่อน
 
-        // ต้องถือแว่น
-        if (!magnifyingGlass.IsHolding)
-            return;
+        if (!magnifyingGlass.IsHolding) return;
 
         xraySystem.SetTarget(this);
+
     }
 
-    // =========================================
+    // ==========================================
+
     // SET X-RAY LEVEL
-    //
+
     // 0 = ปกติ
-    // 1 = ทะลุเสื้อผ้า
-    // 2 = ทะลุร่างกาย
-    // =========================================
+
+    // 1 = ทะลุเสื้อผ้า (เห็นลำตัว + หน้ายังโชว์)
+
+    // 2 = ทะลุร่างทั้งหมด (เห็นสมอง/กระดูกด้านใน)
+
+    // ==========================================
 
     public void SetXRayLevel(int level)
+
     {
+
         level = Mathf.Clamp(level, 0, 2);
 
-        // -------------------------------------
-        // LEVEL 1
-        // ปกติ
-        // -------------------------------------
+        // LEVEL 1 (กด 1: ปกติ)
 
         if (level == 0)
+
         {
-            SetMask(
-                outerParts,
-                SpriteMaskInteraction.None
-            );
 
-            SetMask(
-                bodyParts,
-                SpriteMaskInteraction.None
-            );
+            SetMask(outerParts, SpriteMaskInteraction.None);
 
-            SetMask(
-                innerParts,
-                SpriteMaskInteraction.None
-            );
+            SetMask(faceParts, SpriteMaskInteraction.None);
+
+            SetMask(bodyParts, SpriteMaskInteraction.None);
+
+            SetMask(innerParts, SpriteMaskInteraction.None);
+
         }
 
-        // -------------------------------------
-        // LEVEL 2
-        // ทะลุเสื้อผ้า
-        // -------------------------------------
+        // LEVEL 2 (กด 2: ทะลุเสื้อผ้า)
 
         else if (level == 1)
+
         {
-            // เสื้อหายในวงแว่น
-            SetMask(
-                outerParts,
-                SpriteMaskInteraction.VisibleOutsideMask
-            );
 
-            // ลำตัว + แขนยังเห็น
-            SetMask(
-                bodyParts,
-                SpriteMaskInteraction.None
-            );
+            SetMask(outerParts, SpriteMaskInteraction.VisibleOutsideMask); // เสื้อผ้าโดนเจาะหาย
 
-            // ยังไม่เห็นอวัยวะ
-            SetMask(
-                innerParts,
-                SpriteMaskInteraction.None
-            );
+            SetMask(faceParts, SpriteMaskInteraction.None);               // หน้าแสดงผลปกติในวงแว่น!
+
+            SetMask(bodyParts, SpriteMaskInteraction.None);               // ลำตัวแสดงผลปกติ
+
+            SetMask(innerParts, SpriteMaskInteraction.None);              // ซ่อนอวัยวะด้านใน
+
         }
 
-        // -------------------------------------
-        // LEVEL 3
-        // ทะลุลำตัว
-        // -------------------------------------
+        // LEVEL 3 (กด 3: X-Ray ทะลุหมด)
 
         else if (level == 2)
+
         {
-            // เสื้อหายในวง
-            SetMask(
-                outerParts,
-                SpriteMaskInteraction.VisibleOutsideMask
-            );
 
-            // ลำตัว + แขนหายในวง
-            SetMask(
-                bodyParts,
-                SpriteMaskInteraction.VisibleOutsideMask
-            );
+            SetMask(outerParts, SpriteMaskInteraction.VisibleOutsideMask); // เสื้อผ้าโดนเจาะหาย
 
-            // Inner เห็นในวง
-            SetMask(
-                innerParts,
-                SpriteMaskInteraction.VisibleInsideMask
-            );
+            SetMask(faceParts, SpriteMaskInteraction.VisibleOutsideMask);  // หน้าโดนเจาะหาย!
+
+            SetMask(bodyParts, SpriteMaskInteraction.VisibleOutsideMask);  // ลำตัวโดนเจาะหาย
+
+            SetMask(innerParts, SpriteMaskInteraction.VisibleInsideMask);  // โชว์สมอง/กะโหลกในวงแว่น
+
         }
+
     }
 
-    // =========================================
-    // SET MASK
-    // =========================================
+    // ==========================================
 
-    private void SetMask(
-        SpriteRenderer[] renderers,
-        SpriteMaskInteraction mode)
+    // SET MASK
+
+    // ==========================================
+
+    private void SetMask(SpriteRenderer[] renderers, SpriteMaskInteraction mode)
+
     {
-        if (renderers == null)
-            return;
+
+        if (renderers == null) return;
 
         foreach (SpriteRenderer renderer in renderers)
+
         {
-            if (renderer == null)
-                continue;
+
+            if (renderer == null) continue;
 
             renderer.maskInteraction = mode;
+
         }
+
     }
 
-    // =========================================
-    // ADD RENDERER
-    // =========================================
+    // ==========================================
 
-    private void AddRenderer(
-        ref SpriteRenderer[] array,
-        SpriteRenderer renderer)
+    // ADD RENDERER
+
+    // ==========================================
+
+    private void AddRenderer(ref SpriteRenderer[] array, SpriteRenderer renderer)
+
     {
-        if (renderer == null)
-            return;
+
+        if (renderer == null) return;
 
         // ป้องกันซ้ำ
+
         if (array != null)
+
         {
+
             foreach (SpriteRenderer existing in array)
+
             {
-                if (existing == renderer)
-                    return;
+
+                if (existing == renderer) return;
+
             }
+
         }
 
         if (array == null)
+
         {
-            array = new SpriteRenderer[]
-            {
-                renderer
-            };
+
+            array = new SpriteRenderer[] { renderer };
 
             return;
+
         }
 
-        SpriteRenderer[] newArray =
-            new SpriteRenderer[array.Length + 1];
+        SpriteRenderer[] newArray = new SpriteRenderer[array.Length + 1];
 
         for (int i = 0; i < array.Length; i++)
+
         {
+
             newArray[i] = array[i];
+
         }
 
         newArray[array.Length] = renderer;
 
         array = newArray;
+
     }
 
-    // =========================================
-    // COUNT
-    // =========================================
-
-    private int Count(
-        SpriteRenderer[] array)
-    {
-        if (array == null)
-            return 0;
-
-        return array.Length;
-    }
 }
+ 

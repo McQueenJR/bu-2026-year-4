@@ -34,8 +34,8 @@ MonoBehaviour:
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
-  applicantPhotoPrefab: {fileID: 463188664739563271, guid: b0c3d78a028f4af4e998707e033fef41, type: 3}
-  templeDocumentPrefab: {fileID: 9153522378472177717, guid: fd2e6e389ef971343ba3ac77063656b8, type: 3}
+  applicantPhotoPrefab: {fileID: 6946208840450413241, guid: d995b4897d2822c42be8b9b62140f2ee, type: 3}
+  templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 521205145737192029, guid: ac5223f4ec03a024387109076c37f951, type: 3}
   greenDialogs:
   - "\u0E02\u0E2D\u0E1A\u0E04\u0E38\u0E13\u0E04\u0E23\u0E31\u0E1A \u0E1C\u0E21\u0E08\u0E30\u0E01\u0E25\u0E31\u0E1A\u0E40\u0E02\u0E49\u0E32\u0E44\u0E1B\u0E19\u0E2D\u0E19\u0E17\u0E35\u0E48\u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C\u0E04\u0E23\u0E31\u0E1A"

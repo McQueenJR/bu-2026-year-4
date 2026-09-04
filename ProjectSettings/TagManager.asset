@@ -9,6 +9,7 @@ TagManager:
   - XRay_Body
   - XRay_Outer
   - XRay_Inner
+  - XRay_Face
   layers:
   - Default
   - TransparentFX
@@ -57,6 +58,9 @@ TagManager:
     locked: 0
   - name: ForClick
     uniqueID: 3832242441
+    locked: 0
+  - name: FileA1
+    uniqueID: 1268875555
     locked: 0
   - name: Display
     uniqueID: 3645459245
