@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6952219083244229639}
   m_Layer: 0
-  m_Name: "\u0E23\u0E48\u0E32\u0E07\u0E01\u0E32\u0E22"
+  m_Name: "\u0E2B\u0E31\u0E27"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9052465056230011998}
-  - {fileID: 6259688536306364631}
   - {fileID: 8808037086402773881}
   - {fileID: 4531244808134757663}
   - {fileID: 527598029763052585}
@@ -119,7 +117,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_MaskInteraction: 2
   m_Sprite: {fileID: 6705992523775054531, guid: 7eb7e7be9ab3e9b4d8620073c5aba7b4, type: 3}
@@ -210,7 +208,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 2
   m_Sprite: {fileID: 1920247156810515429, guid: c0efda53398a2704f9999f74ba2900d2, type: 3}
@@ -302,7 +300,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_MaskInteraction: 2
   m_Sprite: {fileID: -1253429324063291201, guid: 218a320ad3b3da149bdcf3d987144f23, type: 3}
@@ -329,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
   breathingAmount: 0.04
   breathingSpeed: 1.5
+  breathingDelay: 0
   smoothBreathing: 1
 --- !u!1 &2052859455292630259
 GameObject:
@@ -408,7 +407,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_MaskInteraction: 2
   m_Sprite: {fileID: 6550224175216089606, guid: 5f3a9bea0cec717488ce86efb08a59de, type: 3}
@@ -499,7 +498,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_MaskInteraction: 2
   m_Sprite: {fileID: -1043040171600580483, guid: e500238e886a02f4daa24671a0bf4600, type: 3}
@@ -539,11 +538,11 @@ Transform:
   m_GameObject: {fileID: 2957916479369062286}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65048, y: -0.92169, z: 0}
+  m_LocalPosition: {x: 0.65048003, y: -0.92168987, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6952219083244229639}
+  m_Father: {fileID: 2432750559999142536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9147845540331116554
 SpriteRenderer:
@@ -591,7 +590,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 2
   m_Sprite: {fileID: 5813371204196106217, guid: 1c0c1da7bfab9154db2da04d06bc9752, type: 3}
@@ -618,6 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
   breathingAmount: 0.04
   breathingSpeed: 1.5
+  breathingDelay: 0
   smoothBreathing: 1
 --- !u!1 &4307906772886433474
 GameObject:
@@ -697,7 +697,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_MaskInteraction: 2
   m_Sprite: {fileID: -4087656163519524110, guid: f106834f700555e458541fd242934d88, type: 3}
@@ -737,11 +737,11 @@ Transform:
   m_GameObject: {fileID: 5206213536529164786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65048, y: -0.92169, z: 0}
+  m_LocalPosition: {x: 0.65048003, y: -0.92168987, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6952219083244229639}
+  m_Father: {fileID: 2432750559999142536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3662619727865179053
 SpriteRenderer:
@@ -789,7 +789,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3563179199658230996, guid: 2685885a5a695b74b9480f08cbdbe802, type: 3}
@@ -816,6 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
   breathingAmount: 0.04
   breathingSpeed: 1.5
+  breathingDelay: 0
   smoothBreathing: 1
 --- !u!1 &5646606654608804731
 GameObject:
@@ -895,7 +896,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_MaskInteraction: 2
   m_Sprite: {fileID: -3904740165300576757, guid: 620683f88c71cb541a2024a397be9fe3, type: 3}
@@ -986,7 +987,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_MaskInteraction: 2
   m_Sprite: {fileID: -7248924385744413128, guid: 93b506fa838c62e429ba6f3e7b8436c8, type: 3}
@@ -1216,7 +1217,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_MaskInteraction: 2
   m_Sprite: {fileID: 2030362344941826669, guid: 8411ae01350a1c445a36ef04d3289433, type: 3}
@@ -1261,7 +1262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2432750559999142536}
   m_Layer: 0
-  m_Name: "\u0E40\u0E2A\u0E37\u0E49\u0E2D\u0E1C\u0E49\u0E32"
+  m_Name: "\u0E15\u0E31\u0E27"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1281,5 +1282,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7029640538962595712}
+  - {fileID: 9052465056230011998}
+  - {fileID: 6259688536306364631}
   m_Father: {fileID: 4855154885320467998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

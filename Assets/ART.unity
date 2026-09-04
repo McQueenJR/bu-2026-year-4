@@ -261,7 +261,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1268875555
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7839472567634266479, guid: faab8ff778dfd114ebe8681e0ef71c04, type: 3}
@@ -416,7 +416,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4699842155992170130, guid: 56c707cdaa80ed44383b62dc2cb40894, type: 3}
@@ -767,7 +767,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1126145702056364424, guid: 550f44ae8608e844f85a8f937305192e, type: 3}
@@ -922,7 +922,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1268875555
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8221802452147339452, guid: b44a529f5d67503459a1b4d03499898c, type: 3}
@@ -1153,7 +1153,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7839472567634266479, guid: ac80cbde6530cab4d9096a813996d31e, type: 3}
@@ -1229,7 +1229,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4906520643959514612, guid: 550f5677fda5cf24cb5a9bc9185164d1, type: 3}
@@ -1412,7 +1412,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1562145794635397790, guid: 5142b5f63956eb64892c2355c5ae1ed4, type: 3}
@@ -2247,7 +2247,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 12
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6099873399732076034, guid: 3694d56b3f3e4ed4cbb2f719ee6e4258, type: 3}
@@ -2557,7 +2557,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5895540913150188443, guid: 1c35fa7f84f330847b41324517fcc584, type: 3}
@@ -3093,7 +3093,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8298316641218103250, guid: 69cc114fd53b6484ebc0daa44a96194e, type: 3}
@@ -3184,7 +3184,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6929780254742810043, guid: 105384059dba19d498f6b2433d85ec6e, type: 3}
@@ -3491,7 +3491,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -358614415887147512, guid: 6ff7116daff9c9f45bae0becdde99ff9, type: 3}
@@ -3769,7 +3769,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 134461545532900091, guid: 5a81f7fe808ed5d499154e78a380d72d, type: 3}
@@ -4241,7 +4241,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3379463121690889879, guid: c199f308f87e83e43b540fce94635864, type: 3}
@@ -4543,7 +4543,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6500307413946619009, guid: 1df410856b65ba54a8de3f3957b5380e, type: 3}
@@ -4812,7 +4812,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8221802452147339452, guid: e523dab52bc8e5748b43c1c2282d96ec, type: 3}
@@ -5097,7 +5097,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 12
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8166710274925509176, guid: f708014047e191f4abacb7c9cb145e3a, type: 3}
@@ -5622,7 +5622,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 11
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6998877320211397565, guid: 928e4b995a74807429b6cfdf65b8e54f, type: 3}
@@ -6087,7 +6087,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5895540913150188443, guid: 1c35fa7f84f330847b41324517fcc584, type: 3}
@@ -6311,7 +6311,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7398923401956034441, guid: c29dab4b75c03f248b9f19e5403cf02b, type: 3}
@@ -6803,7 +6803,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5585718239724135981, guid: c639bbd8f92567a49a90e4758280c9a9, type: 3}
@@ -7035,7 +7035,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6594200010978543763, guid: 03f3c111cf7547f4daad97522fc94e13, type: 3}
@@ -7126,7 +7126,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3494309329873018441, guid: 6acb651c2e3e34848b35c16c4999615b, type: 3}
@@ -7295,7 +7295,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4944848351003241079, guid: fb4518853413ece46ac10f7f8481c355, type: 3}
@@ -8022,7 +8022,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5030841295085578095, guid: 253222fec7c345640aea1314fd8af864, type: 3}
@@ -8229,7 +8229,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1268875555
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5716938127419247501, guid: cbb61a8152cdfc44cac5fe0412babd7c, type: 3}
@@ -8756,7 +8756,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8591756813361861176, guid: 5edd2ebfbaf1dc64bac9d60ad0a6f62c, type: 3}
@@ -9088,7 +9088,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3582633302143852562, guid: 2577246a24df2af488de7e72a2898cf3, type: 3}
@@ -9262,7 +9262,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8020143640844766479, guid: 1310bc0e952072140a244fbfb8b4ba18, type: 3}
@@ -9523,7 +9523,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: -951517301633423112, guid: 81cb045979a3800478c82c8220b8f8e8, type: 3}
@@ -9646,7 +9646,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6245764321121853457, guid: 2f1b09bf587fa9545b57eed1af89ec0b, type: 3}
@@ -9998,7 +9998,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3434804726945747866, guid: 5f2be4ae5b92299458a60c6d403ad978, type: 3}
@@ -11041,7 +11041,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -742722902505789342, guid: 3868fbc6c93066644ab14c0f98aa917e, type: 3}
@@ -11652,13 +11652,7 @@ MonoBehaviour:
     npcType: 0
     spawnChance: 70
     prefabs:
-    - {fileID: 8914167707390193818, guid: 26c54a345d44a2f418ee84423f6244c5, type: 3}
     - {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
-    - {fileID: 8270647993874138754, guid: 447b40e02e7bf8247b055acc73ca2190, type: 3}
-    - {fileID: 550283808478641447, guid: f1fff3c8531d0404986bc41a11921f0a, type: 3}
-    - {fileID: 6495539038219323651, guid: 21426ad6500e1154aa7a78cf9e3241e5, type: 3}
-    - {fileID: 2176509908907234561, guid: 47f3dfaf20b576f4f8c4b7d12030679b, type: 3}
-    - {fileID: 6501346306687715307, guid: 6d932c0952c709d4bb76389af9fcf660, type: 3}
   - roleName: Rob
     npcType: 1
     spawnChance: 30
@@ -12434,7 +12428,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5184886056005491619, guid: a34e04f8f6882834ebfe978b5972ddc8, type: 3}
@@ -12525,7 +12519,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8344660109067643731, guid: c7d6c6c826d480a4f8d7e295aa7eed7e, type: 3}
@@ -12815,7 +12809,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -13040,7 +13034,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 602270502045815718, guid: ea6f8903f5aacac4699cbf14525997a9, type: 3}
@@ -13486,7 +13480,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7416443096810342870, guid: 473f062352d958d40893c2e4433b888d, type: 3}
@@ -13681,7 +13675,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1268875555
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5976307804602949683, guid: 722852a188647a248b2719a9d234f5e8, type: 3}
@@ -13856,7 +13850,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1268875555
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2625771514622382646, guid: 1135ca5d899bf2c4aac8477081f5af02, type: 3}
@@ -14323,7 +14317,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4948933554451466441, guid: eaa5c6b511d45d641814308ce54cb674, type: 3}
@@ -14785,7 +14779,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5585718239724135981, guid: c639bbd8f92567a49a90e4758280c9a9, type: 3}
@@ -15253,7 +15247,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4699842155992170130, guid: 56c707cdaa80ed44383b62dc2cb40894, type: 3}
@@ -15329,7 +15323,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4906520643959514612, guid: 550f5677fda5cf24cb5a9bc9185164d1, type: 3}
@@ -15435,7 +15429,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3434804726945747866, guid: 5f2be4ae5b92299458a60c6d403ad978, type: 3}
@@ -16746,7 +16740,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5976307804602949683, guid: 97fbf4085345b454d846925e72e31d0b, type: 3}
@@ -16873,7 +16867,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: bea205bd006d52948b69fd9d2a533442, type: 3}
@@ -17591,7 +17585,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8298316641218103250, guid: 69cc114fd53b6484ebc0daa44a96194e, type: 3}
@@ -17682,7 +17676,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -256308012126118382, guid: 2747804595c6a604b858f3a3f530f2a2, type: 3}
@@ -18114,7 +18108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7676010025550794383, guid: db46bffcf8138804c95a15960326d816, type: 3}
@@ -18389,7 +18383,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1268875555
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2214569205408207334, guid: e6da21e5b2732c042afa965b898efaf1, type: 3}
@@ -18544,7 +18538,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8221802452147339452, guid: e523dab52bc8e5748b43c1c2282d96ec, type: 3}
@@ -18699,7 +18693,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5976307804602949683, guid: 97fbf4085345b454d846925e72e31d0b, type: 3}
@@ -18898,7 +18892,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1268875555
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 9141446541345884159, guid: 4aadc9cc2dae1c446b2ba54bc881c752, type: 3}
@@ -19137,7 +19131,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7398923401956034441, guid: c29dab4b75c03f248b9f19e5403cf02b, type: 3}
@@ -19435,7 +19429,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8591756813361861176, guid: 5edd2ebfbaf1dc64bac9d60ad0a6f62c, type: 3}
@@ -19526,7 +19520,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1760649077
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6929780254742810043, guid: 105384059dba19d498f6b2433d85ec6e, type: 3}
@@ -20275,7 +20269,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5895540913150188443, guid: 1c35fa7f84f330847b41324517fcc584, type: 3}
@@ -20503,7 +20497,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3434804726945747866, guid: 5f2be4ae5b92299458a60c6d403ad978, type: 3}
@@ -20881,7 +20875,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 602270502045815718, guid: ea6f8903f5aacac4699cbf14525997a9, type: 3}
@@ -21331,7 +21325,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -256308012126118382, guid: 2747804595c6a604b858f3a3f530f2a2, type: 3}
@@ -21762,7 +21756,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7824054773987343343, guid: 30f6849db3b73db4d8d8c6fe713695dd, type: 3}
@@ -22027,7 +22021,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1513664325973470683, guid: 33e103a2125c3aa46ad9ae8855bf568d, type: 3}
@@ -22348,7 +22342,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1402243512736200290, guid: 201ff7d0f3b5cbb42acc05e85395799b, type: 3}
@@ -22933,7 +22927,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6150226750470954968, guid: 1c71968b9c3935e48a1067a6431afd18, type: 3}
@@ -23088,7 +23082,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7839472567634266479, guid: ac80cbde6530cab4d9096a813996d31e, type: 3}
@@ -23654,7 +23648,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: 9028295882517535525, guid: fc79e87e7072250448fb9cefc4df67b4, type: 3}
@@ -24170,7 +24164,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3434804726945747866, guid: 5f2be4ae5b92299458a60c6d403ad978, type: 3}
@@ -24986,7 +24980,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4699842155992170130, guid: 56c707cdaa80ed44383b62dc2cb40894, type: 3}
@@ -25594,7 +25588,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6150226750470954968, guid: 1c71968b9c3935e48a1067a6431afd18, type: 3}
@@ -25685,7 +25679,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -462724855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 936449175292713077, guid: fe604265c244c7d4481aadf04d4c7250, type: 3}
@@ -26137,7 +26131,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8344660109067643731, guid: c7d6c6c826d480a4f8d7e295aa7eed7e, type: 3}
@@ -26228,7 +26222,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -649508051
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6594200010978543763, guid: 03f3c111cf7547f4daad97522fc94e13, type: 3}

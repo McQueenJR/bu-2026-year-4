@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: a426bce3b8dc5e044987fbf9daf272d5
+guid: c6c39f76c6bf9134fadca3a918383b97
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7567636016395153034
-    second: "\u0E23\u0E39\u0E1B - \u0E27\u0E23\u0E1E\u0E25_0"
+      213: -3835085026103966058
+    second: 949d08072554eaa9_0
+  - first:
+      213: -7835808520509374894
+    second: 949d08072554eaa9_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0E23\u0E39\u0E1B - \u0E27\u0E23\u0E1E\u0E25_0"
+      name: 949d08072554eaa9_0
       rect:
         serializedVersion: 2
-        x: 1048
-        y: 492
-        width: 221
-        height: 242
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8e6fa2acd4a50960800000000000000
-      internalID: 7567636016395153034
+      spriteID: 69647a7ec7a07cac0800000000000000
+      internalID: -3835085026103966058
       vertices: []
       indices: 
       edges: []
@@ -125,7 +128,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8a0b2258f19af4f4792ef095a99357a0
+    spriteID: 49319d2a7174d7b4bbffaacdfa4ba281
     internalID: 0
     vertices: []
     indices: 
@@ -137,7 +140,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1920.0,"y":1080.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      "\u0E23\u0E39\u0E1B - \u0E27\u0E23\u0E1E\u0E25_0": 7567636016395153034
+      949d08072554eaa9_0: -3835085026103966058
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a426bce3b8dc5e044987fbf9daf272d5
+guid: 8f67aa7d2aa727d43a5c3974d5466958
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7567636016395153034
-    second: "\u0E23\u0E39\u0E1B - \u0E27\u0E23\u0E1E\u0E25_0"
+      213: -4315266081852527939
+    second: "\u0E23\u0E39\u0E1B - \u0E19\u0E34\u0E20\u0E32\u0E1E\u0E23_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0E23\u0E39\u0E1B - \u0E27\u0E23\u0E1E\u0E25_0"
+      name: "\u0E23\u0E39\u0E1B - \u0E19\u0E34\u0E20\u0E32\u0E1E\u0E23_0"
       rect:
         serializedVersion: 2
-        x: 1048
-        y: 492
-        width: 221
-        height: 242
+        x: 1047
+        y: 491
+        width: 224
+        height: 244
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8e6fa2acd4a50960800000000000000
-      internalID: 7567636016395153034
+      spriteID: dba63ef9c581d14c0800000000000000
+      internalID: -4315266081852527939
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8a0b2258f19af4f4792ef095a99357a0
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -133,11 +133,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1920.0,"y":1080.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      "\u0E23\u0E39\u0E1B - \u0E27\u0E23\u0E1E\u0E25_0": 7567636016395153034
+      "\u0E23\u0E39\u0E1B - \u0E19\u0E34\u0E20\u0E32\u0E1E\u0E23_0": -4315266081852527939
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
