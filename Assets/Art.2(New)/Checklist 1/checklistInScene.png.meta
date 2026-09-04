@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 74d0abe639b54a542a6bedd429ad5e7b
+guid: 0e8d6528974b46c469fea1ca733ffaae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -83298773819409755
-    second: BaseNoMirror_0
+      213: 1659345679071688803
+    second: checklistInScene_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,9 +72,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BaseNoMirror_0
+      name: checklistInScene_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 447
+        y: 265
+        width: 112
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5aab440e43018def0800000000000000
-      internalID: -83298773819409755
+      spriteID: 368b5a08a1e270710800000000000000
+      internalID: 1659345679071688803
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BaseNoMirror_0: -83298773819409755
+      checklistInScene_0: 1659345679071688803
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,6 +5,10 @@ public class MagnifyingGlass : MonoBehaviour
 {
     [Header("Camera")]
     [SerializeField] private Camera mainCamera;
+
+    [Header("Visual")]
+    [SerializeField] private GameObject storedVisual;
+    [SerializeField] private GameObject heldVisual;
 
     private bool isHolding;
     private Vector3 tablePosition;
@@ -24,11 +27,20 @@ public class MagnifyingGlass : MonoBehaviour
             mainCamera = Camera.main;
         }
 
+        // จำตำแหน่งตอนวางอยู่บนโต๊ะ
         tablePosition = transform.position;
 
         // หา XRaySystem ใน Scene
-        xraySystem =
-            FindFirstObjectByType<XRaySystem>();
+        xraySystem = FindFirstObjectByType<XRaySystem>();
+
+        // เริ่มต้น = ยังไม่ได้หยิบ
+        isHolding = false;
+
+        if (storedVisual != null)
+            storedVisual.SetActive(true);
+
+        if (heldVisual != null)
+            heldVisual.SetActive(false);
     }
 
     private void Update()
@@ -64,6 +76,14 @@ public class MagnifyingGlass : MonoBehaviour
     {
         isHolding = true;
 
+        // ซ่อนแว่นที่วางอยู่บนโต๊ะ
+        if (storedVisual != null)
+            storedVisual.SetActive(false);
+
+        // แสดงแว่นสำหรับถือ/ลาก
+        if (heldVisual != null)
+            heldVisual.SetActive(true);
+
         Debug.Log("หยิบแว่นขยายแล้ว");
     }
 
@@ -72,8 +92,7 @@ public class MagnifyingGlass : MonoBehaviour
         if (mainCamera == null)
             return;
 
-        Vector3 mousePosition =
-            Input.mousePosition;
+        Vector3 mousePosition = Input.mousePosition;
 
         mousePosition.z =
             Mathf.Abs(
@@ -97,9 +116,16 @@ public class MagnifyingGlass : MonoBehaviour
     {
         isHolding = false;
 
-        // คืนตำแหน่งแว่น
-        transform.position =
-            tablePosition;
+        // คืนตำแหน่งเดิมบนโต๊ะ
+        transform.position = tablePosition;
+
+        // ซ่อนแว่นตอนถือ
+        if (heldVisual != null)
+            heldVisual.SetActive(false);
+
+        // แสดงแว่นที่วางบนโต๊ะ
+        if (storedVisual != null)
+            storedVisual.SetActive(true);
 
         // รีเซ็ต X-Ray กลับ Default
         if (xraySystem != null)
@@ -110,4 +136,3 @@ public class MagnifyingGlass : MonoBehaviour
         Debug.Log("วางแว่นขยายแล้ว + รีเซ็ต X-Ray");
     }
 }
-
