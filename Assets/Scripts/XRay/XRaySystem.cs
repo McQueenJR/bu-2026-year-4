@@ -19,15 +19,9 @@ public class XRaySystem : MonoBehaviour
         if (magnifyingGlass == null)
             return;
 
+        // ถ้ายังไม่ได้ถือแว่น
         if (!magnifyingGlass.IsHolding)
             return;
-
-
-        // ==========================================
-        // หา NPC ใต้เมาส์
-        // ==========================================
-
-        FindTargetUnderMouse();
 
 
         // ==========================================
@@ -62,104 +56,70 @@ public class XRaySystem : MonoBehaviour
 
 
     // ==========================================
-    // หา NPC ที่เมาส์กำลังชี้อยู่
-    // ==========================================
-
-    private void FindTargetUnderMouse()
-    {
-        Camera cam = Camera.main;
-
-        if (cam == null)
-            return;
-
-
-        Vector3 mousePosition =
-            Input.mousePosition;
-
-
-        mousePosition.z =
-            Mathf.Abs(
-                cam.transform.position.z
-            );
-
-
-        Vector3 worldPosition =
-            cam.ScreenToWorldPoint(
-                mousePosition
-            );
-
-
-        // หา Collider ทั้งหมดตรงตำแหน่งเมาส์
-        Collider2D[] hits =
-            Physics2D.OverlapPointAll(
-                worldPosition
-            );
-
-
-        NPCXRayTarget foundTarget = null;
-
-
-        foreach (Collider2D hit in hits)
-        {
-            if (hit == null)
-                continue;
-
-
-            // หา NPCXRayTarget จากตัวเองหรือ Parent
-            NPCXRayTarget target =
-                hit.GetComponentInParent<NPCXRayTarget>();
-
-
-            if (target != null)
-            {
-                foundTarget = target;
-                break;
-            }
-        }
-
-
-        // ถ้าเจอ NPC
-        if (foundTarget != null)
-        {
-            if (foundTarget != currentTarget)
-            {
-                SetTarget(foundTarget);
-            }
-        }
-        else
-        {
-            // ถ้าไม่ได้ชี้ NPC
-            if (currentTarget != null)
-            {
-                currentTarget.SetXRayLevel(0);
-                currentTarget = null;
-            }
-        }
-    }
-
-
-    // ==========================================
     // SET TARGET
+    // XRayDetector เรียกใช้
     // ==========================================
 
     public void SetTarget(NPCXRayTarget target)
     {
-        if (currentTarget != null &&
-            currentTarget != target)
+        if (target == null)
+            return;
+
+
+        // ถ้าเป็น Target เดิม ไม่ต้องทำอะไร
+        if (currentTarget == target)
+            return;
+
+
+        // ปิด X-Ray ของ Target เดิม
+        if (currentTarget != null)
         {
             currentTarget.SetXRayLevel(0);
         }
 
 
+        // เปลี่ยน Target
         currentTarget = target;
 
 
-        if (currentTarget != null)
-        {
-            currentTarget.SetXRayLevel(
-                currentLevel
-            );
-        }
+        // ใช้ Level ปัจจุบัน
+        currentTarget.SetXRayLevel(
+            currentLevel
+        );
+
+
+        Debug.Log(
+            "X-Ray Target = " +
+            currentTarget.gameObject.name
+        );
+    }
+
+
+    // ==========================================
+    // CLEAR TARGET
+    // XRayDetector เรียกเมื่อ NPC ออกจากวง
+    // ==========================================
+
+    public void ClearTarget(NPCXRayTarget target)
+    {
+        if (target == null)
+            return;
+
+
+        if (currentTarget != target)
+            return;
+
+
+        // กลับเป็นปกติ
+        target.SetXRayLevel(0);
+
+
+        currentTarget = null;
+
+
+        Debug.Log(
+            "X-Ray Target = None"
+        );
     }
 
 
@@ -169,17 +129,17 @@ public class XRaySystem : MonoBehaviour
 
     private void SetLevel(int level)
     {
-        currentLevel =
-            Mathf.Clamp(level, 0, 2);
-
+        currentLevel = Mathf.Clamp(level, 0, 2);
 
         if (currentTarget != null)
         {
-            currentTarget.SetXRayLevel(
-                currentLevel
-            );
+            currentTarget.SetXRayLevel(currentLevel);
         }
 
+        if (magnifyingGlass != null)
+        {
+            magnifyingGlass.SetHeldSprite(currentLevel);
+        }
 
         Debug.Log(
             "X-Ray Level = " +
@@ -196,13 +156,16 @@ public class XRaySystem : MonoBehaviour
     {
         currentLevel = 0;
 
-
         if (currentTarget != null)
         {
             currentTarget.SetXRayLevel(0);
             currentTarget = null;
         }
 
+        if (magnifyingGlass != null)
+        {
+            magnifyingGlass.SetHeldSprite(0);
+        }
 
         Debug.Log(
             "X-Ray Reset → Level 1 / Default"

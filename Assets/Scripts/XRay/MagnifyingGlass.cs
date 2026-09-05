@@ -3,6 +3,9 @@ using UnityEngine.EventSystems;
 
 public class MagnifyingGlass : MonoBehaviour
 {
+    [Header("Magic Sound")]
+    [SerializeField] private AudioSource magicSound;
+    
     [Header("Camera")]
     [SerializeField] private Camera mainCamera;
 
@@ -10,12 +13,28 @@ public class MagnifyingGlass : MonoBehaviour
     [SerializeField] private GameObject storedVisual;
     [SerializeField] private GameObject heldVisual;
 
+    [Header("Held Visual Sprites")]
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite xray2Sprite;
+    [SerializeField] private Sprite xray3Sprite;
+    
+    [Header("Guide UI")]
+    [SerializeField] private GameObject guideUI;
+    
+    private SpriteRenderer heldSpriteRenderer;
+
     private bool isHolding;
     private Vector3 tablePosition;
 
     public bool IsHolding
     {
         get { return isHolding; }
+    }
+
+    // ให้ XRaySystem เข้าถึง HeldVisual
+    public GameObject HeldVisual
+    {
+        get { return heldVisual; }
     }
 
     private XRaySystem xraySystem;
@@ -27,20 +46,22 @@ public class MagnifyingGlass : MonoBehaviour
             mainCamera = Camera.main;
         }
 
-        // จำตำแหน่งตอนวางอยู่บนโต๊ะ
         tablePosition = transform.position;
 
-        // หา XRaySystem ใน Scene
         xraySystem = FindFirstObjectByType<XRaySystem>();
 
-        // เริ่มต้น = ยังไม่ได้หยิบ
         isHolding = false;
 
         if (storedVisual != null)
             storedVisual.SetActive(true);
 
         if (heldVisual != null)
+        {
             heldVisual.SetActive(false);
+
+            heldSpriteRenderer =
+                heldVisual.GetComponent<SpriteRenderer>();
+        }
     }
 
     private void Update()
@@ -59,7 +80,6 @@ public class MagnifyingGlass : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // ถ้าเมาส์อยู่บน UI ไม่ต้องหยิบ
         if (EventSystem.current != null &&
             EventSystem.current.IsPointerOverGameObject())
         {
@@ -76,13 +96,16 @@ public class MagnifyingGlass : MonoBehaviour
     {
         isHolding = true;
 
-        // ซ่อนแว่นที่วางอยู่บนโต๊ะ
         if (storedVisual != null)
             storedVisual.SetActive(false);
 
-        // แสดงแว่นสำหรับถือ/ลาก
         if (heldVisual != null)
             heldVisual.SetActive(true);
+
+        SetHeldSprite(0);
+
+        if (guideUI != null)
+            guideUI.SetActive(true);
 
         Debug.Log("หยิบแว่นขยายแล้ว");
     }
@@ -116,23 +139,76 @@ public class MagnifyingGlass : MonoBehaviour
     {
         isHolding = false;
 
-        // คืนตำแหน่งเดิมบนโต๊ะ
         transform.position = tablePosition;
 
-        // ซ่อนแว่นตอนถือ
         if (heldVisual != null)
             heldVisual.SetActive(false);
 
-        // แสดงแว่นที่วางบนโต๊ะ
         if (storedVisual != null)
             storedVisual.SetActive(true);
 
-        // รีเซ็ต X-Ray กลับ Default
+        if (guideUI != null)
+            guideUI.SetActive(false);
+
         if (xraySystem != null)
         {
             xraySystem.ResetXRay();
         }
 
-        Debug.Log("วางแว่นขยายแล้ว + รีเซ็ต X-Ray");
+        Debug.Log("วางแว่นแล้ว + รีเซ็ต X-Ray");
     }
+    public void SetHeldSprite(int level)
+    {
+        if (heldSpriteRenderer == null)
+            return;
+
+        switch (level)
+        {
+            case 0:
+                // รูปแว่นปกติ
+                heldSpriteRenderer.sprite = normalSprite;
+
+                StopMagicSound();
+                break;
+
+            case 1:
+                // X-Ray Level 2
+                heldSpriteRenderer.sprite = xray2Sprite;
+
+                StartMagicSound();
+                break;
+
+            case 2:
+                // X-Ray Level 3
+                heldSpriteRenderer.sprite = xray3Sprite;
+
+                StartMagicSound();
+                break;
+        }
+    }
+    
+    private void StartMagicSound()
+    {
+        if (magicSound == null)
+            return;
+
+        // ถ้าเสียงกำลังเล่นอยู่ ไม่ต้องเริ่มใหม่
+        if (!magicSound.isPlaying)
+        {
+            magicSound.Play();
+        }
+    }
+
+    private void StopMagicSound()
+    {
+        if (magicSound == null)
+            return;
+
+        if (magicSound.isPlaying)
+        {
+            magicSound.Stop();
+        }
+    }
+    
+    
 }
