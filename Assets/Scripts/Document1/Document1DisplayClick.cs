@@ -20,6 +20,7 @@ public class Document1DisplayClick : MonoBehaviour
 
     private SpriteRenderer[] spriteRenderers;
     private int[] baseSortingOrders;
+    private int currentOffset = 0;
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class Document1DisplayClick : MonoBehaviour
         originalZ = transform.position.z;
         originalPosition = transform.position;
 
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
         baseSortingOrders = new int[spriteRenderers.Length];
         for (int i = 0; i < spriteRenderers.Length; i++)
             baseSortingOrders[i] = spriteRenderers[i].sortingOrder;
@@ -43,6 +44,7 @@ public class Document1DisplayClick : MonoBehaviour
 
     public void ResetSortingOrder()
     {
+        currentOffset = 0; // <-- เพิ่มบรรทัดนี้
         for (int i = 0; i < spriteRenderers.Length; i++)
             spriteRenderers[i].sortingOrder = baseSortingOrders[i];
 
@@ -148,6 +150,7 @@ public class Document1DisplayClick : MonoBehaviour
     private void BringToFront()
     {
         int order = DraggableSortOrder.GetNextOrder();
+        currentOffset = order; // <-- เพิ่มบรรทัดนี้
 
         for (int i = 0; i < spriteRenderers.Length; i++)
         {
@@ -158,5 +161,20 @@ public class Document1DisplayClick : MonoBehaviour
         Vector3 pos = transform.position;
         pos.z = originalZ - (order * 0.0001f);
         transform.position = pos;
+    }
+    public void SetPageBaseOrder(GameObject page, int newBaseOrder)
+    {
+        if (page == null || spriteRenderers == null) return;
+
+        var pageRenderers = page.GetComponentsInChildren<SpriteRenderer>(true);
+        foreach (var sr in pageRenderers)
+        {
+            int idx = System.Array.IndexOf(spriteRenderers, sr);
+            if (idx >= 0)
+            {
+                baseSortingOrders[idx] = newBaseOrder;
+                sr.sortingOrder = currentOffset + newBaseOrder;
+            }
+        }
     }
 }
