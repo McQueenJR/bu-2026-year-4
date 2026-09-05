@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class XRaySystem : MonoBehaviour
@@ -9,47 +8,51 @@ public class XRaySystem : MonoBehaviour
 
     private NPCXRayTarget currentTarget;
 
-    // ==========================================
-    // X-Ray Level
-    //
-    // 0 = ปกติ (Default)
+    // 0 = ปกติ
     // 1 = ทะลุเสื้อผ้า
-    // 2 = ทะลุร่างกาย / เห็นอวัยวะภายใน
-    // ==========================================
-
+    // 2 = ทะลุทั้งร่าง
     private int currentLevel = 0;
+
 
     private void Update()
     {
         if (magnifyingGlass == null)
             return;
 
-        // ต้องถือแว่นก่อน
         if (!magnifyingGlass.IsHolding)
             return;
 
-        // ======================================
-        // เลข 1 = ปกติ
-        // ======================================
+
+        // ==========================================
+        // หา NPC ใต้เมาส์
+        // ==========================================
+
+        FindTargetUnderMouse();
+
+
+        // ==========================================
+        // กด 1 = ปกติ
+        // ==========================================
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SetLevel(0);
         }
 
-        // ======================================
-        // เลข 2 = ทะลุเสื้อผ้า
-        // ======================================
+
+        // ==========================================
+        // กด 2 = ทะลุเสื้อผ้า
+        // ==========================================
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SetLevel(1);
         }
 
-        // ======================================
-        // เลข 3 = ทะลุร่างกาย
-        // เห็นอวัยวะภายใน
-        // ======================================
+
+        // ==========================================
+        // กด 3 = ทะลุทั้งร่าง
+        // ==========================================
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -57,29 +60,111 @@ public class XRaySystem : MonoBehaviour
         }
     }
 
+
     // ==========================================
-    // ตั้ง NPC ที่กำลังถูกส่อง
+    // หา NPC ที่เมาส์กำลังชี้อยู่
+    // ==========================================
+
+    private void FindTargetUnderMouse()
+    {
+        Camera cam = Camera.main;
+
+        if (cam == null)
+            return;
+
+
+        Vector3 mousePosition =
+            Input.mousePosition;
+
+
+        mousePosition.z =
+            Mathf.Abs(
+                cam.transform.position.z
+            );
+
+
+        Vector3 worldPosition =
+            cam.ScreenToWorldPoint(
+                mousePosition
+            );
+
+
+        // หา Collider ทั้งหมดตรงตำแหน่งเมาส์
+        Collider2D[] hits =
+            Physics2D.OverlapPointAll(
+                worldPosition
+            );
+
+
+        NPCXRayTarget foundTarget = null;
+
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit == null)
+                continue;
+
+
+            // หา NPCXRayTarget จากตัวเองหรือ Parent
+            NPCXRayTarget target =
+                hit.GetComponentInParent<NPCXRayTarget>();
+
+
+            if (target != null)
+            {
+                foundTarget = target;
+                break;
+            }
+        }
+
+
+        // ถ้าเจอ NPC
+        if (foundTarget != null)
+        {
+            if (foundTarget != currentTarget)
+            {
+                SetTarget(foundTarget);
+            }
+        }
+        else
+        {
+            // ถ้าไม่ได้ชี้ NPC
+            if (currentTarget != null)
+            {
+                currentTarget.SetXRayLevel(0);
+                currentTarget = null;
+            }
+        }
+    }
+
+
+    // ==========================================
+    // SET TARGET
     // ==========================================
 
     public void SetTarget(NPCXRayTarget target)
     {
-        // คืน NPC เก่าเป็นปกติ
-        if (currentTarget != null)
+        if (currentTarget != null &&
+            currentTarget != target)
         {
             currentTarget.SetXRayLevel(0);
         }
 
+
         currentTarget = target;
 
-        // ถ้ามี NPC ใหม่
+
         if (currentTarget != null)
         {
-            currentTarget.SetXRayLevel(currentLevel);
+            currentTarget.SetXRayLevel(
+                currentLevel
+            );
         }
     }
 
+
     // ==========================================
-    // เปลี่ยนระดับ X-Ray
+    // SET LEVEL
     // ==========================================
 
     private void SetLevel(int level)
@@ -87,7 +172,7 @@ public class XRaySystem : MonoBehaviour
         currentLevel =
             Mathf.Clamp(level, 0, 2);
 
-        // ส่งระดับไปยัง NPC
+
         if (currentTarget != null)
         {
             currentTarget.SetXRayLevel(
@@ -95,35 +180,32 @@ public class XRaySystem : MonoBehaviour
             );
         }
 
+
         Debug.Log(
             "X-Ray Level = " +
             (currentLevel + 1)
         );
     }
 
+
     // ==========================================
-    // Reset X-Ray
-    //
-    // เรียกใช้ตอนวางแว่น
-    // กลับเป็น Default / Level 1
+    // RESET
     // ==========================================
 
     public void ResetXRay()
     {
-        // กลับเป็น Default
         currentLevel = 0;
 
-        // คืน NPC ที่กำลังถูกส่องให้ปกติ
+
         if (currentTarget != null)
         {
             currentTarget.SetXRayLevel(0);
-
             currentTarget = null;
         }
+
 
         Debug.Log(
             "X-Ray Reset → Level 1 / Default"
         );
     }
 }
-
