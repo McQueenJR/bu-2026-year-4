@@ -5,8 +5,8 @@ using System;
 // หน้าที่: บอกว่า "ตัวไหนถูกคลิกล่าสุด" ควรได้ sortingOrder สูงกว่าทุกตัวก่อนหน้า
 public static class DraggableSortOrder
 {
-    private const int Step = 10;
-    private const int MaxOrder = 100000; // เพดานกันไหลไม่มีที่สิ้นสุด (เผื่อไว้ กรณีไม่มีใครแจ้ง Close)
+    private const int Step = 30;
+    private const int MaxOrder = 300000; // เพดานกันไหลไม่มีที่สิ้นสุด (เผื่อไว้ กรณีไม่มีใครแจ้ง Close)
 
     private static int currentOrder = 0;
     private static int openCount = 0; // จำนวนของที่ลากได้ที่เปิดอยู่ตอนนี้

@@ -16,7 +16,7 @@ public class TodayListDisplayClick : MonoBehaviour
     private float originalZ;
     private Vector3 originalPosition;
 
-    private SpriteRenderer[] spriteRenderers;
+    private Renderer[] allRenderers;
     private int[] baseSortingOrders;
 
     private void Awake()
@@ -26,10 +26,11 @@ public class TodayListDisplayClick : MonoBehaviour
         originalZ = transform.position.z;
         originalPosition = transform.position;
 
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        baseSortingOrders = new int[spriteRenderers.Length];
-        for (int i = 0; i < spriteRenderers.Length; i++)
-            baseSortingOrders[i] = spriteRenderers[i].sortingOrder;
+        // ===== เปลี่ยนตรงนี้: ดึง Renderer ทั้งหมด (รวม SpriteRenderer + MeshRenderer ของ Text) =====
+        allRenderers = GetComponentsInChildren<Renderer>();
+        baseSortingOrders = new int[allRenderers.Length];
+        for (int i = 0; i < allRenderers.Length; i++)
+            baseSortingOrders[i] = allRenderers[i].sortingOrder;
 
         DraggableSortOrder.OnOrderOverflow += ResetSortingOrder;
     }
@@ -41,8 +42,8 @@ public class TodayListDisplayClick : MonoBehaviour
 
     public void ResetSortingOrder()
     {
-        for (int i = 0; i < spriteRenderers.Length; i++)
-            spriteRenderers[i].sortingOrder = baseSortingOrders[i];   
+        for (int i = 0; i < allRenderers.Length; i++)
+            allRenderers[i].sortingOrder = baseSortingOrders[i];
 
         transform.position = originalPosition;
     }
@@ -55,20 +56,16 @@ public class TodayListDisplayClick : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             isDragging = true;
-
             BringToFront();
 
             Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPos.z = transform.position.z;
-
             offset = transform.position - mouseWorldPos;
         }
     }
-
     private void OnMouseDrag()
     {
-        if (!isDragging)
-            return;
+        if (!isDragging) return;
 
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = transform.position.z;
@@ -84,9 +81,7 @@ public class TodayListDisplayClick : MonoBehaviour
     private void OnMouseUp()
     {
         if (Input.GetMouseButtonUp(0))
-        {
             isDragging = false;
-        }
     }
 
     // =========================
@@ -121,10 +116,8 @@ public class TodayListDisplayClick : MonoBehaviour
     private Vector3 ClampToBoundary(Vector3 pos)
     {
         Bounds b = dragBoundary.bounds;
-
         pos.x = Mathf.Clamp(pos.x, b.min.x + halfExtents.x, b.max.x - halfExtents.x);
         pos.y = Mathf.Clamp(pos.y, b.min.y + halfExtents.y, b.max.y - halfExtents.y);
-
         return pos;
     }
 
@@ -132,10 +125,10 @@ public class TodayListDisplayClick : MonoBehaviour
     {
         int order = DraggableSortOrder.GetNextOrder();
 
-        for (int i = 0; i < spriteRenderers.Length; i++)
+        for (int i = 0; i < allRenderers.Length; i++)
         {
-            if (spriteRenderers[i] != null)
-                spriteRenderers[i].sortingOrder = order + baseSortingOrders[i];
+            if (allRenderers[i] != null)
+                allRenderers[i].sortingOrder = order + baseSortingOrders[i];
         }
 
         Vector3 pos = transform.position;
@@ -145,10 +138,10 @@ public class TodayListDisplayClick : MonoBehaviour
     
     public void RefreshSpriteCache()
     {
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        baseSortingOrders = new int[spriteRenderers.Length];
-        for (int i = 0; i < spriteRenderers.Length; i++)
-            baseSortingOrders[i] = spriteRenderers[i].sortingOrder;
+        allRenderers = GetComponentsInChildren<Renderer>();
+        baseSortingOrders = new int[allRenderers.Length];
+        for (int i = 0; i < allRenderers.Length; i++)
+            baseSortingOrders[i] = allRenderers[i].sortingOrder;
     }
     
 }

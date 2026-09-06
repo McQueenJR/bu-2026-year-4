@@ -5824,6 +5824,8 @@ MonoBehaviour:
   - {fileID: 1297076036}
   - {fileID: 1799345246}
   - {fileID: 826389067}
+  namePrefab: {fileID: 5810957296096590244, guid: 84bb23e39c4bfe842a26c3f8ee5b6726, type: 3}
+  nameOffset: {x: 0, y: -1.7, z: 0}
 --- !u!4 &676843102
 Transform:
   m_ObjectHideFlags: 0

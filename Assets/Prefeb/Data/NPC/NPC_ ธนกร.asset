@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
   m_Name: "NPC_ \u0E18\u0E19\u0E01\u0E23"
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  npcName: "\u0E18\u0E19\u0E01\u0E23"
+  npcName: "\u0E18\u0E19\u0E01\u0E23 \u0E19\u0E2D\u0E19\u0E19\u0E49\u0E2D\u0E22"
   age: 34
   dialogs:
   - "\u0E2A\u0E27\u0E31\u0E2A\u0E14\u0E35\u0E04\u0E23\u0E31\u0E1A \u0E1C\u0E21\u0E2D\u0E2D\u0E01\u0E44\u0E1B\u0E2A\u0E31\u0E1A\u0E04\u0E31\u0E17\u0E40\u0E2D\u0E32\u0E15\u0E4C\u0E40\u0E2A\u0E32\u0E44\u0E1F\u0E02\u0E49\u0E32\u0E07\u0E19\u0E2D\u0E01\u0E21\u0E32
