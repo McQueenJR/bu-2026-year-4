@@ -1587,9 +1587,9 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingLayerID: -462724855
+  m_SortingLayer: 5
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &118063772
@@ -1849,7 +1849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131802840}
   m_Layer: 0
-  m_Name: Document1
+  m_Name: S_Document1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3342,7 +3342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 239624484}
   m_Layer: 0
-  m_Name: Emergency
+  m_Name: S_Emergency
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3650,7 +3650,7 @@ GameObject:
   - component: {fileID: 292879985}
   - component: {fileID: 292879986}
   m_Layer: 0
-  m_Name: NPCQuestion (1)
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3680,9 +3680,9 @@ AudioSource:
   m_GameObject: {fileID: 292879984}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 1480361fe238e9549bf21e13c3df12e2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5494,7 +5494,7 @@ GameObject:
   - component: {fileID: 548101088}
   - component: {fileID: 548101089}
   m_Layer: 0
-  m_Name: NPCQuestion (1)
+  m_Name: Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5524,9 +5524,9 @@ AudioSource:
   m_GameObject: {fileID: 548101087}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3689ba0d9d521f348b4f6dce74288fbf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5920,7 +5920,7 @@ GameObject:
   - component: {fileID: 567946260}
   - component: {fileID: 567946261}
   m_Layer: 0
-  m_Name: NPCQuestion (2)
+  m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5950,9 +5950,9 @@ AudioSource:
   m_GameObject: {fileID: 567946259}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3689ba0d9d521f348b4f6dce74288fbf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6048,7 +6048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 583342904}
   m_Layer: 0
-  m_Name: GreenRedButton
+  m_Name: S_GreenRedButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6278,6 +6278,8 @@ Transform:
   - {fileID: 715862078}
   - {fileID: 1876230267}
   - {fileID: 318465953}
+  - {fileID: 2147187656}
+  - {fileID: 1352818982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &603867669
@@ -7809,7 +7811,7 @@ GameObject:
   - component: {fileID: 744668699}
   - component: {fileID: 744668700}
   m_Layer: 0
-  m_Name: NPCQuestion (1)
+  m_Name: Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7839,9 +7841,9 @@ AudioSource:
   m_GameObject: {fileID: 744668698}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4ea4e713044b163428afa19f417f9575, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8301,7 +8303,7 @@ MonoBehaviour:
   bagManager: {fileID: 0}
   typeSpeed: 0.03
   voiceAudioSource: {fileID: 766519929}
-  voiceClip: {fileID: 8300000, guid: b4a4910f813872645ae57fc2ccf374cc, type: 3}
+  voiceClip: {fileID: 8300000, guid: e67b883434de2bc42a6e19ff44e18391, type: 3}
   voiceVolume: 1
 --- !u!82 &766519929
 AudioSource:
@@ -8314,7 +8316,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b4a4910f813872645ae57fc2ccf374cc, type: 3}
+  m_Resource: {fileID: 8300000, guid: e67b883434de2bc42a6e19ff44e18391, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8779,7 +8781,7 @@ GameObject:
   - component: {fileID: 808421135}
   - component: {fileID: 808421136}
   m_Layer: 0
-  m_Name: NPCQuestion (4)
+  m_Name: TickOff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8809,7 +8811,7 @@ AudioSource:
   m_GameObject: {fileID: 808421134}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
   m_PlayOnAwake: 0
@@ -10310,7 +10312,7 @@ GameObject:
   - component: {fileID: 951082312}
   - component: {fileID: 951082313}
   m_Layer: 0
-  m_Name: NPCQuestion (3)
+  m_Name: TickOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10340,7 +10342,7 @@ AudioSource:
   m_GameObject: {fileID: 951082311}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
   m_PlayOnAwake: 0
@@ -10862,7 +10864,7 @@ GameObject:
   - component: {fileID: 974080134}
   - component: {fileID: 974080133}
   m_Layer: 0
-  m_Name: NPCQuestion (4)
+  m_Name: TickOff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10877,7 +10879,7 @@ AudioSource:
   m_GameObject: {fileID: 974080132}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
   m_PlayOnAwake: 0
@@ -10991,7 +10993,7 @@ GameObject:
   - component: {fileID: 980811193}
   - component: {fileID: 980811194}
   m_Layer: 0
-  m_Name: NPCQuestion (3)
+  m_Name: TickOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11021,7 +11023,7 @@ AudioSource:
   m_GameObject: {fileID: 980811192}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
   m_PlayOnAwake: 0
@@ -13218,7 +13220,7 @@ GameObject:
   - component: {fileID: 1189679853}
   - component: {fileID: 1189679854}
   m_Layer: 0
-  m_Name: NPCQuestion (1)
+  m_Name: Open/Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13248,9 +13250,9 @@ AudioSource:
   m_GameObject: {fileID: 1189679852}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4ea4e713044b163428afa19f417f9575, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -13832,6 +13834,97 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247804477}
   m_CullTransparentMesh: 1
+--- !u!1 &1264747479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264747481}
+  - component: {fileID: 1264747480}
+  m_Layer: 0
+  m_Name: glowSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1264747480
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264747479}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: -649508051
+  m_SortingLayer: 7
+  m_SortingOrder: 2
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.79, y: 6.13}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1264747481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264747479}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.00000005960463, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1697589975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1277665961
 GameObject:
   m_ObjectHideFlags: 0
@@ -14015,7 +14108,7 @@ GameObject:
   - component: {fileID: 1299602023}
   - component: {fileID: 1299602022}
   m_Layer: 0
-  m_Name: NPCQuestion (3)
+  m_Name: Show
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14030,9 +14123,9 @@ AudioSource:
   m_GameObject: {fileID: 1299602021}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3689ba0d9d521f348b4f6dce74288fbf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -14519,9 +14612,9 @@ AudioSource:
   m_GameObject: {fileID: 1305516343}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: f3164b1cf24e340489b95adaf0c32604, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -15042,6 +15135,8 @@ MonoBehaviour:
   normalSprite: {fileID: -5927565084554807810, guid: d834a5fdeeff75a4586dc5060c5f586b, type: 3}
   xray2Sprite: {fileID: -5195102538367666440, guid: eea4ac062c725d2498f45a6adc66cf85, type: 3}
   xray3Sprite: {fileID: -5195102538367666440, guid: eea4ac062c725d2498f45a6adc66cf85, type: 3}
+  glowSpriteRenderer: {fileID: 1264747480}
+  glowFadeDuration: 0.5
   guideUI: {fileID: 2012144034}
 --- !u!4 &1352818982
 Transform:
@@ -15052,13 +15147,13 @@ Transform:
   m_GameObject: {fileID: 1352818978}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7105124, w: 0.70368475}
-  m_LocalPosition: {x: -2.91, y: -2.07, z: 0}
-  m_LocalScale: {x: 1.5303, y: 1.5303, z: 1.5303}
+  m_LocalPosition: {x: 479.66977, y: -89.881546, z: 0}
+  m_LocalScale: {x: 1.5302999, y: 1.5302999, z: 1.5303}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1697589975}
   - {fileID: 485707795}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 597172544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.553}
 --- !u!61 &1352818983
 BoxCollider2D:
@@ -18159,6 +18254,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 259534994}
+  - {fileID: 1264747481}
   m_Father: {fileID: 1352818982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!58 &1697589976
@@ -18247,7 +18343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1710356929}
   m_Layer: 0
-  m_Name: Checklist
+  m_Name: S_Checklist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18416,7 +18512,7 @@ GameObject:
   - component: {fileID: 1737531168}
   - component: {fileID: 1737531169}
   m_Layer: 0
-  m_Name: NPCQuestion (2)
+  m_Name: PageChange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18446,9 +18542,9 @@ AudioSource:
   m_GameObject: {fileID: 1737531167}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: cfe47b423e8ab684daf2d848bffeb06c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -21827,7 +21923,7 @@ GameObject:
   - component: {fileID: 2001356958}
   - component: {fileID: 2001356957}
   m_Layer: 0
-  m_Name: NPCQuestion (2)
+  m_Name: Send
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21842,7 +21938,7 @@ AudioSource:
   m_GameObject: {fileID: 2001356956}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
   m_PlayOnAwake: 0
@@ -21956,7 +22052,7 @@ GameObject:
   - component: {fileID: 2005661955}
   - component: {fileID: 2005661956}
   m_Layer: 0
-  m_Name: NPCQuestion (1)
+  m_Name: Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21986,9 +22082,9 @@ AudioSource:
   m_GameObject: {fileID: 2005661954}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 4ea4e713044b163428afa19f417f9575, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -22604,7 +22700,7 @@ GameObject:
   - component: {fileID: 2034678838}
   - component: {fileID: 2034678839}
   m_Layer: 0
-  m_Name: NPCQuestion (2)
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22634,9 +22730,9 @@ AudioSource:
   m_GameObject: {fileID: 2034678837}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3689ba0d9d521f348b4f6dce74288fbf, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -23507,7 +23603,7 @@ GameObject:
   - component: {fileID: 2134356239}
   - component: {fileID: 2134356238}
   m_Layer: 0
-  m_Name: NPCQuestion (2)
+  m_Name: Summit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23522,7 +23618,7 @@ AudioSource:
   m_GameObject: {fileID: 2134356237}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 637bbc4423c97c44cbf5f725730603aa, type: 3}
   m_PlayOnAwake: 0
@@ -23783,7 +23879,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 597172544}
     m_Modifications:
     - target: {fileID: 1609973292729224473, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_Name
@@ -23795,11 +23891,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0463
+      value: 482.53348
       objectReference: {fileID: 0}
     - target: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.59197
+      value: -87.219574
       objectReference: {fileID: 0}
     - target: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23811,15 +23907,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23846,6 +23942,11 @@ GameObject:
 --- !u!1 &2147187652 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5932324017323523231, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
+  m_PrefabInstance: {fileID: 2147187650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2147187656 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5586443660628067490, guid: b1f4190ad6160cb40a7f04692d2d4ca8, type: 3}
   m_PrefabInstance: {fileID: 2147187650}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
@@ -23875,9 +23976,7 @@ SceneRoots:
   - {fileID: 464053264}
   - {fileID: 676843102}
   - {fileID: 1766862959}
-  - {fileID: 1352818982}
   - {fileID: 1403662624}
   - {fileID: 1963058074}
   - {fileID: 344994960}
   - {fileID: 1115199529}
-  - {fileID: 2147187650}
