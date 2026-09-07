@@ -41,8 +41,8 @@ public class NPCData : ScriptableObject
     [TextArea(2, 5)]
     public string[] emergencyDialogs;
     [Header("Checklist")]
-    public string[] checkQuestions = new string[4];
+    public string[] checkQuestions = new string[5];
 
     [Header("Correct Answer")]
-    public bool[] correctAnswers = new bool[4];
+    public bool[] correctAnswers = new bool[5];
 }

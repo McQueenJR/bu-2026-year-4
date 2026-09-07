@@ -10,10 +10,11 @@ public class NPCQuestionManager : MonoBehaviour
     public GameObject askPanel;   // แผง List/Ask (4 หัวข้อ + ปุ่ม Send)
 
     [Header("Question Toggles")]
-    public Toggle toggleBag;
     public Toggle toggleAppearance;
-    public Toggle toggleID;
+    public Toggle toggleMagnifyingGlass;
+    public Toggle toggleMatchstick;
     public Toggle toggleEntryDoc;
+    public Toggle toggleTodayList;
 
     [Header("Buttons")]
     public Button sendButton;     // ปุ่ม "Ask" / "Send"
@@ -29,8 +30,8 @@ public class NPCQuestionManager : MonoBehaviour
     // NPC ที่กำลังถูกถามอยู่ตอนนี้
     private NPC currentAskingNPC;
 
-    private bool[] selectedQuestions = new bool[4];
-    private int[] questionOrder = new int[4];
+    private bool[] selectedQuestions = new bool[5];
+    private int[] questionOrder = new int[5];
     private int selectedCount = 0;
     private int currentQuestionIndex = 0;
  
@@ -45,10 +46,11 @@ public class NPCQuestionManager : MonoBehaviour
         if (askPanel != null)
             askPanel.SetActive(false);
 
-        toggleBag.onValueChanged.AddListener(v => SelectQuestion(0, v));
-        toggleAppearance.onValueChanged.AddListener(v => SelectQuestion(1, v));
-        toggleID.onValueChanged.AddListener(v => SelectQuestion(2, v));
+        toggleAppearance.onValueChanged.AddListener(v => SelectQuestion(0, v));
+        toggleMagnifyingGlass.onValueChanged.AddListener(v => SelectQuestion(1, v));
+        toggleMatchstick.onValueChanged.AddListener(v => SelectQuestion(2, v));
         toggleEntryDoc.onValueChanged.AddListener(v => SelectQuestion(3, v));
+        toggleTodayList.onValueChanged.AddListener(v => SelectQuestion(4, v));
 
         if (sendButton != null)
             sendButton.onClick.AddListener(StartAskQuestions);
@@ -126,7 +128,7 @@ public class NPCQuestionManager : MonoBehaviour
 
     private void SelectQuestion(int index, bool isOn)
     {
-        if (index < 0 || index >= 4)
+        if (index < 0 || index >= 5)
             return;
 
         selectedQuestions[index] = isOn;
@@ -147,7 +149,7 @@ public class NPCQuestionManager : MonoBehaviour
 
         selectedCount = 0;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (selectedQuestions[i])
             {
@@ -217,6 +219,16 @@ public class NPCQuestionManager : MonoBehaviour
             Debug.LogError("NPCQuestionManager ไม่มี DialogManager");
             return;
         }
+        
+        NPCMouthAnimation mouth = currentAskingNPC.GetComponentInChildren<NPCMouthAnimation>();
+        if (mouth != null)
+        {
+            dialogManager.SetTalkingNPC(mouth);
+        }
+        else
+        {
+            Debug.LogWarning("NPC " + currentAskingNPC.data.npcName + " ไม่มี NPCMouthAnimation");
+        }
 
         dialogManager.StartChecklistDialog(
             currentAskingNPC.data.npcName,
@@ -252,7 +264,7 @@ public class NPCQuestionManager : MonoBehaviour
 
     private void ResetSelection()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             selectedQuestions[i] = false;
             questionOrder[i] = 0;
@@ -260,11 +272,12 @@ public class NPCQuestionManager : MonoBehaviour
 
         selectedCount = 0;
         currentQuestionIndex = 0;
-
-        toggleBag.SetIsOnWithoutNotify(false);
+        
         toggleAppearance.SetIsOnWithoutNotify(false);
-        toggleID.SetIsOnWithoutNotify(false);
+        toggleMagnifyingGlass.SetIsOnWithoutNotify(false);
+        toggleMatchstick.SetIsOnWithoutNotify(false);
         toggleEntryDoc.SetIsOnWithoutNotify(false);
+        toggleTodayList.SetIsOnWithoutNotify(false);
     }
 
 

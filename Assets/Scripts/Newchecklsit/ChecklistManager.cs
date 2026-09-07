@@ -14,23 +14,29 @@ public class ChecklistManager : MonoBehaviour
     public AudioClip submitSound;
 
     [Header("Answer Toggles (World)")]
-    public WorldToggle bagAbnormal;
-    public WorldToggle bagNormal;
-
+    
     public WorldToggle appearanceAbnormal;
     public WorldToggle appearanceNormal;
+    
+    public WorldToggle magnifyingGlassAbnormal;
+    public WorldToggle magnifyingGlassNormal;
 
-    public WorldToggle idAbnormal;
-    public WorldToggle idNormal;
-
+    public WorldToggle matchstickAbnormal;
+    public WorldToggle matchstickNormal;
+    
     public WorldToggle entryDocAbnormal;
     public WorldToggle entryDocNormal;
+    
+    public WorldToggle todayListAbnormal;
+    public WorldToggle todayListNormal;
+    
+    
 
     [Header("Score")]
     public int checklistScore = 0; // ใช้แสดงผลคะแนนรอบล่าสุดที่ตอบ (ไม่ใช่ตัวสะสมจริง)
 
-    private bool[] playerAnswers = new bool[4];
-    private bool[] answered = new bool[4];
+    private bool[] playerAnswers = new bool[5];
+    private bool[] answered = new bool[5];
 
     // เก็บคะแนน checklist ล่าสุดที่ "กดส่ง" ของ NPC แต่ละคน
     private Dictionary<GameObject, int> npcChecklistScores = new Dictionary<GameObject, int>();
@@ -40,8 +46,8 @@ public class ChecklistManager : MonoBehaviour
     
     private class ChecklistAnswerState
     {
-        public bool[] answers = new bool[4];
-        public bool[] answered = new bool[4];
+        public bool[] answers = new bool[5];
+        public bool[] answered = new bool[5];
     }
     private Dictionary<GameObject, ChecklistAnswerState> npcAnswerStates = new Dictionary<GameObject, ChecklistAnswerState>();
 
@@ -57,10 +63,11 @@ public class ChecklistManager : MonoBehaviour
 
         // ผูก toggle คู่ Abnormal/Normal ให้ทำงานแบบ radio (เลือกได้ข้อเดียว)
         // + ผูกเข้ากับ SetAnswer เหมือนระบบเดิม
-        SetupPair(bagAbnormal, bagNormal, 0);
-        SetupPair(appearanceAbnormal, appearanceNormal, 1);
-        SetupPair(idAbnormal, idNormal, 2);
+        SetupPair(appearanceAbnormal, appearanceNormal, 0);
+        SetupPair(magnifyingGlassAbnormal, magnifyingGlassNormal, 1);
+        SetupPair(matchstickAbnormal, matchstickNormal, 2);
         SetupPair(entryDocAbnormal, entryDocNormal, 3);
+        SetupPair(todayListAbnormal, todayListNormal, 4);
     }
 
     private void SetupPair(WorldToggle abnormalToggle, WorldToggle normalToggle, int index)
@@ -83,7 +90,7 @@ public class ChecklistManager : MonoBehaviour
     // =====================================================
     private void SetAnswer(int index, bool answer, bool isOn)
     {
-        if (index < 0 || index >= 4)
+        if (index < 0 || index >= 5)
             return;
 
         if (isOn)
@@ -119,7 +126,7 @@ public class ChecklistManager : MonoBehaviour
             npcAnswerStates[currentNPC.gameObject] = state;
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             state.answers[i] = playerAnswers[i];
             state.answered[i] = answered[i];
@@ -207,11 +214,11 @@ public class ChecklistManager : MonoBehaviour
 
         int scoreThisNPC = 0;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (!answered[i])
             {
-                Debug.Log("ยังตอบไม่ครบ 4 ข้อ ส่งไม่ได้");
+                Debug.Log("ยังตอบไม่ครบ 5 ข้อ ส่งไม่ได้");
                 return; // หยุดทั้งฟังก์ชันทันที ไม่บันทึกคะแนนเลย
             }
 
@@ -244,16 +251,17 @@ public class ChecklistManager : MonoBehaviour
         if (currentNPC != null)
             npcAnswerStates.TryGetValue(currentNPC.gameObject, out state);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             answered[i] = state != null && state.answered[i];
             playerAnswers[i] = answered[i] ? state.answers[i] : false;
         }
 
-        ApplyToggle(bagAbnormal, bagNormal, 0);
-        ApplyToggle(appearanceAbnormal, appearanceNormal, 1);
-        ApplyToggle(idAbnormal, idNormal, 2);
+        ApplyToggle(appearanceAbnormal, appearanceNormal, 0);
+        ApplyToggle(magnifyingGlassAbnormal, magnifyingGlassNormal, 1);
+        ApplyToggle(matchstickAbnormal, matchstickNormal, 2);
         ApplyToggle(entryDocAbnormal, entryDocNormal, 3);
+        ApplyToggle(todayListAbnormal, todayListNormal, 4);
     }
 
     private void ApplyToggle(WorldToggle abnormalToggle, WorldToggle normalToggle, int index)
