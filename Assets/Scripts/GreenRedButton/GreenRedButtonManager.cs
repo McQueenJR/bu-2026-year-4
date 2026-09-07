@@ -10,9 +10,9 @@ public class GreenRedButtonManager : MonoBehaviour
     public ButtonVisual redButtonVisual;
 
     [Header("Button Sounds")]
-    public AudioSource buttonSound;
-    public AudioClip greenButtonSound;
-    public AudioClip redButtonSound;
+    public AudioSource greenButtonSound;
+    public AudioSource redButtonSound;
+    public AudioSource showButtonsSound;
 
     [Header("Decision Buttons Panel")]
     public GameObject decisionButtonsPanel;
@@ -57,8 +57,8 @@ public class GreenRedButtonManager : MonoBehaviour
         greenButtonVisual.SetActive(true);
         redButtonVisual.SetActive(false);
 
-        if (buttonSound != null && greenButtonSound != null)
-            buttonSound.PlayOneShot(greenButtonSound);
+        if (greenButtonSound != null)
+            greenButtonSound.Play();
 
         HideDecisionButtons();
         GameManager.Instance.SetCurrentNPCMouthTalking();
@@ -84,8 +84,8 @@ public class GreenRedButtonManager : MonoBehaviour
         greenButtonVisual.SetActive(false);
         redButtonVisual.SetActive(true);
 
-        if (buttonSound != null && redButtonSound != null)
-            buttonSound.PlayOneShot(redButtonSound);
+        if (redButtonSound != null)
+            redButtonSound.Play();
 
         HideDecisionButtons();
         GameManager.Instance.SetCurrentNPCMouthTalking(); 
@@ -101,6 +101,9 @@ public class GreenRedButtonManager : MonoBehaviour
     {
         if (decisionButtonsPanel != null)
             decisionButtonsPanel.SetActive(true);
+        
+        if (showButtonsSound != null)
+            showButtonsSound.Play();
     }
 
     public void HideDecisionButtons()

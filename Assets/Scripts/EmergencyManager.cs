@@ -16,7 +16,6 @@ public class EmergencyManager : MonoBehaviour
 
     // เสียงตอนกดปุ่ม Emergency
     public AudioSource emergencyButtonSound;
-    public AudioClip emergencyButtonClip;
 
 
     private bool coverOpened = false;   // สถานะฝา (arm) — ใช้เฉพาะตอนประตูเปิดอยู่
@@ -52,9 +51,9 @@ public class EmergencyManager : MonoBehaviour
                 buttonRenderer.sprite = coverOpenSprite;
 
                 // เล่นเสียงตอนเปิดฝาปุ่ม Emergency
-                if (emergencyButtonSound != null && emergencyButtonClip != null)
+                if (emergencyButtonSound != null)
                 {
-                    emergencyButtonSound.PlayOneShot(emergencyButtonClip);
+                    emergencyButtonSound.Play();
                 }
 
                 return;
@@ -67,9 +66,9 @@ public class EmergencyManager : MonoBehaviour
             gameManager.emergencyMode = true;
 
             // เล่นเสียงตอนกด Emergency ครั้งที่ 2
-            if (emergencyButtonSound != null && emergencyButtonClip != null)
+            if (emergencyButtonSound != null)
             {
-                emergencyButtonSound.PlayOneShot(emergencyButtonClip);
+                emergencyButtonSound.Play();
             }
 
             if (doorSound != null) doorSound.Play();
@@ -88,9 +87,9 @@ public class EmergencyManager : MonoBehaviour
             gameManager.emergencyMode = false;
 
             // เล่นเสียงตอนกด Emergency เพื่อเปิดประตู
-            if (emergencyButtonSound != null && emergencyButtonClip != null)
+            if (emergencyButtonSound != null)
             {
-                emergencyButtonSound.PlayOneShot(emergencyButtonClip);
+                emergencyButtonSound.Play();
             }
 
             if (doorSound != null) doorSound.Play();

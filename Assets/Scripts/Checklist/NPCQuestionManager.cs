@@ -23,9 +23,10 @@ public class NPCQuestionManager : MonoBehaviour
     public DialogManager dialogManager;
 
     [Header("Sound")]
-    public AudioSource askAudioSource;
-    public AudioClip openPanelSound;
-    public AudioClip sendSound;
+    public AudioSource openPanelSource;
+    public AudioSource sendSource;
+    public AudioSource toggleOnSource;
+    public AudioSource toggleOffSource;
 
     // NPC ที่กำลังถูกถามอยู่ตอนนี้
     private NPC currentAskingNPC;
@@ -110,7 +111,7 @@ public class NPCQuestionManager : MonoBehaviour
         if (askPanel != null)
             askPanel.SetActive(true);
 
-        PlaySound(openPanelSound);
+        PlaySound(openPanelSource);
     }
 
 
@@ -132,6 +133,11 @@ public class NPCQuestionManager : MonoBehaviour
             return;
 
         selectedQuestions[index] = isOn;
+        
+        if (isOn)
+            PlaySound(toggleOnSource);
+        else
+            PlaySound(toggleOffSource);
     }
 
 
@@ -166,7 +172,7 @@ public class NPCQuestionManager : MonoBehaviour
 
         currentQuestionIndex = 0;
 
-        PlaySound(sendSound);
+        PlaySound(sendSource);
 
         // ปิดแผงเลือกหัวข้อทันทีตามที่ต้องการ
         // (ผู้เล่นคลิก NPC ใหม่เองถ้าอยากถามรอบถัดไป)
@@ -281,11 +287,11 @@ public class NPCQuestionManager : MonoBehaviour
     }
 
 
-    private void PlaySound(AudioClip clip)
+    private void PlaySound(AudioSource source)
     {
-        if (askAudioSource != null && clip != null)
+        if (source != null)
         {
-            askAudioSource.PlayOneShot(clip);
+            source.Play();
         }
     }
 }

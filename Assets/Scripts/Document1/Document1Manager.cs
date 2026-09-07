@@ -40,6 +40,10 @@ public class Document1Manager : MonoBehaviour
 
     private int frontMasterIndex = 0;
     private bool isAnimating = false;
+    
+    [Header("Sound (ลาก GameObject ที่มี AudioSource + Clip ตั้งไว้แล้วมาใส่)")]
+    public AudioSource sfxOpenClose;
+    public AudioSource sfxPageChange;
 
     void Start()
     {
@@ -110,6 +114,8 @@ public class Document1Manager : MonoBehaviour
 
         DraggableSortOrder.NotifyOpened();
 
+        if (sfxOpenClose != null) sfxOpenClose.Play();
+        
         StopAllCoroutines();
         isAnimating = false;
         ShowFrontInstant(0);
@@ -119,6 +125,8 @@ public class Document1Manager : MonoBehaviour
     {
         if (documentRoot != null) documentRoot.SetActive(false);
         DraggableSortOrder.NotifyClosed();
+        
+        if (sfxOpenClose != null) sfxOpenClose.Play();
     }
 
     void ShowFrontInstant(int idx)
@@ -152,12 +160,14 @@ public class Document1Manager : MonoBehaviour
     public void NextPage()
     {
         if (isAnimating || flattenedPages == null || flattenedPages.Length <= 1) return;
+        if (sfxPageChange != null) sfxPageChange.Play();
         StartCoroutine(NextPageRoutine());
     }
 
     public void PrevPage()
     {
         if (isAnimating || flattenedPages == null || flattenedPages.Length <= 1) return;
+        if (sfxPageChange != null) sfxPageChange.Play();
         StartCoroutine(PrevPageRoutine());
     }
 
@@ -239,6 +249,8 @@ public class Document1Manager : MonoBehaviour
 
         int targetIdx = rowStartIndex[rowIndex];
         if (targetIdx == frontMasterIndex) return;
+        
+        if (sfxPageChange != null) sfxPageChange.Play();
 
         StartCoroutine(GoToIndexRoutine(targetIdx));
     }

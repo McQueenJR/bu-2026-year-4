@@ -9,12 +9,12 @@ public class ChecklistManager : MonoBehaviour
     public GameObject checklistPanel;
 
     [Header("Checklist Sounds")]
-    public AudioSource checklistAudioSource;
-    public AudioClip openChecklistSound;
-    public AudioClip submitSound;
-
-    [Header("Answer Toggles (World)")]
+    public AudioSource openChecklistSound;
+    public AudioSource submitSound;
+    public AudioSource toggleOnSound;
+    public AudioSource toggleOffSound;
     
+    [Header("ช่องใส่ของที่จะตรวจอ่ะ")]
     public WorldToggle appearanceAbnormal;
     public WorldToggle appearanceNormal;
     
@@ -98,6 +98,8 @@ public class ChecklistManager : MonoBehaviour
             // ผู้เล่นติ๊กเลือกข้อนี้
             playerAnswers[index] = answer;
             answered[index] = true;
+            
+            PlaySound(toggleOnSound);
 
             Debug.Log(
                 "ข้อ " + index +
@@ -109,6 +111,8 @@ public class ChecklistManager : MonoBehaviour
         {
             // ★ ผู้เล่นกดยกเลิก (คลิกซ้ำอันเดิม) -> ถือว่าข้อนี้ยังไม่ได้ตอบ
             answered[index] = false;
+            
+            PlaySound(toggleOffSound);
 
             Debug.Log("ข้อ " + index + " ผู้เล่นยกเลิกคำตอบ");
         }
@@ -291,11 +295,11 @@ public class ChecklistManager : MonoBehaviour
         currentNPC = null;
     }
 
-    private void PlaySound(AudioClip clip)
+    private void PlaySound(AudioSource source)
     {
-        if (checklistAudioSource != null && clip != null)
+        if (source != null)
         {
-            checklistAudioSource.PlayOneShot(clip);
+            source.Play();
         }
     }
 }
