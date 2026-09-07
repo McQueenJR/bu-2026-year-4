@@ -61,7 +61,7 @@ public class GreenRedButtonManager : MonoBehaviour
             buttonSound.PlayOneShot(greenButtonSound);
 
         HideDecisionButtons();
-        // เริ่ม Green Dialog แทนการปล่อย NPC ตรงๆ
+        GameManager.Instance.SetCurrentNPCMouthTalking();
         GameManager.Instance.dialogManager.StartGreenDialog(npc.data);
         
     }
@@ -88,7 +88,7 @@ public class GreenRedButtonManager : MonoBehaviour
             buttonSound.PlayOneShot(redButtonSound);
 
         HideDecisionButtons();
-
+        GameManager.Instance.SetCurrentNPCMouthTalking(); 
         GameManager.Instance.dialogManager.StartRedDialog(npc.data);
     }
     

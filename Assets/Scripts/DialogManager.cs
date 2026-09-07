@@ -556,7 +556,11 @@ public class DialogManager : MonoBehaviour
 
             case DialogType.Emergency:
 
-                // Emergency จบ
+                // Dialog ของ NPC จบแล้ว → ค่อยเริ่มกระบวนการเรียกตำรวจ
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.OnPoliceCalled();
+                }
                 break;
 
 

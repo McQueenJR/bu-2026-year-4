@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour
     // DIALOG MOUTH ANIMATION
     // =========================
 
-    private void SetCurrentNPCMouthTalking()
+    public void SetCurrentNPCMouthTalking()
     {
         if (currentNPC == null)
             return;

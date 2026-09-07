@@ -75,10 +75,10 @@ public class EmergencyManager : MonoBehaviour
             if (doorSound != null) doorSound.Play();
             doorAnimator.SetTrigger("CloseDoor");
 
-            // 🔥 เรียก Dialog ตาม NPC
-            gameManager.OnPoliceCalled();
+            // 🔥 เล่น Dialog ของ NPC ก่อน ตำรวจจะถูกเรียกหลัง dialog นี้จบ
+            gameManager.StartEmergencyDialog();
 
-            Debug.Log("Emergency Activated - Police Called");
+            Debug.Log("Emergency Activated - Dialog Started");
         }
         else
         {
