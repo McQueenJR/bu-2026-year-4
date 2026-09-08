@@ -169,6 +169,25 @@ public class ChecklistManager : MonoBehaviour
             Debug.LogWarning("ไม่มี GameManager");
             return;
         }
+        
+        if (GameManager.Instance.isPoliceSequenceActive)
+        {
+            Debug.Log("กำลังอยู่ระหว่างเรียกตำรวจ เปิด Checklist ไม่ได้ตอนนี้");
+            return;
+        }
+
+        if (GameManager.Instance.dialogManager != null &&
+            GameManager.Instance.dialogManager.IsDialogOpen())
+        {
+            Debug.Log("มี Dialog เปิดอยู่ เปิด Checklist ไม่ได้ตอนนี้");
+            return;
+        }
+
+        if (GameManager.Instance.currentState != GameManager.NPCState.Inspecting)
+        {
+            Debug.Log("NPC ยังไม่ถึงจุดตรวจ เปิด Checklist ไม่ได้ตอนนี้");
+            return;
+        }
 
         GameObject npcObject = GameManager.Instance.currentNPC;
 

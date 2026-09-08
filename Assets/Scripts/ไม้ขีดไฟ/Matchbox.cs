@@ -36,15 +36,27 @@ public class Matchbox : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
         if (GameManager.Instance != null)
         {
             if (GameManager.Instance.isPoliceSequenceActive)
+            {
+                Debug.Log("กำลังอยู่ระหว่างเรียกตำรวจ กดไม่ได้ตอนนี้");
                 return;
+            }
 
             if (GameManager.Instance.dialogManager != null &&
                 GameManager.Instance.dialogManager.IsDialogOpen())
+            {
+                Debug.Log("มี Dialog เปิดอยู่ กดไม่ได้ตอนนี้");
                 return;
+            }
+
+            if (GameManager.Instance.currentState != GameManager.NPCState.Inspecting)
+            {
+                Debug.Log("NPC ยังไม่ถึงจุดตรวจ หรือกำลังเดินอยู่ กดไม่ได้ตอนนี้");
+                return;
+            }
         }
         
         if (holdingMatch)

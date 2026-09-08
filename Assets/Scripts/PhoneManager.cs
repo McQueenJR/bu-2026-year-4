@@ -8,31 +8,29 @@ public class PhoneManager : MonoBehaviour
 
     public void OpenPhone()
     {
-        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
         if (GameManager.Instance != null)
         {
-
             if (GameManager.Instance.isPoliceSequenceActive)
             {
-                Debug.Log("กำลังอยู่ระหว่างเรียกตำรวจ เปิดโทรศัพท์ไม่ได้ตอนนี้");
+                Debug.Log("กำลังอยู่ระหว่างเรียกตำรวจ กดไม่ได้ตอนนี้");
                 return;
             }
 
             if (GameManager.Instance.dialogManager != null &&
                 GameManager.Instance.dialogManager.IsDialogOpen())
             {
-                Debug.Log("มี Dialog เปิดอยู่ เปิดโทรศัพท์ไม่ได้ตอนนี้");
+                Debug.Log("มี Dialog เปิดอยู่ กดไม่ได้ตอนนี้");
                 return;
             }
 
-        }
-        if (!GameManager.Instance.emergencyMode)
-        {
-            Debug.Log("ต้องปิดประตูก่อน");
-            return;
+            if (GameManager.Instance.currentState != GameManager.NPCState.Inspecting)
+            {
+                Debug.Log("NPC ยังไม่ถึงจุดตรวจ หรือกำลังเดินอยู่ กดไม่ได้ตอนนี้");
+                return;
+            }
         }
         
-
         telaphone.SetActive(false);
         phonePanel.SetActive(true);
     }
