@@ -24,6 +24,17 @@ public class TodayListManager : MonoBehaviour
 
     public void OpenTodayList(List<NPCData> todayNPCs)
     {
+        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.isPoliceSequenceActive)
+                return;
+
+            if (GameManager.Instance.dialogManager != null &&
+                GameManager.Instance.dialogManager.IsDialogOpen())
+                return;
+        }
+        
         popup.SetActive(true);
 
         if (spawnedPhotos.Count > 0)

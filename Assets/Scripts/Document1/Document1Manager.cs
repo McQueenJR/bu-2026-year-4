@@ -109,6 +109,17 @@ public class Document1Manager : MonoBehaviour
     // =========================
     public void OpenDocument()
     {
+        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.isPoliceSequenceActive)
+                return;
+
+            if (GameManager.Instance.dialogManager != null &&
+                GameManager.Instance.dialogManager.IsDialogOpen())
+                return;
+        }
+            
         if (documentRoot != null) documentRoot.SetActive(true);
         if (displayClick != null) displayClick.ResetSortingOrder();
 

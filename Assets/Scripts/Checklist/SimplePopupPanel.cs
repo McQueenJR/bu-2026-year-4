@@ -18,6 +18,17 @@ public class SimplePopupPanel : MonoBehaviour
  
     public void Show()
     {
+        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.isPoliceSequenceActive)
+                return;
+
+            if (GameManager.Instance.dialogManager != null &&
+                GameManager.Instance.dialogManager.IsDialogOpen())
+                return;
+        }
+
         if (panel != null) panel.SetActive(true);
         if (blocker != null) blocker.SetActive(true);
     }

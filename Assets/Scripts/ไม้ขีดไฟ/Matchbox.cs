@@ -36,6 +36,17 @@ public class Matchbox : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.isPoliceSequenceActive)
+                return;
+
+            if (GameManager.Instance.dialogManager != null &&
+                GameManager.Instance.dialogManager.IsDialogOpen())
+                return;
+        }
+        
         if (holdingMatch)
             return;
 

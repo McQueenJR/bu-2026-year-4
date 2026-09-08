@@ -170,6 +170,17 @@ public class MagnifyingGlass : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.isPoliceSequenceActive)
+                return;
+
+            if (GameManager.Instance.dialogManager != null &&
+                GameManager.Instance.dialogManager.IsDialogOpen())
+                return;
+        }
+        
         // ถ้าคลิก UI อยู่ ไม่ให้หยิบแว่น
         if (EventSystem.current != null &&
             EventSystem.current.IsPointerOverGameObject())

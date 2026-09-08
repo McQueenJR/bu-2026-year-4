@@ -69,6 +69,17 @@ public class NPCQuestionManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
             return;
+        
+        // กันกดระหว่างมี dialog เปิดอยู่ หรือกำลังเรียกตำรวจ
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.isPoliceSequenceActive)
+                return;
+
+            if (GameManager.Instance.dialogManager != null &&
+                GameManager.Instance.dialogManager.IsDialogOpen())
+                return;
+        }
 
         // ต้องเป็น NPC ตัวปัจจุบันเท่านั้น
         if (GameManager.Instance.currentNPC != npcObject)

@@ -36,13 +36,12 @@ public class GameManager : MonoBehaviour
     [Header("Dialog")]
     public DialogManager dialogManager;
     private GameObject emergencyDialogNPC;
-
+    /*
     [Header("Bag")]
     public GameObject bagPrefab;
     public Transform spawnPointBag;
     public Vector3 bagScale = Vector3.one;
-    public Vector3 bagRotation = Vector3.zero;   // ใส่เป็นองศา (Euler angles)
-    public SlidingPanel windowPanel;
+    public Vector3 bagRotation = Vector3.zero;   
 
     private GameObject currentBag;
 
@@ -54,7 +53,7 @@ public class GameManager : MonoBehaviour
     public Vector3 idCardRotation = Vector3.zero;
 
     private GameObject currentIDCard;
-    
+  */  
     [Header("Temple Document")]
     public GameObject templeDocumentPrefab;     // Prefab เอกสาร
     public Transform spawnPointDocument;        // จุด Spawn เอกสาร
@@ -64,9 +63,9 @@ public class GameManager : MonoBehaviour
     // =========================
     // SPAWN SOUNDS
     // =========================
-    [Header("Spawn Sounds")]
+   /* [Header("Spawn Sounds")]
     public AudioSource spawnAudioSource;
-    public AudioClip bagAndCardSpawnSound;
+    public AudioClip bagAndCardSpawnSound;*/
 
     [Header("Police Call")]
     public GameObject policePrefab;
@@ -187,10 +186,10 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Dialog จบ");
 
-        windowPanel.SlideOut(() =>
-        {
-            SpawnBag();
-        });
+
+         //   SpawnBag();
+         SpawnDocument();
+
     }
     
     public void StartEmergencyDialog()
@@ -269,7 +268,7 @@ public class GameManager : MonoBehaviour
     // BAG
     // =========================
 
-    private void SpawnBag()
+ /*   private void SpawnBag()
     {
         if (bagPrefab == null)
         {
@@ -342,7 +341,7 @@ public class GameManager : MonoBehaviour
             spawnAudioSource.PlayOneShot(bagAndCardSpawnSound);
         }
     }
-    
+  */  
     private void SpawnDocument()
     {
         if (templeDocumentPrefab == null)
@@ -366,7 +365,7 @@ public class GameManager : MonoBehaviour
 
     private void DestroyBagAndSlideBack()
     {
-        if (currentBag != null)
+     /*   if (currentBag != null)
         {
             Destroy(currentBag);
             currentBag = null;
@@ -376,17 +375,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(currentIDCard);
             currentIDCard = null;
-        }
+        }*/
         if (currentDocument != null)
         {
             Destroy(currentDocument);
             currentDocument = null;
         }
-
-        if (windowPanel != null)
-        {
-            windowPanel.SlideBack();
-        }
+        
     }
 
     // =========================

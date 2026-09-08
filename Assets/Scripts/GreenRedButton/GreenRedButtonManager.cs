@@ -3,11 +3,6 @@ using UnityEngine;
 public class GreenRedButtonManager : MonoBehaviour
 {
     public static GreenRedButtonManager Instance;
-    
-
-    [Header("Button Visuals")]
-    public ButtonVisual greenButtonVisual;
-    public ButtonVisual redButtonVisual;
 
     [Header("Button Sounds")]
     public AudioSource greenButtonSound;
@@ -24,8 +19,6 @@ public class GreenRedButtonManager : MonoBehaviour
 
     void Start()
     {
-        greenButtonVisual.SetActive(false);
-        redButtonVisual.SetActive(false);
         HideDecisionButtons();
     }
 
@@ -54,8 +47,6 @@ public class GreenRedButtonManager : MonoBehaviour
             return;
         }
         
-        greenButtonVisual.SetActive(true);
-        redButtonVisual.SetActive(false);
 
         if (greenButtonSound != null)
             greenButtonSound.Play();
@@ -80,9 +71,7 @@ public class GreenRedButtonManager : MonoBehaviour
             Debug.LogError("NPC ไม่มีข้อมูลสำหรับ Red Dialog");
             return;
         }
-
-        greenButtonVisual.SetActive(false);
-        redButtonVisual.SetActive(true);
+        
 
         if (redButtonSound != null)
             redButtonSound.Play();

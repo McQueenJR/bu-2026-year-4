@@ -41,6 +41,12 @@ public class EmergencyManager : MonoBehaviour
             Debug.Log("ปุ่มแดงยังไม่ทำงาน กดฉุกเฉินไม่ได้");
             return;
         }
+        
+        if (gameManager.dialogManager != null && gameManager.dialogManager.IsDialogOpen())
+        {
+            Debug.Log("Dialog กำลังเปิดอยู่ กดปุ่มฉุกเฉินไม่ได้ตอนนี้");
+            return;
+        }
 
         if (!isDoorClosed)
         {
