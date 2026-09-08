@@ -13,6 +13,10 @@ public class TodayListManager : MonoBehaviour
     // ===== เพิ่มบรรทัดนี้ =====
     public GameObject namePrefab;          // ลาก prefab "Text (TMP)" มาใส่ใน Inspector
     public Vector3 nameOffset = new Vector3(0, -1.5f, 0); // ตำแหน่งใต้รูป ปรับเลขตามจริง
+    
+    [Header("SOUND")]
+    public AudioSource openSound;
+    public AudioSource closeSound;
 
     private List<GameObject> spawnedPhotos = new List<GameObject>();
 
@@ -88,9 +92,13 @@ public class TodayListManager : MonoBehaviour
         }
 
         popup.SetActive(true);
+        if (openSound != null)
+            openSound.Play();
     }
     public void CloseTodayList()
     {
+        if (closeSound != null)
+            closeSound.Play();
         popup.SetActive(false);
     }
 

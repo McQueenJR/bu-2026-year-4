@@ -14,6 +14,7 @@ public class NPCMovement : MonoBehaviour
 
     private float baseY;
     private float bounceTime;
+    
 
     void Start()
     {
@@ -31,6 +32,9 @@ public class NPCMovement : MonoBehaviour
 
         // เริ่มจังหวะเดินใหม่
         bounceTime = 0f;
+        
+        if (NPCSoundManager.Instance != null)
+            NPCSoundManager.Instance.PlayWalk();
     }
 
     void Update()
@@ -61,6 +65,9 @@ public class NPCMovement : MonoBehaviour
         if (Vector3.Distance(transform.position, target) < 0.05f)
         {
             moving = false;
+            
+            if (NPCSoundManager.Instance != null)
+                NPCSoundManager.Instance.StopWalk();
 
             // กลับมาอยู่ระดับปกติ
             Vector3 finalPos = transform.position;
