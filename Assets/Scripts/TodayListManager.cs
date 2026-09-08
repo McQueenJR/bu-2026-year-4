@@ -22,9 +22,49 @@ public class TodayListManager : MonoBehaviour
         popup.SetActive(false);
     }
 
-    public void OpenTodayList(List<NPCData> todayNPCs)
+    // เรียกจากระบบตอนเริ่มวัน — สร้างรูป/ชื่อ ไม่มีเงื่อนไขจำกัด
+    public void GenerateTodayList(List<NPCData> todayNPCs)
     {
-        // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
+        if (spawnedPhotos.Count > 0)
+            return;
+
+        for (int i = 0; i < todayNPCs.Count && i < slots.Length; i++)
+        {
+            GameObject photo = Instantiate(todayNPCs[i].TodayPhotoPrefab, slots[i]);
+            photo.transform.localPosition = Vector3.zero;
+            photo.transform.localScale = Vector3.one;
+            spawnedPhotos.Add(photo);
+
+            if (namePrefab != null)
+            {
+                GameObject nameObj = Instantiate(namePrefab, slots[i]);
+                nameObj.transform.localPosition = nameOffset;
+                nameObj.transform.localScale = Vector3.one;
+
+                TextMeshPro tmp = nameObj.GetComponent<TextMeshPro>();
+                if (tmp != null)
+                    tmp.text = todayNPCs[i].npcName;
+
+                Renderer photoRenderer = photo.GetComponentInChildren<Renderer>();
+                Renderer textRenderer = nameObj.GetComponent<Renderer>();
+                if (photoRenderer != null && textRenderer != null)
+                {
+                    textRenderer.sortingLayerID = photoRenderer.sortingLayerID;
+                    textRenderer.sortingOrder = photoRenderer.sortingOrder + 1;
+                }
+
+                spawnedPhotos.Add(nameObj);
+            }
+        }
+
+        TodayListDisplayClick display = popup.GetComponentInChildren<TodayListDisplayClick>();
+        if (display != null)
+            display.RefreshSpriteCache();
+    }
+
+    // เรียกจากตอนผู้เล่นคลิกไอคอน — แค่เปิด popup มี 3 เงื่อนไขป้องกัน
+    public void OpenTodayList()
+    {
         if (GameManager.Instance != null)
         {
             if (GameManager.Instance.isPoliceSequenceActive)
@@ -46,49 +86,9 @@ public class TodayListManager : MonoBehaviour
                 return;
             }
         }
-        
+
         popup.SetActive(true);
-
-        if (spawnedPhotos.Count > 0)
-            return;
-
-        for (int i = 0; i < todayNPCs.Count && i < slots.Length; i++)
-        {
-            // สร้างรูป (เหมือนเดิม)
-            GameObject photo = Instantiate(todayNPCs[i].TodayPhotoPrefab, slots[i]);
-            photo.transform.localPosition = Vector3.zero;
-            photo.transform.localScale = Vector3.one;
-            spawnedPhotos.Add(photo);
-
-            // ===== เพิ่มส่วนนี้: สร้าง text แยก แต่ parent เข้ากับ slot เดียวกัน =====
-            if (namePrefab != null)
-            {
-                GameObject nameObj = Instantiate(namePrefab, slots[i]);
-                nameObj.transform.localPosition = nameOffset;
-                nameObj.transform.localScale = Vector3.one;
-
-                TextMeshPro tmp = nameObj.GetComponent<TextMeshPro>();
-                if (tmp != null)
-                    tmp.text = todayNPCs[i].npcName;
-
-                // ===== เพิ่มบรรทัดนี้: ทำให้ text อยู่ชั้นเดียวกับรูป ไม่จมหลังกระดาษ =====
-                Renderer photoRenderer = photo.GetComponentInChildren<Renderer>();
-                Renderer textRenderer = nameObj.GetComponent<Renderer>();
-                if (photoRenderer != null && textRenderer != null)
-                {
-                    textRenderer.sortingLayerID = photoRenderer.sortingLayerID; // เอา Sorting Layer เดียวกับรูป (Display)
-                    textRenderer.sortingOrder = photoRenderer.sortingOrder + 1;  // Order สูงกว่ารูปนิดหน่อย ให้อยู่บนสุด
-                }
-
-                spawnedPhotos.Add(nameObj);
-            }
-        }
-
-        TodayListDisplayClick display = popup.GetComponentInChildren<TodayListDisplayClick>();
-        if (display != null)
-            display.RefreshSpriteCache();
     }
-
     public void CloseTodayList()
     {
         popup.SetActive(false);

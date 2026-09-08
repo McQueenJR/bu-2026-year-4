@@ -272,7 +272,7 @@ public class SpawnManager : MonoBehaviour
         // ส่งไปสร้าง Today List
         if (todayListManager != null)
         {
-            todayListManager.OpenTodayList(todayData);
+            todayListManager.GenerateTodayList(todayData);
         }
         else
         {
