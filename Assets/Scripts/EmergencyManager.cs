@@ -28,6 +28,13 @@ public class EmergencyManager : MonoBehaviour
 
     public void EmergencyButton()
     {
+        // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
+        if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)
+            return;
+
+        if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+        
         // กันกดระหว่าง police sequence กำลังทำงานอยู่
         if (gameManager.isPoliceSequenceActive)
         {

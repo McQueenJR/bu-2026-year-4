@@ -48,7 +48,9 @@ public class MagnifyingGlass : MonoBehaviour
     {
         get { return isHolding; }
     }
-
+    
+    public static MagnifyingGlass Instance { get; private set; }
+    
     // ให้ XRaySystem เข้าถึง HeldVisual
     public GameObject HeldVisual
     {
@@ -62,6 +64,8 @@ public class MagnifyingGlass : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
+        
         // Camera
         if (mainCamera == null)
         {
@@ -170,6 +174,9 @@ public class MagnifyingGlass : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+        
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
         if (GameManager.Instance != null)
         {

@@ -109,6 +109,13 @@ public class Document1Manager : MonoBehaviour
     // =========================
     public void OpenDocument()
     {
+        // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
+        if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)
+            return;
+        
+        if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+        
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
         if (GameManager.Instance != null)
         {

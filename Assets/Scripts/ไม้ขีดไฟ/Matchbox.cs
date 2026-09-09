@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Matchbox : MonoBehaviour
 {
@@ -12,13 +13,29 @@ public class Matchbox : MonoBehaviour
 
     [Header("ระบบความมืด")]
     [SerializeField] private GameObject darknessOverlay;
+    
+    [Header("เสียงไม้ขีดไฟ")]
+    [SerializeField] private AudioSource igniteAudioSource;   // เสียงไฟพุ่งขึ้น ตอนหยิบ (เล่นครั้งเดียว)
+    [SerializeField] private AudioSource loopFireAudioSource; // เสียงไฟลุกวนๆ (เล่นวนหลังไฟพุ่งจบ)
 
     private bool holdingMatch = false;
 
     private SpriteRenderer boxSprite;
+    
+    private Coroutine fireSoundRoutine;
+    
+    public static Matchbox Instance { get; private set; }
 
+    public bool IsHolding
+    {
+        get { return holdingMatch; }
+    }
+    
+    
     private void Start()
     {
+        Instance = this;
+        
         boxSprite = GetComponent<SpriteRenderer>();
 
         // ซ่อนไม้ขีดตอนเริ่ม
@@ -36,6 +53,9 @@ public class Matchbox : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding) 
+            return;
+        
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
         if (GameManager.Instance != null)
         {
@@ -173,11 +193,13 @@ public class Matchbox : MonoBehaviour
         if (NPCAnomaly.CurrentNPC != null)
         {
             NPCAnomaly.CurrentNPC.ShowAnomaly();
+            
         }
-
+        
         Debug.Log(
             "ถือไม้ขีด → ไม้ขีดอยู่ขวา + เมาส์ย้ายตาม + มืด + Anomaly"
         );
+        PlayMatchSound();
     }
 
     private void ReturnMatch()
@@ -219,9 +241,76 @@ public class Matchbox : MonoBehaviour
         {
             darknessOverlay.SetActive(false);
         }
-
+        
+        StopMatchSound();
         Debug.Log(
             "คืนไม้ขีด → กล่องกลับ + ไม้ขีดหาย + ไฟสว่าง + NPC ปกติ"
         );
+    }
+    private void PlayMatchSound()
+    {
+        if (fireSoundRoutine != null)
+        {
+            StopCoroutine(fireSoundRoutine);
+            fireSoundRoutine = null;
+        }
+
+        if (loopFireAudioSource != null)
+        {
+            loopFireAudioSource.Stop();
+        }
+
+        if (igniteAudioSource != null)
+        {
+            igniteAudioSource.Stop();
+            igniteAudioSource.Play();
+        }
+
+        fireSoundRoutine = StartCoroutine(PlayLoopFireAfterIgnite());
+    }
+
+    private IEnumerator PlayLoopFireAfterIgnite()
+    {
+        float waitTime = 0f;
+
+        if (igniteAudioSource != null && igniteAudioSource.clip != null)
+        {
+            waitTime = igniteAudioSource.clip.length;
+        }
+
+        yield return new WaitForSeconds(waitTime);
+
+        if (!holdingMatch)
+        {
+            fireSoundRoutine = null;
+            yield break;
+        }
+
+        if (loopFireAudioSource != null)
+        {
+            loopFireAudioSource.loop = true;
+            loopFireAudioSource.Play();
+        }
+
+        fireSoundRoutine = null;
+    }
+
+    private void StopMatchSound()
+    {
+        if (fireSoundRoutine != null)
+        {
+            StopCoroutine(fireSoundRoutine);
+            fireSoundRoutine = null;
+        }
+
+        if (igniteAudioSource != null)
+        {
+            igniteAudioSource.Stop();
+        }
+
+        if (loopFireAudioSource != null)
+        {
+            loopFireAudioSource.Stop();
+        }
     }
 }

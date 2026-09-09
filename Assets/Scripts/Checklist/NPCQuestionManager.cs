@@ -9,15 +9,14 @@ public class NPCQuestionManager : MonoBehaviour
     [Header("Panel")]
     public GameObject askPanel;   // แผง List/Ask (4 หัวข้อ + ปุ่ม Send)
 
-    [Header("Question Toggles")]
-    public Toggle toggleAppearance;
-    public Toggle toggleMagnifyingGlass;
-    public Toggle toggleMatchstick;
-    public Toggle toggleEntryDoc;
-    public Toggle toggleTodayList;
+    [Header("Question Buttons")]
+    public Button buttonAppearance;
+    public Button buttonMagnifyingGlass;
+    public Button buttonMatchstick;
+    public Button buttonEntryDoc;
+    public Button buttonTodayList;
+    
 
-    [Header("Buttons")]
-    public Button sendButton;     // ปุ่ม "Ask" / "Send"
 
     [Header("Dialog")]
     public DialogManager dialogManager;
@@ -25,18 +24,11 @@ public class NPCQuestionManager : MonoBehaviour
     [Header("Sound")]
     public AudioSource openPanelSource;
     public AudioSource sendSource;
-    public AudioSource toggleOnSource;
-    public AudioSource toggleOffSource;
 
     // NPC ที่กำลังถูกถามอยู่ตอนนี้
     private NPC currentAskingNPC;
-
-    private bool[] selectedQuestions = new bool[5];
-    private int[] questionOrder = new int[5];
-    private int selectedCount = 0;
-    private int currentQuestionIndex = 0;
- 
-
+    
+    
     private void Awake()
     {
         Instance = this;
@@ -47,14 +39,11 @@ public class NPCQuestionManager : MonoBehaviour
         if (askPanel != null)
             askPanel.SetActive(false);
 
-        toggleAppearance.onValueChanged.AddListener(v => SelectQuestion(0, v));
-        toggleMagnifyingGlass.onValueChanged.AddListener(v => SelectQuestion(1, v));
-        toggleMatchstick.onValueChanged.AddListener(v => SelectQuestion(2, v));
-        toggleEntryDoc.onValueChanged.AddListener(v => SelectQuestion(3, v));
-        toggleTodayList.onValueChanged.AddListener(v => SelectQuestion(4, v));
-
-        if (sendButton != null)
-            sendButton.onClick.AddListener(StartAskQuestions);
+        buttonAppearance.onClick.AddListener(() => AskQuestion(0));
+        buttonMagnifyingGlass.onClick.AddListener(() => AskQuestion(1));
+        buttonMatchstick.onClick.AddListener(() => AskQuestion(2));
+        buttonEntryDoc.onClick.AddListener(() => AskQuestion(3));
+        buttonTodayList.onClick.AddListener(() => AskQuestion(4));
     }
 
 
@@ -68,6 +57,13 @@ public class NPCQuestionManager : MonoBehaviour
     public void TryOpenQuestionPanel(GameObject npcObject)
     {
         if (GameManager.Instance == null)
+            return;
+        
+        // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
+        if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)
+            return;
+        
+        if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
             return;
         
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
@@ -129,7 +125,6 @@ public class NPCQuestionManager : MonoBehaviour
     private void OpenPanel()
     {
         Debug.Log("[" + Time.frameCount + "] OpenPanel เรียก");
-        ResetSelection();
 
         if (askPanel != null)
             askPanel.SetActive(true);
@@ -145,110 +140,39 @@ public class NPCQuestionManager : MonoBehaviour
 
     }
 
+    
 
     // =====================================================
-    // เลือกหัวข้อที่จะถาม
+    // กด text ข้อไหน → ถามข้อนั้นทันที
     // =====================================================
 
-    private void SelectQuestion(int index, bool isOn)
+    private void AskQuestion(int questionIndex)
     {
-        if (index < 0 || index >= 5)
-            return;
-
-        selectedQuestions[index] = isOn;
-        
-        if (isOn)
-            PlaySound(toggleOnSource);
-        else
-            PlaySound(toggleOffSource);
-    }
-
-
-    // =====================================================
-    // กดปุ่ม Ask / Send
-    // =====================================================
-
-    public void StartAskQuestions()
-    {
-        if (currentAskingNPC == null)
+        if (currentAskingNPC == null || currentAskingNPC.data == null)
         {
             Debug.LogWarning("ยังไม่มี NPC ที่กำลังถาม");
             return;
         }
 
-        selectedCount = 0;
-
-        for (int i = 0; i < 5; i++)
-        {
-            if (selectedQuestions[i])
-            {
-                questionOrder[selectedCount] = i;
-                selectedCount++;
-            }
-        }
-
-        if (selectedCount == 0)
-        {
-            Debug.Log("ยังไม่ได้เลือกหัวข้อคำถาม");
-            return;
-        }
-
-        currentQuestionIndex = 0;
-
-        PlaySound(sendSource);
-
-        // ปิดแผงเลือกหัวข้อทันทีตามที่ต้องการ
-        // (ผู้เล่นคลิก NPC ใหม่เองถ้าอยากถามรอบถัดไป)
-        ClosePanel();
-
-        AskNextQuestion();
-    }
-
-
-    // =====================================================
-    // ถามทีละข้อ ผ่าน DialogManager
-    // =====================================================
-
-    private void AskNextQuestion()
-    {
-        if (currentAskingNPC == null || currentAskingNPC.data == null)
-        {
-            currentAskingNPC = null;
-            return;
-        }
-
-        if (currentQuestionIndex >= selectedCount)
-        {
-            Debug.Log("ถามครบทุกข้อที่เลือกแล้ว");
-            currentAskingNPC = null;
-            return;
-        }
-
-        int questionIndex = questionOrder[currentQuestionIndex];
-
         if (currentAskingNPC.data.checkQuestions == null ||
             questionIndex >= currentAskingNPC.data.checkQuestions.Length)
         {
-            currentQuestionIndex++;
-            AskNextQuestion();
             return;
         }
 
         string question = currentAskingNPC.data.checkQuestions[questionIndex];
 
         if (string.IsNullOrWhiteSpace(question))
-        {
-            currentQuestionIndex++;
-            AskNextQuestion();
             return;
-        }
 
         if (dialogManager == null)
         {
             Debug.LogError("NPCQuestionManager ไม่มี DialogManager");
             return;
         }
-        
+
+        PlaySound(sendSource);
+
         NPCMouthAnimation mouth = currentAskingNPC.GetComponentInChildren<NPCMouthAnimation>();
         if (mouth != null)
         {
@@ -259,6 +183,9 @@ public class NPCQuestionManager : MonoBehaviour
             Debug.LogWarning("NPC " + currentAskingNPC.data.npcName + " ไม่มี NPCMouthAnimation");
         }
 
+        // ปิดแผงทันที ผู้เล่นคลิก NPC ใหม่เองถ้าอยากถามข้ออื่นต่อ
+        ClosePanel();
+
         dialogManager.StartChecklistDialog(
             currentAskingNPC.data.npcName,
             question
@@ -267,48 +194,14 @@ public class NPCQuestionManager : MonoBehaviour
 
 
     // =====================================================
-    // DialogManager เรียกกลับตอน dialog คำถาม (DialogType.Checklist)
-    // ข้อนึงจบแล้ว
+    // DialogManager เรียกกลับตอน dialog คำถามจบ
     // =====================================================
 
     public void AskDialogFinished()
     {
-        currentQuestionIndex++;
-
-        if (currentQuestionIndex < selectedCount)
-        {
-            AskNextQuestion();
-        }
-        else
-        {
-            Debug.Log("ถามคำถามครบทุกข้อในรอบนี้แล้ว");
-            currentAskingNPC = null;
-        }
+        currentAskingNPC = null;
     }
-
-
-    // =====================================================
-    // RESET
-    // =====================================================
-
-    private void ResetSelection()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            selectedQuestions[i] = false;
-            questionOrder[i] = 0;
-        }
-
-        selectedCount = 0;
-        currentQuestionIndex = 0;
-        
-        toggleAppearance.SetIsOnWithoutNotify(false);
-        toggleMagnifyingGlass.SetIsOnWithoutNotify(false);
-        toggleMatchstick.SetIsOnWithoutNotify(false);
-        toggleEntryDoc.SetIsOnWithoutNotify(false);
-        toggleTodayList.SetIsOnWithoutNotify(false);
-    }
-
+    
 
     private void PlaySound(AudioSource source)
     {

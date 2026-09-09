@@ -7,6 +7,13 @@ public class DocumentButton : MonoBehaviour
 
     public void OpenDocument()
     {
+        // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
+        if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)
+            return;
+
+        if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+
         if (GameManager.Instance.currentNPC == null) return;
 
         NPC npc = GameManager.Instance.currentNPC.GetComponent<NPC>();

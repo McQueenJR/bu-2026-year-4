@@ -170,6 +170,13 @@ public class ChecklistManager : MonoBehaviour
             return;
         }
         
+        // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
+        if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)
+            return;
+        
+        if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+        
         if (GameManager.Instance.isPoliceSequenceActive)
         {
             Debug.Log("กำลังอยู่ระหว่างเรียกตำรวจ เปิด Checklist ไม่ได้ตอนนี้");
