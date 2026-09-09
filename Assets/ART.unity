@@ -7590,7 +7590,7 @@ MonoBehaviour:
   bagManager: {fileID: 0}
   typeSpeed: 0.03
   voiceAudioSource: {fileID: 766519929}
-  voiceClip: {fileID: 8300000, guid: e67b883434de2bc42a6e19ff44e18391, type: 3}
+  voiceClip: {fileID: 8300000, guid: 51043a1a4caf035439f1a8b436b57613, type: 3}
   voiceVolume: 1
 --- !u!82 &766519929
 AudioSource:
@@ -7603,7 +7603,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3586011935849827654, guid: b563ea6a57e56ae4ea967264d6b9668f, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: e67b883434de2bc42a6e19ff44e18391, type: 3}
+  m_Resource: {fileID: 8300000, guid: 51043a1a4caf035439f1a8b436b57613, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
