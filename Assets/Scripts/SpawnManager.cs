@@ -20,7 +20,7 @@ public class NPCRole
 
     // จำ prefab ตัวล่าสุดที่สปาวไปของ role นี้ กันไม่ให้ออกซ้ำติดกัน
     [System.NonSerialized]
-    public GameObject lastSpawnedPrefab;
+    public HashSet<GameObject> usedPrefabsToday = new HashSet<GameObject>();
     
     
 }
@@ -44,16 +44,6 @@ public class SpawnManager : MonoBehaviour
     public List<GameObject> todayApplicants = new List<GameObject>();
 
     private int currentApplicantIndex = 0;
-    
-    [Header("กฎบังคับโจร")]
-    [Tooltip("ทุกๆ กี่ตัว ต้องมีโจรอย่างน้อย 1 ตัว")]
-    public int checkWindow = 4;
-
-    [Tooltip("จำนวนโจรขั้นต่ำในแต่ละช่วง (window)")]
-    public int minRobberInWindow = 1;
-
-    // เก็บ history ของ NPCType ที่สปาวไปแล้วในวันนี้ (เรียงตามลำดับ)
-    private List<NPCType> spawnHistory = new List<NPCType>();
     
 
     // =========================
@@ -108,23 +98,10 @@ public class SpawnManager : MonoBehaviour
     // =========================
     private NPCRole ChooseRole()
     {
-        // 1) เช็คกฎบังคับโจรก่อน
-        if (MustForceRobber())
-        {
-            NPCRole robberRole = roles.FirstOrDefault(
-                r => r.npcType == NPCType.Robber &&
-                     r.prefabs != null &&
-                     r.prefabs.Length > 0);
-
-            if (robberRole != null)
-                return robberRole;
-
-            Debug.LogWarning("ควรบังคับ Robber แต่ไม่มี Role Robber ที่ตั้ง prefab ไว้");
-        }
-
-        // 2) สุ่มแบบ Weighted ตาม % ที่ตั้งไว้
+        //สุ่มแบบ Weighted ตาม % ที่ตั้งไว้
         var validRoles = roles
             .Where(r => r.prefabs != null && r.prefabs.Length > 0)
+            .Where(r => r.prefabs.Any(p => p != null && !r.usedPrefabsToday.Contains(p))) 
             .ToList();
 
         float totalWeight = validRoles.Sum(r => r.spawnChance);
@@ -146,28 +123,6 @@ public class SpawnManager : MonoBehaviour
         return validRoles.LastOrDefault();
     }
 
-    // เช็คว่ารอบนี้ต้องบังคับ Robber หรือไม่
-    // กฎ: ทุกๆ checkWindow ตัว ต้องมี Robber อย่างน้อย minRobberInWindow ตัว
-    private bool MustForceRobber()
-    {
-        if (checkWindow <= 0)
-            return false;
-
-        int nextSpawnNumber = spawnHistory.Count + 1;
-
-        // เช็คเฉพาะตอนที่กำลังจะครบรอบ (ตัวที่ 4, 8, 12, ...)
-        if (nextSpawnNumber % checkWindow != 0)
-            return false;
-
-        int windowStart = spawnHistory.Count - (checkWindow - 1);
-        if (windowStart < 0) windowStart = 0;
-
-        var window = spawnHistory.Skip(windowStart).Take(checkWindow - 1);
-
-        int robberCountInWindow = window.Count(t => t == NPCType.Robber);
-
-        return robberCountInWindow < minRobberInWindow;
-    }
 
     // =========================
     // เลือก PREFAB ใน ROLE
@@ -175,20 +130,18 @@ public class SpawnManager : MonoBehaviour
     private GameObject ChoosePrefabFromRole(NPCRole role)
     {
         List<GameObject> available = role.prefabs
-            .Where(p => p != null)
+            .Where(p => p != null && !role.usedPrefabsToday.Contains(p))
             .ToList();
 
-        // ตัด prefab ตัวล่าสุดออก กันไม่ให้ออกซ้ำติดกัน (ถ้ามีตัวเลือกมากกว่า 1)
-        if (role.lastSpawnedPrefab != null && available.Count > 1)
-        {
-            available.Remove(role.lastSpawnedPrefab);
-        }
 
         if (available.Count == 0)
             return null;
 
         int index = Random.Range(0, available.Count);
-        return available[index];
+        GameObject chosen = available[index];
+        role.usedPrefabsToday.Add(chosen);
+        return chosen;
+        
     }
 
     // =========================
@@ -201,14 +154,7 @@ public class SpawnManager : MonoBehaviour
             spawnPoint.position,
             Quaternion.identity
         );
-
-        if (role != null)
-        {
-            role.lastSpawnedPrefab = prefab;
-            spawnHistory.Add(role.npcType);
-        }
-
-        gameManager.currentNPC = npc;
+        
         gameManager.currentState = GameManager.NPCState.WalkingToCheckpoint;
 
         NPCMovement movement = npc.GetComponent<NPCMovement>();
@@ -226,50 +172,54 @@ public class SpawnManager : MonoBehaviour
     {
         todayApplicants.Clear();
         currentApplicantIndex = 0;
+        foreach (var role in roles)
+            role.usedPrefabsToday.Clear();
 
-        List<NPCData> todayData = new List<NPCData>();
-        HashSet<GameObject> usedPrefabs = new HashSet<GameObject>();
-        
+        // ⭐ เก็บเป็นคู่ (prefab, data) เพื่อ shuffle พร้อมกันแบบไม่หลุด sync
+        List<(GameObject prefab, NPCData data)> todayPairs = new List<(GameObject, NPCData)>();
 
-        for (int i = 0; i < gameManager.npcPerDay; i++)
+        int safety = 0;
+        int maxSafety = gameManager.npcPerDay * 20;
+
+        while (todayPairs.Count < gameManager.npcPerDay && safety < maxSafety)
         {
-            NPCRole role = ChooseRole();
-            GameObject prefab = ChoosePrefabFromRole(role);
+            safety++;
 
+            NPCRole role = ChooseRole();
+            if (role == null)
+                break;
+
+            GameObject prefab = ChoosePrefabFromRole(role);
             if (prefab == null)
                 continue;
-            
-            if (usedPrefabs.Contains(prefab))
-                continue;
 
-            usedPrefabs.Add(prefab);
-
-
-            // เก็บ Prefab สำหรับ Spawn จริง
-            todayApplicants.Add(prefab);
-
-            // เก็บ NPCData สำหรับ Today List
             NPC npc = prefab.GetComponent<NPC>();
-            if (npc != null && npc.data != null)
-            {
-                todayData.Add(npc.data);
-                Debug.Log("Today NPC : " + npc.data.npcName);
-            }
+            NPCData data = (npc != null) ? npc.data : null;
 
-            // ใช้ history แค่ตอนสุ่มวันนี้
-            role.lastSpawnedPrefab = prefab;
-            spawnHistory.Add(role.npcType);
+            todayPairs.Add((prefab, data));
+        }
+
+        // ⭐ สุ่มลำดับการมาอีกที (Fisher–Yates shuffle)
+        for (int i = todayPairs.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (todayPairs[i], todayPairs[j]) = (todayPairs[j], todayPairs[i]);
+        }
+
+        // แยกกลับเป็น 2 list ตามลำดับใหม่ที่ shuffle แล้ว
+        List<NPCData> todayData = new List<NPCData>();
+        foreach (var pair in todayPairs)
+        {
+            todayApplicants.Add(pair.prefab);
+            if (pair.data != null)
+            {
+                todayData.Add(pair.data);
+                Debug.Log("Today NPC : " + pair.data.npcName);
+            }
         }
 
         Debug.Log("สุ่ม NPC วันนี้ทั้งหมด = " + todayData.Count);
 
-        // รีเซ็ต history หลังสุ่มเสร็จ
-        spawnHistory.Clear();
-
-        foreach (var role in roles)
-            role.lastSpawnedPrefab = null;
-
-        // ส่งไปสร้าง Today List
         if (todayListManager != null)
         {
             todayListManager.GenerateTodayList(todayData);
@@ -279,15 +229,6 @@ public class SpawnManager : MonoBehaviour
             Debug.LogError("TodayListManager ยังไม่ได้ใส่ใน SpawnManager");
         }
     }
-
-    // =========================
-    // เรียกตอนขึ้นวันใหม่ เพื่อรีเซ็ต history
-    // =========================
-    public void ResetHistory()
-    {
-        spawnHistory.Clear();
-
-        foreach (var role in roles)
-            role.lastSpawnedPrefab = null;
-    }
+    
+    
 }

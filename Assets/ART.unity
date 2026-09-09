@@ -9366,15 +9366,21 @@ MonoBehaviour:
     npcType: 1
     spawnChance: 30.2
     prefabs:
+    - {fileID: 609683202770183612, guid: b6235ca5a23560345930f8b9c3b9a4b8, type: 3}
+    - {fileID: 4516521795484292953, guid: 6dfc33a179e83a649924af6796803990, type: 3}
     - {fileID: 2083295734745886584, guid: 17831afda2b57c347b626e212886de03, type: 3}
+    - {fileID: 7826912195225827764, guid: 8009f1a87b28f19408628892e85087b8, type: 3}
+    - {fileID: 2175457328634468189, guid: fefd9bc5c51dcac4e919014ad4182108, type: 3}
     - {fileID: 4735287917786521808, guid: 56e8d8ddb339fed4e88c9069a151755f, type: 3}
+    - {fileID: 947727555767222509, guid: e0a269f18d601f04e99bbb4c9b4bc43a, type: 3}
+    - {fileID: 5732943905157268380, guid: 8340cb35c53b378449ea5708d0926473, type: 3}
+    - {fileID: 6134953775173375829, guid: 3cbd7df5e3803a645a4e36361e6c0c03, type: 3}
+    - {fileID: 544997767607268783, guid: 39c6d33e6c9755040acc172559e52356, type: 3}
   spawnPoint: {fileID: 1783206952}
   stopPoint: {fileID: 2134447594}
   gameManager: {fileID: 1304983901}
   todayListManager: {fileID: 676843101}
   todayApplicants: []
-  checkWindow: 4
-  minRobberInWindow: 1
 --- !u!4 &947236654
 Transform:
   m_ObjectHideFlags: 0

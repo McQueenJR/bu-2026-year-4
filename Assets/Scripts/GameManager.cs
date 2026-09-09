@@ -536,8 +536,7 @@ public class GameManager : MonoBehaviour
         // เคลียร์ NPC ค้าง (กันเหนียว เผื่อมี object หลงเหลือ)
         currentNPC = null;
         currentState = NPCState.WalkingToCheckpoint;
-
-        spawner.ResetHistory();              
+        
         spawner.GenerateTodayApplicants();   
         spawner.SpawnNPC();     
         

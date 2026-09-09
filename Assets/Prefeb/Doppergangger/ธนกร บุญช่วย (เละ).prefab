@@ -220,7 +220,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7814765690185103239, guid: 6a2d0a49e4ee28843ac03d35035f3c20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb00b7e6213de4d4aa15e3ecc66c1158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  npcType: 0
+  npcType: 1
   data: {fileID: 11400000, guid: f5affd6b78b565140898bcd1478816d7, type: 2}
 --- !u!114 &1667472207342864691
 MonoBehaviour:
@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 39400576350088975}
   m_Layer: 0
   m_Name: "\u0E1B\u0E32\u0E01_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Face
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1981,7 +1981,7 @@ GameObject:
   - component: {fileID: 473176197757150896}
   m_Layer: 0
   m_Name: "\u0E1C\u0E21_0"
-  m_TagString: Untagged
+  m_TagString: XRay_Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
