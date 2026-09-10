@@ -830,11 +830,11 @@ PrefabInstance:
       objectReference: {fileID: -3563179199658230996, guid: d9fa0374653269e42892db3cc8adf2a5, type: 3}
     - target: {fileID: 1176934621693335239, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.28291
+      value: -0.4828
       objectReference: {fileID: 0}
     - target: {fileID: 1176934621693335239, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.65488
+      value: 1.43335
       objectReference: {fileID: 0}
     - target: {fileID: 1176934621693335239, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalPosition.z
@@ -880,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 3668117835832673677, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5771997419103296074, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.085
@@ -902,8 +902,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1176934621693335239, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4947904651437040895}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2216390078516856973, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3786728649598969082}
   m_SourcePrefab: {fileID: 100100000, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+--- !u!1 &6271494005696589984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2216390078516856973, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+  m_PrefabInstance: {fileID: 5317310364109240365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3786728649598969082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271494005696589984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12dee38520f09846906fd272d3f0fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomBlendModes.SpriteBlendingMode
+  blendMode: 2
 --- !u!4 &6458072079707680490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1176934621693335239, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
