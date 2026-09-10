@@ -29,8 +29,8 @@ public class EndDayUI : MonoBehaviour
         
         villagerPassedText.text = "ชาวบ้านเข้าหมู่บ้าน : " + villagerPassed + " คน";
         villagerArrestedText.text = "ชาวบ้านโดนจับ : " + villagerArrested + " คน";
-        robberPassedText.text = "โจรเข้าหมู่บ้าน : " + robberPassed + " คน";
-        robberArrestedText.text = "โจรโดนจับ : " + robberArrested + " คน";
+        robberPassedText.text = "ผีเข้าหมู่บ้าน : " + robberPassed + " คน";
+        robberArrestedText.text = "ผีโดนจับ : " + robberArrested + " คน";
 
         rankText.text = "แรงค์ : " + GetRank(score);
     }

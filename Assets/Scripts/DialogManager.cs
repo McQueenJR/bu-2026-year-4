@@ -12,6 +12,7 @@ public class DialogManager : MonoBehaviour
     public BagManager bagManager;
     
     // NPC ที่กำลังพูดอยู่
+    // NPC ที่กำลังพูดอยู่
     private NPCMouthAnimation currentMouth;
     
     private string[] dialogs;
@@ -29,6 +30,12 @@ public class DialogManager : MonoBehaviour
 
     // true = กำลังพิมพ์ข้อความอยู่
     private bool isTyping = false;
+    
+    [Header("Close Delay")]
+    [SerializeField] private float closeDelay = 0.5f;
+    
+    private bool canClose = false;
+    private Coroutine closeDelayCoroutine;
 
 
     // =====================================================
@@ -312,6 +319,13 @@ public class DialogManager : MonoBehaviour
             typewriterCoroutine = null;
         }
 
+        if (closeDelayCoroutine != null)
+        {
+            StopCoroutine(closeDelayCoroutine);
+            closeDelayCoroutine = null;
+        }
+        canClose = false;
+        
         isTyping = true;
 
         // ตรวจว่าข้อความนี้เป็นข้อความแรกหรือไม่
@@ -369,6 +383,21 @@ public class DialogManager : MonoBehaviour
             SkipTypewriter();
             return;
         }
+    }
+
+    public void OnConfirmButton()
+    {
+        if (isTyping)
+        {
+            SkipTypewriter();
+                return;
+        }
+
+        if (!canClose)
+        {
+            return;
+        }
+        CloseDialog();
     }
 
 
@@ -498,9 +527,23 @@ public class DialogManager : MonoBehaviour
             currentMouth.StopTalking();
         }
 
+        if (closeDelayCoroutine != null)
+        {
+            StopCoroutine(closeDelayCoroutine);
+        }
+        closeDelayCoroutine = StartCoroutine(EnableCloseAfterDelay());
+
         // =================================================
         // อนาคตสามารถใส่ระบบปากตรงนี้
         // =================================================
+    }
+
+    private IEnumerator EnableCloseAfterDelay()
+    {
+        canClose = false;
+        yield return new WaitForSeconds(closeDelay);
+        canClose = true;
+        closeDelayCoroutine = null;
     }
 
 

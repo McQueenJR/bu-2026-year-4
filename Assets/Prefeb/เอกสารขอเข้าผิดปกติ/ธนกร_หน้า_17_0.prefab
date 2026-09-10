@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2886208241603063489}
   - component: {fileID: 7270872678200767211}
-  - component: {fileID: 7947086351426469409}
   - component: {fileID: 5252187762309861125}
+  - component: {fileID: 1755298208423285890}
   m_Layer: 0
   m_Name: "\u0E18\u0E19\u0E01\u0E23_\u0E2B\u0E19\u0E49\u0E32_17_0"
   m_TagString: Untagged
@@ -93,7 +93,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &7947086351426469409
+--- !u!114 &5252187762309861125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8255467576396695883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bbc2e8491cf0149a5b48f11b174d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DocumentDisplayClick
+  clampToBoundary: 0
+  dragBoundary: {fileID: 0}
+--- !u!61 &1755298208423285890
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +141,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 1.8578458, y: -0.06557155}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -137,19 +151,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 6.391795, y: 9.007727}
   m_EdgeRadius: 0
---- !u!114 &5252187762309861125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8255467576396695883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2bbc2e8491cf0149a5b48f11b174d4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DocumentDisplayClick
-  clampToBoundary: 0
-  dragBoundary: {fileID: 0}
