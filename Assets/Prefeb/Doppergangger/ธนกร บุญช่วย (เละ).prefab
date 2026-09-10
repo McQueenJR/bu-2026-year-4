@@ -815,7 +815,6 @@ GameObject:
   m_Component:
   - component: {fileID: 63596967202524688}
   - component: {fileID: 578739486813755722}
-  - component: {fileID: 3954396117428918291}
   - component: {fileID: 39400576350088975}
   m_Layer: 0
   m_Name: "\u0E1B\u0E32\u0E01_0"
@@ -865,7 +864,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -898,19 +897,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3954396117428918291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5084571764164917019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d12dee38520f09846906fd272d3f0fdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CustomBlendModes.SpriteBlendingMode
-  blendMode: 2
 --- !u!95 &39400576350088975
 Animator:
   serializedVersion: 7

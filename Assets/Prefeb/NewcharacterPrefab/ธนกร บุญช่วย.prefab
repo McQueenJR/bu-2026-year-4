@@ -739,7 +739,6 @@ GameObject:
   - component: {fileID: 819550894351903585}
   - component: {fileID: 3668117835832673677}
   - component: {fileID: 4698578689015097032}
-  - component: {fileID: 5743819166904598039}
   m_Layer: 0
   m_Name: "\u0E1B\u0E32\u0E01"
   m_TagString: XRay_Face
@@ -788,7 +787,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -843,19 +842,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5743819166904598039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2216390078516856973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d12dee38520f09846906fd272d3f0fdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CustomBlendModes.SpriteBlendingMode
-  blendMode: 2
 --- !u!1 &2925097997472328337
 GameObject:
   m_ObjectHideFlags: 0
