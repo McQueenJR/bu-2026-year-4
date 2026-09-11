@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 5d46b94cfad2ef24db12d470c7221fd1
+guid: b2cc549b88e138f439432902f46c4cd7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3618340029745673461
-    second: "\u0E01\u0E23\u0E30\u0E14\u0E38\u0E01\u0E41\u0E02\u0E19_0"
+      213: -1714158746829707317
+    second: "BG \u0E41\u0E02\u0E19_0"
   - first:
-      213: -6734788806798660648
-    second: "\u0E01\u0E23\u0E30\u0E14\u0E38\u0E01\u0E41\u0E02\u0E19_1"
+      213: -8239266506675138723
+    second: "BG \u0E41\u0E02\u0E19_1"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0E01\u0E23\u0E30\u0E14\u0E39\u0E01\u0E41\u0E02\u0E19 \u0E02\u0E49\u0E32\u0E07\u0E40\u0E14\u0E35\u0E22\u0E27_0"
+      name: "BG \u0E41\u0E02\u0E19 1_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -118,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 591c4d5a6ea7ea44b809e9402b74502a
-      internalID: 934060082
+      spriteID: 4262aaf4592d5aa4bb4bf1399540db01
+      internalID: -1937682009
       vertices: []
       indices: 
       edges: []
@@ -128,7 +128,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 304ab75a0921234409971fecddf65b4e
+    spriteID: 0ec5c9a7b23cb7942bdf4ef199161276
     internalID: 0
     vertices: []
     indices: 
@@ -140,7 +140,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1920.0,"y":1080.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      "\u0E01\u0E23\u0E30\u0E14\u0E39\u0E01\u0E41\u0E02\u0E19 \u0E02\u0E49\u0E32\u0E07\u0E40\u0E14\u0E35\u0E22\u0E27_0": 934060082
+      "BG \u0E41\u0E02\u0E19 1_0": -1937682009
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
