@@ -66,9 +66,15 @@ public class TodayListManager : MonoBehaviour
             display.RefreshSpriteCache();
     }
 
-    // เรียกจากตอนผู้เล่นคลิกไอคอน — แค่เปิด popup มี 3 เงื่อนไขป้องกัน
     public void OpenTodayList()
     {
+        // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
+        if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)
+            return;
+
+        if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+
         if (GameManager.Instance != null)
         {
             if (GameManager.Instance.isPoliceSequenceActive)

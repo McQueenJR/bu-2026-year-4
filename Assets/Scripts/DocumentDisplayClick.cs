@@ -88,6 +88,9 @@ public class DocumentDisplayClick : MonoBehaviour
         // คลิกขวา → ปิด popup เอกสาร
         if (Input.GetMouseButtonDown(1))
         {
+            if (NPCSoundManager.Instance != null)
+                NPCSoundManager.Instance.PlayDocumentClose();
+
             if (DocumentPopupManager.Instance != null)
                 DocumentPopupManager.Instance.Close();
         }

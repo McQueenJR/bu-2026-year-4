@@ -10,6 +10,7 @@ public class ChecklistManager : MonoBehaviour
 
     [Header("Checklist Sounds")]
     public AudioSource openChecklistSound;
+    public AudioSource closeChecklistSound;
     public AudioSource submitSound;
     public AudioSource toggleOnSound;
     public AudioSource toggleOffSound;
@@ -317,6 +318,8 @@ public class ChecklistManager : MonoBehaviour
             checklistPanel.SetActive(false);
 
         DraggableSortOrder.NotifyClosed();
+        
+        PlaySound(closeChecklistSound);
 
         currentNPC = null;
     }

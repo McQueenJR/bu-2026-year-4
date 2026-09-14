@@ -3,7 +3,13 @@ using UnityEngine;
 public class NPCSoundManager : MonoBehaviour
 {
     public static NPCSoundManager Instance;
+
+    [Header("WALK")]
     public AudioSource walkAudioSource;
+    
+    [Header("DOCUMENT")]
+    public AudioSource documentOpenSource;
+    public AudioSource documentCloseSource;
 
     private int walkingCount = 0;
 
@@ -27,4 +33,17 @@ public class NPCSoundManager : MonoBehaviour
         if (walkingCount == 0 && walkAudioSource != null)
             walkAudioSource.Stop();
     }
+    
+    public void PlayDocumentOpen()
+    {
+        if (documentOpenSource != null)
+            documentOpenSource.Play();
+    }
+
+    public void PlayDocumentClose()
+    {
+        if (documentCloseSource != null)
+            documentCloseSource.Play();
+    }
+    
 }

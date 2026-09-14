@@ -15,6 +15,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
   npcName: "\u0E18\u0E19\u0E01\u0E23 \u0E1A\u0E38\u0E0D\u0E0A\u0E48\u0E27\u0E22"
   age: 34
+  voiceType: 0
   dialogs:
   - (*&$^%#@*^%#
   bagItems:

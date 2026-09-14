@@ -6,6 +6,7 @@ public class NPCData : ScriptableObject
     [Header("Character")]
     public string npcName;
     public int age;
+    public NpcVoiceType voiceType = NpcVoiceType.None;
 
     [Header("Dialog")]
     [TextArea(2, 5)]

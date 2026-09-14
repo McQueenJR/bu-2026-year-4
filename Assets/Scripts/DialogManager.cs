@@ -45,13 +45,27 @@ public class DialogManager : MonoBehaviour
     [Header("Dialog Sound")]
     [SerializeField] private AudioSource voiceAudioSource;
 
-    // เสียงพูดของตัวละคร
-    [SerializeField] private AudioClip voiceClip;
+    // เสียงสำรอง ใช้ตอนไม่มี NPCData (Simple/Checklist) หรือหา voiceType ไม่เจอในคลัง
+    [SerializeField] private AudioClip defaultVoiceClip;
 
     // ระดับเสียง
     [SerializeField, Range(0f, 1f)]
     private float voiceVolume = 1f;
+    
+    // คู่เชื่อม Voice Type กับ AudioClip แต่ละแบบ
+    [System.Serializable]
+    public class VoiceClipEntry
+    {
+        public NpcVoiceType voiceType;
+        public AudioClip clip;
+    }
 
+    // คลังเสียง เพิ่มชนิดใหม่ได้เรื่อยๆ ผ่าน Inspector
+    [Header("Voice Library")]
+    [SerializeField] private VoiceClipEntry[] voiceClips;
+    
+    // NPCData ของตัวที่กำลังพูดอยู่ ใช้หา voiceType
+    private NPCData currentNpcData;
 
     // =====================================================
     // DIALOG POSITION
@@ -132,6 +146,8 @@ public class DialogManager : MonoBehaviour
     {
         if (data == null)
             return;
+        
+        currentNpcData = data;
 
         currentDialogType = DialogType.Normal;
 
@@ -158,6 +174,8 @@ public class DialogManager : MonoBehaviour
     {
         if (data == null)
             return;
+        
+        currentNpcData = data;
 
         currentDialogType = DialogType.Green;
 
@@ -183,6 +201,8 @@ public class DialogManager : MonoBehaviour
     {
         if (data == null)
             return;
+        
+        currentNpcData = data;
 
         currentDialogType = DialogType.Red;
 
@@ -222,6 +242,8 @@ public class DialogManager : MonoBehaviour
 
             return;
         }
+        
+        currentNpcData = data;
 
         currentDialogType = DialogType.Emergency;
 
@@ -278,6 +300,8 @@ public class DialogManager : MonoBehaviour
 
             return;
         }
+        
+        currentNpcData = null;
 
         currentDialogType = DialogType.Checklist;
 
@@ -646,10 +670,12 @@ public class DialogManager : MonoBehaviour
         if (voiceAudioSource == null)
             return;
 
-        if (voiceClip == null)
+        AudioClip clip = GetVoiceClipForCurrentNPC();
+        
+        if (clip == null)
             return;
-
-        voiceAudioSource.clip = voiceClip;
+        
+        voiceAudioSource.clip = clip;
         voiceAudioSource.volume = voiceVolume;
 
         // ให้เสียงวนระหว่างที่ Dialog กำลังแสดง
@@ -657,7 +683,21 @@ public class DialogManager : MonoBehaviour
 
         voiceAudioSource.Play();
     }
+    // เลือกคลิปเสียงจากคลัง ตาม voiceType ของ NPC ที่กำลังพูด
+    private AudioClip GetVoiceClipForCurrentNPC()
+    {
+        // ไม่มี NPCData (Simple/Checklist) → ใช้เสียงสำรอง
+        if (currentNpcData == null)
+            return defaultVoiceClip;
 
+        foreach (var entry in voiceClips)
+        {
+            if (entry.voiceType == currentNpcData.voiceType)
+                return entry.clip;
+        }
+        // ไม่เจอ type ที่ตรงกันในคลัง → fallback
+        return defaultVoiceClip;
+    }
 
     // =====================================================
     // STOP VOICE

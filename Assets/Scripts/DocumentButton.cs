@@ -4,7 +4,7 @@ public class DocumentButton : MonoBehaviour
 {
     private GameObject currentDocument;
     public GameObject documentPopup;
-
+    
     public void OpenDocument()
     {
         // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
@@ -30,6 +30,9 @@ public class DocumentButton : MonoBehaviour
         );
         
         DocumentPopupManager.Instance.Open(npc.data.applicantPhotoPrefab);
+        
+        if (NPCSoundManager.Instance != null)
+            NPCSoundManager.Instance.PlayDocumentOpen();
     }
 
     public void CloseDocument()
@@ -39,5 +42,9 @@ public class DocumentButton : MonoBehaviour
             Destroy(currentDocument);
             currentDocument = null;
         }
+        
+        if (NPCSoundManager.Instance != null)
+            NPCSoundManager.Instance.PlayDocumentClose();
+        
     }
 }
