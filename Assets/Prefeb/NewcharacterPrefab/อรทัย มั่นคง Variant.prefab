@@ -264,7 +264,7 @@ SpriteRenderer:
   m_SortingLayerID: 87016409
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_Sprite: {fileID: 2030362344941826669, guid: 78158238a3186b7449d7738c15dffd47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -480,7 +480,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 936554571
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3618340029745673461, guid: bb4a7c032d84a5b4d8688cd00a2fc7ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -835,6 +835,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.029658
       objectReference: {fileID: 0}
+    - target: {fileID: 380112634194669921, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 380112634194669921, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 380112634194669921, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 936554571
+      objectReference: {fileID: 0}
     - target: {fileID: 558203183139931358, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.73855925
@@ -932,10 +944,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2201358220216057272, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201358220216057272, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201358220216057272, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 936554571
+      objectReference: {fileID: 0}
     - target: {fileID: 3879257640208842936, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 6550224175216089606, guid: 4ab14f2c176472f4fa2ed28645f99f9d, type: 3}
+    - target: {fileID: 4189991784570075530, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189991784570075530, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189991784570075530, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 936554571
+      objectReference: {fileID: 0}
     - target: {fileID: 4273948720196144906, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -948,6 +984,30 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1920247156810515429, guid: 676a3b17906584c4ea2e38bb162924cd, type: 3}
+    - target: {fileID: 5068878383469765208, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068878383469765208, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068878383469765208, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 936554571
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223305415642773831, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223305415642773831, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223305415642773831, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 936554571
+      objectReference: {fileID: 0}
     - target: {fileID: 5604811342339616944, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.61877805
@@ -987,6 +1047,18 @@ PrefabInstance:
     - target: {fileID: 6139018440551916917, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Offset.y
       value: 0.7324984
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454767735197458604, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454767735197458604, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454767735197458604, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 936554571
       objectReference: {fileID: 0}
     - target: {fileID: 6790542331066266305, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Sprite
@@ -1051,6 +1123,14 @@ PrefabInstance:
     - target: {fileID: 8185283696382630133, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.4044491
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305438267422658439, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: breathingSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305438267422658439, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: breathingAmount
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8330870920992204109, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Sprite
