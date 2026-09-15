@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "Talking\u0E0A\u0E32\u0E0D"
+  m_Name: "Talking\u0E2A\u0E21\u0E2B\u0E21\u0E32\u0E22"
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 2030362344941826669, guid: c6d64433bb840814eb2ac294ed8ac6b3, type: 3}
+      value: {fileID: 2030362344941826669, guid: da346890493ea6c4696799f4ec381581, type: 3}
     - time: 0.06666667
-      value: {fileID: 2717919221109400055, guid: f0c308583913ffd4bbf9fd7df18408ba, type: 3}
+      value: {fileID: 2717919221109400055, guid: 8f41d04994cf2ac4aac63b5f6dc4b3bb, type: 3}
     - time: 0.13333334
-      value: {fileID: 2030362344941826669, guid: c6d64433bb840814eb2ac294ed8ac6b3, type: 3}
+      value: {fileID: 2030362344941826669, guid: da346890493ea6c4696799f4ec381581, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,9 +48,9 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 2030362344941826669, guid: c6d64433bb840814eb2ac294ed8ac6b3, type: 3}
-    - {fileID: 2717919221109400055, guid: f0c308583913ffd4bbf9fd7df18408ba, type: 3}
-    - {fileID: 2030362344941826669, guid: c6d64433bb840814eb2ac294ed8ac6b3, type: 3}
+    - {fileID: 2030362344941826669, guid: da346890493ea6c4696799f4ec381581, type: 3}
+    - {fileID: 2717919221109400055, guid: 8f41d04994cf2ac4aac63b5f6dc4b3bb, type: 3}
+    - {fileID: 2030362344941826669, guid: da346890493ea6c4696799f4ec381581, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
