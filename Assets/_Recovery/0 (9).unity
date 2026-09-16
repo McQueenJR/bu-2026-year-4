@@ -9333,30 +9333,9 @@ MonoBehaviour:
     npcType: 0
     spawnChance: 70
     prefabs:
-    - {fileID: 4050511452626198979, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
-    - {fileID: 9212593438457314374, guid: 2b03dcbe68d7ec445934359aa7022529, type: 3}
-  - roleName: Vill
-    npcType: 0
-    spawnChance: 70
-    prefabs:
     - {fileID: 672807511211730892, guid: 5929c609b0a054048a37e38fbc77b697, type: 3}
     - {fileID: 6873768859452820952, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
-    - {fileID: 2641298048805318647, guid: 89ae13160c576344f82450f1935694c8, type: 3}
-    - {fileID: 1801129086527023195, guid: a86d602f88005414881ee1f78200949b, type: 3}
-    - {fileID: 5659499894291387253, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
-    - {fileID: 7521192592224718049, guid: 22df88fe1c873d24ba9cc82dac6a60ce, type: 3}
-    - {fileID: 7521192592224718049, guid: 22df88fe1c873d24ba9cc82dac6a60ce, type: 3}
-  - roleName: Vill
-    npcType: 0
-    spawnChance: 70
-    prefabs:
-    - {fileID: 672807511211730892, guid: 5929c609b0a054048a37e38fbc77b697, type: 3}
-    - {fileID: 6873768859452820952, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
-    - {fileID: 2641298048805318647, guid: 89ae13160c576344f82450f1935694c8, type: 3}
-    - {fileID: 1801129086527023195, guid: a86d602f88005414881ee1f78200949b, type: 3}
-    - {fileID: 5659499894291387253, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
-    - {fileID: 7521192592224718049, guid: 22df88fe1c873d24ba9cc82dac6a60ce, type: 3}
-    - {fileID: 7521192592224718049, guid: 22df88fe1c873d24ba9cc82dac6a60ce, type: 3}
+    - {fileID: 5732223808204118176, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
   spawnPoint: {fileID: 1783206952}
   stopPoint: {fileID: 2134447594}
   gameManager: {fileID: 1304983901}
