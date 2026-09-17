@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 7577209439520253880}
   - component: {fileID: 7606896497038067107}
   m_Layer: 0
-  m_Name: "\u0E2B\u0E19\u0E49\u0E32_0 (1)"
+  m_Name: "BG\u0E2B\u0E31\u0E27"
   m_TagString: XRay_Inner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

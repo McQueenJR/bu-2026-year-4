@@ -9333,8 +9333,7 @@ MonoBehaviour:
     npcType: 0
     spawnChance: 70
     prefabs:
-    - {fileID: 4050511452626198979, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
-    - {fileID: 9212593438457314374, guid: 2b03dcbe68d7ec445934359aa7022529, type: 3}
+    - {fileID: 1548488063753413480, guid: 233fcc7e67385824d856398d6a4b5a23, type: 3}
   - roleName: Vill
     npcType: 0
     spawnChance: 70
