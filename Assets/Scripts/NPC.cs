@@ -5,13 +5,15 @@ public enum NPCType
 {
     Villager,
     Robber,
-    Monk
+    Special
 }
 
 public class NPC : MonoBehaviour
 {
     public NPCType npcType;
     public NPCData data;
+    
+    [HideInInspector] public TodayApplicant applicant;
 
     private void OnMouseUpAsButton()
     {

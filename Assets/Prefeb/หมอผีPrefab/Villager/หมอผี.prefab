@@ -1766,6 +1766,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   npcType: 0
   data: {fileID: 11400000, guid: aad1cbe2e5447384ea9f501046eb3e3c, type: 2}
+  applicant:
+    npcData: {fileID: 0}
+    displayData: {fileID: 0}
+    spawnPrefab: {fileID: 0}
+    isGood: 0
+    isInTodayList: 0
+    campID: -1
+    isAlive: 1
+    hasEnteredCamp: 0
 --- !u!4 &3061513912551609920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2230973119353925988, guid: a31f4397ff91e7249baf8b5672562337, type: 3}

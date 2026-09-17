@@ -28,7 +28,7 @@ public class NPCData : ScriptableObject
     [Header("Today List")]
     public GameObject TodayPhotoPrefab;
     
-   
+    [HideInInspector] public TodayApplicant applicant;
     
     [Header("Green Button Dialog")]
     [TextArea(2, 5)]
@@ -46,4 +46,6 @@ public class NPCData : ScriptableObject
 
     [Header("Correct Answer")]
     public bool[] correctAnswers = new bool[5];
+    
+    
 }

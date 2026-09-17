@@ -29,8 +29,9 @@ public class TodayListManager : MonoBehaviour
     // เรียกจากระบบตอนเริ่มวัน — สร้างรูป/ชื่อ ไม่มีเงื่อนไขจำกัด
     public void GenerateTodayList(List<NPCData> todayNPCs)
     {
-        if (spawnedPhotos.Count > 0)
+         if (spawnedPhotos.Count > 0)
             return;
+        ClearTodayList();
 
         for (int i = 0; i < todayNPCs.Count && i < slots.Length; i++)
         {
@@ -51,6 +52,7 @@ public class TodayListManager : MonoBehaviour
 
                 Renderer photoRenderer = photo.GetComponentInChildren<Renderer>();
                 Renderer textRenderer = nameObj.GetComponent<Renderer>();
+
                 if (photoRenderer != null && textRenderer != null)
                 {
                     textRenderer.sortingLayerID = photoRenderer.sortingLayerID;
@@ -66,14 +68,15 @@ public class TodayListManager : MonoBehaviour
             display.RefreshSpriteCache();
     }
 
+    // เรียกจากตอนผู้เล่นคลิกไอคอน — แค่เปิด popup มี 3 เงื่อนไขป้องกัน
     public void OpenTodayList()
     {
-        // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
+
         if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)
-            return;
+       return;
 
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
-            return;
+         return;
 
         if (GameManager.Instance != null)
         {

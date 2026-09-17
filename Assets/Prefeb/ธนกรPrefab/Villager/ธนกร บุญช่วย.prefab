@@ -633,6 +633,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   npcType: 0
   data: {fileID: 11400000, guid: 6563465fd5f56654986a6c76a0b31144, type: 2}
+  applicant:
+    npcData: {fileID: 0}
+    displayData: {fileID: 0}
+    spawnPrefab: {fileID: 0}
+    isGood: 0
+    isInTodayList: 0
+    campID: -1
+    isAlive: 1
+    hasEnteredCamp: 0
 --- !u!114 &7466308853699907839
 MonoBehaviour:
   m_ObjectHideFlags: 0

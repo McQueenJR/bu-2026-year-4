@@ -6,8 +6,9 @@ public class GameManager : MonoBehaviour
     private bool greenDialogTriggered = false;  
     public static GameManager Instance;
 
-    public GameObject currentNPC;
+   public GameObject currentNPC;
     public SpawnManager spawner;
+    public TodayListManager todayListManager;
 
     public Transform enterPoint;
     public Transform exitPoint;
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int currentHour;
     public int startHour = 20;
     public int endHour = 6;
+    public int npcPerDay = 8;
 
     public ClockManager clockManager;
 
@@ -78,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Day Stats")]
     public int npcProcessedCount = 0;
-    public int npcPerDay = 8;
+    //public int npcPerDay = 8;
 
     public int score = 0;
     public int villagerPassed = 0;
@@ -98,11 +100,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentHour = startHour;
-
         clockManager.SetHour(currentHour);
 
+        if (todayListManager != null)
+            todayListManager.ResetForNewDay();
+
         spawner.GenerateTodayApplicants();
-        spawner.SpawnNPC();
+        spawner.SpawnNextNPC();
     }
 
     // =========================
@@ -462,26 +466,15 @@ public class GameManager : MonoBehaviour
 
         clockManager.SetHour(currentHour);
 
-        /*Debug.Log(
-            "เวลา : " +
-            currentHour.ToString("00") +
-            ":00"); */
-
-        // จบวันเมื่อครบ 8 คน (แทนที่จะดูแค่ currentHour == endHour)
+        // จบวันเมื่อครบจำนวน NPC ของวันนี้
         if (npcProcessedCount >= npcPerDay)
         {
             EndGame();
             return;
         }
-        /*if (currentHour == endHour)
-        {
-            EndGame();
-            return;
-        }*/
-
 
         // Spawn NPC คนใหม่
-        spawner.SpawnNPC();
+        spawner.SpawnNextNPC();
     }
 
     // =========================
@@ -513,35 +506,48 @@ public class GameManager : MonoBehaviour
 
     public void StartNextDay()
     {
-        // รีเซ็ตสถิติ
+        // -------------------- รีเซ็ตคะแนน --------------------
         npcProcessedCount = 0;
         score = 0;
         villagerPassed = 0;
         villagerArrested = 0;
         robberPassed = 0;
         robberArrested = 0;
-        
-      // ★ เคลียร์คะแนน checklist ของวันเก่าทั้งหมด ไม่ให้ปนกับวันใหม่
+
+        // รีเซ็ต Checklist
         if (ChecklistManager.Instance != null)
             ChecklistManager.Instance.ResetAllChecklistScores();
-        
-        // ปิด UI สรุปผล
+
+        // ปิด UI End Day
         if (endDayUI != null)
             endDayUI.Hide();
 
-        // รีเซ็ตเวลากลับไปเริ่มต้น
+        // -------------------- รีเซ็ตเวลา --------------------
         currentHour = startHour;
         clockManager.SetHour(currentHour);
 
-        // เคลียร์ NPC ค้าง (กันเหนียว เผื่อมี object หลงเหลือ)
+        // -------------------- รีเซ็ต NPC --------------------
         currentNPC = null;
         currentState = NPCState.WalkingToCheckpoint;
+
         
-        spawner.GenerateTodayApplicants();   
-        spawner.SpawnNPC();     
-        
+        // ล้าง Today List ของวันเก่า
+        if (todayListManager != null)
+            todayListManager.ResetForNewDay();
+
+// สุ่ม NPC ของวันใหม่
+        if (spawner != null)
+        {
+            spawner.ResetToday();
+            spawner.GenerateTodayApplicants();
+            spawner.SpawnNextNPC();
+        }
+
+        // ซ่อนปุ่มเขียว/แดง
         if (GreenRedButtonManager.Instance != null)
             GreenRedButtonManager.Instance.HideDecisionButtons();
+
+        Debug.Log("===== START DAY =====");
     }
 
     private void StartPoliceDialog()
@@ -699,7 +705,7 @@ public class GameManager : MonoBehaviour
         NPC npc = npcObj.GetComponent<NPC>();
         if (npc == null) return;
 
-        bool isRobber = npc.npcType == NPCType.Robber;
+        bool isRobber = npc.npcType == NPCType.Special;
 
         if (!wasArrested)
         {

@@ -2,233 +2,343 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-[System.Serializable]
-public class NPCRole
-{
-    [Header("ชื่อ Role (แค่ให้ดูใน Inspector)")]
-    public string roleName;
-
-    [Header("ประเภท NPC ของ Role นี้")]
-    public NPCType npcType;
-
-    [Header("โอกาสสปาว (%) - ปรับได้")]
-    [Range(0f, 100f)]
-    public float spawnChance = 50f;
-
-    [Header("Prefab ที่อยู่ใน Role นี้")]
-    public GameObject[] prefabs;
-
-    // จำ prefab ตัวล่าสุดที่สปาวไปของ role นี้ กันไม่ให้ออกซ้ำติดกัน
-    [System.NonSerialized]
-    public HashSet<GameObject> usedPrefabsToday = new HashSet<GameObject>();
-    
-    
-}
-
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Roles")]
-    public NPCRole[] roles;
+    [Header("NPC Database")]
+    public AllDataPrefabNPC allData;
 
-    [Header("จุดสปาว")]
+    [Header("Spawn Point")]
     public Transform spawnPoint;
     public Transform stopPoint;
 
-    [Header("อ้างอิง GameManager")]
+    [Header("References")]
     public GameManager gameManager;
-
-    [Header("Today List")]
     public TodayListManager todayListManager;
 
-// เก็บ Prefab NPC ที่จะเกิดในวันนี้
-    public List<GameObject> todayApplicants = new List<GameObject>();
+    [Header("Special Rule")]
+    [Tooltip("ทุกกี่คนต้องมี Special อย่างน้อย 1 คน")]
+    public int specialWindow = 4;
+
+    [Tooltip("เปิด/ปิดกฎบังคับ Special")]
+    public bool forceSpecial = true;
+
+    // NPC ทั้งหมดของวันนี้
+    public List<TodayApplicant> todayApplicants = new();
 
     private int currentApplicantIndex = 0;
-    
 
-    // =========================
-    // MAIN SPAWN
-    // =========================
-    public void SpawnNPC()
-    {
-        if (gameManager.currentNPC != null)
-            return;
-
-        // ⭐ เพิ่มส่วนนี้
-        // Spawn ตาม Today List ก่อน
-        if (todayApplicants.Count > 0)
-        {
-            if (currentApplicantIndex >= todayApplicants.Count)
-            {
-                Debug.Log("NPC วันนี้ Spawn ครบแล้ว");
-                return;
-            }
-
-            GameObject prefabToday = todayApplicants[currentApplicantIndex];
-
-            Debug.Log("Spawn NPC : " + prefabToday.name);
-
-            currentApplicantIndex++;
-
-            SpawnPrefab(prefabToday, null);
-            return;
-        }
-
-        NPCRole chosenRole = ChooseRole();
-
-        if (chosenRole == null)
-        {
-            Debug.LogError("เลือก Role ไม่ได้");
-            return;
-        }
-
-        GameObject prefab = ChoosePrefabFromRole(chosenRole);
-
-        if (prefab == null)
-        {
-            Debug.LogError("ไม่มี prefab");
-            return;
-        }
-
-        SpawnPrefab(prefab, chosenRole);
-    }
-
-    // =========================
-    // เลือก ROLE
-    // =========================
-    private NPCRole ChooseRole()
-    {
-        //สุ่มแบบ Weighted ตาม % ที่ตั้งไว้
-        var validRoles = roles
-            .Where(r => r.prefabs != null && r.prefabs.Length > 0)
-            .Where(r => r.prefabs.Any(p => p != null && !r.usedPrefabsToday.Contains(p))) 
-            .ToList();
-
-        float totalWeight = validRoles.Sum(r => r.spawnChance);
-
-        if (totalWeight <= 0f)
-            return validRoles.FirstOrDefault();
-
-        float rand = Random.Range(0f, totalWeight);
-        float cumulative = 0f;
-
-        foreach (var role in validRoles)
-        {
-            cumulative += role.spawnChance;
-
-            if (rand <= cumulative)
-                return role;
-        }
-
-        return validRoles.LastOrDefault();
-    }
-
-
-    // =========================
-    // เลือก PREFAB ใน ROLE
-    // =========================
-    private GameObject ChoosePrefabFromRole(NPCRole role)
-    {
-        List<GameObject> available = role.prefabs
-            .Where(p => p != null && !role.usedPrefabsToday.Contains(p))
-            .ToList();
-
-
-        if (available.Count == 0)
-            return null;
-
-        int index = Random.Range(0, available.Count);
-        GameObject chosen = available[index];
-        role.usedPrefabsToday.Add(chosen);
-        return chosen;
-        
-    }
-
-    // =========================
-    // SPAWN จริง
-    // =========================
-    private void SpawnPrefab(GameObject prefab, NPCRole role)
-    {
-        GameObject npc = Instantiate(
-            prefab,
-            spawnPoint.position,
-            Quaternion.identity
-        );
-        
-        gameManager.currentState = GameManager.NPCState.WalkingToCheckpoint;
-
-        NPCMovement movement = npc.GetComponent<NPCMovement>();
-
-        if (movement == null)
-        {
-            Debug.LogError(prefab.name + " ไม่มี NPCMovement");
-            return;
-        }
-
-        movement.MoveTo(stopPoint.position);
-    }
-    
+    // =========================================================
+    // เริ่มวันใหม่
+    // =========================================================
     public void GenerateTodayApplicants()
     {
         todayApplicants.Clear();
         currentApplicantIndex = 0;
-        foreach (var role in roles)
-            role.usedPrefabsToday.Clear();
+        int npcToday = Random.Range(
+            allData.minNPCPerDay,
+            allData.maxNPCPerDay + 1
+        );
 
-        // ⭐ เก็บเป็นคู่ (prefab, data) เพื่อ shuffle พร้อมกันแบบไม่หลุด sync
-        List<(GameObject prefab, NPCData data)> todayPairs = new List<(GameObject, NPCData)>();
+// ✅ เพิ่มตรงนี้
+        gameManager.npcPerDay = npcToday;
+        Debug.Log("NPC วันนี้ทั้งหมด = " + npcToday);
 
-        int safety = 0;
-        int maxSafety = gameManager.npcPerDay * 20;
+// จำนวนคนใน Today List
+        int todayListCount = Random.Range(
+            allData.minTodayList,
+            Mathf.Min(allData.maxTodayList + 1, npcToday + 1)
+        );
 
-        while (todayPairs.Count < gameManager.npcPerDay && safety < maxSafety)
+        HashSet<DataPrefabNPC> usedNPC = new HashSet<DataPrefabNPC>();
+
+        int safety = 300;
+
+        // ---------- สุ่ม NPC ทั้งวัน ----------
+        while (todayApplicants.Count < npcToday && safety-- > 0)
         {
-            safety++;
+            RoleGroup role;
 
-            NPCRole role = ChooseRole();
-            if (role == null)
-                break;
+            if (NeedSpecial(todayApplicants.Count))
+                role = allData.special;
+            else
+                role = ChooseRole();
 
-            GameObject prefab = ChoosePrefabFromRole(role);
-            if (prefab == null)
+            DataPrefabNPC npc = ChooseNPC(role);
+
+            if (npc == null)
                 continue;
 
-            NPC npc = prefab.GetComponent<NPC>();
-            NPCData data = (npc != null) ? npc.data : null;
+            if (usedNPC.Contains(npc))
+                continue;
 
-            todayPairs.Add((prefab, data));
+            usedNPC.Add(npc);
+
+            TodayApplicant applicant = CreateApplicant(npc);
+
+            if (applicant == null)
+                continue;
+
+            todayApplicants.Add(applicant);
         }
 
-        // ⭐ สุ่มลำดับการมาอีกที (Fisher–Yates shuffle)
-        for (int i = todayPairs.Count - 1; i > 0; i--)
+        if (safety <= 0)
         {
-            int j = Random.Range(0, i + 1);
-            (todayPairs[i], todayPairs[j]) = (todayPairs[j], todayPairs[i]);
+            Debug.LogWarning("NPC ไม่พอสำหรับ Today List");
         }
 
-        // แยกกลับเป็น 2 list ตามลำดับใหม่ที่ shuffle แล้ว
-        List<NPCData> todayData = new List<NPCData>();
-        foreach (var pair in todayPairs)
+        // ---------- สุ่มว่าใครอยู่ Today List ----------
+        List<int> indexes = Enumerable.Range(0, todayApplicants.Count).ToList();
+
+        for (int i = 0; i < indexes.Count; i++)
         {
-            todayApplicants.Add(pair.prefab);
-            if (pair.data != null)
+            int random = Random.Range(i, indexes.Count);
+            (indexes[i], indexes[random]) = (indexes[random], indexes[i]);
+        }
+        
+
+
+        // สุ่มว่าใครอยู่ Today List
+        for (int i = 0; i < todayListCount && i < indexes.Count; i++)
+        {
+            todayApplicants[indexes[i]].isInTodayList = true;
+        }
+
+        
+
+        // ---------- เตรียม Prefab และข้อมูล Today List ----------
+        List<NPCData> todayListData = new();
+
+        foreach (TodayApplicant applicant in todayApplicants)
+        {
+            PrepareApplicantPrefab(applicant);
+
+            if (applicant.isInTodayList && applicant.displayData != null)
             {
-                todayData.Add(pair.data);
-                Debug.Log("Today NPC : " + pair.data.npcName);
+                todayListData.Add(applicant.displayData);
             }
         }
 
-        Debug.Log("สุ่ม NPC วันนี้ทั้งหมด = " + todayData.Count);
+        
+        todayListManager.GenerateTodayList(todayListData);
+            
+        Debug.Log("NPC ทั้งวัน = " + todayApplicants.Count);
 
-        if (todayListManager != null)
+        foreach (TodayApplicant a in todayApplicants)
         {
-            todayListManager.GenerateTodayList(todayData);
-        }
-        else
-        {
-            Debug.LogError("TodayListManager ยังไม่ได้ใส่ใน SpawnManager");
+            Debug.Log(a.displayData.npcName);
         }
     }
-    
-    
+
+    // =========================================================
+    // Spawn NPC ทีละคน
+    // =========================================================
+    public void SpawnNextNPC()
+    {
+        if (gameManager.currentNPC != null)
+            return;
+
+        if (currentApplicantIndex >= todayApplicants.Count)
+        {
+            Debug.Log("NPC วันนี้หมดแล้ว");
+            return;
+        }
+
+        TodayApplicant applicant = todayApplicants[currentApplicantIndex];
+        currentApplicantIndex++;
+
+// Spawn NPC
+        GameObject npc = Instantiate(
+            applicant.spawnPrefab,
+            spawnPoint.position,
+            Quaternion.identity
+        );
+
+// ===== ส่งข้อมูลเข้า NPC =====
+        NPC npcScript = npc.GetComponent<NPC>();
+
+        if (npcScript != null)
+        {
+            // เก็บ Applicant ทั้งตัว
+            npcScript.applicant = applicant;
+
+            // เก็บ NPCData ที่ใช้วันนี้
+            npcScript.data = applicant.displayData;
+        }
+
+// เก็บ NPC ปัจจุบันใน GameManager
+        gameManager.currentNPC = npc;
+        gameManager.currentState = GameManager.NPCState.WalkingToCheckpoint;
+
+// ให้เดินไป Stop Point
+        NPCMovement movement = npc.GetComponent<NPCMovement>();
+
+        if (movement != null)
+        {
+            movement.MoveTo(stopPoint.position);
+        }
+    }
+
+    // =========================================================
+    // เลือก Role ตาม %
+    // =========================================================
+    private RoleGroup ChooseRole()
+    {
+        List<RoleGroup> roles = new()
+        {
+            allData.villager,
+            allData.monk,
+            allData.special
+        };
+
+        int totalWeight = roles.Sum(r => r.spawnChance);
+
+        int random = Random.Range(0, totalWeight);
+
+        int current = 0;
+
+        foreach (RoleGroup role in roles)
+        {
+            current += role.spawnChance;
+
+            if (random < current)
+                return role;
+        }
+
+        return roles.Last();
+    }
+
+    // =========================================================
+    // ทุก ๆ 4 คน ต้องมี Special
+    // =========================================================
+    private bool NeedSpecial(int currentIndex)
+    {
+        if (!forceSpecial)
+            return false;
+
+        if ((currentIndex + 1) % specialWindow != 0)
+            return false;
+
+        int start = Mathf.Max(0, currentIndex - (specialWindow - 1));
+
+        for (int i = start; i < currentIndex; i++)
+        {
+            if (todayApplicants[i].npcData.roleType == NPCType.Special)
+                return false;
+        }
+
+        return true;
+    }
+
+    // =========================================================
+    // เลือก DataPrefabNPC ภายใน Role
+    // =========================================================
+    private DataPrefabNPC ChooseNPC(RoleGroup role)
+    {
+        if (role.npcs == null || role.npcs.Count == 0)
+            return null;
+
+        int totalWeight = role.npcs.Sum(n => n.chance);
+
+        if (totalWeight <= 0)
+            return null;
+
+        int random = Random.Range(0, totalWeight);
+        int current = 0;
+
+        foreach (NPCGroupChance npc in role.npcs)
+        {
+            current += npc.chance;
+
+            if (random < current)
+                return npc.npc;
+        }
+
+        return role.npcs.Last().npc;
+    }
+
+    // =========================================================
+    // สร้าง Applicant
+    // =========================================================
+    private TodayApplicant CreateApplicant(DataPrefabNPC npc)
+    {
+        bool isGood = Random.Range(0, 100) < npc.todayGood.chance;
+
+        return new TodayApplicant
+        {
+            npcData = npc,
+            isGood = isGood,
+            isInTodayList = false
+        };
+    }
+
+    // =========================================================
+    // เตรียม Prefab ของ Applicant
+    // =========================================================
+    private void PrepareApplicantPrefab(TodayApplicant applicant)
+    {
+        NPCSpawnGroup group = applicant.isInTodayList
+            ? (applicant.isGood ? applicant.npcData.todayGood : applicant.npcData.todayBad)
+            : (applicant.isGood ? applicant.npcData.normalGood : applicant.npcData.normalBad);
+
+        applicant.spawnPrefab = GetRandomPrefab(group);
+
+        if (applicant.spawnPrefab == null)
+        {
+            Debug.LogError($"{applicant.npcData.name} ไม่มี Prefab ในกลุ่มนี้");
+            return;
+        }
+
+        NPC npc = applicant.spawnPrefab.GetComponent<NPC>();
+
+        if (npc == null)
+        {
+            Debug.LogError($"{applicant.spawnPrefab.name} ไม่มี Script NPC");
+            return;
+        }
+
+        if (npc.data == null)
+        {
+            Debug.LogError($"{applicant.spawnPrefab.name} ยังไม่ได้ใส่ NPCData ใน Script NPC");
+            return;
+        }
+
+        applicant.displayData = npc.data;
+    }
+
+    // =========================================================
+    // สุ่ม Prefab ตาม %
+    // =========================================================
+    private GameObject GetRandomPrefab(NPCSpawnGroup group)
+    {
+        if (group.prefabs == null || group.prefabs.Count == 0)
+            return null;
+
+        int totalWeight = group.prefabs.Sum(p => p.chance);
+
+        if (totalWeight <= 0)
+            return null;
+
+        int random = Random.Range(0, totalWeight);
+
+        int current = 0;
+
+        foreach (NPCPrefabChance prefab in group.prefabs)
+        {
+            current += prefab.chance;
+
+            if (random < current)
+                return prefab.prefab;
+        }
+
+        return group.prefabs.Last().prefab;
+    }
+
+    // =========================================================
+    // รีเซ็ตวันใหม่
+    // =========================================================
+    public void ResetToday()
+    {
+        todayApplicants.Clear();
+        currentApplicantIndex = 0;
+    }
 }

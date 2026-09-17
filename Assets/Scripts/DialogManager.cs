@@ -9,7 +9,7 @@ public class DialogManager : MonoBehaviour
     public TMP_Text nameText;
     public TMP_Text dialogText;
 
-    public BagManager bagManager;
+   // public BagManager bagManager;
     
     // NPC ที่กำลังพูดอยู่
     // NPC ที่กำลังพูดอยู่
