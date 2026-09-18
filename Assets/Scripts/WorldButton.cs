@@ -42,7 +42,7 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject()) 
             return;
 
         transform.localScale = originalScale * hoverScale;
