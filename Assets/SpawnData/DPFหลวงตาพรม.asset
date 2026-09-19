@@ -10,22 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b8f2083a0b87a6408a5397ebfca5f2c, type: 3}
-  m_Name: DataPrefabNPC1 4
+  m_Name: "DPF\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32\u0E1E\u0E23\u0E21"
   m_EditorClassIdentifier: Assembly-CSharp::DataPrefabNPC
   todayGood:
     chance: 7
     prefabs:
-    - prefab: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
-      chance: 19
+    - prefab: {fileID: 5793601454066011965, guid: 9f9b34f00598d984d8515ef98d105bc8, type: 3}
+      chance: 100
   todayBad:
     chance: 37
     prefabs:
-    - prefab: {fileID: 2083295734745886584, guid: 17831afda2b57c347b626e212886de03, type: 3}
-      chance: 29
-    - prefab: {fileID: 7826912195225827764, guid: 8009f1a87b28f19408628892e85087b8, type: 3}
-      chance: 29
-    - prefab: {fileID: 2175457328634468189, guid: fefd9bc5c51dcac4e919014ad4182108, type: 3}
-      chance: 29
+    - prefab: {fileID: 5793601454066011965, guid: 9f9b34f00598d984d8515ef98d105bc8, type: 3}
+      chance: 100
   normalGood:
     chance: 55
     prefabs:
