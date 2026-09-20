@@ -262,7 +262,7 @@ SpriteRenderer:
   m_SortingLayerID: 936554571
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_Sprite: {fileID: 6705992523775054531, guid: f87dec546591c1c45a0fadf6c8036933, type: 3}
   m_Color: {r: 0.36862746, g: 0.05882353, b: 0.05882353, a: 1}
   m_FlipX: 0
@@ -578,8 +578,7 @@ PrefabInstance:
       objectReference: {fileID: -3563179199658230996, guid: 49bde3fb67d7d0c44ae7666811c6599a, type: 3}
     - target: {fileID: 8379800548220292905, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       propertyPath: m_Name
-      value: "\u0E2B\u0E25\u0E27\u0E07\u0E1E\u0E35\u0E48\u0E2A\u0E21\u0E04\u0E34\u0E14
-        \u0E0A\u0E27\u0E19\u0E1B\u0E31\u0E0D\u0E42\u0E0D Variant Variant"
+      value: "\u0E2B\u0E25\u0E27\u0E07\u0E1E\u0E35\u0E48\u0E40\u0E2D\u0E01 \u0E2D\u0E20\u0E34\u0E1B\u0E38\u0E0D\u0E42\u0E0D"
       objectReference: {fileID: 0}
     - target: {fileID: 8716468108165248662, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       propertyPath: m_LocalPosition.x

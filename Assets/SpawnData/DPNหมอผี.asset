@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8f2083a0b87a6408a5397ebfca5f2c, type: 3}
+  m_Name: "DPN\u0E2B\u0E21\u0E2D\u0E1C\u0E35"
+  m_EditorClassIdentifier: Assembly-CSharp::DataPrefabNPC
+  todayGood:
+    chance: 7
+    prefabs:
+    - prefab: {fileID: 2910441343679088732, guid: e8a26263257616e43b70478ce9d46709, type: 3}
+      chance: 100
+  todayBad:
+    chance: 37
+    prefabs:
+    - prefab: {fileID: 2910441343679088732, guid: e8a26263257616e43b70478ce9d46709, type: 3}
+      chance: 100
+  normalGood:
+    chance: 55
+    prefabs:
+    - prefab: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      chance: 43
+  normalBad:
+    chance: 35
+    prefabs:
+    - prefab: {fileID: 544997767607268783, guid: 39c6d33e6c9755040acc172559e52356, type: 3}
+      chance: 0
+    - prefab: {fileID: 6134953775173375829, guid: 3cbd7df5e3803a645a4e36361e6c0c03, type: 3}
+      chance: 0
+    - prefab: {fileID: 5732943905157268380, guid: 8340cb35c53b378449ea5708d0926473, type: 3}
+      chance: 0
+  roleType: 0
