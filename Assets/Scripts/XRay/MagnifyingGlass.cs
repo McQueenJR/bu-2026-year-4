@@ -173,6 +173,31 @@ public class MagnifyingGlass : MonoBehaviour
 
     private void OnMouseDown()
     {
+       
+        
+        // ถ้าคลิก UI อยู่ ไม่ให้หยิบแว่น
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+
+        // ถ้าถืออยู่แล้ว ไม่ต้องหยิบซ้ำ
+        if (isHolding)
+            return;
+
+
+        PickUp();
+    }
+
+
+    // =========================================================
+    // PICK UP
+    // =========================================================
+
+    private void PickUp()
+    {
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
             return;
         
@@ -199,29 +224,6 @@ public class MagnifyingGlass : MonoBehaviour
             }
         }
         
-        // ถ้าคลิก UI อยู่ ไม่ให้หยิบแว่น
-        if (EventSystem.current != null &&
-            EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
-
-        // ถ้าถืออยู่แล้ว ไม่ต้องหยิบซ้ำ
-        if (isHolding)
-            return;
-
-
-        PickUp();
-    }
-
-
-    // =========================================================
-    // PICK UP
-    // =========================================================
-
-    private void PickUp()
-    {
         isHolding = true;
 
 
