@@ -31,103 +31,124 @@ public class SpawnManager : MonoBehaviour
     // เริ่มวันใหม่
     // =========================================================
     public void GenerateTodayApplicants()
+{
+    todayApplicants.Clear();
+    currentApplicantIndex = 0;
+
+    // =====================================================
+    // จำนวน NPC ของวันนี้
+    // =====================================================
+    int npcToday = Random.Range(
+        allData.minNPCPerDay,
+        allData.maxNPCPerDay + 1
+    );
+
+    // ส่งจำนวน NPC ให้ GameManager ใช้เช็ก End Day
+    gameManager.npcPerDay = npcToday;
+
+    Debug.Log("NPC วันนี้ทั้งหมด = " + npcToday);
+
+    // =====================================================
+    // จำนวนคนใน Today List
+    // =====================================================
+    int todayListCount = Random.Range(
+        allData.minTodayList,
+        Mathf.Min(allData.maxTodayList + 1, npcToday + 1)
+    );
+
+    HashSet<DataPrefabNPC> usedNPC = new HashSet<DataPrefabNPC>();
+    int safety = 300;
+
+    // =====================================================
+    // สุ่ม NPC ทั้งวัน
+    // =====================================================
+    while (todayApplicants.Count < npcToday && safety-- > 0)
     {
-        todayApplicants.Clear();
-        currentApplicantIndex = 0;
-        int npcToday = Random.Range(
-            allData.minNPCPerDay,
-            allData.maxNPCPerDay + 1
-        );
+        RoleGroup role = NeedSpecial(todayApplicants.Count)
+            ? allData.special
+            : ChooseRole();
 
-// ✅ เพิ่มตรงนี้
-        gameManager.npcPerDay = npcToday;
-        Debug.Log("NPC วันนี้ทั้งหมด = " + npcToday);
+        DataPrefabNPC npc = ChooseNPC(role);
 
-// จำนวนคนใน Today List
-        int todayListCount = Random.Range(
-            allData.minTodayList,
-            Mathf.Min(allData.maxTodayList + 1, npcToday + 1)
-        );
+        if (npc == null || usedNPC.Contains(npc))
+            continue;
 
-        HashSet<DataPrefabNPC> usedNPC = new HashSet<DataPrefabNPC>();
+        usedNPC.Add(npc);
 
-        int safety = 300;
+        TodayApplicant applicant = CreateApplicant(npc);
 
-        // ---------- สุ่ม NPC ทั้งวัน ----------
-        while (todayApplicants.Count < npcToday && safety-- > 0)
+        if (applicant == null)
+            continue;
+
+        todayApplicants.Add(applicant);
+    }
+
+    if (safety <= 0)
+    {
+        Debug.LogWarning("NPC ไม่พอสำหรับวันนี้");
+    }
+
+    // =====================================================
+    // สุ่มว่าใครอยู่ Today List
+    // =====================================================
+    List<int> indexes = Enumerable.Range(0, todayApplicants.Count).ToList();
+
+    for (int i = 0; i < indexes.Count; i++)
+    {
+        int random = Random.Range(i, indexes.Count);
+        (indexes[i], indexes[random]) = (indexes[random], indexes[i]);
+    }
+
+    for (int i = 0; i < todayListCount && i < indexes.Count; i++)
+    {
+        todayApplicants[indexes[i]].isInTodayList = true;
+    }
+
+    // =====================================================
+    // เตรียม Prefab ของแต่ละ NPC
+    // (ตอนนี้รู้แล้วว่าใครอยู่ Today List)
+    // =====================================================
+    foreach (TodayApplicant applicant in todayApplicants)
+    {
+        PrepareApplicantPrefab(applicant);
+    }
+
+    // =====================================================
+    // แจก Camp ให้ NPC ทุกคน
+    // =====================================================
+    if (CampManager.Instance != null)
+    {
+        CampManager.Instance.AssignCamp(todayApplicants);
+    }
+
+    // =====================================================
+    // ส่งข้อมูลเข้า Today List
+    // =====================================================
+    List<NPCData> todayListData = new List<NPCData>();
+
+    foreach (TodayApplicant applicant in todayApplicants)
+    {
+        if (applicant.isInTodayList && applicant.displayData != null)
         {
-            RoleGroup role;
-
-            if (NeedSpecial(todayApplicants.Count))
-                role = allData.special;
-            else
-                role = ChooseRole();
-
-            DataPrefabNPC npc = ChooseNPC(role);
-
-            if (npc == null)
-                continue;
-
-            if (usedNPC.Contains(npc))
-                continue;
-
-            usedNPC.Add(npc);
-
-            TodayApplicant applicant = CreateApplicant(npc);
-
-            if (applicant == null)
-                continue;
-
-            todayApplicants.Add(applicant);
-        }
-
-        if (safety <= 0)
-        {
-            Debug.LogWarning("NPC ไม่พอสำหรับ Today List");
-        }
-
-        // ---------- สุ่มว่าใครอยู่ Today List ----------
-        List<int> indexes = Enumerable.Range(0, todayApplicants.Count).ToList();
-
-        for (int i = 0; i < indexes.Count; i++)
-        {
-            int random = Random.Range(i, indexes.Count);
-            (indexes[i], indexes[random]) = (indexes[random], indexes[i]);
-        }
-        
-
-
-        // สุ่มว่าใครอยู่ Today List
-        for (int i = 0; i < todayListCount && i < indexes.Count; i++)
-        {
-            todayApplicants[indexes[i]].isInTodayList = true;
-        }
-
-        
-
-        // ---------- เตรียม Prefab และข้อมูล Today List ----------
-        List<NPCData> todayListData = new();
-
-        foreach (TodayApplicant applicant in todayApplicants)
-        {
-            PrepareApplicantPrefab(applicant);
-
-            if (applicant.isInTodayList && applicant.displayData != null)
-            {
-                todayListData.Add(applicant.displayData);
-            }
-        }
-
-        
-        todayListManager.GenerateTodayList(todayListData);
-            
-        Debug.Log("NPC ทั้งวัน = " + todayApplicants.Count);
-
-        foreach (TodayApplicant a in todayApplicants)
-        {
-            Debug.Log(a.displayData.npcName);
+            todayListData.Add(applicant.displayData);
         }
     }
+
+    if (todayListManager != null)
+    {
+        todayListManager.GenerateTodayList(todayListData);
+    }
+
+    // =====================================================
+    // Debug
+    // =====================================================
+    Debug.Log("NPC ทั้งวัน = " + todayApplicants.Count);
+
+    if (CampManager.Instance != null)
+    {
+        CampManager.Instance.PrintAllCamps();
+    }
+}
 
     // =========================================================
     // Spawn NPC ทีละคน

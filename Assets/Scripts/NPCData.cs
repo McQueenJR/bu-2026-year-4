@@ -47,5 +47,8 @@ public class NPCData : ScriptableObject
     [Header("Correct Answer")]
     public bool[] correctAnswers = new bool[5];
     
+    [Header("Camp / Tent")]
+    public int campID = 0;
+    
     
 }

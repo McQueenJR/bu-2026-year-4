@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -104,7 +105,8 @@ public class GameManager : MonoBehaviour
 
         if (todayListManager != null)
             todayListManager.ResetForNewDay();
-
+        if (CampManager.Instance != null)
+            CampManager.Instance.ResetCamps();
         spawner.GenerateTodayApplicants();
         spawner.SpawnNextNPC();
     }
@@ -392,23 +394,33 @@ public class GameManager : MonoBehaviour
     // RELEASE NPC
     // =========================
 
-    public   void ReleaseCurrentNPC()
+    public void ReleaseCurrentNPC()
     {
         if (currentNPC == null)
             return;
-        if (currentState == NPCState.Leaving) return;  
-        RecordDecision(currentNPC, wasArrested: false);   // <-- โอ๊ตเพิ่มบรรทัดนี้
+
+        if (currentState == NPCState.Leaving)
+            return;
+
+        // ===================== CAMP =====================
+        NPC npc = currentNPC.GetComponent<NPC>();
+
+        if (npc != null && npc.applicant != null)
+        {
+            npc.applicant.hasEnteredCamp = true;
+            Debug.Log($"{npc.data.npcName} เข้า Camp {npc.applicant.campID} แล้ว");
+        }
+        // ================================================
+
+        RecordDecision(currentNPC, wasArrested: false);
         currentState = NPCState.Leaving;
 
         DestroyBagAndSlideBack();
 
-        NPCMovement move =
-            currentNPC.GetComponent<NPCMovement>();
-
+        NPCMovement move = currentNPC.GetComponent<NPCMovement>();
         move.MoveTo(enterPoint.position);
 
-        StartCoroutine(
-            WaitForExitThenAdvanceHour(currentNPC));
+        StartCoroutine(WaitForExitThenAdvanceHour(currentNPC));
     }
 
     // =========================
@@ -439,17 +451,29 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForExitThenAdvanceHour(GameObject npc)
     {
-        NPCMovement move =
-            npc.GetComponent<NPCMovement>();
+        NPCMovement move = npc.GetComponent<NPCMovement>();
 
         while (move.IsMoving())
             yield return null;
+
+        // ===== CAMP =====
+        NPC npcScript = npc.GetComponent<NPC>();
+
+        if (npcScript != null && npcScript.applicant != null)
+        {
+            npcScript.applicant.hasEnteredCamp = true;
+
+            Debug.Log($"{npcScript.data.npcName} เข้า Camp {npcScript.applicant.campID} แล้ว");
+
+            if (CampManager.Instance != null)
+                CampManager.Instance.PrintEnteredCamp();
+        }
+        // ================
 
         Destroy(npc);
 
         currentNPC = null;
 
-        // เวลา +1 ชั่วโมง
         AdvanceHour();
     }
 
@@ -539,6 +563,8 @@ public class GameManager : MonoBehaviour
         if (spawner != null)
         {
             spawner.ResetToday();
+            if (CampManager.Instance != null)
+                CampManager.Instance.ResetCamps();
             spawner.GenerateTodayApplicants();
             spawner.SpawnNextNPC();
         }
@@ -749,5 +775,26 @@ public class GameManager : MonoBehaviour
         }
 
         npcProcessedCount++;
+    }
+    
+    public void TestCampCall()
+    {
+        if (currentNPC == null)
+            return;
+
+        NPC npc = currentNPC.GetComponent<NPC>();
+
+        if (npc == null || npc.applicant == null)
+            return;
+
+        List<TodayApplicant> campmates =
+            CampManager.Instance.GetCampmates(npc.applicant);
+
+        Debug.Log("=== คนใน Camp เดียวกัน ===");
+
+        foreach (TodayApplicant mate in campmates)
+        {
+            Debug.Log(mate.displayData.npcName);
+        }
     }
 }
