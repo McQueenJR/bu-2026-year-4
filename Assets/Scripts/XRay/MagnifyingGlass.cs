@@ -18,7 +18,6 @@ public class MagnifyingGlass : MonoBehaviour
     [Tooltip("ภาพแว่นปกติ")]
     [SerializeField] private Sprite normalSprite;
 
-    [Tooltip("ภาพแว่นเรืองแสง Level 2")]
     [SerializeField] private Sprite xray2Sprite;
 
     [Tooltip("ภาพแว่นเรืองแสง Level 3")]

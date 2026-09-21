@@ -19,9 +19,7 @@ MonoBehaviour:
   villager:
     spawnChance: 40
     npcs:
-    - npc: {fileID: 11400000, guid: ab8f319feb0e6274391e0d500af82f82, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: e36a2a84e9f2ae5448c665dba99f41b4, type: 2}
+    - npc: {fileID: 11400000, guid: 05011b93bb0547944a04fb8cbe806f47, type: 2}
       chance: 50
   monk:
     spawnChance: 40
