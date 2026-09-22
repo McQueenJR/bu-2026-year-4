@@ -18,6 +18,13 @@ public class DocumentButton : MonoBehaviour
 
         NPC npc = GameManager.Instance.currentNPC.GetComponent<NPC>();
         if (npc == null || npc.data == null) return;
+        
+        // ★ ถ้า NPC ตัวนี้ไม่มีเอกสารติดตัว ไม่ต้อง spawn อะไรเลย
+        if (npc.data.applicantPhotoPrefab == null)
+        {
+            Debug.Log($"NPC '{npc.data.npcName}' ไม่มีเอกสารติดตัว (applicantPhotoPrefab = None)");
+            return;
+        }
 
         // ลบใบเก่าถ้ามี
         if (currentDocument != null)

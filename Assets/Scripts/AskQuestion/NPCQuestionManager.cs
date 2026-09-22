@@ -154,13 +154,13 @@ public class NPCQuestionManager : MonoBehaviour
             return;
         }
 
-        if (currentAskingNPC.data.checkQuestions == null ||
-            questionIndex >= currentAskingNPC.data.checkQuestions.Length)
+        if (currentAskingNPC.data.selectedCheckQuestions == null ||
+            questionIndex >= currentAskingNPC.data.selectedCheckQuestions.Length)
         {
             return;
         }
 
-        string question = currentAskingNPC.data.checkQuestions[questionIndex];
+        string question = currentAskingNPC.data.selectedCheckQuestions[questionIndex];
 
         if (string.IsNullOrWhiteSpace(question))
             return;

@@ -184,6 +184,12 @@ public class SpawnManager : MonoBehaviour
 
             // เก็บ NPCData ที่ใช้วันนี้
             npcScript.data = applicant.displayData;
+            
+            // สุ่มเลือกข้อความ checklist ของแต่ละหัวข้อไว้ล่วงหน้า ตั้งแต่ตอนสปาวน์
+            if (npcScript.data != null)
+            {
+                npcScript.data.InitializeChecklistQuestions();
+            }
         }
 
 // เก็บ NPC ปัจจุบันใน GameManager

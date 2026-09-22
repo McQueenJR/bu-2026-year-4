@@ -20,6 +20,12 @@ public class DocumentPopupManager : MonoBehaviour
 
     public void Open(GameObject documentPrefab)
     {
+        // ถ้า NPC ตัวนี้ไม่มีเอกสารติดตัว ไม่ต้องเปิด popup เลย
+        if (documentPrefab == null)
+        {
+            Debug.Log("NPC ตัวนี้ไม่มีเอกสารติดตัว (documentPrefab เป็น None)");
+            return;
+        }
         
         // กันกดระหว่างถือแว่นขยาย / ไม้ขีดไฟ
         if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding)

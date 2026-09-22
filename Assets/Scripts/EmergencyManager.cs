@@ -77,6 +77,9 @@ public class EmergencyManager : MonoBehaviour
             isDoorClosed = true;
 
             gameManager.emergencyMode = true;
+            
+            if (NPCSoundManager.Instance != null)
+                NPCSoundManager.Instance.SetMuteWalk(true);
 
             // เล่นเสียงตอนกด Emergency ครั้งที่ 2
             if (emergencyButtonSound != null)
@@ -121,6 +124,9 @@ public class EmergencyManager : MonoBehaviour
         coverOpened = false;
 
         gameManager.emergencyMode = false;
+        
+        if (NPCSoundManager.Instance != null)
+            NPCSoundManager.Instance.SetMuteWalk(false);
 
         if (doorSound != null) doorSound.Play();
         doorAnimator.SetTrigger("OpenDoor");

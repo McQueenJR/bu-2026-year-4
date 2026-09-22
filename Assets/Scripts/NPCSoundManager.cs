@@ -13,6 +13,7 @@ public class NPCSoundManager : MonoBehaviour
 
     private int walkingCount = 0;
 
+    private bool muteWalk = false;
     void Awake()
     {
         Instance = this;
@@ -21,6 +22,9 @@ public class NPCSoundManager : MonoBehaviour
     public void PlayWalk()
     {
         walkingCount++;
+        
+        // ถ้าถูกปิดเสียงอยู่ ไม่ต้องเล่นเสียง แต่ยังนับ count ไว้ตามปกติ
+        if (muteWalk) return;
 
         if (walkAudioSource != null && !walkAudioSource.isPlaying)
             walkAudioSource.Play();
@@ -31,6 +35,14 @@ public class NPCSoundManager : MonoBehaviour
         walkingCount = Mathf.Max(0, walkingCount - 1);
 
         if (walkingCount == 0 && walkAudioSource != null)
+            walkAudioSource.Stop();
+    }
+    
+    public void SetMuteWalk(bool mute)
+    {
+        muteWalk = mute;
+
+        if (mute && walkAudioSource != null)
             walkAudioSource.Stop();
     }
     

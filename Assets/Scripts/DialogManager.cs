@@ -319,6 +319,24 @@ public class DialogManager : MonoBehaviour
         ShowCurrentDialog();
     }
 
+    public void StartChecklistDialog(
+        NPCData data,
+        int questionIndex,
+        string speaker)
+    {
+        if (data == null ||
+            data.selectedCheckQuestions == null ||
+            questionIndex < 0 ||
+            questionIndex >= data.selectedCheckQuestions.Length ||
+            string.IsNullOrWhiteSpace(data.selectedCheckQuestions[questionIndex]))
+        {
+            Debug.LogWarning("Checklist ไม่มีข้อความ (index: " + questionIndex + ")");
+            return;
+        }
+        // เรียกใช้ logic เดิม โดยส่งข้อความที่สุ่มไว้แล้วเข้าไป
+        StartChecklistDialog(speaker, data.selectedCheckQuestions[questionIndex]);
+    }
+
 
     // =====================================================
     // SHOW CURRENT

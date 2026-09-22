@@ -348,26 +348,41 @@ public class GameManager : MonoBehaviour
         }
     }
   */  
-    private void SpawnDocument()
-    {
-        if (templeDocumentPrefab == null)
-        {
-            Debug.LogError("ไม่ได้ใส่ Temple Document Prefab");
-            return;
-        }
+ private void SpawnDocument()
+ {
+     if (templeDocumentPrefab == null)
+     {
+         Debug.LogError("ไม่ได้ใส่ Temple Document Prefab");
+         return;
+     }
 
-        if (spawnPointDocument == null)
-        {
-            Debug.LogError("ไม่ได้ใส่ Spawn Point Document");
-            return;
-        }
+     if (spawnPointDocument == null)
+     {
+         Debug.LogError("ไม่ได้ใส่ Spawn Point Document");
+         return;
+     }
 
-        currentDocument = Instantiate(
-            templeDocumentPrefab,
-            spawnPointDocument.position,
-            Quaternion.identity
-        );
-    }
+     // ★ เช็คว่า NPC ตัวปัจจุบันมีหน้า Display เอกสารของตัวเองมั้ย
+     if (currentNPC == null)
+         return;
+
+     NPC npc = currentNPC.GetComponent<NPC>();
+     if (npc == null || npc.data == null)
+         return;
+
+     if (npc.data.applicantPhotoPrefab == null)
+     {
+         Debug.Log($"NPC '{npc.data.npcName}' ไม่มีเอกสารติดตัว (applicantPhotoPrefab = None) → ไม่ spawn ไอคอนเอกสาร");
+         return;
+     }
+
+     // ผ่านเงื่อนไขแล้ว → spawn ไอคอนเอกสารตัวเดิม (รูปเดียวกันทุกคน) ตามปกติ
+     currentDocument = Instantiate(
+         templeDocumentPrefab,
+         spawnPointDocument.position,
+         Quaternion.identity
+     );
+ }
 
     private void DestroyBagAndSlideBack()
     {
@@ -629,66 +644,60 @@ public class GameManager : MonoBehaviour
     {
         isPoliceSequenceActive = true;
 
+        // 🔥 1. เล่นเสียงสัญญาณเตือนทันที ไม่ต้องรอ NPC เดินออกก่อน
+        if (policeSound != null)
+        {
+            policeSound.Play();
+        }
 
-        // 1. NPC ปัจจุบันออกไปก่อน
+        // 2. NPC ปัจจุบันเดินออกไปก่อน (เดินคู่กับเสียงสัญญาณที่เล่นอยู่แล้ว)
         if (currentNPC != null)
         {
-            
-            NPCMovement npcMove =
-                currentNPC.GetComponent<NPCMovement>();
-
+            NPCMovement npcMove = currentNPC.GetComponent<NPCMovement>();
             npcMove.MoveTo(exitPoint.position, 6f);
 
             while (npcMove.IsMoving())
                 yield return null;
 
             RecordDecision(currentNPC, wasArrested: true);
-
             Destroy(currentNPC);
             currentNPC = null;
         }
 
-        // 2. เล่นเสียงสัญญาณเตือน
+        // 🔥 3. ถ้าเสียงยังเล่นไม่จบ (เผื่อเสียงยาวกว่าระยะเวลาเดิน) ค่อยรอให้จบ
         if (policeSound != null)
         {
-            policeSound.Play();
-
-            // รอจนเสียงจบ
             while (policeSound.isPlaying)
                 yield return null;
         }
 
-        // 3. เปิดประตูฉุกเฉิน
+        // 4. เปิดประตูฉุกเฉิน
         if (emergencyManager != null)
             emergencyManager.ForceOpenDoor();
 
-        // 4. Spawn ตำรวจ
+        // 5. Spawn ตำรวจ
         currentPolice = Instantiate(
             policePrefab,
             spawner.spawnPoint.position,
             Quaternion.identity
         );
 
-        NPCMovement policeMove =
-            currentPolice.GetComponent<NPCMovement>();
+        NPCMovement policeMove = currentPolice.GetComponent<NPCMovement>();
 
-        // 5. ตำรวจเดินเข้ามากลางจอ
+        // 6. ตำรวจเดินเข้ามากลางจอ
         policeMove.MoveTo(spawnPolice.position);
 
         while (policeMove.IsMoving())
             yield return null;
 
-        // 6. ตำรวจมาถึงแล้ว → เปิด Dialog
+        // 7. ตำรวจมาถึงแล้ว → เปิด Dialog
         StartPoliceDialog();
 
-        // รอจน Dialog จบ
-        yield return new WaitUntil(() =>
-            !dialogManager.IsDialogOpen()
-        );
-        // ตำรวจเดินออกแล้ว → ค่อยลบกระเป๋า/บัตรออกจากโต๊ะ
+        yield return new WaitUntil(() => !dialogManager.IsDialogOpen());
+
         DestroyBagAndSlideBack();
 
-        // 7. ตำรวจเดินออก
+        // 8. ตำรวจเดินออก
         policeMove.MoveTo(exitPolicePoint.position);
 
         while (policeMove.IsMoving())
@@ -696,9 +705,8 @@ public class GameManager : MonoBehaviour
 
         Destroy(currentPolice);
         currentPolice = null;
-        
 
-        // 8. กลับเข้าสู่เกมปกติ
+        // 9. กลับเข้าสู่เกมปกติ
         AdvanceHour();
 
         isPoliceSequenceActive = false;
