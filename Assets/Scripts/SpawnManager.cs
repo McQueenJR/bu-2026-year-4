@@ -14,14 +14,7 @@ public class SpawnManager : MonoBehaviour
     [Header("References")]
     public GameManager gameManager;
     public TodayListManager todayListManager;
-
-    [Header("Special Rule")]
-    [Tooltip("ทุกกี่คนต้องมี Special อย่างน้อย 1 คน")]
-    public int specialWindow = 4;
-
-    [Tooltip("เปิด/ปิดกฎบังคับ Special")]
-    public bool forceSpecial = true;
-
+    
     // NPC ทั้งหมดของวันนี้
     public List<TodayApplicant> todayApplicants = new();
 
@@ -64,16 +57,11 @@ public class SpawnManager : MonoBehaviour
     // =====================================================
     while (todayApplicants.Count < npcToday && safety-- > 0)
     {
-        RoleGroup role = NeedSpecial(todayApplicants.Count)
-            ? allData.special
-            : ChooseRole();
-
+        RoleGroup role = ChooseRole();
         DataPrefabNPC npc = ChooseNPC(role);
 
-        if (npc == null || usedNPC.Contains(npc))
+        if (npc == null)
             continue;
-
-        usedNPC.Add(npc);
 
         TodayApplicant applicant = CreateApplicant(npc);
 
@@ -108,9 +96,12 @@ public class SpawnManager : MonoBehaviour
     // เตรียม Prefab ของแต่ละ NPC
     // (ตอนนี้รู้แล้วว่าใครอยู่ Today List)
     // =====================================================
+    
+    Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC = new();
+
     foreach (TodayApplicant applicant in todayApplicants)
     {
-        PrepareApplicantPrefab(applicant);
+        PrepareApplicantPrefab(applicant, usedPrefabsPerNPC);
     }
 
     // =====================================================
@@ -234,27 +225,6 @@ public class SpawnManager : MonoBehaviour
         return roles.Last();
     }
 
-    // =========================================================
-    // ทุก ๆ 4 คน ต้องมี Special
-    // =========================================================
-    private bool NeedSpecial(int currentIndex)
-    {
-        if (!forceSpecial)
-            return false;
-
-        if ((currentIndex + 1) % specialWindow != 0)
-            return false;
-
-        int start = Mathf.Max(0, currentIndex - (specialWindow - 1));
-
-        for (int i = start; i < currentIndex; i++)
-        {
-            if (todayApplicants[i].npcData.roleType == NPCType.Special)
-                return false;
-        }
-
-        return true;
-    }
 
     // =========================================================
     // เลือก DataPrefabNPC ภายใน Role
@@ -301,13 +271,21 @@ public class SpawnManager : MonoBehaviour
     // =========================================================
     // เตรียม Prefab ของ Applicant
     // =========================================================
-    private void PrepareApplicantPrefab(TodayApplicant applicant)
+    private void PrepareApplicantPrefab(
+        TodayApplicant applicant,
+        Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC)
     {
         NPCSpawnGroup group = applicant.isInTodayList
             ? (applicant.isGood ? applicant.npcData.todayGood : applicant.npcData.todayBad)
             : (applicant.isGood ? applicant.npcData.normalGood : applicant.npcData.normalBad);
 
-        applicant.spawnPrefab = GetRandomPrefab(group);
+        if (!usedPrefabsPerNPC.TryGetValue(applicant.npcData, out HashSet<GameObject> usedPrefabs))
+        {
+            usedPrefabs = new HashSet<GameObject>();
+            usedPrefabsPerNPC[applicant.npcData] = usedPrefabs;
+        }
+        
+        applicant.spawnPrefab = GetRandomPrefab(group, usedPrefabs);
 
         if (applicant.spawnPrefab == null)
         {
@@ -315,6 +293,8 @@ public class SpawnManager : MonoBehaviour
             return;
         }
 
+        usedPrefabs.Add(applicant.spawnPrefab);
+        
         NPC npc = applicant.spawnPrefab.GetComponent<NPC>();
 
         if (npc == null)
@@ -335,21 +315,30 @@ public class SpawnManager : MonoBehaviour
     // =========================================================
     // สุ่ม Prefab ตาม %
     // =========================================================
-    private GameObject GetRandomPrefab(NPCSpawnGroup group)
+    private GameObject GetRandomPrefab(NPCSpawnGroup group, HashSet<GameObject> excludedPrefabs)
     {
         if (group.prefabs == null || group.prefabs.Count == 0)
             return null;
 
-        int totalWeight = group.prefabs.Sum(p => p.chance);
+        List<NPCPrefabChance> available = group.prefabs
+            .Where(p => p.prefab != null && !excludedPrefabs.Contains(p.prefab))
+            .ToList();
+
+        // ถ้าใช้จนครบทุก prefab ในกลุ่มนี้แล้วจริงๆ ให้รีเซ็ตกลับมาใช้ซ้ำได้ทั้งกลุ่ม
+        if (available.Count == 0)
+            available = group.prefabs;
+
+        // ★★★ จุดที่แก้: ต้องคำนวณจาก available ไม่ใช่ group.prefabs ★★★
+        int totalWeight = available.Sum(p => p.chance);
 
         if (totalWeight <= 0)
             return null;
 
         int random = Random.Range(0, totalWeight);
-
         int current = 0;
 
-        foreach (NPCPrefabChance prefab in group.prefabs)
+        // ★★★ จุดที่แก้: loop ต้องวนจาก available ไม่ใช่ group.prefabs ★★★
+        foreach (NPCPrefabChance prefab in available)
         {
             current += prefab.chance;
 
@@ -357,7 +346,7 @@ public class SpawnManager : MonoBehaviour
                 return prefab.prefab;
         }
 
-        return group.prefabs.Last().prefab;
+        return available.Last().prefab;
     }
 
     // =========================================================
