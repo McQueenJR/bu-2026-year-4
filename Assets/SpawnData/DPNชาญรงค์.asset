@@ -57,9 +57,9 @@ MonoBehaviour:
     chance: 35
     prefabs:
     - prefab: {fileID: 544997767607268783, guid: 39c6d33e6c9755040acc172559e52356, type: 3}
-      chance: 0
+      chance: 9
     - prefab: {fileID: 6134953775173375829, guid: 3cbd7df5e3803a645a4e36361e6c0c03, type: 3}
-      chance: 0
+      chance: 5
     - prefab: {fileID: 5732943905157268380, guid: 8340cb35c53b378449ea5708d0926473, type: 3}
-      chance: 0
+      chance: 9
   roleType: 0

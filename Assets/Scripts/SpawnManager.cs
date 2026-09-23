@@ -63,6 +63,12 @@ public class SpawnManager : MonoBehaviour
         if (npc == null)
             continue;
 
+        // ไม่ให้ DataPrefabNPC ซ้ำในวันเดียวกัน
+        if (usedNPC.Contains(npc))
+            continue;
+
+        usedNPC.Add(npc);
+
         TodayApplicant applicant = CreateApplicant(npc);
 
         if (applicant == null)
@@ -194,6 +200,8 @@ public class SpawnManager : MonoBehaviour
         {
             movement.MoveTo(stopPoint.position);
         }
+        
+        
     }
 
     // =========================================================
@@ -201,15 +209,18 @@ public class SpawnManager : MonoBehaviour
     // =========================================================
     private RoleGroup ChooseRole()
     {
-        List<RoleGroup> roles = new()
-        {
-            allData.villager,
-            allData.monk,
-            allData.special
-        };
+        List<RoleGroup> roles = new();
+
+        if (allData.villager.npcs.Any(n => n.npc != null))
+            roles.Add(allData.villager);
+
+        if (allData.monk.npcs.Any(n => n.npc != null))
+            roles.Add(allData.monk);
+
+        if (allData.special.npcs.Any(n => n.npc != null))
+            roles.Add(allData.special);
 
         int totalWeight = roles.Sum(r => r.spawnChance);
-
         int random = Random.Range(0, totalWeight);
 
         int current = 0;
