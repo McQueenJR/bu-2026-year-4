@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
-  applicantPhotoPrefab: {fileID: 3637179144791824987, guid: 74b44a986df6d90438d0911086bff780, type: 3}
+  applicantPhotoPrefab: {fileID: 4171516466840288374, guid: 3c7be5bc0f357f94d8586b0441663bce, type: 3}
   templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 6921753078679136934, guid: 575fef915c3d3bb47aabf0ff2be2eba0, type: 3}
   applicant:
