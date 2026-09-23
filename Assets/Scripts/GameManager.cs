@@ -15,12 +15,16 @@ public class GameManager : MonoBehaviour
     public Transform exitPoint;
 
     [Header("Day System")]
+    public int currentDay = 1;
+    public int maxDay = 7;
+    public int npcPerDay;
+
     public int currentHour;
     public int startHour = 20;
     public int endHour = 6;
-    public int npcPerDay = 8;
 
     public ClockManager clockManager;
+    public CalendarManager calendarManager;
 
     [Header("Emergency")]
     public bool emergencyMode = false;
@@ -100,13 +104,17 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        currentDay = 1;
         currentHour = startHour;
+
+        clockManager.SetDay(currentDay);
         clockManager.SetHour(currentHour);
+
+        calendarManager.SetDay(currentDay);
 
         if (todayListManager != null)
             todayListManager.ResetForNewDay();
-        if (CampManager.Instance != null)
-            CampManager.Instance.ResetCamps();
+
         spawner.GenerateTodayApplicants();
         spawner.SpawnNextNPC();
     }
@@ -512,7 +520,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Spawn NPC คนใหม่
+        // Spawn คนต่อไป
         spawner.SpawnNextNPC();
     }
 
@@ -545,7 +553,18 @@ public class GameManager : MonoBehaviour
 
     public void StartNextDay()
     {
-        // -------------------- รีเซ็ตคะแนน --------------------
+        // ---------- จบเกมเมื่อครบ 7 วัน ----------
+        if (currentDay >= maxDay)
+        {
+            Debug.Log("จบเกมครบ 7 วัน");
+            // ใส่หน้า Ending UI ตรงนี้ภายหลัง
+            return;
+        }
+
+        // ---------- เปลี่ยนวัน ----------
+        currentDay++;
+
+        // รีเซ็ตสถิติของวัน
         npcProcessedCount = 0;
         score = 0;
         villagerPassed = 0;
@@ -553,44 +572,42 @@ public class GameManager : MonoBehaviour
         robberPassed = 0;
         robberArrested = 0;
 
-        // รีเซ็ต Checklist
         if (ChecklistManager.Instance != null)
             ChecklistManager.Instance.ResetAllChecklistScores();
 
-        // ปิด UI End Day
         if (endDayUI != null)
             endDayUI.Hide();
 
-        // -------------------- รีเซ็ตเวลา --------------------
+        // รีเซ็ตเวลา
         currentHour = startHour;
         clockManager.SetHour(currentHour);
 
-        // -------------------- รีเซ็ต NPC --------------------
+        // อัปเดต Day UI
+        clockManager.SetDay(currentDay);
+
+        // เปลี่ยนปฏิทิน
+        if (calendarManager != null)
+            calendarManager.SetDay(currentDay);
+
+        // รีเซ็ต NPC
         currentNPC = null;
         currentState = NPCState.WalkingToCheckpoint;
 
-        
-        // ล้าง Today List ของวันเก่า
         if (todayListManager != null)
             todayListManager.ResetForNewDay();
 
-// สุ่ม NPC ของวันใหม่
         if (spawner != null)
         {
             spawner.ResetToday();
-            if (CampManager.Instance != null)
-                CampManager.Instance.ResetCamps();
             spawner.GenerateTodayApplicants();
             spawner.SpawnNextNPC();
         }
 
-        // ซ่อนปุ่มเขียว/แดง
         if (GreenRedButtonManager.Instance != null)
             GreenRedButtonManager.Instance.HideDecisionButtons();
 
-        Debug.Log("===== START DAY =====");
+        Debug.Log("===== DAY " + currentDay + " =====");
     }
-
     private void StartPoliceDialog()
     {
         if (currentPolice == null)
