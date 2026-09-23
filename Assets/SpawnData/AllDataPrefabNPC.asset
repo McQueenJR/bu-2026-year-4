@@ -35,7 +35,7 @@ MonoBehaviour:
       chance: 50
     - npc: {fileID: 11400000, guid: 42aade560c03b72469470f2edf71c446, type: 2}
       chance: 50
-    - npc: {fileID: 11400000, guid: 376f102a78ad33f4bb89fe672bf362a0, type: 2}
+    - npc: {fileID: 11400000, guid: 4b38f1aad057dbd49951fb933e769224, type: 2}
       chance: 50
     - npc: {fileID: 11400000, guid: 530a1d485a3415f44bf2f8057e90e14e, type: 2}
       chance: 50
