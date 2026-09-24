@@ -37,7 +37,7 @@ MonoBehaviour:
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
   applicantPhotoPrefab: {fileID: 7639666304129359646, guid: c41a3e156de3e4640bfccd20ae3b5675, type: 3}
   templeDocumentPrefab: {fileID: 0}
-  TodayPhotoPrefab: {fileID: 6921753078679136934, guid: 575fef915c3d3bb47aabf0ff2be2eba0, type: 3}
+  TodayPhotoPrefab: {fileID: 0}
   applicant:
     npcData: {fileID: 0}
     displayData: {fileID: 0}

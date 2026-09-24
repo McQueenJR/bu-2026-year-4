@@ -57,17 +57,11 @@ MonoBehaviour:
       chance: 2
     - prefab: {fileID: 6540626571707286482, guid: a11baecf390dff5409ed0dd20ddcfb64, type: 3}
       chance: 2
-    - prefab: {fileID: 5507188244128583806, guid: 1931fb265cea9cc4890ec44af2a68229, type: 3}
-      chance: 2
-    - prefab: {fileID: 4847401926607407080, guid: 77f813e785e59c44a82c106912393bc1, type: 3}
-      chance: 2
   normalBad:
     chance: 35
     prefabs:
-    - prefab: {fileID: 544997767607268783, guid: 39c6d33e6c9755040acc172559e52356, type: 3}
+    - prefab: {fileID: 5507188244128583806, guid: 1931fb265cea9cc4890ec44af2a68229, type: 3}
       chance: 17
-    - prefab: {fileID: 6134953775173375829, guid: 3cbd7df5e3803a645a4e36361e6c0c03, type: 3}
+    - prefab: {fileID: 4847401926607407080, guid: 77f813e785e59c44a82c106912393bc1, type: 3}
       chance: 19
-    - prefab: {fileID: 5732943905157268380, guid: 8340cb35c53b378449ea5708d0926473, type: 3}
-      chance: 15
   roleType: 0

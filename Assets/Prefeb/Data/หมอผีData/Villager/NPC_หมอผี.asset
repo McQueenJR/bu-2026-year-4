@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcba2bc8927f8064bb643e6b6fa2f406, type: 3}
   m_Name: "NPC_\u0E2B\u0E21\u0E2D\u0E1C\u0E35"
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  npcName: Police
+  npcName: "\u0E2B\u0E21\u0E2D\u0E1C\u0E35"
   age: 35
   voiceType: 0
   dialogs:
