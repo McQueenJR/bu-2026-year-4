@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using System.Collections;
 
 public class Matchbox : MonoBehaviour
@@ -17,11 +18,13 @@ public class Matchbox : MonoBehaviour
     [Header("เสียงไม้ขีดไฟ")]
     [SerializeField] private AudioSource igniteAudioSource;   // เสียงไฟพุ่งขึ้น ตอนหยิบ (เล่นครั้งเดียว)
     [SerializeField] private AudioSource loopFireAudioSource; // เสียงไฟลุกวนๆ (เล่นวนหลังไฟพุ่งจบ)
+    
+    [Header("Global Light")]
+    [SerializeField] private Light2D globalLight;
 
     private bool holdingMatch = false;
 
-    private SpriteRenderer boxSprite;
-    
+    [SerializeField] private GameObject boxVisual;    
     private Coroutine fireSoundRoutine;
     
     public static Matchbox Instance { get; private set; }
@@ -36,7 +39,6 @@ public class Matchbox : MonoBehaviour
     {
         Instance = this;
         
-        boxSprite = GetComponent<SpriteRenderer>();
 
         // ซ่อนไม้ขีดตอนเริ่ม
         if (matchstick != null)
@@ -128,7 +130,11 @@ public class Matchbox : MonoBehaviour
         // =====================================
         // 1. เปิดไม้ขีด
         // =====================================
-
+        if (globalLight != null)
+        {
+            globalLight.enabled = false;
+        }
+        
         if (matchstick != null)
         {
             matchstick.SetActive(true);
@@ -181,9 +187,9 @@ public class Matchbox : MonoBehaviour
         // 6. ซ่อนกล่อง
         // =====================================
 
-        if (boxSprite != null)
+        if (boxVisual != null)
         {
-            boxSprite.enabled = false;
+            boxVisual.SetActive(false);
         }
 
         // =====================================
@@ -209,7 +215,11 @@ public class Matchbox : MonoBehaviour
         // =====================================
         // NPC กลับปกติ
         // =====================================
-
+        if (globalLight != null)
+        {
+            globalLight.enabled = true;
+        }
+        
         if (NPCAnomaly.CurrentNPC != null)
         {
             NPCAnomaly.CurrentNPC.HideAnomaly();
@@ -228,9 +238,9 @@ public class Matchbox : MonoBehaviour
         // เปิดกล่องกลับ
         // =====================================
 
-        if (boxSprite != null)
+        if (boxVisual != null)
         {
-            boxSprite.enabled = true;
+            boxVisual.SetActive(true);
         }
 
         // =====================================
