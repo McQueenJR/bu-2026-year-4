@@ -27,6 +27,8 @@ public class SpawnManager : MonoBehaviour
 {
     todayApplicants.Clear();
     currentApplicantIndex = 0;
+    
+    
 
     // =====================================================
     // จำนวน NPC ของวันนี้
@@ -116,6 +118,27 @@ public class SpawnManager : MonoBehaviour
     if (CampManager.Instance != null)
     {
         CampManager.Instance.AssignCamp(todayApplicants);
+    }
+    
+            
+    // =====================================================
+    // สร้างข้อมูลเอกสารของแต่ละ NPC (สุ่มครั้งเดียวตอนเริ่มวัน)
+    // =====================================================
+    int today = gameManager.currentDay;
+
+    foreach (TodayApplicant applicant in todayApplicants)
+    {
+        if (applicant.displayData == null)
+            continue;
+
+        applicant.templeDocument = TempleDocumentGenerator.Generate(
+            applicant.displayData.templeDocumentData,
+            today,
+            true   // ขั้นที่ 3 จะเปลี่ยนเป็นค่าจาก AbbotStatusManager
+        );
+
+        if (applicant.templeDocument != null)
+            Debug.Log($"[Doc] {applicant.displayData.npcName}: {applicant.templeDocument}");
     }
 
     // =====================================================

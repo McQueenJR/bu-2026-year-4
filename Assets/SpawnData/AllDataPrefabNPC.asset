@@ -17,29 +17,9 @@ MonoBehaviour:
   minTodayList: 3
   maxTodayList: 6
   villager:
-    spawnChance: 40
+    spawnChance: 100
     npcs:
     - npc: {fileID: 11400000, guid: e67912681470fa241af9d74180f24115, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 05011b93bb0547944a04fb8cbe806f47, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 376f102a78ad33f4bb89fe672bf362a0, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: c8cb946ad82a5b7408a7e19b40610f40, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: b3e7c3a7c6a6fcc43a7161de112ec902, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 8f95ba33b0d5c314381c1a417019466e, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 34fd8501fdcc2264c863650c5e3d470e, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 42aade560c03b72469470f2edf71c446, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 4b38f1aad057dbd49951fb933e769224, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 530a1d485a3415f44bf2f8057e90e14e, type: 2}
-      chance: 50
-    - npc: {fileID: 11400000, guid: 357bbea9a1b0c0e4596ad32df6e0eebb, type: 2}
       chance: 50
   monk:
     spawnChance: 40

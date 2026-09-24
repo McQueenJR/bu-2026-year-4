@@ -1,6 +1,9 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
-// แปะที่ prefab เอกสารแต่ละใบ (ตัวที่มี SpriteRenderer + BoxCollider2D อยู่แล้ว)
+// แปะที่ root ของเอกสารแต่ละใบ (ต้องมี BoxCollider2D บน root เดียวกัน)
+// - เอกสารเดิม: root มี SpriteRenderer ตัวเดียว
+// - Template ใหม่: root มี SortingGroup + ลูกหลายชิ้น (Paper, Photo, Text ...)
 public class DocumentDisplayClick : MonoBehaviour
 {
     private bool isDragging = false;
@@ -12,10 +15,14 @@ public class DocumentDisplayClick : MonoBehaviour
     public bool clampToBoundary = false;
     public BoxCollider2D dragBoundary;
 
+    [Header("Template ใหม่: ใส่ Paper เพื่อใช้คำนวณขอบ (ว่าง = รวมทุก Renderer เหมือนเดิม)")]
+    [SerializeField] private Renderer extentsSource;
+
     private Vector2 halfExtents;
     private float originalZ;
 
     private SpriteRenderer sr;
+    private SortingGroup sortingGroup;
     private int baseSortingOrder;
 
     private void Awake()
@@ -25,12 +32,17 @@ public class DocumentDisplayClick : MonoBehaviour
         originalZ = transform.position.z;
 
         sr = GetComponent<SpriteRenderer>();
-        if (sr != null)
+        sortingGroup = GetComponent<SortingGroup>();
+
+        // มี SortingGroup → ใช้ group เป็นตัวจัดลำดับทั้งใบ (ลูกทุกชิ้นตามไปด้วย)
+        if (sortingGroup != null)
+            baseSortingOrder = sortingGroup.sortingOrder;
+        else if (sr != null)
             baseSortingOrder = sr.sortingOrder;
 
         DraggableSortOrder.OnOrderOverflow += ResetSortingOrder;
     }
-    
+
     public void SetDragBoundary(BoxCollider2D boundary)
     {
         dragBoundary = boundary;
@@ -44,8 +56,15 @@ public class DocumentDisplayClick : MonoBehaviour
 
     public void ResetSortingOrder()
     {
-        if (sr != null)
-            sr.sortingOrder = baseSortingOrder;
+        SetSortingOrder(baseSortingOrder);
+    }
+
+    private void SetSortingOrder(int order)
+    {
+        if (sortingGroup != null)
+            sortingGroup.sortingOrder = order;
+        else if (sr != null)
+            sr.sortingOrder = order;
     }
 
     private void OnMouseDown()
@@ -98,6 +117,14 @@ public class DocumentDisplayClick : MonoBehaviour
 
     private Vector2 CalculateHalfExtents()
     {
+        // Template ใหม่: ใช้ขอบของ Paper อย่างเดียว (ไม่ให้ TMP / ลูกอื่นทำให้ขอบเพี้ยน)
+        if (extentsSource != null)
+        {
+            Bounds paperBounds = extentsSource.bounds;
+            return new Vector2(paperBounds.extents.x, paperBounds.extents.y);
+        }
+
+        // เอกสารเดิม: รวมทุก Renderer
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
         if (renderers.Length == 0) return Vector2.zero;
 
@@ -118,10 +145,10 @@ public class DocumentDisplayClick : MonoBehaviour
 
     private void BringToFront()
     {
-        if (sr == null) return;
+        if (sortingGroup == null && sr == null) return;
 
         int order = DraggableSortOrder.GetNextOrder();
-        sr.sortingOrder = order + baseSortingOrder;
+        SetSortingOrder(order + baseSortingOrder);
 
         Vector3 pos = transform.position;
         pos.z = originalZ - (order * 0.0001f);

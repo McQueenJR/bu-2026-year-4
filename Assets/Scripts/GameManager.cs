@@ -378,9 +378,9 @@ public class GameManager : MonoBehaviour
      if (npc == null || npc.data == null)
          return;
 
-     if (npc.data.applicantPhotoPrefab == null)
+     if (!npc.data.HasTempleDocument)
      {
-         Debug.Log($"NPC '{npc.data.npcName}' ไม่มีเอกสารติดตัว (applicantPhotoPrefab = None) → ไม่ spawn ไอคอนเอกสาร");
+         Debug.Log($"NPC '{npc.data.npcName}' ไม่มีเอกสารติดตัว → ไม่ spawn ไอคอนเอกสาร");
          return;
      }
 

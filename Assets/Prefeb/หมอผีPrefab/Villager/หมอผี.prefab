@@ -1775,6 +1775,32 @@ MonoBehaviour:
     campID: -1
     isAlive: 1
     hasEnteredCamp: 0
+    templeDocument:
+      generatedDay: 0
+      paper: {fileID: 0}
+      logo:
+        value: {fileID: 0}
+        isFake: 0
+      photo:
+        value: {fileID: 0}
+        isFake: 0
+      idNumber:
+        value: 
+        isFake: 0
+      firstName:
+        value: 
+        isFake: 0
+      lastName:
+        value: 
+        isFake: 0
+      tentNumber:
+        value: 
+        isFake: 0
+      reason:
+        value: 
+        isFake: 0
+      signature: {fileID: 0}
+      showSignature: 0
 --- !u!4 &3061513912551609920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2230973119353925988, guid: a31f4397ff91e7249baf8b5672562337, type: 3}

@@ -153,3 +153,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DocumentDisplayClick
   clampToBoundary: 0
   dragBoundary: {fileID: 0}
+  extentsSource: {fileID: 0}

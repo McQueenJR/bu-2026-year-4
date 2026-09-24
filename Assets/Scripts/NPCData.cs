@@ -29,7 +29,12 @@ public class NPCData : ScriptableObject
     [Header("Applicant Photo")]
     public GameObject applicantPhotoPrefab;
     
-    [Header("Temple Entry Document")]
+    [Header("Temple Document (ระบบใหม่)")]
+    public TempleDocumentData templeDocumentData;
+    
+    // มีเอกสารติดตัวไหม (ระบบใหม่ หรือ prefab เดิม)
+    public bool HasTempleDocument => templeDocumentData != null || applicantPhotoPrefab != null;
+    
     public GameObject templeDocumentPrefab;
     
     [Header("Today List")]
