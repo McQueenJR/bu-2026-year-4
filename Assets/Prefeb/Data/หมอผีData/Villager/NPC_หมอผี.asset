@@ -14,6 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
   npcName: Police
   age: 35
+  voiceType: 0
   dialogs:
-  - Never mind
+  - "\u0E17\u0E33\u0E07\u0E32\u0E19\u0E44\u0E14\u0E49\u0E40\u0E22\u0E35\u0E48\u0E22\u0E21\u0E22\u0E2D\u0E14"
   bagItems: []
+  idCardPrefab: {fileID: 0}
+  idCardDisplayPrefab: {fileID: 0}
+  applicantPhotoPrefab: {fileID: 0}
+  templeDocumentPrefab: {fileID: 0}
+  TodayPhotoPrefab: {fileID: 0}
+  applicant:
+    npcData: {fileID: 0}
+    displayData: {fileID: 0}
+    spawnPrefab: {fileID: 0}
+    isGood: 0
+    isInTodayList: 0
+    campID: -1
+    isAlive: 1
+    hasEnteredCamp: 0
+  greenDialogs: []
+  redDialogs: []
+  emergencyDialogs: []
+  checkQuestions:
+  - messages: []
+  - messages: []
+  - messages: []
+  - messages: []
+  - messages: []
+  selectedCheckQuestions: []
+  correctAnswers: 0000000000
+  campID: 0
