@@ -679,7 +679,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u0E2D\u0E31\u0E04\u0E23\u0E40\u0E14\u0E0A \u0E1E\u0E34\u0E0A\u0E34\u0E15\u0E0A\u0E31\u0E22      
         \u0E1C\u0E35 - \u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07\u0E2B\u0E21\u0E14
-        1"
+        - \u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C"
       objectReference: {fileID: 0}
     - target: {fileID: 4455370763627557417, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: m_Sprite
@@ -736,7 +736,7 @@ PrefabInstance:
     - target: {fileID: 8438479905003203507, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: 97485a434956eaf459b0b147a5254de0, type: 2}
+      objectReference: {fileID: 11400000, guid: 97639ce4751344e4983b04720eaaa3f5, type: 2}
     - target: {fileID: 8612269343269181754, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: m_Sprite
       value: 

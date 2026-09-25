@@ -947,7 +947,9 @@ PrefabInstance:
       objectReference: {fileID: -3563179199658230996, guid: 6ba942a4b783fa24196dd61dc5260844, type: 3}
     - target: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Name
-      value: "\u0E15\u0E32\u0E1A\u0E38\u0E0D \u0E21\u0E32\u0E25\u0E31\u0E22"
+      value: "\u0E15\u0E32\u0E1A\u0E38\u0E0D \u0E21\u0E32\u0E25\u0E31\u0E22 \u0E0A\u0E32\u0E27\u0E1A\u0E49\u0E32\u0E19
+        - \u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A - \u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D\u0E16\u0E39\u0E01
+        - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E38\u0E48\u0E43\u0E19\u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C"
       objectReference: {fileID: 0}
     - target: {fileID: 3879257640208842936, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Sprite
@@ -964,7 +966,7 @@ PrefabInstance:
     - target: {fileID: 5891997051059578120, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: fc194d58af0b1b6488cf0061f4d58abd, type: 2}
+      objectReference: {fileID: 11400000, guid: b3a1830254d0c4b40b52fb0c2267d39a, type: 2}
     - target: {fileID: 6006668911753893761, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Sprite
       value: 

@@ -502,8 +502,9 @@ PrefabInstance:
       objectReference: {fileID: -3563179199658230996, guid: 92b71174bf54c514dab606bd99a503aa, type: 3}
     - target: {fileID: 2641298048805318647, guid: 89ae13160c576344f82450f1935694c8, type: 3}
       propertyPath: m_Name
-      value: "\u0E19\u0E34\u0E20\u0E32\u0E1E\u0E23 \u0E17\u0E2D\u0E07\u0E14\u0E35
-        Variant"
+      value: "\u0E19\u0E34\u0E20\u0E32\u0E1E\u0E23 \u0E17\u0E2D\u0E07\u0E14\u0E35  
+        \u0E0A\u0E32\u0E27\u0E1A\u0E49\u0E32\u0E19 - \u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A
+        - \u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D\u0E16\u0E39\u0E01 - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E38\u0E48\u0E43\u0E19\u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C"
       objectReference: {fileID: 0}
     - target: {fileID: 2890135821724653128, guid: 89ae13160c576344f82450f1935694c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -696,7 +697,7 @@ PrefabInstance:
     - target: {fileID: 7604900695332513159, guid: 89ae13160c576344f82450f1935694c8, type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: c353afea1fa1c1f4186b42b859d873ee, type: 2}
+      objectReference: {fileID: 11400000, guid: ba186be69684798428b25733d3effd6a, type: 2}
     - target: {fileID: 7716185098061436686, guid: 89ae13160c576344f82450f1935694c8, type: 3}
       propertyPath: m_Sprite
       value: 
