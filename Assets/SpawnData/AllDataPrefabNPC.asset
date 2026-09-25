@@ -21,9 +21,11 @@ MonoBehaviour:
     npcs:
     - npc: {fileID: 11400000, guid: e67912681470fa241af9d74180f24115, type: 2}
       chance: 50
+    - npc: {fileID: 11400000, guid: 05011b93bb0547944a04fb8cbe806f47, type: 2}
+      chance: 50
   monk:
     spawnChance: 40
     npcs: []
   special:
-    spawnChance: 40
+    spawnChance: 1
     npcs: []

@@ -13,7 +13,8 @@ public class NPC : MonoBehaviour
     public NPCType npcType;
     public NPCData data;
     
-    [HideInInspector] public TodayApplicant applicant;
+    [HideInInspector]
+    public TodayApplicant applicant;
 
     private void OnMouseUpAsButton()
     {

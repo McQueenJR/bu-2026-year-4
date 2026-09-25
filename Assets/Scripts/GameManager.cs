@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private bool greenDialogTriggered = false;  
     public static GameManager Instance;
-
+    private bool releasedToCamp = false;
    public GameObject currentNPC;
     public SpawnManager spawner;
     public TodayListManager todayListManager;
@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     [Header("Emergency")]
     public bool emergencyMode = false;
     public EmergencyManager emergencyManager;
+    
+    
 
     public enum NPCState
     {
@@ -106,7 +108,12 @@ public class GameManager : MonoBehaviour
     {
         currentDay = 1;
         currentHour = startHour;
-
+        
+        if (CampManager.Instance != null)
+        {
+            CampManager.Instance.StartNewDay(currentDay);
+        }
+        
         clockManager.SetDay(currentDay);
         clockManager.SetHour(currentHour);
 
@@ -419,23 +426,19 @@ public class GameManager : MonoBehaviour
 
     public void ReleaseCurrentNPC()
     {
-        if (currentNPC == null)
-            return;
+        if (currentNPC == null) return;
+        if (currentState == NPCState.Leaving) return;
 
-        if (currentState == NPCState.Leaving)
-            return;
-
-        // ===================== CAMP =====================
+        RecordDecision(currentNPC, wasArrested: false);
+        releasedToCamp = true;
+        
         NPC npc = currentNPC.GetComponent<NPC>();
 
         if (npc != null && npc.applicant != null)
         {
-            npc.applicant.hasEnteredCamp = true;
-            Debug.Log($"{npc.data.npcName} เข้า Camp {npc.applicant.campID} แล้ว");
+            npc.applicant.hasEnteredToday = true;
         }
-        // ================================================
 
-        RecordDecision(currentNPC, wasArrested: false);
         currentState = NPCState.Leaving;
 
         DestroyBagAndSlideBack();
@@ -450,22 +453,22 @@ public class GameManager : MonoBehaviour
     // REJECT NPC
     // =========================
 
-    public   void RejectCurrentNPC()
+    public void RejectCurrentNPC()
     {
         if (currentNPC == null)
             return;
+
+        // ✅ ตัวนี้ไม่เข้าวัด
+        releasedToCamp = false;
 
         currentState = NPCState.Leaving;
 
         DestroyBagAndSlideBack();
 
-        NPCMovement move =
-            currentNPC.GetComponent<NPCMovement>();
-
+        NPCMovement move = currentNPC.GetComponent<NPCMovement>();
         move.MoveTo(exitPoint.position);
 
-        StartCoroutine(
-            WaitForExitThenAdvanceHour(currentNPC));
+        StartCoroutine(WaitForExitThenAdvanceHour(currentNPC));
     }
 
     // =========================
@@ -479,19 +482,19 @@ public class GameManager : MonoBehaviour
         while (move.IsMoving())
             yield return null;
 
-        // ===== CAMP =====
-        NPC npcScript = npc.GetComponent<NPC>();
-
-        if (npcScript != null && npcScript.applicant != null)
+        // NPC เดินกลับถึง Camp แล้ว
+        if (releasedToCamp)
         {
-            npcScript.applicant.hasEnteredCamp = true;
+            NPC npcScript = npc.GetComponent<NPC>();
 
-            Debug.Log($"{npcScript.data.npcName} เข้า Camp {npcScript.applicant.campID} แล้ว");
-
-            if (CampManager.Instance != null)
-                CampManager.Instance.PrintEnteredCamp();
+            if (npcScript != null &&
+                npcScript.applicant != null &&
+                CampManager.Instance != null)
+            {
+                CampManager.Instance.EnterCampToday(npcScript.applicant.displayData);
+                CampManager.Instance.PrintAllCamps();
+            }
         }
-        // ================
 
         Destroy(npc);
 
@@ -563,6 +566,10 @@ public class GameManager : MonoBehaviour
 
         // ---------- เปลี่ยนวัน ----------
         currentDay++;
+        if (CampManager.Instance != null)
+        {
+            CampManager.Instance.StartNewDay(currentDay);
+        }
 
         // รีเซ็ตสถิติของวัน
         npcProcessedCount = 0;
@@ -812,14 +819,14 @@ public class GameManager : MonoBehaviour
         if (npc == null || npc.applicant == null)
             return;
 
-        List<TodayApplicant> campmates =
-            CampManager.Instance.GetCampmates(npc.applicant);
+        List<CampResident> campmates =
+            CampManager.Instance.GetRoommates(npc.data);
 
         Debug.Log("=== คนใน Camp เดียวกัน ===");
 
-        foreach (TodayApplicant mate in campmates)
+        foreach (CampResident mate in campmates)
         {
-            Debug.Log(mate.displayData.npcName);
+            Debug.Log(mate.npcData.npcName);
         }
     }
 }

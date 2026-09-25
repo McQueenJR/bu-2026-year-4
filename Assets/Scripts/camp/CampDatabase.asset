@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdc2d1c3264ec44a9cb8dee2ec04df5, type: 3}
+  m_Name: CampDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::CampDatabase
+  rooms:
+  - roomCode: A2-03
+    phoneNumber: 3123
+    residents:
+    - npcData: {fileID: 11400000, guid: 5ba0ad581ff6caa4bb0c6f8dc6a106f4, type: 2}
+      hasDocument: 1
+    - npcData: {fileID: 11400000, guid: 97485a434956eaf459b0b147a5254de0, type: 2}
+      hasDocument: 1
+  - roomCode: A1-01
+    phoneNumber: 4617
+    residents:
+    - npcData: {fileID: 11400000, guid: 7884119caacc0f14caa21c2996939455, type: 2}
+      hasDocument: 1
+    - npcData: {fileID: 11400000, guid: c353afea1fa1c1f4186b42b859d873ee, type: 2}
+      hasDocument: 1
+  - roomCode: A1-02
+    phoneNumber: 9722
+    residents:
+    - npcData: {fileID: 11400000, guid: 1d1aaec74c1ff2b40935dcf3ee0b49d8, type: 2}
+      hasDocument: 1
+    - npcData: {fileID: 11400000, guid: 36a4eb84f9bd971449efb41d24b1e4b9, type: 2}
+      hasDocument: 1
+  - roomCode: A1-03
+    phoneNumber: 4344
+    residents:
+    - npcData: {fileID: 11400000, guid: a366f3d826387cb4b9afbe73cf378030, type: 2}
+      hasDocument: 1
+    - npcData: {fileID: 11400000, guid: 6563465fd5f56654986a6c76a0b31144, type: 2}
+      hasDocument: 1
+  - roomCode: A2-01
+    phoneNumber: 1981
+    residents:
+    - npcData: {fileID: 11400000, guid: edbba2f7696022b42a1de59ed4066673, type: 2}
+      hasDocument: 1
+    - npcData: {fileID: 11400000, guid: f59b3d9145d0fac47bce65b3396e0c49, type: 2}
+      hasDocument: 1
+  - roomCode: A2-02
+    phoneNumber: 7679
+    residents:
+    - npcData: {fileID: 11400000, guid: d66eb5478bff6424bb237c34ddbbb63b, type: 2}
+      hasDocument: 0
+  - roomCode: A3-01
+    phoneNumber: 4949
+    residents:
+    - npcData: {fileID: 11400000, guid: 291af383af9911c4999b737ee8257c8f, type: 2}
+      hasDocument: 1
+  - roomCode: A3-02
+    phoneNumber: 8412
+    residents:
+    - npcData: {fileID: 11400000, guid: e4929784ee3eb4048ba455d5d48ce166, type: 2}
+      hasDocument: 1
+    - npcData: {fileID: 11400000, guid: 50815bf818fa27c488a0edb26b8c4ab1, type: 2}
+      hasDocument: 1
+  - roomCode: A3-02
+    phoneNumber: 8412
+    residents:
+    - npcData: {fileID: 0}
+      hasDocument: 0

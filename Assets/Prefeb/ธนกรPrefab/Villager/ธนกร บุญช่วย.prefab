@@ -639,9 +639,6 @@ MonoBehaviour:
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0
-    campID: -1
-    isAlive: 1
-    hasEnteredCamp: 0
     templeDocument:
       generatedDay: 0
       paper: {fileID: 0}
@@ -668,6 +665,7 @@ MonoBehaviour:
         isFake: 0
       signature: {fileID: 0}
       showSignature: 0
+    hasEnteredToday: 0
 --- !u!114 &7466308853699907839
 MonoBehaviour:
   m_ObjectHideFlags: 0

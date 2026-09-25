@@ -75,7 +75,7 @@ public class SpawnManager : MonoBehaviour
 
         if (applicant == null)
             continue;
-
+        applicant.hasEnteredToday = false;
         todayApplicants.Add(applicant);
     }
 
@@ -115,11 +115,8 @@ public class SpawnManager : MonoBehaviour
     // =====================================================
     // แจก Camp ให้ NPC ทุกคน
     // =====================================================
-    if (CampManager.Instance != null)
-    {
-        CampManager.Instance.AssignCamp(todayApplicants);
-    }
     
+   
             
     // =====================================================
     // สร้างข้อมูลเอกสารของแต่ละ NPC (สุ่มครั้งเดียวตอนเริ่มวัน)
@@ -148,10 +145,18 @@ public class SpawnManager : MonoBehaviour
 
     foreach (TodayApplicant applicant in todayApplicants)
     {
-        if (applicant.isInTodayList && applicant.displayData != null)
+        if (!applicant.isInTodayList || applicant.displayData == null)
+            continue;
+
+        // ถ้าอยู่ Camp วันนี้ ไม่ต้องขึ้น Today List
+        if (CampManager.Instance != null &&
+            CampManager.Instance.IsHomeToday(applicant.displayData))
         {
-            todayListData.Add(applicant.displayData);
+            Debug.Log($"{applicant.displayData.npcName} อยู่ Camp → ไม่ขึ้น Today List");
+            continue;
         }
+
+        todayListData.Add(applicant.displayData);
     }
 
     if (todayListManager != null)
@@ -169,6 +174,7 @@ public class SpawnManager : MonoBehaviour
         CampManager.Instance.PrintAllCamps();
     }
 }
+    
 
     // =========================================================
     // Spawn NPC ทีละคน
@@ -184,8 +190,37 @@ public class SpawnManager : MonoBehaviour
             return;
         }
 
-        TodayApplicant applicant = todayApplicants[currentApplicantIndex];
-        currentApplicantIndex++;
+        TodayApplicant applicant = null;
+
+// ข้าม NPC ที่อยู่ Camp วันนี้
+        while (currentApplicantIndex < todayApplicants.Count)
+        {
+            TodayApplicant nextApplicant = todayApplicants[currentApplicantIndex];
+            currentApplicantIndex++;
+            if (nextApplicant.hasEnteredToday)
+            {
+                Debug.Log($"{nextApplicant.displayData.npcName} เข้าวัดแล้ววันนี้ → ข้าม");
+                continue;
+            }
+
+            // ถ้าอยู่ Camp วันนี้ ไม่ต้อง Spawn
+            if (CampManager.Instance != null &&
+                CampManager.Instance.IsHomeToday(nextApplicant.displayData))
+            {
+                Debug.Log($"{nextApplicant.displayData.npcName} อยู่ Camp วันนี้ → ไม่ Spawn");
+                continue;
+            }
+
+            applicant = nextApplicant;
+            break;
+        }
+
+// ไม่มี NPC ที่ต้องตรวจแล้ว
+        if (applicant == null)
+        {
+            Debug.Log("NPC ที่ต้องตรวจวันนี้หมดแล้ว");
+            return;
+        }
 
 // Spawn NPC
         GameObject npc = Instantiate(

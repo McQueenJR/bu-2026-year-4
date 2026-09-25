@@ -1,194 +1,260 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class Camp
-{
-    public int campID;
-    public string campName;
-
-    // NPC ที่อยู่ในแคมป์นี้
-    public List<TodayApplicant> members = new List<TodayApplicant>();
-}
-
 public class CampManager : MonoBehaviour
 {
     public static CampManager Instance;
 
-    [Header("Camp ทั้งหมด")]
-    public List<Camp> camps = new List<Camp>();
+    [Header("Camp Database")]
+    public CampDatabase campDatabase;
 
-    private void Awake()
+    // สถานะระหว่างเล่นเกม
+    private Dictionary<NPCData, bool> aliveNPC = new();
+    private Dictionary<NPCData, bool> homeTodayNPC = new();
+
+    void Awake()
     {
         Instance = this;
+        InitializeCampStatus();
     }
 
-    // =========================================================
-    // รีเซ็ต Camp ตอนเริ่มวันใหม่
-    // =========================================================
-    public void ResetCamps()
+    // ==========================
+    // สร้างสถานะเริ่มต้น
+    // ==========================
+    void InitializeCampStatus()
     {
-        foreach (Camp camp in camps)
+        if (campDatabase == null)
         {
-            camp.members.Clear();
+            Debug.LogError("Camp Database ยังไม่ได้ใส่");
+            return;
+        }
+
+        aliveNPC.Clear();
+        homeTodayNPC.Clear();
+
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            foreach (CampResident resident in room.residents)
+            {
+                if (resident.npcData == null)
+                    continue;
+
+                aliveNPC[resident.npcData] = true;
+                homeTodayNPC[resident.npcData] = false;
+            }
         }
     }
 
-    // =========================================================
-    // หา Camp จาก ID
-    // =========================================================
-    public Camp GetCamp(int campID)
+    // ==========================
+    // เริ่มวันใหม่
+    // ==========================
+    public void StartNewDay(int day)
     {
-        foreach (Camp camp in camps)
+        Debug.Log($"===== CAMP DAY {day} =====");
+
+        foreach (NPCData npc in new List<NPCData>(aliveNPC.Keys))
         {
-            if (camp.campID == campID)
-                return camp;
+            // คนตายไม่อยู่ Camp เสมอ
+            if (!aliveNPC[npc])
+            {
+                homeTodayNPC[npc] = false;
+                continue;
+            }
+
+            // เริ่มวันใหม่ สุ่มว่าอยู่ Camp วันนี้ไหม
+            bool stayHome = Random.value < 0.6f;
+            homeTodayNPC[npc] = stayHome;
+
+            Debug.Log($"{npc.npcName} : {(stayHome ? "อยู่ Camp" : "ไม่อยู่ Camp")}");
+        }
+
+        PrintAllCamps();
+    }
+
+    // ==========================
+    // หา Room จากเบอร์โทร
+    // ==========================
+    public CampRoom GetRoomByPhone(string phoneNumber)
+    {
+        if (campDatabase == null)
+            return null;
+
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            if (room.phoneNumber == phoneNumber)
+                return room;
         }
 
         return null;
     }
 
-    // =========================================================
-    // แจก Camp ให้ NPC ทุกคนของวันนั้น
-    // =========================================================
-    public void AssignCamp(List<TodayApplicant> applicants)
+    // ==========================
+    // หา Room ของ NPC
+    // ==========================
+    public CampRoom GetRoomOfNPC(NPCData npc)
     {
-        if (camps.Count == 0)
+        if (campDatabase == null)
+            return null;
+
+        foreach (CampRoom room in campDatabase.rooms)
         {
-            Debug.LogWarning("ไม่มี Camp");
-            return;
+            foreach (CampResident resident in room.residents)
+            {
+                if (resident.npcData == npc)
+                    return room;
+            }
         }
 
-        ResetCamps();
-
-        int campIndex = 0;
-
-        foreach (TodayApplicant applicant in applicants)
-        {
-            Camp camp = camps[campIndex];
-
-            applicant.campID = camp.campID;
-            applicant.isAlive = true;
-            applicant.hasEnteredCamp = false;
-
-            camp.members.Add(applicant);
-
-            string npcName = applicant.displayData != null
-                ? applicant.displayData.npcName
-                : applicant.npcData.name;
-
-            Debug.Log($"{npcName} -> Camp {camp.campName}");
-
-            campIndex++;
-
-            if (campIndex >= camps.Count)
-                campIndex = 0;
-        }
+        return null;
     }
 
-    // =========================================================
-    // เพิ่ม NPC เข้า Camp (ใช้ตอน NPC ผ่านด่าน)
-    // =========================================================
-    public void AddApplicant(TodayApplicant applicant)
+    // ==========================
+    // คนที่อยู่ Camp วันนี้
+    // ==========================
+    public List<CampResident> GetResidentsAtHome(string phoneNumber)
     {
-        if (applicant == null)
-            return;
+        List<CampResident> result = new();
 
-        Camp camp = GetCamp(applicant.campID);
+        CampRoom room = GetRoomByPhone(phoneNumber);
 
-        if (camp == null)
-        {
-            Debug.LogWarning("ไม่พบ Camp ID : " + applicant.campID);
-            return;
-        }
-
-        if (!camp.members.Contains(applicant))
-        {
-            camp.members.Add(applicant);
-        }
-
-        applicant.hasEnteredCamp = true;
-    }
-
-    // =========================================================
-    // ดึงสมาชิกใน Camp เดียวกัน (ไม่รวมตัวเอง)
-    // =========================================================
-    public List<TodayApplicant> GetCampmates(TodayApplicant applicant)
-    {
-        List<TodayApplicant> result = new List<TodayApplicant>();
-
-        if (applicant == null)
+        if (room == null)
             return result;
 
-        Camp camp = GetCamp(applicant.campID);
-
-        if (camp == null)
-            return result;
-
-        foreach (TodayApplicant member in camp.members)
+        foreach (CampResident resident in room.residents)
         {
-            if (member != applicant)
-                result.Add(member);
+            if (resident.npcData == null)
+                continue;
+
+            if (aliveNPC[resident.npcData] &&
+                homeTodayNPC[resident.npcData])
+            {
+                result.Add(resident);
+            }
         }
 
         return result;
     }
 
-    // =========================================================
-    // สุ่มคนใน Camp เดียวกัน (ไว้ใช้โทรถาม)
-    // =========================================================
-    public TodayApplicant GetRandomCampmate(TodayApplicant applicant)
+    // ==========================
+    // รูมเมตของ NPC
+    // ==========================
+    public List<CampResident> GetRoommates(NPCData npc)
     {
-        List<TodayApplicant> mates = GetCampmates(applicant);
+        List<CampResident> roommates = new();
 
-        if (mates.Count == 0)
+        CampRoom room = GetRoomOfNPC(npc);
+
+        if (room == null)
+            return roommates;
+
+        foreach (CampResident resident in room.residents)
+        {
+            if (resident.npcData != npc)
+                roommates.Add(resident);
+        }
+
+        return roommates;
+    }
+
+    // ==========================
+    // สุ่มคนรับสาย
+    // ==========================
+    public CampResident GetAnsweringResident(string phoneNumber)
+    {
+        List<CampResident> residents = GetResidentsAtHome(phoneNumber);
+
+        if (residents.Count == 0)
             return null;
 
-        return mates[Random.Range(0, mates.Count)];
+        return residents[Random.Range(0, residents.Count)];
     }
 
-    // =========================================================
-    // Debug ดูสมาชิกทุก Camp
-    // =========================================================
-    public void PrintAllCamps()
+    // ==========================
+    // NPC ผ่านด่าน -> เข้า Camp วันนี้
+    // ==========================
+    public void EnterCampToday(NPCData npc)
     {
-        foreach (Camp camp in camps)
+        if (npc == null || campDatabase == null)
+            return;
+
+        foreach (CampRoom room in campDatabase.rooms)
         {
-            Debug.Log("===== " + camp.campName + " =====");
-
-            foreach (TodayApplicant npc in camp.members)
+            foreach (CampResident resident in room.residents)
             {
-                if (npc == null)
+                // เทียบจากชื่อ NPC
+                if (resident.npcData != null &&
+                    resident.npcData.npcName == npc.npcName)
                 {
-                    Debug.Log("NULL NPC");
-                    continue;
+                    homeTodayNPC[resident.npcData] = true;
+
+                    Debug.Log($"{resident.npcData.npcName} เข้า Camp ห้อง {room.roomCode}");
+                    return;
                 }
-
-                string npcName = npc.displayData != null
-                    ? npc.displayData.npcName
-                    : npc.npcData.name;
-
-                Debug.Log($"{npcName} (Camp ID : {npc.campID})");
             }
         }
-    }
-    
-    public void PrintEnteredCamp()
-    {
-        foreach (Camp camp in camps)
-        {
-            Debug.Log($"===== {camp.campName} =====");
 
-            foreach (TodayApplicant npc in camp.members)
+        Debug.LogError($"หา {npc.npcName} ใน CampManager ไม่เจอ");
+    }
+
+    // ==========================
+    // NPC ตาย
+    // ==========================
+    public void KillResident(NPCData npc)
+    {
+        if (npc == null)
+            return;
+
+        if (!aliveNPC.ContainsKey(npc))
+            return;
+
+        aliveNPC[npc] = false;
+        homeTodayNPC[npc] = false;
+
+        Debug.Log($"{npc.npcName} เสียชีวิตแล้ว");
+    }
+
+    // ==========================
+    // เช็กสถานะ
+    // ==========================
+    public bool IsAlive(NPCData npc)
+    {
+        return aliveNPC.ContainsKey(npc) && aliveNPC[npc];
+    }
+
+    public bool IsHomeToday(NPCData npc)
+    {
+        if (npc == null) return false;
+
+        foreach (NPCData key in homeTodayNPC.Keys)
+        {
+            if (key.npcName == npc.npcName)
+                return homeTodayNPC[key];
+        }
+
+        return false;
+    }
+
+    // ==========================
+    // Debug
+    // ==========================
+    public void PrintAllCamps()
+    {
+        if (campDatabase == null)
+            return;
+
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            Debug.Log($"===== {room.roomCode} ({room.phoneNumber}) =====");
+
+            foreach (CampResident resident in room.residents)
             {
-                if (npc.hasEnteredCamp)
-                {
-                    Debug.Log($"[อยู่ในเต็นท์] {npc.displayData.npcName}");
-                }
-                else
-                {
-                    Debug.Log($"[ยังไม่เข้า] {npc.displayData.npcName}");
-                }
+                if (resident.npcData == null)
+                    continue;
+
+                string alive = IsAlive(resident.npcData) ? "Alive" : "Dead";
+                string home = IsHomeToday(resident.npcData) ? "อยู่ Camp" : "ไม่อยู่ Camp";
+
+                Debug.Log($"{resident.npcData.npcName} | {alive} | {home}");
             }
         }
     }

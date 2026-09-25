@@ -12,11 +12,9 @@ public class TodayApplicant
     public bool isGood;                // Good / Bad เวอร์ชันของ NPC
     public bool isInTodayList;         // อยู่ใน Today List หรือไม่
 
-    [Header("Camp System")]
-    public int campID = -1;            // หมายเลขเต็นท์ (0,1,2...)
-    public bool isAlive = true;        // ยังอยู่ในเต็นท์หรือโดนฆ่าแล้ว
-    public bool hasEnteredCamp = false;// เข้าเต็นท์แล้วหรือยัง
     
     [Header("Temple Document")]
     public TempleDocumentRuntime templeDocument;
+    [HideInInspector]
+    public bool hasEnteredToday = false;
 }
