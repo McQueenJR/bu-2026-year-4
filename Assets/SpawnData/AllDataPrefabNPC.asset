@@ -20,12 +20,46 @@ MonoBehaviour:
     spawnChance: 100
     npcs:
     - npc: {fileID: 11400000, guid: e67912681470fa241af9d74180f24115, type: 2}
-      chance: 50
+      chance: 0
+    - npc: {fileID: 11400000, guid: e11dca32546cc914eaad3978d8664d4f, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 376f102a78ad33f4bb89fe672bf362a0, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 066fe417bc583764f839b1af4bd3827f, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 56b6d79eb7e670e4f9399b91653e4d8f, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: cbb0a3ff35013534dbe05bad1b067137, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: b89e1ca8d8a46fb4fbf0fe50b06bc31a, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 438fcbdd4122f7241abb40674400c7dd, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 0b88e2948e6a8d846966242f0317643f, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: f7d1faaa113d42b4b855341b71839533, type: 2}
+      chance: 0
     - npc: {fileID: 11400000, guid: 05011b93bb0547944a04fb8cbe806f47, type: 2}
-      chance: 50
+      chance: 0
+    - npc: {fileID: 11400000, guid: 011ff2e1da7ff844e845c912a81ace30, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 697d2868a7f6f574bb882f5017673b8a, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 41dd8242ad01fe342ab07672e8c4edd7, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: 77c405c1bdfc09846bd0f2a99cb39ffc, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: f9525486ddc19184fa05568641bcc1c7, type: 2}
+      chance: 0
   monk:
     spawnChance: 40
-    npcs: []
+    npcs:
+    - npc: {fileID: 11400000, guid: a6f5d80c49fa85a4fad5878fa9891c1e, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: e36a2a84e9f2ae5448c665dba99f41b4, type: 2}
+      chance: 0
+    - npc: {fileID: 11400000, guid: ab8f319feb0e6274391e0d500af82f82, type: 2}
+      chance: 0
   special:
     spawnChance: 1
     npcs: []
