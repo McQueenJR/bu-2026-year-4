@@ -1,11 +1,9 @@
 using UnityEngine;
 
-// ติดที่ TodaylistPanel (ตัวที่มี Collider2D ครอบเต็มพาเนลอยู่แล้ว)
 public class TodayListDisplayClick : MonoBehaviour
 {
     private bool isDragging = false;
     private Vector3 offset;
-
     private Camera mainCamera;
 
     [Header("กันลากออกนอกกรอบที่กำหนด")]
@@ -26,7 +24,6 @@ public class TodayListDisplayClick : MonoBehaviour
         originalZ = transform.position.z;
         originalPosition = transform.position;
 
-        // ===== เปลี่ยนตรงนี้: ดึง Renderer ทั้งหมด (รวม SpriteRenderer + MeshRenderer ของ Text) =====
         allRenderers = GetComponentsInChildren<Renderer>();
         baseSortingOrders = new int[allRenderers.Length];
         for (int i = 0; i < allRenderers.Length; i++)
@@ -40,6 +37,16 @@ public class TodayListDisplayClick : MonoBehaviour
         DraggableSortOrder.OnOrderOverflow -= ResetSortingOrder;
     }
 
+    // =========================
+    // เช็คปุ่มกลางทุกเฟรม ไม่ต้องพึ่ง OnMouseDown ของใครทั้งนั้น
+    // ทำงานเฉพาะตอน GameObject นี้ active (คือตอน popup เปิดอยู่เท่านั้น)
+    // =========================
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(2))
+            TryToggleMarkUnderMouse();
+    }
+
     public void ResetSortingOrder()
     {
         for (int i = 0; i < allRenderers.Length; i++)
@@ -48,26 +55,45 @@ public class TodayListDisplayClick : MonoBehaviour
         transform.position = originalPosition;
     }
 
-    // =========================
-    // ลาก
-    // =========================
     private void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0))
-        {
-            isDragging = true;
-            BringToFront();
-
-            Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = transform.position.z;
-            offset = transform.position - mouseWorldPos;
-        }
+            BeginDrag(Input.mousePosition);
     }
+
     private void OnMouseDrag()
+    {
+        if (isDragging)
+            ContinueDrag(Input.mousePosition);
+    }
+
+    private void OnMouseUp()
+    {
+        if (Input.GetMouseButtonUp(0))
+            EndDrag();
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+            RequestClose();
+    }
+
+    public void BeginDrag(Vector3 mouseScreenPos)
+    {
+        isDragging = true;
+        BringToFront();
+
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        mouseWorldPos.z = transform.position.z;
+        offset = transform.position - mouseWorldPos;
+    }
+
+    public void ContinueDrag(Vector3 mouseScreenPos)
     {
         if (!isDragging) return;
 
-        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
         mouseWorldPos.z = transform.position.z;
 
         Vector3 targetPos = mouseWorldPos + offset;
@@ -78,21 +104,33 @@ public class TodayListDisplayClick : MonoBehaviour
         transform.position = targetPos;
     }
 
-    private void OnMouseUp()
+    public void EndDrag()
     {
-        if (Input.GetMouseButtonUp(0))
-            isDragging = false;
+        isDragging = false;
     }
 
-    // =========================
-    // คลิกขวา → ปิด
-    // =========================
-    private void OnMouseOver()
+    public void RequestClose()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (TodayListManager.Instance != null)
+            TodayListManager.Instance.CloseTodayList();
+    }
+
+    // หา Mark ที่อยู่ใต้ตำแหน่งเมาส์ แล้วสั่ง toggle ให้ตรงๆ
+    // ไม่สนใจว่า raycast ปกติจะเลือกใครเป็นผู้ชนะ
+    private void TryToggleMarkUnderMouse()
+    {
+        Vector3 worldPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        worldPoint.z = 0f;
+
+        Collider2D[] hits = Physics2D.OverlapPointAll(worldPoint);
+        foreach (var h in hits)
         {
-            if (TodayListManager.Instance != null)
-                TodayListManager.Instance.CloseTodayList();
+            TodayListMarkToggle mark = h.GetComponent<TodayListMarkToggle>();
+            if (mark != null)
+            {
+                mark.ToggleMark();
+                break;
+            }
         }
     }
 
@@ -135,7 +173,7 @@ public class TodayListDisplayClick : MonoBehaviour
         pos.z = originalZ - (order * 0.0001f);
         transform.position = pos;
     }
-    
+
     public void RefreshSpriteCache()
     {
         allRenderers = GetComponentsInChildren<Renderer>();
@@ -143,5 +181,4 @@ public class TodayListDisplayClick : MonoBehaviour
         for (int i = 0; i < allRenderers.Length; i++)
             baseSortingOrders[i] = allRenderers[i].sortingOrder;
     }
-    
 }

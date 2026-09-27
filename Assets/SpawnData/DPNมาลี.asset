@@ -15,7 +15,7 @@ MonoBehaviour:
   todayGood:
     chance: 7
     prefabs:
-    - prefab: {fileID: 2701796410127562494, guid: 0e41fc57decd17041893ca20f8f471bc, type: 3}
+    - prefab: {fileID: 2129492280979273991, guid: 0e41fc57decd17041893ca20f8f471bc, type: 3}
       chance: 100
   todayBad:
     chance: 37

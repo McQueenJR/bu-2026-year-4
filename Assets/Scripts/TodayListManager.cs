@@ -14,6 +14,9 @@ public class TodayListManager : MonoBehaviour
     public GameObject namePrefab;          // ลาก prefab "Text (TMP)" มาใส่ใน Inspector
     public Vector3 nameOffset = new Vector3(0, -1.5f, 0); // ตำแหน่งใต้รูป ปรับเลขตามจริง
     
+    [Header("กากบาทติ๊กรายชื่อ")]
+    public GameObject markColliderPrefab;
+    
     [Header("SOUND")]
     public AudioSource openSound;
     public AudioSource closeSound;
@@ -61,11 +64,22 @@ public class TodayListManager : MonoBehaviour
 
                 spawnedPhotos.Add(nameObj);
             }
+            if (markColliderPrefab != null)
+            {
+                GameObject markObj = Instantiate(markColliderPrefab, photo.transform);
+                markObj.transform.localPosition = Vector3.zero;
+                //markObj.transform.localScale = Vector3.one;
+                // ให้มันใช้ scale ที่ตั้งไว้ใน prefab เองแทน
+                
+                spawnedPhotos.Add(markObj);
+            }
         }
 
         TodayListDisplayClick display = popup.GetComponentInChildren<TodayListDisplayClick>();
         if (display != null)
             display.RefreshSpriteCache();
+        
+        Physics2D.SyncTransforms();
     }
 
     // เรียกจากตอนผู้เล่นคลิกไอคอน — แค่เปิด popup มี 3 เงื่อนไขป้องกัน
@@ -101,6 +115,8 @@ public class TodayListManager : MonoBehaviour
         }
 
         popup.SetActive(true);
+        Physics2D.SyncTransforms();
+        
         if (openSound != null)
             openSound.Play();
     }
