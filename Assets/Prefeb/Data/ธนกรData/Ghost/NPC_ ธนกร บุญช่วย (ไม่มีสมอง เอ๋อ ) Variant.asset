@@ -28,7 +28,8 @@ MonoBehaviour:
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
-  applicantPhotoPrefab: {fileID: 6946208840450413241, guid: d995b4897d2822c42be8b9b62140f2ee, type: 3}
+  applicantPhotoPrefab: {fileID: 0}
+  templeDocumentData: {fileID: 11400000, guid: aef47ab6533d91749a61183eeb7ac9ed, type: 2}
   templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 6921753078679136934, guid: 575fef915c3d3bb47aabf0ff2be2eba0, type: 3}
   applicant:
@@ -37,9 +38,33 @@ MonoBehaviour:
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0
-    campID: -1
-    isAlive: 1
-    hasEnteredCamp: 0
+    templeDocument:
+      generatedDay: 0
+      paper: {fileID: 0}
+      logo:
+        value: {fileID: 0}
+        isFake: 0
+      photo:
+        value: {fileID: 0}
+        isFake: 0
+      idNumber:
+        value: 
+        isFake: 0
+      firstName:
+        value: 
+        isFake: 0
+      lastName:
+        value: 
+        isFake: 0
+      tentNumber:
+        value: 
+        isFake: 0
+      reason:
+        value: 
+        isFake: 0
+      signature: {fileID: 0}
+      showSignature: 0
+    hasEnteredToday: 0
   greenDialogs:
   - "\u0E1A\u0E4A\u0E32\u0E22 \u0E1A\u0E4A\u0E32\u0E22 \u0E1A\u0E4B\u0E32\u0E22"
   redDialogs:

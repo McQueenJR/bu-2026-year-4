@@ -40,9 +40,9 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
   applicantPhotoPrefab: {fileID: 2587323786786100968, guid: a9f84d4e46a53394bbf2708373e02538, type: 3}
-  templeDocumentData: {fileID: 0}
+  templeDocumentData: {fileID: 11400000, guid: 2fba6d28bd540994f9c6d9117186fd9d, type: 2}
   templeDocumentPrefab: {fileID: 0}
-  TodayPhotoPrefab: {fileID: 0}
+  TodayPhotoPrefab: {fileID: 3175394428027141904, guid: cece8c83612a633448936ef01645c0de, type: 3}
   applicant:
     npcData: {fileID: 0}
     displayData: {fileID: 0}

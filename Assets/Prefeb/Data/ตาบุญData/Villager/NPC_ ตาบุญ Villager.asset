@@ -38,7 +38,7 @@ MonoBehaviour:
   applicantPhotoPrefab: {fileID: 1214283402335713282, guid: f324db202b2678446906d45000e7184a, type: 3}
   templeDocumentData: {fileID: 0}
   templeDocumentPrefab: {fileID: 0}
-  TodayPhotoPrefab: {fileID: 244759680098739023, guid: 96199263c4dafc44abab31fb4bb56e3f, type: 3}
+  TodayPhotoPrefab: {fileID: 2156758093284830505, guid: 0431871a2a9e5a14f9ff7562c19f817b, type: 3}
   applicant:
     npcData: {fileID: 0}
     displayData: {fileID: 0}
