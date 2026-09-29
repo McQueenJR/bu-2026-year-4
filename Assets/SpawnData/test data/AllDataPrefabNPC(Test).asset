@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3315c38c468e0a44b953ad9a9bc8fe4, type: 3}
+  m_Name: AllDataPrefabNPC(Test)
+  m_EditorClassIdentifier: Assembly-CSharp::AllDataPrefabNPC
+  minNPCPerDay: 1
+  maxNPCPerDay: 1
+  minTodayList: 3
+  maxTodayList: 6
+  villager:
+    spawnChance: 59
+    npcs:
+    - npc: {fileID: 11400000, guid: 7be90f7441f2fa343b2c48fad5d9a20f, type: 2}
+      chance: 10
+  monk:
+    spawnChance: 0
+    npcs:
+    - npc: {fileID: 11400000, guid: a6f5d80c49fa85a4fad5878fa9891c1e, type: 2}
+      chance: 50
+    - npc: {fileID: 11400000, guid: e36a2a84e9f2ae5448c665dba99f41b4, type: 2}
+      chance: 50
+    - npc: {fileID: 11400000, guid: ab8f319feb0e6274391e0d500af82f82, type: 2}
+      chance: 0
+  special:
+    spawnChance: 1
+    npcs: []

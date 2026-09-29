@@ -204,10 +204,15 @@ public class SpawnManager : MonoBehaviour
             }
 
             // ถ้าอยู่ Camp วันนี้ ไม่ต้อง Spawn
-            if (CampManager.Instance != null &&
+            if (!nextApplicant.isGhost &&
+                CampManager.Instance != null &&
                 CampManager.Instance.IsHomeToday(nextApplicant.displayData))
             {
-                Debug.Log($"{nextApplicant.displayData.npcName} อยู่ Camp วันนี้ → ไม่ Spawn");
+                Debug.Log(
+                    $"{nextApplicant.displayData.npcName} " +
+                    $"อยู่ Camp วันนี้ → ไม่ Spawn"
+                );
+
                 continue;
             }
 
@@ -303,7 +308,38 @@ public class SpawnManager : MonoBehaviour
         if (role.npcs == null || role.npcs.Count == 0)
             return null;
 
-        int totalWeight = role.npcs.Sum(n => n.chance);
+        // เอาเฉพาะ NPC ที่ยังมีชีวิต
+        List<NPCGroupChance> aliveNPCs = new List<NPCGroupChance>();
+
+        foreach (NPCGroupChance entry in role.npcs)
+        {
+            if (entry.npc == null)
+                continue;
+
+            NPCData npcData = GetNPCDataFromPrefabData(entry.npc);
+
+            // ถ้าหา NPCData ไม่เจอ ให้ข้าม
+            if (npcData == null)
+                continue;
+
+            // NPC ตายแล้ว → ห้ามสุ่ม
+            if (CampManager.Instance != null &&
+                !CampManager.Instance.IsAlive(npcData))
+            {
+                Debug.Log(
+                    $"☠️ {npcData.npcName} ตายแล้ว → ไม่สุ่ม Spawn"
+                );
+
+                continue;
+            }
+
+            aliveNPCs.Add(entry);
+        }
+
+        if (aliveNPCs.Count == 0)
+            return null;
+
+        int totalWeight = aliveNPCs.Sum(n => n.chance);
 
         if (totalWeight <= 0)
             return null;
@@ -311,15 +347,48 @@ public class SpawnManager : MonoBehaviour
         int random = Random.Range(0, totalWeight);
         int current = 0;
 
-        foreach (NPCGroupChance npc in role.npcs)
+        foreach (NPCGroupChance entry in aliveNPCs)
         {
-            current += npc.chance;
+            current += entry.chance;
 
             if (random < current)
-                return npc.npc;
+                return entry.npc;
         }
 
-        return role.npcs.Last().npc;
+        return aliveNPCs.Last().npc;
+    }
+    
+    private NPCData GetNPCDataFromPrefabData(DataPrefabNPC data)
+    {
+        if (data == null)
+            return null;
+
+        NPCSpawnGroup[] groups =
+        {
+            data.todayGood,
+            data.todayBad,
+            data.normalGood,
+            data.normalBad
+        };
+
+        foreach (NPCSpawnGroup group in groups)
+        {
+            if (group == null || group.prefabs == null)
+                continue;
+
+            foreach (NPCPrefabChance prefabChance in group.prefabs)
+            {
+                if (prefabChance.prefab == null)
+                    continue;
+
+                NPC npc = prefabChance.prefab.GetComponent<NPC>();
+
+                if (npc != null && npc.data != null)
+                    return npc.data;
+            }
+        }
+
+        return null;
     }
 
     // =========================================================
@@ -347,6 +416,11 @@ public class SpawnManager : MonoBehaviour
         NPCSpawnGroup group = applicant.isInTodayList
             ? (applicant.isGood ? applicant.npcData.todayGood : applicant.npcData.todayBad)
             : (applicant.isGood ? applicant.npcData.normalGood : applicant.npcData.normalBad);
+
+// ==========================================
+// กำหนดว่า Applicant วันนี้เป็น Ghost หรือไม่
+// ==========================================
+        applicant.isGhost = group.isGhost;
 
         if (!usedPrefabsPerNPC.TryGetValue(applicant.npcData, out HashSet<GameObject> usedPrefabs))
         {
@@ -379,6 +453,22 @@ public class SpawnManager : MonoBehaviour
         }
 
         applicant.displayData = npc.data;
+        
+        // ==========================================
+// GHOST
+// ==========================================
+        if (applicant.isGhost)
+        {
+            applicant.ghostTarget = applicant.displayData;
+
+            Debug.Log(
+                $"👻 Ghost Target = {applicant.ghostTarget.npcName}"
+            );
+        }
+        else
+        {
+            applicant.ghostTarget = null;
+        }
     }
 
     // =========================================================

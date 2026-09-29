@@ -431,12 +431,26 @@ public class GameManager : MonoBehaviour
 
         RecordDecision(currentNPC, wasArrested: false);
         releasedToCamp = true;
-        
+    
         NPC npc = currentNPC.GetComponent<NPC>();
 
         if (npc != null && npc.applicant != null)
         {
             npc.applicant.hasEnteredToday = true;
+
+            // ==========================
+            // GHOST
+            // ==========================
+            if (npc.applicant.isGhost &&
+                npc.applicant.ghostTarget != null)
+            {
+                if (CampManager.Instance != null)
+                {
+                    CampManager.Instance.GhostEnterCamp(
+                        npc.applicant.ghostTarget
+                    );
+                }
+            }
         }
 
         currentState = NPCState.Leaving;
@@ -491,8 +505,18 @@ public class GameManager : MonoBehaviour
                 npcScript.applicant != null &&
                 CampManager.Instance != null)
             {
-                CampManager.Instance.EnterCampToday(npcScript.applicant.displayData);
-                CampManager.Instance.PrintAllCamps();
+                // Ghost ห้ามทำให้ NPC ตัวจริงกลายเป็นอยู่ Camp
+                if (!npcScript.applicant.isGhost)
+                {
+                    CampManager.Instance.EnterCampToday(
+                        npcScript.applicant.displayData
+                    );
+
+                    Debug.Log(
+                        $"🏕️ {npcScript.applicant.displayData.npcName} " +
+                        $"เข้า Camp แล้ว → Runtime ควรเป็น 🟢"
+                    );
+                }
             }
         }
 
@@ -556,6 +580,12 @@ public class GameManager : MonoBehaviour
 
     public void StartNextDay()
     {
+        
+        if (CampManager.Instance != null)
+        {
+            CampManager.Instance.ResolveGhosts();
+        }
+        
         // ---------- จบเกมเมื่อครบ 7 วัน ----------
         if (currentDay >= maxDay)
         {

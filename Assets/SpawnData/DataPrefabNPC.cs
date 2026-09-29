@@ -19,7 +19,8 @@ public class NPCSpawnGroup
     [Header("โอกาสเลือกกลุ่มนี้")]
     [Range(0, 100)]
     public int chance = 50;
-
+    [Header("เป็น Ghost หรือไม่")]
+    public bool isGhost = false;
     [Header("Prefab ในกลุ่มนี้")]
     public List<NPCPrefabChance> prefabs = new List<NPCPrefabChance>();
 }
@@ -35,6 +36,6 @@ public class DataPrefabNPC : ScriptableObject
     public NPCSpawnGroup normalGood;
     public NPCSpawnGroup normalBad;
     
-    [Header("Role ของ NPC นี้")]
-    public NPCType roleType;
+    //[Header("Role ของ NPC นี้")]
+   // public NPCType roleType;
 }

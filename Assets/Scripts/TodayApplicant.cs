@@ -4,17 +4,21 @@ using UnityEngine;
 public class TodayApplicant
 {
     [Header("ข้อมูล NPC ของวันนี้")]
-    public DataPrefabNPC npcData;      // ScriptableObject ของ NPC
-    public NPCData displayData;        // NPCData ที่ใช้แสดง Dialog / Today List
+    public DataPrefabNPC npcData;
+    public NPCData displayData;
 
     [Header("Spawn วันนี้")]
-    public GameObject spawnPrefab;     // Prefab ที่จะ Spawn วันนี้
-    public bool isGood;                // Good / Bad เวอร์ชันของ NPC
-    public bool isInTodayList;         // อยู่ใน Today List หรือไม่
+    public GameObject spawnPrefab;
+    public bool isGood;
+    public bool isInTodayList;
+    public bool isGhost;
 
-    
+    [Header("Ghost")]
+    public NPCData ghostTarget;
+
     [Header("Temple Document")]
     public TempleDocumentRuntime templeDocument;
+
     [HideInInspector]
     public bool hasEnteredToday = false;
 }
