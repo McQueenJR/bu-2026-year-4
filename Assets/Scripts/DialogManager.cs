@@ -151,7 +151,7 @@ public class DialogManager : MonoBehaviour
 
         currentDialogType = DialogType.Normal;
 
-        dialogs = data.dialogs;
+        dialogs = data.Dialogs;
         
         // สุ่มเลือกบทพูด 1 ชุด จากที่มีอยู่ทั้งหมด
         currentIndex = (dialogs != null && dialogs.Length > 0)
@@ -179,7 +179,7 @@ public class DialogManager : MonoBehaviour
 
         currentDialogType = DialogType.Green;
 
-        dialogs = data.greenDialogs;
+        dialogs = data.GreenDialogs;
         
         currentIndex = (dialogs != null && dialogs.Length > 0)
             ? Random.Range(0, dialogs.Length)
@@ -206,7 +206,7 @@ public class DialogManager : MonoBehaviour
 
         currentDialogType = DialogType.Red;
 
-        dialogs = data.redDialogs;
+        dialogs = data.RedDialogs;
 
         // สุ่มเลือกบทพูด 1 ชุด
         currentIndex = (dialogs != null && dialogs.Length > 0)
@@ -231,8 +231,8 @@ public class DialogManager : MonoBehaviour
         if (data == null)
             return;
 
-        if (data.emergencyDialogs == null ||
-            data.emergencyDialogs.Length == 0)
+        if (data.EmergencyDialogs == null ||
+            data.EmergencyDialogs.Length == 0)
         {
             Debug.LogWarning(
                 "NPC " +
@@ -247,7 +247,7 @@ public class DialogManager : MonoBehaviour
 
         currentDialogType = DialogType.Emergency;
 
-        dialogs = data.emergencyDialogs;
+        dialogs = data.EmergencyDialogs;
         currentIndex = Random.Range(0, dialogs.Length);
         nameText.text = data.npcName;
 

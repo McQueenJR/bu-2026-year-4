@@ -18,25 +18,27 @@ public class TempleDocumentRuntime
     public FieldValue<string> idNumber;
     public FieldValue<string> firstName;
     public FieldValue<string> lastName;
+    public FieldValue<string> occupation;
     public FieldValue<string> tentNumber;
     public FieldValue<string> reason;
 
     [Header("Signature")]
-    public Sprite signature;
+    public FieldValue<Sprite> signature;
     public bool showSignature;                 // snapshot ตอนสร้างเอกสาร
 
     // มีฟิลด์ไหนเป็นค่าปลอมบ้างไหม (ไว้ต่อยอดกับ Checklist / เฉลย)
     public bool HasAnyAnomaly =>
         logo.isFake || photo.isFake ||
-        idNumber.isFake || firstName.isFake || lastName.isFake ||
-        tentNumber.isFake || reason.isFake;
+        idNumber.isFake || firstName.isFake || lastName.isFake || occupation.isFake ||
+        tentNumber.isFake || reason.isFake || signature.isFake;
 
     public override string ToString()
     {
         return $"วัน {generatedDay} | ID:{Show(idNumber)} | ชื่อ:{Show(firstName)} | สกุล:{Show(lastName)}" +
+               $" | อาชีพ:{Show(occupation)}" +
                $" | เต็นท์:{Show(tentNumber)} | เหตุผล:{Show(reason)}" +
                $" | รูป:{Show(photo)} | โลโก้:{Show(logo)}" +
-               $" | ลายเซ็น:{(showSignature ? "มี" : "ไม่มี")}";
+               $" | ลายเซ็น:{(showSignature ? Show(signature) : "ไม่มี")}";
     }
 
     private static string Show(FieldValue<string> f)

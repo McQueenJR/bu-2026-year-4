@@ -16,6 +16,7 @@ public class TempleDocumentView : MonoBehaviour
     [SerializeField] private TextMeshPro idNumberText;
     [SerializeField] private TextMeshPro firstNameText;
     [SerializeField] private TextMeshPro lastNameText;
+    [SerializeField] private TextMeshPro occupationText;
     [SerializeField] private TextMeshPro tentNumberText;
     [SerializeField] private TextMeshPro reasonText;
 
@@ -37,14 +38,15 @@ public class TempleDocumentView : MonoBehaviour
         SetText(idNumberText, data.idNumber.value);
         SetText(firstNameText, data.firstName.value);
         SetText(lastNameText, data.lastName.value);
+        SetText(occupationText, data.occupation.value);
         SetText(tentNumberText, data.tentNumber.value);
         SetText(reasonText, data.reason.value);
 
-        // ลายเซ็น: เปิดตาม snapshot ที่ Generator ตัดสินไว้แล้ว
+        // ลายเซ็น: "แสดงไหม" มาจากสถานะเจ้าอาวาส, "รูปไหน" มาจาก Use Fake
         if (signature != null)
         {
-            bool show = data.showSignature && data.signature != null;
-            signature.sprite = data.signature;
+            bool show = data.showSignature && data.signature.value != null;
+            signature.sprite = data.signature.value;
             signature.gameObject.SetActive(show);
         }
     }

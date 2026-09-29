@@ -7,8 +7,8 @@ using UnityEngine;
 public class TempleDocumentData : ScriptableObject
 {
     [Header("Paper")]
-    [Tooltip("ว่าง = ใช้กระดาษที่อยู่ใน Template prefab")]
-    public Sprite paperBackground;
+    [Tooltip("ไม่ติ๊ก / list ว่าง = ใช้กระดาษของ Template prefab | ติ๊ก+มีหลายรูป = สุ่ม 1 รูป")]
+    public PaperVariantField paperBackground = new PaperVariantField();
 
     [Header("Images")]
     public AnomalyField<Sprite> logo = new AnomalyField<Sprite>();
@@ -19,13 +19,14 @@ public class TempleDocumentData : ScriptableObject
     public AnomalyField<string> idNumber = new AnomalyField<string>();
     public AnomalyField<string> firstName = new AnomalyField<string>();
     public AnomalyField<string> lastName = new AnomalyField<string>();
+    public AnomalyField<string> occupation = new AnomalyField<string>();
     [Tooltip("เต็นท์ประจำตัวของ NPC (คงที่) เช่น A3-01 — ค่า Fake = ห้องผิด")]
     public AnomalyField<string> tentNumber = new AnomalyField<string>();
     public AnomalyField<string> reason = new AnomalyField<string>();
 
     [Header("Signature")]
-    [Tooltip("ลายเซ็นเจ้าอาวาส — จะแสดงหรือไม่ ขึ้นกับสถานะเจ้าอาวาสตอนสร้างเอกสาร")]
-    public Sprite signature;
+    [Tooltip("จะ 'แสดงหรือไม่' ขึ้นกับสถานะเจ้าอาวาส (AbbotStatusManager), ส่วน 'ใช้รูปไหน' ขึ้นกับ Use Fake ตรงนี้")]
+    public AnomalyField<Sprite> signature = new AnomalyField<Sprite>();
 
     // ---- ไว้ทดสอบขั้นที่ 1 ----
     // คลิกขวาที่ชื่อ asset ใน Inspector → "Test Generate (x5)"

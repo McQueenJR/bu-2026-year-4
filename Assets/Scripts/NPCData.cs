@@ -14,7 +14,17 @@ public class NPCData : ScriptableObject
     public string npcName;
     public int age;
     public NpcVoiceType voiceType = NpcVoiceType.None;
-
+    
+    [Header("Dialogue Set (ระบบใหม่ — ใช้แชร์บทพูดข้าม NPC ได้)")]
+    public NPCDialogueSet dialogueSet;
+    
+    // ถ้ามี dialogueSet ใช้ชุดนั้น ถ้าไม่มีใช้ array เดิม (ของเก่า NPC ที่ยังไม่ย้าย)
+    public string[] Dialogs => dialogueSet != null ? dialogueSet.dialogs : dialogs;
+    
+    public string[] GreenDialogs => dialogueSet != null ? dialogueSet.greenDialogs : greenDialogs;
+    public string[] RedDialogs => dialogueSet != null ? dialogueSet.redDialogs : redDialogs;
+    public string[] EmergencyDialogs => dialogueSet != null ? dialogueSet.emergencyDialogs : emergencyDialogs;
+    
     [Header("Dialog")]
     [TextArea(2, 5)]
     public string[] dialogs;

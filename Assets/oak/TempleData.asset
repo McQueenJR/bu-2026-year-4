@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aeae08560d70df499011451b7cf17e0, type: 3}
-  m_Name: New Temple Document Data
+  m_Name: TempleData
   m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
-  paperBackground: {fileID: 0}
+  paperBackground:
+    useCustomPaper: 1
+    variants:
+    - {fileID: 21300000, guid: 7933b90c69598c84393b21d8a53a3c89, type: 3}
   logo:
     normal: {fileID: 21300000, guid: fda8111cc66f332428cde1b63da0fe4b, type: 3}
     useFake: 0
@@ -22,14 +25,14 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d6701208d982d83498ad2d8e8f785032, type: 3}
   photo:
     normal: {fileID: 21300000, guid: fda8111cc66f332428cde1b63da0fe4b, type: 3}
-    useFake: 1
+    useFake: 0
     fakeValues:
     - {fileID: 21300000, guid: 15755432783dfe74a9e9028e1c6c5fb1, type: 3}
     - {fileID: 21300000, guid: 10c4eb9fd8a77db43b9dbdaa8004fd95, type: 3}
     - {fileID: 21300000, guid: d6701208d982d83498ad2d8e8f785032, type: 3}
   idNumber:
     normal: 111111
-    useFake: 1
+    useFake: 0
     fakeValues:
     - fake1
     - fake2
@@ -48,6 +51,13 @@ MonoBehaviour:
     - bocchi
     - nijika
     - kita
+  occupation:
+    normal: "\u0E1B\u0E23\u0E30\u0E21\u0E07"
+    useFake: 0
+    fakeValues:
+    - 
+    - 
+    - 
   tentNumber:
     normal: 111111
     useFake: 1
@@ -62,4 +72,7 @@ MonoBehaviour:
     - fake1
     - fake2
     - fake3
-  signature: {fileID: 21300000, guid: fda8111cc66f332428cde1b63da0fe4b, type: 3}
+  signature:
+    normal: {fileID: 21300000, guid: fda8111cc66f332428cde1b63da0fe4b, type: 3}
+    useFake: 0
+    fakeValues: []
