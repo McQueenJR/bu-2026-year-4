@@ -12,6 +12,11 @@ public class EndDayUI : MonoBehaviour
     public TMP_Text villagerArrestedText;
     public TMP_Text robberPassedText;
     public TMP_Text robberArrestedText;
+
+    public TMP_Text villagerRejectedText;
+    public TMP_Text robberRejectedText;
+    public TMP_Text villagersKilledText;
+
     public TMP_Text rankText;
 
     [Header("Button")]
@@ -23,16 +28,41 @@ public class EndDayUI : MonoBehaviour
             nextDayButton.onClick.AddListener(OnNextDayClicked);
     }
 
-    public void Show(int score, int villagerPassed, int villagerArrested, int robberPassed, int robberArrested)
+    public void Show(
+        int score,
+        int villagerPassed,
+        int villagerArrested,
+        int robberPassed,
+        int robberArrested,
+        int villagerRejected,
+        int robberRejected,
+        int villagersKilled)
     {
         panel.SetActive(true);
-        
-        villagerPassedText.text = "ชาวบ้านเข้าหมู่บ้าน : " + villagerPassed + " คน";
-        villagerArrestedText.text = "ชาวบ้านโดนจับ : " + villagerArrested + " คน";
-        robberPassedText.text = "ผีเข้าหมู่บ้าน : " + robberPassed + " คน";
-        robberArrestedText.text = "ผีโดนจับ : " + robberArrested + " คน";
 
-        rankText.text = "แรงค์ : " + GetRank(score);
+        villagerPassedText.text =
+            "ชาวบ้านเข้าหมู่บ้าน : " + villagerPassed + " คน";
+
+        villagerArrestedText.text =
+            "ชาวบ้านโดนจับ : " + villagerArrested + " คน";
+
+        robberPassedText.text =
+            "ผีเข้าหมู่บ้าน : " + robberPassed + " คน";
+
+        robberArrestedText.text =
+            "ผีโดนจับ : " + robberArrested + " คน";
+
+        villagerRejectedText.text =
+            "ชาวบ้านถูกปฏิเสธ : " + villagerRejected + " คน";
+
+        robberRejectedText.text =
+            "ผีถูกปฏิเสธ : " + robberRejected + " คน";
+
+        villagersKilledText.text =
+            "ชาวบ้านถูกสังหาร : " + villagersKilled + " คน";
+
+        rankText.text =
+            "แรงค์ : " + GetRank(score);
     }
 
     public void Hide()

@@ -22,6 +22,9 @@ public class CampManager : MonoBehaviour
     [SerializeField]
     private List<CampRuntimeRoom> runtimeRooms =
         new List<CampRuntimeRoom>();
+    
+    [Header("Daily Camp Stats")]
+    public int villagersKilledToday = 0;
 
     
     [System.Serializable]
@@ -85,6 +88,8 @@ public class CampManager : MonoBehaviour
     // ==========================
     public void StartNewDay(int day)
     {
+        
+        villagersKilledToday = 0;
         Debug.Log($"===== CAMP DAY {day} =====");
 
         // NPC ที่ยังมีชีวิต
@@ -295,10 +300,19 @@ public class CampManager : MonoBehaviour
         if (!aliveNPC.ContainsKey(npc))
             return;
 
+        // กันนับซ้ำ
+        if (!aliveNPC[npc])
+            return;
+
         aliveNPC[npc] = false;
         homeTodayNPC[npc] = false;
 
-        Debug.Log($"{npc.npcName} เสียชีวิตแล้ว");
+        villagersKilledToday++;
+
+        Debug.Log(
+            $"💀 {npc.npcName} เสียชีวิตแล้ว " +
+            $"| ฆ่าวันนี้ = {villagersKilledToday}"
+        );
     }
 
     // ==========================
@@ -540,5 +554,18 @@ public class CampManager : MonoBehaviour
 
         PrintAllCamps();
     }
-    
+    public int GetTodayTempleNPCCount()
+    {
+        int count = 0;
+
+        foreach (NPCData npc in aliveNPC.Keys)
+        {
+            if (aliveNPC[npc] && !IsHomeToday(npc))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }

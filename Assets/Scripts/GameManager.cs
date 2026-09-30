@@ -87,13 +87,15 @@ public class GameManager : MonoBehaviour
 
     [Header("Day Stats")]
     public int npcProcessedCount = 0;
-    //public int npcPerDay = 8;
 
     public int score = 0;
     public int villagerPassed = 0;
     public int villagerArrested = 0;
     public int robberPassed = 0;
     public int robberArrested = 0;
+
+    public int villagerRejected = 0;
+    public int robberRejected = 0;
 
     [Header("End Day UI")]
     public EndDayUI endDayUI;
@@ -472,7 +474,24 @@ public class GameManager : MonoBehaviour
         if (currentNPC == null)
             return;
 
-        // ✅ ตัวนี้ไม่เข้าวัด
+        // ==========================
+        // นับสถิติการปฏิเสธ
+        // ==========================
+        NPC npc = currentNPC.GetComponent<NPC>();
+
+        if (npc != null)
+        {
+            if (npc.npcType == NPCType.Special)
+            {
+                robberRejected++;
+            }
+            else
+            {
+                villagerRejected++;
+            }
+        }
+
+        // NPC ตัวนี้ไม่เข้า Camp
         releasedToCamp = false;
 
         currentState = NPCState.Leaving;
@@ -540,14 +559,15 @@ public class GameManager : MonoBehaviour
 
         clockManager.SetHour(currentHour);
 
-        // จบวันเมื่อครบจำนวน NPC ของวันนี้
+        // NPC วันนี้หมดแล้ว
         if (npcProcessedCount >= npcPerDay)
         {
+            Debug.Log("===== NPC วันนี้หมดแล้ว → จบวัน =====");
+
             EndGame();
             return;
         }
 
-        // Spawn คนต่อไป
         spawner.SpawnNextNPC();
     }
 
@@ -568,9 +588,27 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("จบวัน คะแนนรวม: " + score);
 
+        int villagersKilled = 0;
+
+        if (CampManager.Instance != null)
+        {
+            villagersKilled = CampManager.Instance.villagersKilledToday;
+        }
+
         if (endDayUI != null)
         {
-            endDayUI.Show(score, villagerPassed, villagerArrested, robberPassed, robberArrested);
+            endDayUI.Show(
+                score,
+                villagerPassed,
+                villagerArrested,
+                robberPassed,
+                robberArrested,
+                villagerRejected,
+                robberRejected,
+                CampManager.Instance != null
+                    ? CampManager.Instance.villagersKilledToday
+                    : 0
+            );
         }
     }
 
@@ -608,6 +646,8 @@ public class GameManager : MonoBehaviour
         villagerArrested = 0;
         robberPassed = 0;
         robberArrested = 0;
+        villagerRejected = 0;
+        robberRejected = 0;
 
         if (ChecklistManager.Instance != null)
             ChecklistManager.Instance.ResetAllChecklistScores();
