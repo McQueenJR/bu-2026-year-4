@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aeae08560d70df499011451b7cf17e0, type: 3}
-  m_Name: "Logo-\u0E25\u0E32\u0E22\u0E40\u0E0B\u0E47\u0E19\u0E1C\u0E34\u0E14.\u0E18\u0E19\u0E01\u0E23"
+  m_Name: "\u0E40\u0E2D\u0E01\u0E2A\u0E32\u0E23\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07"
   m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
-  paperBackground: {fileID: 0}
+  paperBackground:
+    useCustomPaper: 0
+    variants: []
   logo:
     normal: {fileID: 7332877267196587869, guid: 5550b8550169ac64883e034fc7a11759, type: 3}
-    useFake: 1
+    useFake: 0
     fakeValues:
     - {fileID: 6017210087554621937, guid: 152962ed8b776454d80bf9d98b4e2750, type: 3}
     - {fileID: -4696693758605869302, guid: 6dbfe99e95a4c134288155076e6744d4, type: 3}
@@ -25,9 +27,9 @@ MonoBehaviour:
     normal: {fileID: 2485612490660815995, guid: 67e2d34511c8efc42814e6e9d93e5405, type: 3}
     useFake: 0
     fakeValues:
-    - {fileID: 21300000, guid: 15755432783dfe74a9e9028e1c6c5fb1, type: 3}
-    - {fileID: 21300000, guid: 10c4eb9fd8a77db43b9dbdaa8004fd95, type: 3}
-    - {fileID: 21300000, guid: d6701208d982d83498ad2d8e8f785032, type: 3}
+    - {fileID: -7945337574229941911, guid: b8f2696626c363546b84d5a1d197ed0b, type: 3}
+    - {fileID: 5874482059372213388, guid: 09408fb6a62d7f044bad85fcbcefed7f, type: 3}
+    - {fileID: -5917624910050241314, guid: 0dbd10f92560d3a43a815256d52512cf, type: 3}
   idNumber:
     normal: ' 97521'
     useFake: 0
@@ -39,16 +41,23 @@ MonoBehaviour:
     normal: "\u0E18\u0E19\u0E01\u0E23 "
     useFake: 0
     fakeValues:
-    - "\u0E0A\u0E31\u0E22\u0E27\u0E31\u0E15"
-    - "\u0E2A\u0E38\u0E40\u0E21\u0E15"
-    - "\u0E14\u0E25\u0E1E\u0E23"
+    - " \u0E18\u0E35\u0E23\u0E20\u0E31\u0E17\u0E23"
+    - "\u0E0A\u0E31\u0E22\u0E22\u0E38\u0E17\u0E18 "
+    - "\u0E1E\u0E07\u0E28\u0E18\u0E23"
   lastName:
     normal: "\u0E1A\u0E38\u0E0D\u0E0A\u0E48\u0E27\u0E22"
     useFake: 0
     fakeValues:
-    - bocchi
-    - nijika
-    - kita
+    - "\u0E1E\u0E31\u0E12\u0E19\u0E32\u0E01\u0E38\u0E25 "
+    - "\u0E2A\u0E38\u0E23\u0E24\u0E17\u0E18\u0E34\u0E4C"
+    - "\u0E2D\u0E31\u0E04\u0E23\u0E40\u0E14\u0E0A\u0E0A\u0E31\u0E22"
+  occupation:
+    normal: " \u0E0A\u0E48\u0E32\u0E07\u0E44\u0E1F\u0E1B\u0E23\u0E30\u0E08\u0E33\u0E2B\u0E21\u0E39\u0E48\u0E1A\u0E49\u0E32\u0E19"
+    useFake: 0
+    fakeValues:
+    - "\u0E0A\u0E48\u0E32\u0E07\u0E44\u0E21\u0E49"
+    - "\u0E04\u0E19\u0E02\u0E31\u0E1A\u0E23\u0E16 "
+    - "\u0E0A\u0E32\u0E27\u0E19\u0E32"
   tentNumber:
     normal: ' A1-03'
     useFake: 0
@@ -58,10 +67,15 @@ MonoBehaviour:
     - ' A1-06'
   reason:
     normal: "\u0E40\u0E1B\u0E47\u0E19\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E01\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E2D\u0E22\u0E39\u0E48\u0E41\u0E16\u0E27
-      A1 \u0E40\u0E15\u0E4A\u0E19\u0E17\u0E4C 03 / \u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E08\u0E32\u0E01\u0E07\u0E32\u0E19\u0E0B\u0E48\u0E2D\u0E21\u0E44\u0E1F"
+      A1 \u0E40\u0E15\u0E4A\u0E19\u0E17\u0E4C 03 "
     useFake: 0
     fakeValues:
     - fake1
     - fake2
     - fake3
-  signature: {fileID: -1625968434930672485, guid: dab7c20fc235e55418d263324e6d6fca, type: 3}
+  signature:
+    normal: {fileID: 6849745177046654033, guid: 41183ac00e21b3c4abcf64ceb5c8d75d, type: 3}
+    useFake: 0
+    fakeValues:
+    - {fileID: 1641539370542077800, guid: b6aff11ce647b1542a31d640bee2c04d, type: 3}
+    - {fileID: -1625968434930672485, guid: dab7c20fc235e55418d263324e6d6fca, type: 3}
