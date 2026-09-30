@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DataPrefabNPC
   todayGood:
     chance: 7
+    isGhost: 0
     prefabs:
     - prefab: {fileID: 6873768859452820952, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
       chance: 100
   todayBad:
     chance: 37
+    isGhost: 1
     prefabs:
     - prefab: {fileID: 6873768859452820952, guid: ae14cd3e5c556bf4bb9d7c676d6e4b04, type: 3}
       chance: 7
@@ -50,11 +52,13 @@ MonoBehaviour:
       chance: 9
   normalGood:
     chance: 55
+    isGhost: 0
     prefabs:
     - prefab: {fileID: 6873768859452820952, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
       chance: 43
   normalBad:
     chance: 35
+    isGhost: 1
     prefabs:
     - prefab: {fileID: 6873768859452820952, guid: ae14cd3e5c556bf4bb9d7c676d6e4b04, type: 3}
       chance: 7
@@ -84,4 +88,3 @@ MonoBehaviour:
       chance: 7
     - prefab: {fileID: 6873768859452820952, guid: a56ceb7f19bbf2a4085d54252567e2a9, type: 3}
       chance: 9
-  roleType: 0

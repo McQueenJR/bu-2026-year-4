@@ -1772,6 +1772,8 @@ MonoBehaviour:
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0
+    isGhost: 0
+    ghostTarget: {fileID: 0}
     templeDocument:
       generatedDay: 0
       paper: {fileID: 0}
@@ -1790,13 +1792,18 @@ MonoBehaviour:
       lastName:
         value: 
         isFake: 0
+      occupation:
+        value: 
+        isFake: 0
       tentNumber:
         value: 
         isFake: 0
       reason:
         value: 
         isFake: 0
-      signature: {fileID: 0}
+      signature:
+        value: {fileID: 0}
+        isFake: 0
       showSignature: 0
     hasEnteredToday: 0
 --- !u!4 &3061513912551609920 stripped
