@@ -38,7 +38,7 @@ MonoBehaviour:
     - ' 99045'
     - ' 99002'
   firstName:
-    normal: "\u0E19\u0E49\u0E32\u0E17\u0E27\u0E19"
+    normal: "\u0E17\u0E27\u0E19"
     useFake: 0
     fakeValues:
     - " \u0E2D\u0E33\u0E19\u0E32\u0E08 "
