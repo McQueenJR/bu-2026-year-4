@@ -36,7 +36,7 @@ MonoBehaviour:
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
-  applicantPhotoPrefab: {fileID: 6872532558856482333, guid: 450504187819eeb44927b3026508c68d, type: 3}
+  applicantPhotoPrefab: {fileID: 0}
   templeDocumentData: {fileID: 11400000, guid: 20c7c6a0ccaed3c4dadd16f0e43aef0c, type: 2}
   templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 6297387055504299486, guid: 8fd6d0a9e58878c40b28072f579d683e, type: 3}

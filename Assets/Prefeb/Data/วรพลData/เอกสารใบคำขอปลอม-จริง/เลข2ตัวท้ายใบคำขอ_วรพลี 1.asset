@@ -36,8 +36,8 @@ MonoBehaviour:
     useFake: 1
     fakeValues:
     - 78855
-    - 78863
-    - 78886
+    - 79892
+    - 18883
   firstName:
     normal: "\u0E27\u0E23\u0E1E\u0E25"
     useFake: 0

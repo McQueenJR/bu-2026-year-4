@@ -34,7 +34,7 @@ MonoBehaviour:
   - {fileID: 5253951356540890957, guid: 1f142f5a013f24e4282990f1f9d935aa, type: 3}
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
-  applicantPhotoPrefab: {fileID: 111481365497655219, guid: 5cbc6f161d99bcd4f87952eb46803852, type: 3}
+  applicantPhotoPrefab: {fileID: 0}
   templeDocumentData: {fileID: 11400000, guid: 58dc395f8705c4e47ab559074e2d5f4f, type: 2}
   templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 6023198152496074816, guid: fc908c0ede5a1744294e422ad31e1e48, type: 3}
