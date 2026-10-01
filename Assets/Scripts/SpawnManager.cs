@@ -186,7 +186,10 @@ public class SpawnManager : MonoBehaviour
 
         if (currentApplicantIndex >= todayApplicants.Count)
         {
-            Debug.Log("NPC วันนี้หมดแล้ว");
+            Debug.Log("===== NPC วันนี้หมดแล้ว → จบวัน =====");
+
+            gameManager.EndGame();
+
             return;
         }
 
@@ -223,7 +226,10 @@ public class SpawnManager : MonoBehaviour
 // ไม่มี NPC ที่ต้องตรวจแล้ว
         if (applicant == null)
         {
-            Debug.Log("NPC ที่ต้องตรวจวันนี้หมดแล้ว");
+            Debug.Log("===== NPC ที่ต้องตรวจวันนี้หมดแล้ว → จบวัน =====");
+
+            gameManager.EndGame();
+
             return;
         }
 

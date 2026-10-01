@@ -481,14 +481,16 @@ public class GameManager : MonoBehaviour
 
         if (npc != null)
         {
-            if (npc.npcType == NPCType.Special)
-            {
+            bool isRobber =
+                (npc.applicant != null && npc.applicant.isGhost) ||
+                npc.npcType == NPCType.Special;
+
+            if (isRobber)
                 robberRejected++;
-            }
             else
-            {
                 villagerRejected++;
-            }
+
+            npcProcessedCount++;
         }
 
         // NPC ตัวนี้ไม่เข้า Camp
@@ -833,11 +835,12 @@ public class GameManager : MonoBehaviour
         NPC npc = npcObj.GetComponent<NPC>();
         if (npc == null) return;
 
-        bool isRobber = npc.npcType == NPCType.Special;
+        bool isRobber =
+            (npc.applicant != null && npc.applicant.isGhost) ||
+            npc.npcType == NPCType.Special;
 
         if (!wasArrested)
         {
-            // ปล่อยเข้าไปในหมู่บ้าน
             if (isRobber)
             {
                 robberPassed++;
@@ -851,7 +854,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // เรียกตำรวจจับ
             if (isRobber)
             {
                 robberArrested++;
@@ -863,11 +865,19 @@ public class GameManager : MonoBehaviour
                 score = 0;
             }
         }
-        // ★ บวกคะแนน checklist ล่าสุดที่ส่งของ NPC คนนี้เข้า score รวม
+
         if (ChecklistManager.Instance != null)
         {
-            int checklistPoints = ChecklistManager.Instance.GetChecklistScore(npcObj);
-            Debug.Log("ดึงคะแนน checklist ของ npcObj (key = " + npcObj.GetInstanceID() + ") ได้ = " + checklistPoints);
+            int checklistPoints =
+                ChecklistManager.Instance.GetChecklistScore(npcObj);
+
+            Debug.Log(
+                "ดึงคะแนน checklist ของ npcObj (key = " +
+                npcObj.GetInstanceID() +
+                ") ได้ = " +
+                checklistPoints
+            );
+
             score += checklistPoints;
             ChecklistManager.Instance.ConsumeChecklistScore(npcObj);
         }
