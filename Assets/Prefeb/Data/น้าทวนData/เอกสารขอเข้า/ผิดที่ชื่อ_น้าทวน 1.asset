@@ -28,7 +28,7 @@ MonoBehaviour:
     normal: {fileID: 2590543508917512049, guid: 0cfe26a9c48517d4cb3f8dbf234bbbfa, type: 3}
     useFake: 0
     fakeValues:
-    - {fileID: -6339490155590231895, guid: e3f229732215af441913dcfebef07d18, type: 3}
+    - {fileID: 7567636016395153034, guid: a426bce3b8dc5e044987fbf9daf272d5, type: 3}
     - {fileID: 5871440678327768507, guid: fe3d6ce0366da644c9b1c195f05feea3, type: 3}
     - {fileID: 5356676936784179576, guid: d709bee2333c0394bab4488345e846a2, type: 3}
   idNumber:
@@ -39,7 +39,7 @@ MonoBehaviour:
     - ' 99045'
     - ' 99002'
   firstName:
-    normal: "\u0E19\u0E49\u0E32\u0E17\u0E27\u0E19"
+    normal: "\u0E17\u0E27\u0E19"
     useFake: 1
     fakeValues:
     - " \u0E2D\u0E33\u0E19\u0E32\u0E08 "
