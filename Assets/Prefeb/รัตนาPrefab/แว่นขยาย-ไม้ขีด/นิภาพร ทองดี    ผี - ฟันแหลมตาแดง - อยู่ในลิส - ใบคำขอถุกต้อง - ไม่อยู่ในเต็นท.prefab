@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68082fcbc6cdd643a2bfd3bc581b799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCAnomaly
-  eye: {fileID: 9205644919845268499}
+  eye: {fileID: 0}
   normalMouth: {fileID: 2373362789348976448}
   sharpTeeth: {fileID: 4127960853136373019}
   normalEyeColor: {r: 1, g: 1, b: 1, a: 1}
@@ -643,10 +643,5 @@ Transform:
 --- !u!4 &7944212330203095005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3903637310779410390, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
-  m_PrefabInstance: {fileID: 6346419003627362315}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &9205644919845268499 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2869363825751028760, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
   m_PrefabInstance: {fileID: 6346419003627362315}
   m_PrefabAsset: {fileID: 0}

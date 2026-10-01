@@ -65,42 +65,17 @@ public class SpawnManager : MonoBehaviour
         if (npc == null)
             continue;
 
+        // ไม่ให้ DataPrefabNPC ซ้ำในวันเดียวกัน
         if (usedNPC.Contains(npc))
             continue;
+
+        usedNPC.Add(npc);
 
         TodayApplicant applicant = CreateApplicant(npc);
 
         if (applicant == null)
             continue;
-
         applicant.hasEnteredToday = false;
-
-        // เตรียมข้อมูล Prefab ก่อน
-        Dictionary<DataPrefabNPC, HashSet<GameObject>> tempUsed =
-            new Dictionary<DataPrefabNPC, HashSet<GameObject>>();
-
-        PrepareApplicantPrefab(applicant, tempUsed);
-
-        if (applicant.spawnPrefab == null ||
-            applicant.displayData == null)
-        {
-            continue;
-        }
-
-        // ถ้าเป็น NPC ปกติและวันนี้อยู่ Camp → ไม่เอาตัวนี้
-        // Ghost ยังสามารถเข้ามาได้
-        if (!applicant.isGhost &&
-            CampManager.Instance != null &&
-            CampManager.Instance.IsHomeToday(applicant.displayData))
-        {
-            Debug.Log(
-                $"{applicant.displayData.npcName} อยู่ Camp → เปลี่ยนเป็น NPC ตัวอื่น"
-            );
-
-            continue;
-        }
-
-        usedNPC.Add(npc);
         todayApplicants.Add(applicant);
     }
 
@@ -211,13 +186,7 @@ public class SpawnManager : MonoBehaviour
 
         if (currentApplicantIndex >= todayApplicants.Count)
         {
-            Debug.Log("===== NPC วันนี้หมดแล้ว → จบวัน =====");
-
-            if (gameManager != null)
-            {
-                gameManager.EndGame();
-            }
-
+            Debug.Log("NPC วันนี้หมดแล้ว");
             return;
         }
 
@@ -254,13 +223,7 @@ public class SpawnManager : MonoBehaviour
 // ไม่มี NPC ที่ต้องตรวจแล้ว
         if (applicant == null)
         {
-            Debug.Log("===== NPC ที่ต้องตรวจวันนี้หมดแล้ว → จบวัน =====");
-
-            if (gameManager != null)
-            {
-                gameManager.EndGame();
-            }
-
+            Debug.Log("NPC ที่ต้องตรวจวันนี้หมดแล้ว");
             return;
         }
 
