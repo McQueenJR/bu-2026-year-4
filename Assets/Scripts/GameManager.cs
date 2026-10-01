@@ -479,17 +479,14 @@ public class GameManager : MonoBehaviour
         // ==========================
         NPC npc = currentNPC.GetComponent<NPC>();
 
-        if (npc != null)
-        {
-            if (npc.npcType == NPCType.Special)
-            {
-                robberRejected++;
-            }
-            else
-            {
-                villagerRejected++;
-            }
-        }
+        bool isRobber =
+            (npc.applicant != null && npc.applicant.isGhost) ||
+            npc.npcType == NPCType.Special;
+
+        if (isRobber)
+            robberRejected++;
+        else
+            villagerRejected++;
 
         // NPC ตัวนี้ไม่เข้า Camp
         releasedToCamp = false;
@@ -833,11 +830,12 @@ public class GameManager : MonoBehaviour
         NPC npc = npcObj.GetComponent<NPC>();
         if (npc == null) return;
 
-        bool isRobber = npc.npcType == NPCType.Special;
+        bool isRobber =
+            (npc.applicant != null && npc.applicant.isGhost) ||
+            npc.npcType == NPCType.Special;
 
         if (!wasArrested)
         {
-            // ปล่อยเข้าไปในหมู่บ้าน
             if (isRobber)
             {
                 robberPassed++;
@@ -851,7 +849,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // เรียกตำรวจจับ
             if (isRobber)
             {
                 robberArrested++;
@@ -863,6 +860,8 @@ public class GameManager : MonoBehaviour
                 score = 0;
             }
         }
+
+        // ส่วน Checklist ด้านล่างคงเดิม
         // ★ บวกคะแนน checklist ล่าสุดที่ส่งของ NPC คนนี้เข้า score รวม
         if (ChecklistManager.Instance != null)
         {
