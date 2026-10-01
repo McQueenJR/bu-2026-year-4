@@ -15,6 +15,7 @@ MonoBehaviour:
   npcName: "\u0E20\u0E32\u0E13\u0E38\u0E27\u0E31\u0E12\u0E19\u0E4C \u0E41\u0E2A\u0E07\u0E17\u0E2D\u0E07"
   age: 45
   voiceType: 0
+  dialogueSet: {fileID: 0}
   dialogs:
   - "\u0E2D\u0E32\u0E01\u0E32\u0E28\u0E40\u0E22\u0E47\u0E19\u0E14\u0E35\u0E04\u0E23\u0E31\u0E1A
     \u0E04\u0E37\u0E19\u0E19\u0E35\u0E49"
@@ -34,7 +35,7 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
   applicantPhotoPrefab: {fileID: 7341891746716351830, guid: 8d996da56707fd24e82c670c0def0cb7, type: 3}
-  templeDocumentData: {fileID: 0}
+  templeDocumentData: {fileID: 11400000, guid: 94829d38dd9f8834589c2bdc6aa19452, type: 2}
   templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 3869661319734696270, guid: 2455e83fb7087bd468a351e9b49aca4c, type: 3}
   applicant:
@@ -43,6 +44,8 @@ MonoBehaviour:
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0
+    isGhost: 0
+    ghostTarget: {fileID: 0}
     templeDocument:
       generatedDay: 0
       paper: {fileID: 0}
@@ -61,13 +64,18 @@ MonoBehaviour:
       lastName:
         value: 
         isFake: 0
+      occupation:
+        value: 
+        isFake: 0
       tentNumber:
         value: 
         isFake: 0
       reason:
         value: 
         isFake: 0
-      signature: {fileID: 0}
+      signature:
+        value: {fileID: 0}
+        isFake: 0
       showSignature: 0
     hasEnteredToday: 0
   greenDialogs:
