@@ -122,46 +122,62 @@ public class SpawnManager : MonoBehaviour
     // สร้างข้อมูลเอกสารของแต่ละ NPC (สุ่มครั้งเดียวตอนเริ่มวัน)
     // =====================================================
     int today = gameManager.currentDay;
-
     foreach (TodayApplicant applicant in todayApplicants)
     {
         if (applicant.displayData == null)
             continue;
 
+        // ค่าเริ่มต้น = มีเอกสาร
+        applicant.hasTempleDocument = true;
+
         applicant.templeDocument = TempleDocumentGenerator.Generate(
             applicant.displayData.templeDocumentData,
             today,
-            true   // ขั้นที่ 3 จะเปลี่ยนเป็นค่าจาก AbbotStatusManager
+            true
         );
 
         if (applicant.templeDocument != null)
-            Debug.Log($"[Doc] {applicant.displayData.npcName}: {applicant.templeDocument}");
+        {
+            Debug.Log(
+                $"[Doc] {applicant.displayData.npcName}: มีเอกสาร"
+            );
+        }
     }
 
     // =====================================================
     // ส่งข้อมูลเข้า Today List
     // =====================================================
-    List<NPCData> todayListData = new List<NPCData>();
+    List<TodayApplicant> todayListApplicants =
+        todayApplicants
+            .Where(x => x.isInTodayList)
+            .ToList();
 
-    foreach (TodayApplicant applicant in todayApplicants)
+    if (todayListApplicants.Count > 0)
     {
-        if (!applicant.isInTodayList || applicant.displayData == null)
-            continue;
-
-        // ถ้าอยู่ Camp วันนี้ ไม่ต้องขึ้น Today List
-        if (CampManager.Instance != null &&
-            CampManager.Instance.IsHomeToday(applicant.displayData))
+        // ทุกคนใน Today List เริ่มต้นด้วย "มีเอกสาร"
+        foreach (TodayApplicant applicant in todayListApplicants)
         {
-            Debug.Log($"{applicant.displayData.npcName} อยู่ Camp → ไม่ขึ้น Today List");
-            continue;
+            applicant.hasTempleDocument = true;
         }
 
-        todayListData.Add(applicant.displayData);
-    }
+        // =====================================================
+        // บังคับให้มี 1 คน "ไม่มีเอกสาร"
+        // =====================================================
 
-    if (todayListManager != null)
-    {
-        todayListManager.GenerateTodayList(todayListData);
+        TodayApplicant noDocumentApplicant =
+            todayListApplicants[
+                Random.Range(0, todayListApplicants.Count)
+            ];
+
+        noDocumentApplicant.hasTempleDocument = false;
+
+        // ลบเอกสารของ NPC คนนี้จริง ๆ
+        noDocumentApplicant.templeDocument = null;
+
+        Debug.Log(
+            $"📄❌ NPC ไม่มีเอกสารวันนี้ = " +
+            noDocumentApplicant.displayData.npcName
+        );
     }
 
     // =====================================================

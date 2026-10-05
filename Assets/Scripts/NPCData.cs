@@ -72,8 +72,17 @@ public class NPCData : ScriptableObject
     [Header("Correct Answer")]
     public bool[] correctAnswers = new bool[5];
     
-    [Header("Camp / Tent")]
-    public int campID = 0;
+    
+    [Header("Phone Dialog")]
+
+    [TextArea(2, 5)]
+    public string[] phoneGreetingDialogs;
+
+    [TextArea(2, 5)]
+    public string[] phonePeopleCountDialogs;
+
+    [TextArea(2, 5)]
+    public string[] phoneDocumentDialogs;
     
     // เรียกครั้งเดียวตอน NPC สปาวน์ เพื่อสุ่มเลือกข้อความแต่ละหัวข้อไว้ล่วงหน้า
     public void InitializeChecklistQuestions()

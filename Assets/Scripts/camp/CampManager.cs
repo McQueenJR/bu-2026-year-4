@@ -142,6 +142,9 @@ public class CampManager : MonoBehaviour
             $"อยู่ Camp = {aliveList.Count - spawnCount}"
         );
 
+// สร้าง Runtime Camp จาก CampDatabase
+        BuildRuntimeCamp();
+
         PrintAllCamps();
     }
 
@@ -167,25 +170,67 @@ public class CampManager : MonoBehaviour
     // ==========================
     public CampRoom GetRoomOfNPC(NPCData npc)
     {
-        if (campDatabase == null || npc == null)
+        if (campDatabase == null)
+        {
+            Debug.LogError("📞 CampDatabase เป็น NULL");
             return null;
+        }
+
+        if (npc == null)
+        {
+            Debug.LogError("📞 NPCData ที่ส่งเข้ามาเป็น NULL");
+            return null;
+        }
+
+        Debug.Log(
+            $"📞 กำลังหา Room ของ NPC: [{npc.npcName}]"
+        );
 
         foreach (CampRoom room in campDatabase.rooms)
         {
+            if (room == null)
+                continue;
+
+            Debug.Log(
+                $"📞 ตรวจ Room [{room.roomCode}] " +
+                $"เบอร์ [{room.phoneNumber}]"
+            );
+
             foreach (CampResident resident in room.residents)
             {
-                if (resident.npcData == null)
+                if (resident == null ||
+                    resident.npcData == null)
                     continue;
 
-                // เช็กจาก Reference ก่อน
-                if (resident.npcData == npc)
-                    return room;
+                Debug.Log(
+                    $"   └ Resident: [{resident.npcData.npcName}]"
+                );
 
-                // ถ้า Reference ไม่ตรง ให้เช็กจากชื่อ
-                if (resident.npcData.npcName == npc.npcName)
+                if (resident.npcData == npc)
+                {
+                    Debug.Log(
+                        $"📞 ✅ เจอจาก Reference: " +
+                        $"{room.roomCode} / {room.phoneNumber}"
+                    );
+
                     return room;
+                }
+
+                if (resident.npcData.npcName == npc.npcName)
+                {
+                    Debug.Log(
+                        $"📞 ✅ เจอจากชื่อ: " +
+                        $"{room.roomCode} / {room.phoneNumber}"
+                    );
+
+                    return room;
+                }
             }
         }
+
+        Debug.LogError(
+            $"📞 ❌ หา Room ของ [{npc.npcName}] ไม่เจอใน CampDatabase"
+        );
 
         return null;
     }

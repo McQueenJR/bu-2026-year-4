@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     public bool emergencyMode = false;
     public EmergencyManager emergencyManager;
     
+    [Header("Phone")]
+    public PhoneManager phoneManager;
+    
     
 
     public enum NPCState
@@ -68,6 +71,8 @@ public class GameManager : MonoBehaviour
     public Transform spawnPointDocument;        // จุด Spawn เอกสาร
 
     private GameObject currentDocument;
+    
+    public bool currentNPCMissingDocument = false;
 
     // =========================
     // SPAWN SOUNDS
@@ -165,10 +170,48 @@ public class GameManager : MonoBehaviour
     public void NPCReachedCheckpoint(GameObject npc)
     {
         currentNPC = npc;
-        currentState = NPCState.Inspecting;   // ← ตั้งเป็น Inspecting ทันที ไม่รอ
+        currentState = NPCState.Inspecting;
         greenDialogTriggered = false;
-    
-        StartNPCDialog();                      // ← เปิด dialog ปกติเลย ไม่เช็คสีปุ่มแล้ว
+
+        // ==========================================
+        // เช็กเอกสารของ NPC เมื่อถึงจุดตรวจ
+        // ==========================================
+
+        currentNPCMissingDocument = false;
+
+        NPC npcScript = npc.GetComponent<NPC>();
+
+        if (npcScript != null && npcScript.applicant != null)
+        {
+            currentNPCMissingDocument =
+                !npcScript.applicant.hasTempleDocument;
+
+            if (currentNPCMissingDocument)
+            {
+                Debug.Log(
+                    $"📄❌ {npcScript.applicant.displayData.npcName} " +
+                    $"ไม่มีเอกสาร → ต้องใช้โทรศัพท์ตรวจสอบ"
+                );
+            }
+            else
+            {
+                Debug.Log(
+                    $"📄✅ {npcScript.applicant.displayData.npcName} " +
+                    $"มีเอกสาร"
+                );
+            }
+        }
+        if (phoneManager != null &&
+            npcScript != null &&
+            npcScript.applicant != null &&
+            npcScript.applicant.displayData != null)
+        {
+            phoneManager.StartPhoneCheck(
+                npcScript.applicant.displayData
+            );
+        }
+
+        StartNPCDialog();
     }
     
 
@@ -367,6 +410,27 @@ public class GameManager : MonoBehaviour
   */  
  private void SpawnDocument()
  {
+     if (currentNPC == null)
+         return;
+
+     NPC npc = currentNPC.GetComponent<NPC>();
+
+     if (npc == null || npc.applicant == null)
+     {
+         Debug.LogError("NPC ไม่มีข้อมูล Applicant");
+         return;
+     }
+
+     // เช็กว่า Applicant คนนี้มีเอกสารหรือไม่
+     if (!npc.applicant.hasTempleDocument ||
+         npc.applicant.templeDocument == null)
+     {
+         Debug.Log(
+             $"NPC '{npc.applicant.displayData.npcName}' ไม่มีเอกสาร → ไม่ Spawn เอกสาร"
+         );
+         return;
+     }
+
      if (templeDocumentPrefab == null)
      {
          Debug.LogError("ไม่ได้ใส่ Temple Document Prefab");
@@ -379,25 +443,21 @@ public class GameManager : MonoBehaviour
          return;
      }
 
-     // ★ เช็คว่า NPC ตัวปัจจุบันมีหน้า Display เอกสารของตัวเองมั้ย
-     if (currentNPC == null)
-         return;
-
-     NPC npc = currentNPC.GetComponent<NPC>();
-     if (npc == null || npc.data == null)
-         return;
-
-     if (!npc.data.HasTempleDocument)
+     // ลบเอกสารเก่าก่อน ป้องกันเอกสารซ้อน
+     if (currentDocument != null)
      {
-         Debug.Log($"NPC '{npc.data.npcName}' ไม่มีเอกสารติดตัว → ไม่ spawn ไอคอนเอกสาร");
-         return;
+         Destroy(currentDocument);
+         currentDocument = null;
      }
 
-     // ผ่านเงื่อนไขแล้ว → spawn ไอคอนเอกสารตัวเดิม (รูปเดียวกันทุกคน) ตามปกติ
      currentDocument = Instantiate(
          templeDocumentPrefab,
          spawnPointDocument.position,
          Quaternion.identity
+     );
+
+     Debug.Log(
+         $"NPC '{npc.applicant.displayData.npcName}' มีเอกสาร → Spawn เอกสารแล้ว"
      );
  }
 

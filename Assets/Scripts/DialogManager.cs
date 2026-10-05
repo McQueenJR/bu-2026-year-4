@@ -98,6 +98,7 @@ public class DialogManager : MonoBehaviour
         Red,
         Emergency,
         Simple,
+        Phone,
         Checklist
     }
 
@@ -272,6 +273,33 @@ public class DialogManager : MonoBehaviour
         currentDialogType = DialogType.Simple;
 
         dialogs = messages;
+        currentIndex = 0;
+
+        nameText.text = speaker;
+
+        dialogPanel.SetActive(true);
+
+        ShowCurrentDialog();
+    }
+    
+    // ==================================================
+// Phone Dialog
+// ==================================================
+
+    public void StartPhoneDialog(
+        string speaker,
+        string[] messages
+    )
+    {
+        if (messages == null || messages.Length == 0)
+            return;
+
+        currentNpcData = null;
+
+        currentDialogType = DialogType.Phone;
+
+        dialogs = messages;
+
         currentIndex = 0;
 
         nameText.text = speaker;
@@ -654,6 +682,16 @@ public class DialogManager : MonoBehaviour
                 // Simple จบ
                 break;
 
+
+            case DialogType.Phone:
+
+                // Dialog โทรศัพท์จบ
+                if (PhoneManager.Instance != null)
+                {
+                    PhoneManager.Instance.PhoneDialogFinished();
+                }
+
+                break;
 
             case DialogType.Checklist:
 

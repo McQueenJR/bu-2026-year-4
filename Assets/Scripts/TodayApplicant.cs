@@ -18,6 +18,9 @@ public class TodayApplicant
 
     [Header("Temple Document")]
     public TempleDocumentRuntime templeDocument;
+    
+    [Tooltip("NPC คนนี้มีเอกสารขอเข้าหรือไม่")]
+    public bool hasTempleDocument = true;
 
     [HideInInspector]
     public bool hasEnteredToday = false;
