@@ -99,7 +99,8 @@ public class DialogManager : MonoBehaviour
         Emergency,
         Simple,
         Phone,
-        Checklist
+        Checklist,
+        Ending
     }
 
     private DialogType currentDialogType;
@@ -346,6 +347,48 @@ public class DialogManager : MonoBehaviour
 
         ShowCurrentDialog();
     }
+    
+    // =====================================================
+    // ENDING (ฉากจบ BadEnd)
+    // ★ เรียงพูดตามลำดับ element ไม่สุ่ม
+    // ★ เจอช่องว่าง → พัก spacePause วิ แล้วพูดต่อ
+    // =====================================================
+
+    // ระยะพักต่อช่องว่าง (รับค่าจาก EndingManager)
+    private float endingSpacePause = 0.5f;
+
+    public void StartEndingDialog(
+        BadEndDialogueData data,
+        float spacePause = 0.5f)
+    {
+        if (data == null ||
+            data.lines == null ||
+            data.lines.Length == 0)
+        {
+            Debug.LogWarning("BadEndDialogueData ว่าง → ข้ามไปซีนเลย");
+
+            if (EndingManager.Instance != null)
+                EndingManager.Instance.OnBadEndDialogueFinished();
+
+            return;
+        }
+
+        currentNpcData = null;   // ใช้ defaultVoiceClip
+        currentDialogType = DialogType.Ending;
+
+        dialogs = data.lines;
+
+        // ★ เรียงลำดับจาก element แรก ไม่สุ่ม
+        currentIndex = 0;
+
+        endingSpacePause = spacePause;
+
+        nameText.text = data.speakerName;
+
+        dialogPanel.SetActive(true);
+
+        ShowCurrentDialog();
+    }
 
     public void StartChecklistDialog(
         NPCData data,
@@ -421,12 +464,21 @@ public class DialogManager : MonoBehaviour
     private IEnumerator TypeText(string text)
     {
         dialogText.text = "";
+        
+        // ★ Ending: เจอช่องว่าง → พักก่อนพิมพ์ต่อ
+        bool useSpacePause =
+            currentDialogType == DialogType.Ending &&
+            endingSpacePause > 0f;
 
         foreach (char letter in text)
         {
             dialogText.text += letter;
 
-            yield return new WaitForSeconds(typeSpeed);
+            // ★ Ending: เจอช่องว่าง → พักก่อนพิมพ์ต่อ
+            if (useSpacePause && letter == ' ')
+                yield return new WaitForSeconds(endingSpacePause);
+            else
+                yield return new WaitForSeconds(typeSpeed);
         }
 
         isTyping = false;
@@ -623,6 +675,19 @@ public class DialogManager : MonoBehaviour
 
     private void EndDialog()
     {
+        // ★ Ending: ถ้ายังไม่ถึงบรรทัดสุดท้าย
+        //   → ไปบรรทัดถัดไปเลย ไม่ปิดแผง
+        if (currentDialogType == DialogType.Ending &&
+            dialogs != null &&
+            currentIndex < dialogs.Length - 1)
+        {
+            StopVoice();
+
+            currentIndex++;
+            ShowCurrentDialog();
+            return;
+        }
+        
         // หยุด Typewriter ถ้ายังมีอยู่
         if (typewriterCoroutine != null)
         {
@@ -701,6 +766,14 @@ public class DialogManager : MonoBehaviour
                 {
                     NPCQuestionManager.Instance.AskDialogFinished();   // ← เปลี่ยนชื่อเมธอด
                 }
+                break;
+            
+            case DialogType.Ending:
+
+                // พูดครบทุกบรรทัดแล้ว → ให้ EndingManager โหลดซีน
+                if (EndingManager.Instance != null)
+                    EndingManager.Instance.OnBadEndDialogueFinished();
+
                 break;
         }
     }

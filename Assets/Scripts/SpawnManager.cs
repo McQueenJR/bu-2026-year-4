@@ -197,6 +197,14 @@ public class SpawnManager : MonoBehaviour
     // =========================================================
     public void SpawnNextNPC()
     {
+        // ★ BadEnd ถูก trigger → หยุด spawn ปกติทันที
+        if (EndingManager.Instance != null &&
+            EndingManager.Instance.IsBadEndTriggered)
+        {
+            Debug.Log("===== BAD END ถูก trigger → หยุด Spawn =====");
+            return;
+        }
+        
         if (gameManager.currentNPC != null)
             return;
 

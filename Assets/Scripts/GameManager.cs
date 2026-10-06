@@ -548,7 +548,14 @@ public class GameManager : MonoBehaviour
             if (isRobber)
                 robberRejected++;
             else
+            {
                 villagerRejected++;
+
+                // ★ แจ้ง DeathTracker ว่าคนนี้ถูกปฏิเสธ
+                //   รอ roll หายสาบสูญตอนเริ่มวันใหม่
+                if (DeathTracker.Instance != null && npc.data != null)
+                    DeathTracker.Instance.NotifyRejected(npc.data);
+            }
 
             npcProcessedCount++;
         }
@@ -604,6 +611,15 @@ public class GameManager : MonoBehaviour
         Destroy(npc);
 
         currentNPC = null;
+        
+        
+        // ★ เช็ค BadEnd หลังปล่อย NPC เดินออกจากจุดตรวจ
+        //   ถ้าเข้าเงื่อนไข → หยุดเกม ไม่ต้อง AdvanceHour
+        if (EndingManager.Instance != null &&
+            EndingManager.Instance.CheckBadEnd())
+        {
+            yield break;
+        }
 
         AdvanceHour();
     }
@@ -650,6 +666,14 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("จบวัน คะแนนรวม: " + score);
 
+        // ★ เช็ค GoodEnd ก่อน — ถ้าเข้าเงื่อนไขจะโหลดซีนฉากจบ
+        //   แทนการขึ้น EndDayUI
+        if (EndingManager.Instance != null &&
+            EndingManager.Instance.CheckGoodEnd())
+        {
+            return;
+        }
+        
         int villagersKilled = 0;
 
         if (CampManager.Instance != null)
@@ -685,6 +709,10 @@ public class GameManager : MonoBehaviour
         {
             CampManager.Instance.ResolveGhosts();
         }
+        
+        // ★ roll หายสาบสูญของคนที่โดนปุ่มแดงไล่ออกเมื่อคืน
+        if (DeathTracker.Instance != null)
+            DeathTracker.Instance.RollPendingVanish(currentDay);
         
         // ---------- จบเกมเมื่อครบ 7 วัน ----------
         if (currentDay >= maxDay)
@@ -861,11 +889,20 @@ public class GameManager : MonoBehaviour
 
         Destroy(currentPolice);
         currentPolice = null;
+        
+        // ปลด flag ก่อนเสมอ กันเข้า BadEnd แล้ว flag ค้าง
+        isPoliceSequenceActive = false;
+        
+        // ★ เช็ค BadEnd เคสตายจาก emergency ด้วย
+        if (EndingManager.Instance != null &&
+            EndingManager.Instance.CheckBadEnd())
+        {
+            yield break;
+        }
 
         // 9. กลับเข้าสู่เกมปกติ
         AdvanceHour();
-
-        isPoliceSequenceActive = false;
+        
     }
     private void SetPoliceMouthTalking()
     {
@@ -923,6 +960,17 @@ public class GameManager : MonoBehaviour
             {
                 villagerArrested++;
                 score = 0;
+                
+                // ★ นับเป็นตายจาก emergency (เรียกหมอผีมาฆ่าคน)
+                if (DeathTracker.Instance != null && npc.data != null)
+                {
+                    DeathTracker.Instance.RecordDeath(
+                        npc.data,
+                        DeathCause.EmergencyKill,
+                        currentDay,
+                        "ถูกหมอผีกำจัด"
+                    );
+                }
             }
         }
 

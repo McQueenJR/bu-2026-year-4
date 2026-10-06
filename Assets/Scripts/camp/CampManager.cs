@@ -337,7 +337,13 @@ public class CampManager : MonoBehaviour
     // ==========================
     // NPC ตาย
     // ==========================
-    public void KillResident(NPCData npc)
+    // ==========================
+    // NPC ตาย
+    // ==========================
+    public void KillResident(
+        NPCData npc,
+        DeathCause cause = DeathCause.GhostTentKill,
+        string detail = "")
     {
         if (npc == null)
             return;
@@ -353,6 +359,16 @@ public class CampManager : MonoBehaviour
         homeTodayNPC[npc] = false;
 
         villagersKilledToday++;
+
+        // ★ บันทึกสาเหตุการตายลงสมุดกลาง
+        if (DeathTracker.Instance != null)
+        {
+            int day = GameManager.Instance != null
+                ? GameManager.Instance.currentDay
+                : 0;
+
+            DeathTracker.Instance.RecordDeath(npc, cause, day, detail);
+        }
 
         Debug.Log(
             $"💀 {npc.npcName} เสียชีวิตแล้ว " +
@@ -583,9 +599,9 @@ public class CampManager : MonoBehaviour
                 // วันนี้ไม่ได้อยู่ Camp → ไม่โดนฆ่า
                 if (!IsHomeToday(npc))
                     continue;
-
+                
                 // อยู่ Camp + ยังมีชีวิต = ถูก Ghost ฆ่า
-                KillResident(npc);
+                KillResident(npc, DeathCause.GhostTentKill, $"ห้อง {room.roomCode}");
 
                 Debug.Log(
                     $"💀 {npc.npcName} ถูก Ghost ฆ่า " +
@@ -609,6 +625,20 @@ public class CampManager : MonoBehaviour
             {
                 count++;
             }
+        }
+
+        return count;
+    }
+    
+    // นับชาวบ้านที่ยังมีชีวิตทั้งหมด (เงื่อนไขฉากจบ)
+    public int GetAliveVillagerCount()
+    {
+        int count = 0;
+
+        foreach (NPCData npc in aliveNPC.Keys)
+        {
+            if (aliveNPC[npc])
+                count++;
         }
 
         return count;
