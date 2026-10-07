@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3684130067441297661}
   - component: {fileID: 2092196180927832904}
+  - component: {fileID: 5656972905934453894}
   m_Layer: 0
   m_Name: "\u0E2B\u0E19\u0E2D\u0E19_0"
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3870858389043798375}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.92, y: -2.94, z: 0}
+  m_LocalPosition: {x: 0.22, y: -0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 35296489744819016, guid: 46b40382775297c44990584bc88d6327, type: 3}
+  m_Sprite: {fileID: -514670952, guid: db5df369ae55cbe47a7089930a846433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,6 +92,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &5656972905934453894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3870858389043798375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
+  breathingAmount: 0.4
+  breathingSpeed: 2
+  breathingDelay: 0
+  smoothBreathing: 1
 --- !u!1 &5985280356836927950
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +743,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 595564972833658009, guid: e7cbacd0330092441ba71091fec44910, type: 3}
+    - target: {fileID: 2677183169823896826, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3025292016836621593, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -772,11 +793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050511452626198979, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: m_Name
-      value: "\u0E2D\u0E31\u0E04\u0E23\u0E40\u0E14\u0E0A \u0E1E\u0E34\u0E0A\u0E34\u0E15\u0E0A\u0E31\u0E22      
-        \u0E1C\u0E35 - \u0E2D\u0E27\u0E31\u0E22\u0E27\u0E30\u0E40\u0E19\u0E48\u0E32
-        - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A
-        - \u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07
-        - \u0E44\u0E21\u0E48\u0E21\u0E35\u0E04\u0E19\u0E23\u0E31\u0E1A\u0E2A\u0E32\u0E22"
+      value: "\u0E2D\u0E31\u0E04\u0E23\u0E40\u0E14\u0E0A  18"
       objectReference: {fileID: 0}
     - target: {fileID: 4202948588599243523, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: m_Sprite

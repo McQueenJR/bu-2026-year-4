@@ -420,7 +420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Name
-      value: "\u0E28\u0E38\u0E20\u0E0A\u0E31\u0E22 \u0E19\u0E32\u0E04\u0E30 Variant"
+      value: "\u0E28\u0E38\u0E20\u0E0A\u0E31\u0E22 1"
       objectReference: {fileID: 0}
     - target: {fileID: 2201358220216057272, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_SortingLayer

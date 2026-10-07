@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2311907488053692373}
   - component: {fileID: 2616445578377066908}
+  - component: {fileID: 8737826341696391585}
   m_Layer: 0
   m_Name: "\u0E2B\u0E19\u0E2D\u0E19\u0E41\u0E15\u0E48\u0E07_2"
   m_TagString: Untagged
@@ -91,6 +92,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &8737826341696391585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929693296614859339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
+  breathingAmount: 0.4
+  breathingSpeed: 2
+  breathingDelay: 0
+  smoothBreathing: 1
 --- !u!1 &3402335709045000153
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,10 +730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5659499894291387253, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_Name
-      value: "\u0E20\u0E32\u0E19\u0E38\u0E27\u0E31\u0E12\u0E19\u0E4C \u0E41\u0E2A\u0E07\u0E17\u0E2D\u0E07
-        \u0E1C\u0E35\u0E35- \u0E2B\u0E19\u0E2D\u0E19-\u0E44\u0E21\u0E48\u0E21\u0E35\u0E2B\u0E31\u0E27\u0E43\u0E08
-        - \u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07
-        - \u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C"
+      value: "\u0E20\u0E32\u0E19\u0E38\u0E27\u0E31\u0E12\u0E19\u0E4C  8"
       objectReference: {fileID: 0}
     - target: {fileID: 6024576563909428812, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_IsActive

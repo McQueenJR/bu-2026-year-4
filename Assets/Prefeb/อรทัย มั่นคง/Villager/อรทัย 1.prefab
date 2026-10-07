@@ -826,8 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Name
-      value: "\u0E2D\u0E23\u0E17\u0E31\u0E22 \u0E21\u0E31\u0E48\u0E19\u0E04\u0E07
-        Variant"
+      value: "\u0E2D\u0E23\u0E17\u0E31\u0E22 1"
       objectReference: {fileID: 0}
     - target: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_IsActive

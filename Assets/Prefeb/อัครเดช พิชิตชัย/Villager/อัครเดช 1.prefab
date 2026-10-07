@@ -768,7 +768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050511452626198979, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: m_Name
-      value: "\u0E2D\u0E31\u0E04\u0E23\u0E40\u0E14\u0E0A \u0E1E\u0E34\u0E0A\u0E34\u0E15\u0E0A\u0E31\u0E22"
+      value: "\u0E2D\u0E31\u0E04\u0E23\u0E40\u0E14\u0E0A 1"
       objectReference: {fileID: 0}
     - target: {fileID: 4455370763627557417, guid: e65043ec7ff87e14aa2f5b1e3f6da81f, type: 3}
       propertyPath: m_Sprite

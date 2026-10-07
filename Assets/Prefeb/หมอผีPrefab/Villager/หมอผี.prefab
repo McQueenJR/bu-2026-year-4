@@ -1805,6 +1805,7 @@ MonoBehaviour:
         value: {fileID: 0}
         isFake: 0
       showSignature: 0
+    hasTempleDocument: 1
     hasEnteredToday: 0
 --- !u!4 &3061513912551609920 stripped
 Transform:

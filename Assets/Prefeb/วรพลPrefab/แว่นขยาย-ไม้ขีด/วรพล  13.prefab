@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6931161082335170191}
   - component: {fileID: 2692613661502324157}
+  - component: {fileID: 4246773573072412502}
   m_Layer: 0
   m_Name: "\u0E2B\u0E19\u0E2D\u0E19_0"
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3234431214788749764}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0.74, z: 0}
+  m_LocalPosition: {x: -0.18, y: 3.42, z: 0}
   m_LocalScale: {x: 0.80555, y: 0.80555, z: 0.80555}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 35296489744819016, guid: 46b40382775297c44990584bc88d6327, type: 3}
+  m_Sprite: {fileID: -864203630, guid: db5df369ae55cbe47a7089930a846433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,6 +92,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &4246773573072412502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234431214788749764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
+  breathingAmount: 0.4
+  breathingSpeed: 2
+  breathingDelay: 0
+  smoothBreathing: 1
 --- !u!1001 &7106812227703488672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,9 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5659499894291387253, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_Name
-      value: "\u0E27\u0E23\u0E1E\u0E25 \u0E17\u0E2D\u0E07\u0E14\u0E35  \u0E1C\u0E35\u0E35-
-        \u0E2B\u0E19\u0E2D\u0E19-\u0E44\u0E21\u0E48\u0E21\u0E35\u0E2B\u0E31\u0E27\u0E43\u0E08 
-        - \u0E25\u0E37\u0E21\u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E38\u0E48\u0E43\u0E19\u0E40\u0E15\u0E47\u0E19\u0E17"
+      value: "\u0E27\u0E23\u0E1E\u0E25  13"
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 755660139683069730, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}

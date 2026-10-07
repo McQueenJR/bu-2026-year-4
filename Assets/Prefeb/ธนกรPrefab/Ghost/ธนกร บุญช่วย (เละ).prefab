@@ -774,6 +774,7 @@ MonoBehaviour:
         value: {fileID: 0}
         isFake: 0
       showSignature: 0
+    hasTempleDocument: 1
     hasEnteredToday: 0
 --- !u!114 &1667472207342864691
 MonoBehaviour:
