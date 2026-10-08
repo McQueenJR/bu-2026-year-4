@@ -8,7 +8,7 @@ public class CampResident
 
     [Header("Room Document")]
     public bool hasDocument = true;
-    
+    public NPCData documentHolder;
     public bool isAlive;
     public bool isHomeToday;
 }

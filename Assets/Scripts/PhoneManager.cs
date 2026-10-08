@@ -298,6 +298,12 @@ public class PhoneManager : MonoBehaviour
         phonePanel.SetActive(false);
         telaphone.SetActive(true);
 
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
+
+        phoneGreetingActive = false;
+        phoneQuestionAnswerActive = false;
+
         if (phoneDialer != null)
             phoneDialer.Clear();
     }
@@ -467,6 +473,63 @@ public class PhoneManager : MonoBehaviour
                 $"ตอนนี้ในห้องมี {peopleAtHomeCount} คนครับ/ค่ะ"
             }
         );
+    }
+    
+    public void AskDocument()
+    {
+        if (answeringNPC == null)
+            return;
+
+        if (currentTarget == null)
+            return;
+
+        questionPanel.SetActive(false);
+
+        phoneQuestionAnswerActive = true;
+
+        bool hasDocument =
+            CampManager.Instance.HasDocumentInCamp(
+                currentTarget
+            );
+
+        Debug.Log(
+            $"📞 ถาม: เอกสารของ {targetName} อยู่ไหน? " +
+            $"→ hasDocument = {hasDocument}"
+        );
+
+        string answer;
+
+        if (hasDocument)
+        {
+            answer =
+                $"เอกสารของ {targetName} อยู่ที่นี่ครับ/ค่ะ";
+        }
+        else
+        {
+            answer =
+                $"ไม่มีเอกสารของ {targetName} อยู่ที่นี่ครับ/ค่ะ";
+        }
+
+        StartPhoneDialog(
+            answeringName,
+            new string[]
+            {
+                answer
+            }
+        );
+    }
+    
+    public void CloseQuestionPanel()
+    {
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
+
+        Debug.Log("📞 ปิด QuestionPanel → วางสาย");
+
+        if (phoneDialer != null)
+        {
+            phoneDialer.FinishCalling();
+        }
     }
     
 }

@@ -556,12 +556,13 @@ public class CampManager : MonoBehaviour
 
             return;
         }
-
-        // จำว่า Ghost เข้า Room นี้แล้ว
+// จำว่า Ghost เข้า Room นี้แล้ว
         if (!ghostEnteredRooms.Contains(room))
         {
             ghostEnteredRooms.Add(room);
         }
+
+        ghostInRoom[room] = ghostTarget;
 
         Debug.Log(
             $"👻 Ghost เข้าห้อง {room.roomCode} แล้ว " +
@@ -615,6 +616,42 @@ public class CampManager : MonoBehaviour
 
         PrintAllCamps();
     }
+    
+    
+    
+    
+    // ==========================
+// ตรวจสอบเอกสารของ NPC ใน Camp
+// ==========================
+    public bool HasDocumentInCamp(NPCData npc)
+    {
+        if (npc == null || campDatabase == null)
+            return false;
+
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            if (room == null)
+                continue;
+
+            foreach (CampResident resident in room.residents)
+            {
+                if (resident == null ||
+                    resident.npcData == null)
+                    continue;
+
+                if (resident.npcData == npc ||
+                    resident.npcData.npcName == npc.npcName)
+                {
+                    return resident.hasDocument;
+                }
+            }
+        }
+
+        return false;
+    }
+    
+    
+    
     public int GetTodayTempleNPCCount()
     {
         int count = 0;
