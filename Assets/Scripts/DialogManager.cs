@@ -474,11 +474,19 @@ public class DialogManager : MonoBehaviour
         {
             dialogText.text += letter;
 
-            // ★ Ending: เจอช่องว่าง → พักก่อนพิมพ์ต่อ
+            // ★ Ending: เจอช่องว่าง → หยุดเสียง+ปาก แล้วพัก จากนั้นเปิดใหม่
             if (useSpacePause && letter == ' ')
+            {
+                PauseTalkingEffects();
+
                 yield return new WaitForSeconds(endingSpacePause);
+
+                ResumeTalkingEffects();
+            }
             else
+            {
                 yield return new WaitForSeconds(typeSpeed);
+            }
         }
 
         isTyping = false;
@@ -838,5 +846,23 @@ public class DialogManager : MonoBehaviour
             return;
 
         voiceAudioSource.Stop();
+    }
+    
+    // หยุดเสียงและปากชั่วคราว (ใช้ตอนพักที่ช่องว่าง)
+    private void PauseTalkingEffects()
+    {
+        StopVoice();
+
+        if (currentMouth != null)
+            currentMouth.StopTalking();
+    }
+
+    // เปิดเสียงและปากต่อหลังพักเสร็จ
+    private void ResumeTalkingEffects()
+    {
+        StartVoice();
+
+        if (currentMouth != null)
+            currentMouth.StartTalking();
     }
 }
