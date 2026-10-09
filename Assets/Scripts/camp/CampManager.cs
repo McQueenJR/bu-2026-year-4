@@ -90,6 +90,22 @@ public class CampManager : MonoBehaviour
     {
         
         villagersKilledToday = 0;
+        
+        // รีเซ็ตเอกสารของทุกคนก่อนสุ่มวันใหม่
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            if (room == null)
+                continue;
+
+            foreach (CampResident resident in room.residents)
+            {
+                if (resident == null || resident.npcData == null)
+                    continue;
+
+                resident.hasDocument = true;
+            }
+        }
+        
         Debug.Log($"===== CAMP DAY {day} =====");
 
         // NPC ที่ยังมีชีวิต
@@ -665,6 +681,40 @@ public class CampManager : MonoBehaviour
         }
 
         return count;
+    }
+    public void SetDocumentInCamp(NPCData npc, bool hasDocument)
+    {
+        if (npc == null || campDatabase == null)
+            return;
+
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            if (room == null)
+                continue;
+
+            foreach (CampResident resident in room.residents)
+            {
+                if (resident == null || resident.npcData == null)
+                    continue;
+
+                if (resident.npcData == npc ||
+                    resident.npcData.npcName == npc.npcName)
+                {
+                    resident.hasDocument = hasDocument;
+
+                    Debug.Log(
+                        $"📄 Camp Document | {resident.npcData.npcName} " +
+                        $"| Has Document = {hasDocument}"
+                    );
+
+                    return;
+                }
+            }
+        }
+
+        Debug.LogWarning(
+            $"ไม่พบ {npc.npcName} ใน CampDatabase"
+        );
     }
     
     // นับชาวบ้านที่ยังมีชีวิตทั้งหมด (เงื่อนไขฉากจบ)

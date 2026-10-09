@@ -170,14 +170,23 @@ public class SpawnManager : MonoBehaviour
             ];
 
         noDocumentApplicant.hasTempleDocument = false;
-
-        // ลบเอกสารของ NPC คนนี้จริง ๆ
         noDocumentApplicant.templeDocument = null;
+
+// ตั้งให้ NPC คนเดียวกันไม่มีเอกสารใน Camp
+        if (CampManager.Instance != null &&
+            noDocumentApplicant.displayData != null)
+        {
+            CampManager.Instance.SetDocumentInCamp(
+                noDocumentApplicant.displayData,
+                false
+            );
+        }
 
         Debug.Log(
             $"📄❌ NPC ไม่มีเอกสารวันนี้ = " +
-            noDocumentApplicant.displayData.npcName
+            $"{noDocumentApplicant.displayData.npcName}"
         );
+        
     }
 
     // =====================================================
