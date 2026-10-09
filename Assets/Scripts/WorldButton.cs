@@ -20,6 +20,9 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (InteractionLock.IsLocked)
+            return;
+
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
@@ -33,6 +36,9 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (InteractionLock.IsLocked)
+            return;
+
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
@@ -42,6 +48,9 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
+        if (InteractionLock.IsLocked)
+            return;
+
         if (EventSystem.current.IsPointerOverGameObject()) 
             return;
 

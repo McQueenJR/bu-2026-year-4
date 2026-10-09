@@ -18,10 +18,12 @@ MonoBehaviour:
     residents:
     - npcData: {fileID: 11400000, guid: 5ba0ad581ff6caa4bb0c6f8dc6a106f4, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 97485a434956eaf459b0b147a5254de0, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A1-01
@@ -29,10 +31,12 @@ MonoBehaviour:
     residents:
     - npcData: {fileID: 11400000, guid: 7884119caacc0f14caa21c2996939455, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: c353afea1fa1c1f4186b42b859d873ee, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A1-02
@@ -40,10 +44,12 @@ MonoBehaviour:
     residents:
     - npcData: {fileID: 11400000, guid: 1d1aaec74c1ff2b40935dcf3ee0b49d8, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 36a4eb84f9bd971449efb41d24b1e4b9, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A1-03
@@ -51,10 +57,12 @@ MonoBehaviour:
     residents:
     - npcData: {fileID: 11400000, guid: a366f3d826387cb4b9afbe73cf378030, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 6563465fd5f56654986a6c76a0b31144, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A2-01
@@ -62,24 +70,38 @@ MonoBehaviour:
     residents:
     - npcData: {fileID: 11400000, guid: edbba2f7696022b42a1de59ed4066673, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: f59b3d9145d0fac47bce65b3396e0c49, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A2-02
     phoneNumber: 7679
     residents:
     - npcData: {fileID: 11400000, guid: d66eb5478bff6424bb237c34ddbbb63b, type: 2}
-      hasDocument: 0
+      hasDocument: 1
+      documentHolder: {fileID: 0}
+      isAlive: 0
+      isHomeToday: 0
+    - npcData: {fileID: 11400000, guid: dd03d6292a0e3404bbc12b9f35e5c2fe, type: 2}
+      hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A3-01
     phoneNumber: 4949
     residents:
     - npcData: {fileID: 11400000, guid: 291af383af9911c4999b737ee8257c8f, type: 2}
+      hasDocument: 0
+      documentHolder: {fileID: 0}
+      isAlive: 0
+      isHomeToday: 0
+    - npcData: {fileID: 11400000, guid: fc194d58af0b1b6488cf0061f4d58abd, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A3-02
@@ -87,9 +109,11 @@ MonoBehaviour:
     residents:
     - npcData: {fileID: 11400000, guid: e4929784ee3eb4048ba455d5d48ce166, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 50815bf818fa27c488a0edb26b8c4ab1, type: 2}
       hasDocument: 1
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0

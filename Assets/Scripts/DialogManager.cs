@@ -66,6 +66,9 @@ public class DialogManager : MonoBehaviour
     
     // NPCData ของตัวที่กำลังพูดอยู่ ใช้หา voiceType
     private NPCData currentNpcData;
+    
+    // voiceType ของคนส่งหนังสือพิมพ์ (ใช้คลัง voiceClips เดิม)
+    private NpcVoiceType newspaperVoiceType = NpcVoiceType.None;
 
     // =====================================================
     // DIALOG POSITION
@@ -100,7 +103,8 @@ public class DialogManager : MonoBehaviour
         Simple,
         Phone,
         Checklist,
-        Ending
+        Ending,
+        Newspaper
     }
 
     private DialogType currentDialogType;
@@ -389,6 +393,32 @@ public class DialogManager : MonoBehaviour
 
         ShowCurrentDialog();
     }
+    
+    // =====================================================
+    // NEWSPAPER (คนส่งหนังสือพิมพ์) — พูดเรียงตามลำดับ ไม่สุ่ม
+    // คืน true ถ้าเปิด Dialog สำเร็จ
+    // =====================================================
+    public bool StartNewspaperDialog(NewspaperDialogueData data)
+    {
+        if (data == null || !data.HasLines)
+            return false;
+
+        currentNpcData = null;
+        currentDialogType = DialogType.Newspaper;
+        newspaperVoiceType = data.voiceType;
+
+        dialogs = data.lines;
+        currentIndex = 0;
+
+        nameText.text = data.speakerName;
+
+        dialogPanel.SetActive(true);
+
+        ShowCurrentDialog();
+
+        return true;
+    }
+    
 
     public void StartChecklistDialog(
         NPCData data,
@@ -696,6 +726,18 @@ public class DialogManager : MonoBehaviour
             return;
         }
         
+        // Newspaper: ยังไม่ถึงบรรทัดสุดท้าย → ไปบรรทัดถัดไป ไม่ปิดแผง
+        if (currentDialogType == DialogType.Newspaper &&
+            dialogs != null &&
+            currentIndex < dialogs.Length - 1)
+        {
+            StopVoice();
+
+            currentIndex++;
+            ShowCurrentDialog();
+            return;
+        }
+        
         // หยุด Typewriter ถ้ายังมีอยู่
         if (typewriterCoroutine != null)
         {
@@ -783,6 +825,14 @@ public class DialogManager : MonoBehaviour
                     EndingManager.Instance.OnBadEndDialogueFinished();
 
                 break;
+            
+            case DialogType.Newspaper:
+
+                // พูดครบทุกบรรทัดแล้ว → แจ้งระบบหนังสือพิมพ์
+                if (NewspaperDeliveryManager.Instance != null)
+                    NewspaperDeliveryManager.Instance.OnDeliveryDialogFinished();
+
+                break;
         }
     }
 
@@ -823,6 +873,18 @@ public class DialogManager : MonoBehaviour
     // เลือกคลิปเสียงจากคลัง ตาม voiceType ของ NPC ที่กำลังพูด
     private AudioClip GetVoiceClipForCurrentNPC()
     {
+        // คนส่งหนังสือพิมพ์: ใช้ voiceType จาก NewspaperDialogueData
+        if (currentDialogType == DialogType.Newspaper)
+        {
+            foreach (var entry in voiceClips)
+            {
+                if (entry.voiceType == newspaperVoiceType)
+                    return entry.clip;
+            }
+
+            return defaultVoiceClip;
+        }
+        
         // ไม่มี NPCData (Simple/Checklist) → ใช้เสียงสำรอง
         if (currentNpcData == null)
             return defaultVoiceClip;

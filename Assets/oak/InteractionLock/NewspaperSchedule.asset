@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d554fcf4d8189d744af1704f957afabe, type: 3}
+  m_Name: NewspaperSchedule
+  m_EditorClassIdentifier: Assembly-CSharp::NewspaperSchedule
+  days:
+  - day: 1
+    newspaper: {fileID: 11400000, guid: f261dae438b82b243baa4160ab8c2788, type: 2}
+    dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
+  - day: 2
+    newspaper: {fileID: 11400000, guid: d98dab57453ff07458f8aebdd246b8a9, type: 2}
+    dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
+  - day: 3
+    newspaper: {fileID: 11400000, guid: 11fb1fc5cc1e14b4d95e68d3989cb0c0, type: 2}
+    dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
+  - day: 4
+    newspaper: {fileID: 11400000, guid: 7b85a813ff54e834480912867f8157a6, type: 2}
+    dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
+  - day: 5
+    newspaper: {fileID: 11400000, guid: 2e1a0f11da96eac47af779c6cf11b8ba, type: 2}
+    dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
+  - day: 6
+    newspaper: {fileID: 11400000, guid: 29bc5ac2e569ff54ea7772c234c8a3c3, type: 2}
+    dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
+  - day: 7
+    newspaper: {fileID: 11400000, guid: 5805e7f6f55558045b671a2bdc019776, type: 2}
+    dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}

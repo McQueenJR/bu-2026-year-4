@@ -8,6 +8,11 @@ public class NPCMovement : MonoBehaviour
     public float bounceHeight = 0.05f; // ความสูงที่เด้งขึ้นลง
     public float bounceSpeed = 8f;      // ความเร็วของการเด้ง
 
+    [Header("Non-inspection NPC (เช่น คนส่งหนังสือพิมพ์)")]
+    [Tooltip("true = พฤติกรรมเดิม (ถึงจุดแล้วแจ้ง GameManager) / false = เดินเฉยๆ")]
+    public bool notifyCheckpointOnArrival = true;
+    
+    
     private Vector3 target;
     private bool moving = false;
     private float currentSpeed;
@@ -74,7 +79,8 @@ public class NPCMovement : MonoBehaviour
             finalPos.y = target.y;
             transform.position = finalPos;
 
-            if (GameManager.Instance.currentState ==
+            if (notifyCheckpointOnArrival &&
+                GameManager.Instance.currentState ==
                 GameManager.NPCState.WalkingToCheckpoint)
             {
                 GameManager.Instance.NPCReachedCheckpoint(gameObject);

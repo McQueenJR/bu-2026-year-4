@@ -188,6 +188,26 @@ public class SpawnManager : MonoBehaviour
         );
         
     }
+    List<NPCData> todayListData = new List<NPCData>();
+
+    foreach (TodayApplicant applicant in todayListApplicants)
+    {
+        if (applicant.displayData == null)
+            continue;
+
+        if (CampManager.Instance != null &&
+            CampManager.Instance.IsHomeToday(applicant.displayData))
+        {
+            continue;
+        }
+
+        todayListData.Add(applicant.displayData);
+    }
+
+    if (todayListManager != null)
+    {
+        todayListManager.GenerateTodayList(todayListData);
+    }
 
     // =====================================================
     // Debug

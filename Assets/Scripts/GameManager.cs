@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
             todayListManager.ResetForNewDay();
 
         spawner.GenerateTodayApplicants();
-        spawner.SpawnNextNPC();
+        BeginNPCFlowOfTheDay();
     }
 
     // =========================
@@ -767,7 +767,7 @@ public class GameManager : MonoBehaviour
         {
             spawner.ResetToday();
             spawner.GenerateTodayApplicants();
-            spawner.SpawnNextNPC();
+            BeginNPCFlowOfTheDay();
         }
 
         if (GreenRedButtonManager.Instance != null)
@@ -775,6 +775,37 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("===== DAY " + currentDay + " =====");
     }
+    
+    // =========================
+    // MORNING NEWSPAPER
+    // =========================
+
+    // เริ่มลำดับ NPC ของวัน: ส่งหนังสือพิมพ์ก่อน แล้วค่อย Spawn NPC
+    private void BeginNPCFlowOfTheDay()
+    {
+        if (spawner == null)
+            return;
+
+        if (NewspaperDeliveryManager.Instance != null)
+        {
+            NewspaperDeliveryManager.Instance.BeginMorningDelivery(
+                currentDay,
+                OnMorningDeliveryFinished
+            );
+        }
+        else
+        {
+            // ไม่มีระบบหนังสือพิมพ์ในฉาก → ทำงานแบบเดิม
+            spawner.SpawnNextNPC();
+        }
+    }
+
+    private void OnMorningDeliveryFinished()
+    {
+        if (spawner != null)
+            spawner.SpawnNextNPC();
+    }
+    
     private void StartPoliceDialog()
     {
         if (currentPolice == null)
