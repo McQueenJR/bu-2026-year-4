@@ -17,6 +17,7 @@ MonoBehaviour:
   npcName: "\u0E19\u0E49\u0E32\u0E15\u0E34\u0E48\u0E07 \u0E2A\u0E32\u0E22\u0E19\u0E49\u0E33"
   age: 47
   voiceType: 0
+  dialogueSet: {fileID: 0}
   dialogs:
   - "\u0E2A\u0E31\u0E07\u0E40\u0E01\u0E15\u0E44\u0E2B\u0E21 \u0E04\u0E37\u0E19\u0E19\u0E35\u0E49\u0E02\u0E49\u0E32\u0E07\u0E19\u0E2D\u0E01\u0E40\u0E07\u0E35\u0E22\u0E1A\u0E1C\u0E34\u0E14\u0E1B\u0E01\u0E15\u0E34 "
   - "\u0E01\u0E25\u0E34\u0E48\u0E19\u0E22\u0E32\u0E07\u0E22\u0E31\u0E07\u0E15\u0E34\u0E14\u0E21\u0E37\u0E2D\u0E1C\u0E21\u0E2D\u0E22\u0E39\u0E48\u0E40\u0E25\u0E22
@@ -37,7 +38,7 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
   applicantPhotoPrefab: {fileID: 0}
-  templeDocumentData: {fileID: 0}
+  templeDocumentData: {fileID: 11400000, guid: bdd57a272bc606c499b863e9b24c5699, type: 2}
   templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 635308255449158966, guid: aa034eea57bdd374b96fed43b57176d5, type: 3}
   applicant:
@@ -46,6 +47,8 @@ MonoBehaviour:
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0
+    isGhost: 0
+    ghostTarget: {fileID: 0}
     templeDocument:
       generatedDay: 0
       paper: {fileID: 0}
@@ -64,14 +67,20 @@ MonoBehaviour:
       lastName:
         value: 
         isFake: 0
+      occupation:
+        value: 
+        isFake: 0
       tentNumber:
         value: 
         isFake: 0
       reason:
         value: 
         isFake: 0
-      signature: {fileID: 0}
+      signature:
+        value: {fileID: 0}
+        isFake: 0
       showSignature: 0
+    hasTempleDocument: 1
     hasEnteredToday: 0
   greenDialogs:
   - "\u0E02\u0E2D\u0E1A\u0E04\u0E38\u0E13 \u0E04\u0E38\u0E13\u0E2A\u0E31\u0E07\u0E40\u0E01\u0E15\u0E44\u0E14\u0E49\u0E14\u0E35"
@@ -149,4 +158,6 @@ MonoBehaviour:
       \u0E1C\u0E21\u0E44\u0E21\u0E48\u0E40\u0E04\u0E22\u0E1E\u0E25\u0E32\u0E14\u0E40\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E41\u0E1A\u0E1A\u0E19\u0E35\u0E49"
   selectedCheckQuestions: []
   correctAnswers: 0001000100
-  campID: 0
+  phoneGreetingDialogs: []
+  phonePeopleCountDialogs: []
+  phoneDocumentDialogs: []

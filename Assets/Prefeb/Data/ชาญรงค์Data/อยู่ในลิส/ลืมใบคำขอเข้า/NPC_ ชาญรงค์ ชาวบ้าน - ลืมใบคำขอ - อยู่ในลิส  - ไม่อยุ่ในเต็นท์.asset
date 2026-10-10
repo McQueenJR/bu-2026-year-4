@@ -17,6 +17,7 @@ MonoBehaviour:
   npcName: "\u0E0A\u0E32\u0E0D\u0E23\u0E07\u0E04\u0E4C \u0E44\u0E21\u0E49\u0E44\u0E1C\u0E48"
   age: 55
   voiceType: 0
+  dialogueSet: {fileID: 0}
   dialogs:
   - "\u0E25\u0E38\u0E07\u0E44\u0E1B\u0E2A\u0E48\u0E07\u0E04\u0E19\u0E21\u0E32 \u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E0A\u0E49\u0E32\u0E44\u0E1B\u0E2B\u0E19\u0E48\u0E2D\u0E22"
   - "\u0E07\u0E32\u0E19\u0E25\u0E38\u0E07\u0E40\u0E2A\u0E23\u0E47\u0E08\u0E41\u0E25\u0E49\u0E27
@@ -37,6 +38,7 @@ MonoBehaviour:
   idCardPrefab: {fileID: 7282535326936776732, guid: 2655bfa512f05e9498bfe867c96a561e, type: 3}
   idCardDisplayPrefab: {fileID: 5679922750441725577, guid: aa4644043dd13524fa68ea0fd5c3ef12, type: 3}
   applicantPhotoPrefab: {fileID: 0}
+  templeDocumentData: {fileID: 11400000, guid: 0951cb63a87f0e244a4a0d61441ce4b7, type: 2}
   templeDocumentPrefab: {fileID: 0}
   TodayPhotoPrefab: {fileID: 8151730145962033892, guid: a5593d9231348cd47bdb019f09ceb450, type: 3}
   applicant:
@@ -45,9 +47,41 @@ MonoBehaviour:
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0
-    campID: -1
-    isAlive: 1
-    hasEnteredCamp: 0
+    isGhost: 0
+    ghostTarget: {fileID: 0}
+    templeDocument:
+      generatedDay: 0
+      paper: {fileID: 0}
+      logo:
+        value: {fileID: 0}
+        isFake: 0
+      photo:
+        value: {fileID: 0}
+        isFake: 0
+      idNumber:
+        value: 
+        isFake: 0
+      firstName:
+        value: 
+        isFake: 0
+      lastName:
+        value: 
+        isFake: 0
+      occupation:
+        value: 
+        isFake: 0
+      tentNumber:
+        value: 
+        isFake: 0
+      reason:
+        value: 
+        isFake: 0
+      signature:
+        value: {fileID: 0}
+        isFake: 0
+      showSignature: 0
+    hasTempleDocument: 1
+    hasEnteredToday: 0
   greenDialogs:
   - "\u0E02\u0E2D\u0E1A\u0E43\u0E08\u0E19\u0E30 \u0E25\u0E38\u0E07\u0E08\u0E30\u0E23\u0E35\u0E1A\u0E40\u0E02\u0E49\u0E32\u0E44\u0E1B\u0E1E\u0E31\u0E01"
   - "\u0E42\u0E25\u0E48\u0E07\u0E2D\u0E01\u0E44\u0E1B\u0E17\u0E35 \u0E02\u0E2D\u0E1A\u0E43\u0E08\u0E21\u0E32\u0E01"
@@ -115,4 +149,6 @@ MonoBehaviour:
       \u0E2D\u0E32\u0E08\u0E21\u0E2D\u0E07\u0E02\u0E49\u0E32\u0E21\u0E44\u0E1B"
   selectedCheckQuestions: []
   correctAnswers: 0000000100
-  campID: 0
+  phoneGreetingDialogs: []
+  phonePeopleCountDialogs: []
+  phoneDocumentDialogs: []

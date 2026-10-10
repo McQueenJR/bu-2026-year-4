@@ -30,6 +30,9 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 15755432783dfe74a9e9028e1c6c5fb1, type: 3}
     - {fileID: 21300000, guid: 10c4eb9fd8a77db43b9dbdaa8004fd95, type: 3}
     - {fileID: 21300000, guid: d6701208d982d83498ad2d8e8f785032, type: 3}
+  idDigits:
+    original: 000000
+    randomize: 0000000000
   idNumber:
     normal: 111111
     useFake: 0

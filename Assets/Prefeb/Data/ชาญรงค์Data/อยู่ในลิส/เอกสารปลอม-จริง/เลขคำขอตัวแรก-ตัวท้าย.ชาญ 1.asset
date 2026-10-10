@@ -31,6 +31,9 @@ MonoBehaviour:
     - {fileID: -4315266081852527939, guid: 8f67aa7d2aa727d43a5c3974d5466958, type: 3}
     - {fileID: 5356676936784179576, guid: d709bee2333c0394bab4488345e846a2, type: 3}
     - {fileID: 7567636016395153034, guid: a426bce3b8dc5e044987fbf9daf272d5, type: 3}
+  idDigits:
+    original: 10838
+    randomize: 0100000001
   idNumber:
     normal: 10838
     useFake: 1
@@ -68,7 +71,7 @@ MonoBehaviour:
     - A2-01
   reason:
     normal: "\u0E40\u0E1B\u0E47\u0E19\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E01\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E41\u0E16\u0E27
-      A2 \u0E40\u0E15\u0E4A\u0E19\u0E17\u0E4C 03"
+      A2 \u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C 03"
     useFake: 0
     fakeValues:
     - fake1

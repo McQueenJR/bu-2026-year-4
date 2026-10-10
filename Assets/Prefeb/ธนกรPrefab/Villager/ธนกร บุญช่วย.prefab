@@ -619,6 +619,7 @@ MonoBehaviour:
   speed: 3
   bounceHeight: 0.05
   bounceSpeed: 8
+  notifyCheckpointOnArrival: 1
 --- !u!114 &5891997051059578120
 MonoBehaviour:
   m_ObjectHideFlags: 0
