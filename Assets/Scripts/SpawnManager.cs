@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
         Mathf.Min(allData.maxTodayList + 1, npcToday + 1)
     );
 
-    HashSet<DataPrefabNPC> usedNPC = new HashSet<DataPrefabNPC>();
+    
     int safety = 300;
 
     // =====================================================
@@ -64,12 +64,7 @@ public class SpawnManager : MonoBehaviour
 
         if (npc == null)
             continue;
-
-        // ไม่ให้ DataPrefabNPC ซ้ำในวันเดียวกัน
-        if (usedNPC.Contains(npc))
-            continue;
-
-        usedNPC.Add(npc);
+        
 
         TodayApplicant applicant = CreateApplicant(npc);
 
@@ -455,13 +450,15 @@ public class SpawnManager : MonoBehaviour
     // =========================================================
     private TodayApplicant CreateApplicant(DataPrefabNPC npc)
     {
+        // สุ่ม Good/Bad จาก Chance ที่ตั้งไว้ใน DPN
         bool isGood = Random.Range(0, 100) < npc.todayGood.chance;
 
         return new TodayApplicant
         {
             npcData = npc,
             isGood = isGood,
-            isInTodayList = false
+            isInTodayList = false,
+            isGhost = false
         };
     }
 
