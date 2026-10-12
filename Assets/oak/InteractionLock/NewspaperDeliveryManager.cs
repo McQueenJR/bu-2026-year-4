@@ -9,6 +9,13 @@ public class NewspaperDeliveryManager : MonoBehaviour
     [Header("Data")]
     [SerializeField] private NewspaperSchedule schedule;
     [SerializeField] private NewspaperDialogueData defaultDialogue;
+    [SerializeField] private NewspaperMissingDatabase missingDatabase;
+
+    [Header("Date Line (บรรทัดวันที่บนหนังสือพิมพ์)")]
+    [Tooltip("{date} = เลขวันที่ในปฏิทิน, {day} = วันที่ของเกม (1-7)")]
+    [SerializeField] private string dateFormat = "วันที่ {date} ตุลาคม 2558";
+    [Tooltip("เลขวันที่ในปฏิทินของ Day 1")]
+    [SerializeField] private int firstDateNumber = 1;
 
     [Header("Delivery Character")]
     [Tooltip("Prefab ตัวละครคนส่ง ต้องมี NPCMovement (ไม่ต้องมี NPC.cs)")]
@@ -35,9 +42,9 @@ public class NewspaperDeliveryManager : MonoBehaviour
     [SerializeField] private GameObject uiBlocker;
 
     [Header("Timing")]
-    [SerializeField] private float placeDelay = 0.3f;    // หลังพูดจบ → วางหนังสือพิมพ์
-    [SerializeField] private float pickupDelay = 0.5f;   // หลังปิดอ่าน → เก็บ
-    [SerializeField] private float leaveDelay = 0.3f;    // หลังเก็บ → เดินออก
+    [SerializeField] private float placeDelay = 0.3f;
+    [SerializeField] private float pickupDelay = 0.5f;
+    [SerializeField] private float leaveDelay = 0.3f;
 
     [Header("Sound (ไม่ใส่ก็ได้)")]
     [SerializeField] private AudioSource sfxSource;
@@ -50,6 +57,7 @@ public class NewspaperDeliveryManager : MonoBehaviour
     private bool canOpenNewspaper = false;
 
     private NewspaperDayEntry currentEntry;
+    private NewspaperRuntime currentRuntime;
     private NewspaperItem currentItem;
 
     public bool IsRunning => isRunning;
@@ -91,7 +99,7 @@ public class NewspaperDeliveryManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(DeliverySequence(entry, dialogue, onComplete));
+        StartCoroutine(DeliverySequence(day, entry, dialogue, onComplete));
     }
 
     // ตรวจข้อมูลก่อนเริ่ม — ถ้าขาดอะไรให้ข้ามพร้อม Warning (ไม่ล็อก ไม่ค้าง)
@@ -117,9 +125,9 @@ public class NewspaperDeliveryManager : MonoBehaviour
             return false;
         }
 
-        if (entry.newspaper == null || entry.newspaper.readingSprite == null)
+        if (entry.newspaper == null)
         {
-            Debug.LogWarning($"[Newspaper] Day {day} ไม่มี NewspaperData หรือ Reading Sprite → ข้าม");
+            Debug.LogWarning($"[Newspaper] Day {day} ยังไม่ได้ใส่ Newspaper Data → ข้าม");
             return false;
         }
 
@@ -150,6 +158,7 @@ public class NewspaperDeliveryManager : MonoBehaviour
     // SEQUENCE
     // =====================================================
     private IEnumerator DeliverySequence(
+        int day,
         NewspaperDayEntry entry,
         NewspaperDialogueData dialogue,
         Action onComplete)
@@ -157,6 +166,11 @@ public class NewspaperDeliveryManager : MonoBehaviour
         isRunning = true;
         currentEntry = entry;
         SetLock(true);
+
+        // 0) สร้างเนื้อหาหนังสือพิมพ์ของเช้านี้ครั้งเดียว (ตอนนี้สถานะการตายของเมื่อคืนบันทึกครบแล้ว)
+        currentRuntime = NewspaperContentBuilder.Build(
+            entry.newspaper, day, missingDatabase, dateFormat, firstDateNumber
+        );
 
         // 1) Spawn คนส่ง + เดินเข้า
         GameObject boy = Instantiate(
@@ -227,6 +241,7 @@ public class NewspaperDeliveryManager : MonoBehaviour
         // 7) ปลดล็อก แล้วค่อยให้ SpawnManager เดิมเริ่ม
         isRunning = false;
         currentEntry = null;
+        currentRuntime = null;
         SetLock(false);
 
         onComplete?.Invoke();
@@ -237,7 +252,7 @@ public class NewspaperDeliveryManager : MonoBehaviour
     // =====================================================
     public void RequestOpenReading()
     {
-        if (!isRunning || !canOpenNewspaper || currentEntry == null)
+        if (!isRunning || !canOpenNewspaper || currentRuntime == null)
             return;
 
         if (readerPopup.IsOpen)
@@ -251,7 +266,7 @@ public class NewspaperDeliveryManager : MonoBehaviour
         if (currentItem != null)
             currentItem.SetInteractable(false);
 
-        readerPopup.Open(currentEntry.newspaper.readingSprite, OnReadingClosed);
+        readerPopup.Open(currentRuntime, OnReadingClosed);
 
         if (NPCSoundManager.Instance != null)
             NPCSoundManager.Instance.PlayDocumentOpen();

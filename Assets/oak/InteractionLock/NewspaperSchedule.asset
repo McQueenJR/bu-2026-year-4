@@ -17,20 +17,20 @@ MonoBehaviour:
     newspaper: {fileID: 11400000, guid: f261dae438b82b243baa4160ab8c2788, type: 2}
     dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
   - day: 2
-    newspaper: {fileID: 11400000, guid: d98dab57453ff07458f8aebdd246b8a9, type: 2}
+    newspaper: {fileID: 11400000, guid: 91ccfd25ddf550241ae06dca38ca49c5, type: 2}
     dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
   - day: 3
-    newspaper: {fileID: 11400000, guid: 11fb1fc5cc1e14b4d95e68d3989cb0c0, type: 2}
+    newspaper: {fileID: 11400000, guid: d1a436cfa2988f6469d1133ecc42917c, type: 2}
     dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
   - day: 4
-    newspaper: {fileID: 11400000, guid: 7b85a813ff54e834480912867f8157a6, type: 2}
+    newspaper: {fileID: 11400000, guid: 65ddbc42eb7d6434cba9747de8b14257, type: 2}
     dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
   - day: 5
-    newspaper: {fileID: 11400000, guid: 2e1a0f11da96eac47af779c6cf11b8ba, type: 2}
+    newspaper: {fileID: 11400000, guid: b9c0a02c13a4dc74c8e24ca97d336327, type: 2}
     dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
   - day: 6
-    newspaper: {fileID: 11400000, guid: 29bc5ac2e569ff54ea7772c234c8a3c3, type: 2}
+    newspaper: {fileID: 11400000, guid: e46dd2ad32ac6ec42bb46de2f06b625d, type: 2}
     dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}
   - day: 7
-    newspaper: {fileID: 11400000, guid: 5805e7f6f55558045b671a2bdc019776, type: 2}
+    newspaper: {fileID: 11400000, guid: 33a782ec0c848df46b8f90a2eb3762c1, type: 2}
     dialogueOverride: {fileID: 11400000, guid: f56ff2cefa93f434291ff1f2a1a6abb2, type: 2}

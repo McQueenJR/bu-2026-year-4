@@ -26,11 +26,13 @@ public class NewspaperItem : MonoBehaviour
     {
         manager = owner;
 
-        if (data != null && data.DeskSprite != null)
-        {
-            spriteRenderer.sprite = data.DeskSprite;
+        // ถ้าข้อมูลวันนั้นกำหนดภาพบนโต๊ะไว้ ใช้ภาพนั้น ไม่งั้นใช้ภาพใน Prefab
+        if (data != null && data.deskSprite != null)
+            spriteRenderer.sprite = data.deskSprite;
 
-            // ปรับ Collider ให้พอดีกับภาพของแต่ละวัน
+        // ปรับ Collider ให้พอดีกับภาพ
+        if (spriteRenderer.sprite != null)
+        {
             boxCollider.size = spriteRenderer.sprite.bounds.size;
             boxCollider.offset = spriteRenderer.sprite.bounds.center;
         }
