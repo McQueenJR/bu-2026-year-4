@@ -254,14 +254,16 @@ public class SpawnManager : MonoBehaviour
                 continue;
             }
 
-            // ถ้าอยู่ Camp วันนี้ ไม่ต้อง Spawn
+            
+            // NPC จริงที่อยู่ Camp วันนี้ ไม่ต้อง Spawn
             if (!nextApplicant.isGhost &&
+                nextApplicant.displayData != null &&
                 CampManager.Instance != null &&
                 CampManager.Instance.IsHomeToday(nextApplicant.displayData))
             {
                 Debug.Log(
                     $"{nextApplicant.displayData.npcName} " +
-                    $"อยู่ Camp วันนี้ → ไม่ Spawn"
+                    "อยู่ Camp วันนี้ → ข้ามการ Spawn NPC จริง"
                 );
 
                 continue;
@@ -450,16 +452,81 @@ public class SpawnManager : MonoBehaviour
     // =========================================================
     private TodayApplicant CreateApplicant(DataPrefabNPC npc)
     {
-        // สุ่ม Good/Bad จาก Chance ที่ตั้งไว้ใน DPN
-        bool isGood = Random.Range(0, 100) < npc.todayGood.chance;
+        if (npc == null)
+            return null;
+
+        // เลือกกลุ่มสำหรับ Applicant ที่อยู่ใน Today List
+        // หรือกลุ่มสำหรับ Applicant ปกติ
+        bool isInTodayList = false;
+
+        NPCSpawnGroup selectedGroup = ChooseSpawnGroup(
+            npc,
+            isInTodayList
+        );
+
+        if (selectedGroup == null)
+            return null;
 
         return new TodayApplicant
         {
             npcData = npc,
-            isGood = isGood,
-            isInTodayList = false,
-            isGhost = false
+            selectedGroup = selectedGroup, // ← เพิ่มบรรทัดนี้
+            isGood = selectedGroup == npc.todayGood ||
+                     selectedGroup == npc.normalGood,
+            isInTodayList = isInTodayList,
+            isGhost = selectedGroup.isGhost
         };
+    }
+    
+    private NPCSpawnGroup ChooseSpawnGroup(
+        DataPrefabNPC npc,
+        bool isInTodayList)
+    {
+        if (npc == null)
+            return null;
+
+        NPCSpawnGroup goodGroup = isInTodayList
+            ? npc.todayGood
+            : npc.normalGood;
+
+        NPCSpawnGroup badGroup = isInTodayList
+            ? npc.todayBad
+            : npc.normalBad;
+
+        List<NPCSpawnGroup> groups = new List<NPCSpawnGroup>();
+
+        if (goodGroup != null &&
+            goodGroup.chance > 0 &&
+            goodGroup.prefabs != null &&
+            goodGroup.prefabs.Any(p => p.prefab != null && p.chance > 0))
+        {
+            groups.Add(goodGroup);
+        }
+
+        if (badGroup != null &&
+            badGroup.chance > 0 &&
+            badGroup.prefabs != null &&
+            badGroup.prefabs.Any(p => p.prefab != null && p.chance > 0))
+        {
+            groups.Add(badGroup);
+        }
+
+        if (groups.Count == 0)
+            return null;
+
+        int totalWeight = groups.Sum(g => g.chance);
+        int random = Random.Range(0, totalWeight);
+        int current = 0;
+
+        foreach (NPCSpawnGroup group in groups)
+        {
+            current += group.chance;
+
+            if (random < current)
+                return group;
+        }
+
+        return groups[groups.Count - 1];
     }
 
     // =========================================================
@@ -469,13 +536,17 @@ public class SpawnManager : MonoBehaviour
         TodayApplicant applicant,
         Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC)
     {
-        NPCSpawnGroup group = applicant.isInTodayList
-            ? (applicant.isGood ? applicant.npcData.todayGood : applicant.npcData.todayBad)
-            : (applicant.isGood ? applicant.npcData.normalGood : applicant.npcData.normalBad);
+        NPCSpawnGroup group = applicant.selectedGroup;
 
-// ==========================================
-// กำหนดว่า Applicant วันนี้เป็น Ghost หรือไม่
-// ==========================================
+        if (group == null)
+        {
+            Debug.LogError(
+                $"Applicant ของ {applicant.npcData.name} ไม่มี Selected Group"
+            );
+            return;
+        }
+
+        // กำหนดว่า Applicant วันนี้เป็น Ghost หรือไม่
         applicant.isGhost = group.isGhost;
 
         if (!usedPrefabsPerNPC.TryGetValue(applicant.npcData, out HashSet<GameObject> usedPrefabs))

@@ -338,7 +338,7 @@ public class CampManager : MonoBehaviour
                         $"🏕️ {resident.npcData.npcName} เข้า Camp " +
                         $"ห้อง {room.roomCode} → 🟢 อยู่ Camp"
                     );
-
+                    BuildRuntimeCamp();
                     PrintAllCamps();
                     return;
                 }
@@ -373,7 +373,7 @@ public class CampManager : MonoBehaviour
 
         aliveNPC[npc] = false;
         homeTodayNPC[npc] = false;
-
+        BuildRuntimeCamp();
         villagersKilledToday++;
 
         // ★ บันทึกสาเหตุการตายลงสมุดกลาง
@@ -404,10 +404,18 @@ public class CampManager : MonoBehaviour
     {
         if (npc == null) return false;
 
-        foreach (NPCData key in homeTodayNPC.Keys)
+        // ตรวจด้วย reference ของ NPCData ก่อน
+        if (homeTodayNPC.TryGetValue(npc, out bool isHome))
+            return isHome;
+
+        // ถ้าเป็น NPCData คนละ asset แต่ชื่อเดียวกัน ให้ค้นหาสำรอง
+        foreach (KeyValuePair<NPCData, bool> entry in homeTodayNPC)
         {
-            if (key.npcName == npc.npcName)
-                return homeTodayNPC[key];
+            if (entry.Key != null &&
+                entry.Key.npcName == npc.npcName)
+            {
+                return entry.Value;
+            }
         }
 
         return false;
@@ -584,6 +592,12 @@ public class CampManager : MonoBehaviour
             $"👻 Ghost เข้าห้อง {room.roomCode} แล้ว " +
             $"Target: {ghostTarget.npcName}"
         );
+
+// อัปเดตสถานะ Runtime ทันที
+        BuildRuntimeCamp();
+
+// ให้ผีลงมือทันที ไม่รอจบวัน
+        ResolveGhosts();
     }
     public void ResolveGhosts()
     {

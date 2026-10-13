@@ -6,7 +6,8 @@ public class TodayApplicant
     [Header("ข้อมูล NPC ของวันนี้")]
     public DataPrefabNPC npcData;
     public NPCData displayData;
-
+    public NPCSpawnGroup selectedGroup;
+    
     [Header("Spawn วันนี้")]
     public GameObject spawnPrefab;
     public bool isGood;

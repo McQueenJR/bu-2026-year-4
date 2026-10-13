@@ -244,7 +244,77 @@ public class PhoneManager : MonoBehaviour
         }
     }
 
+    
+// ==================================================
+// รีเฟรชข้อมูล Camp สำหรับโทรศัพท์
+// ==================================================
+    public void RefreshPhoneCampData()
+    {
+        if (currentTarget == null)
+        {
+            Debug.LogWarning("📞 ไม่มี Target สำหรับรีเฟรชข้อมูล");
+            return;
+        }
 
+        if (CampManager.Instance == null)
+        {
+            Debug.LogError("📞 ไม่มี CampManager");
+            return;
+        }
+
+        // ดึงสถานะล่าสุดของ Target
+        targetAlive = CampManager.Instance.IsAlive(currentTarget);
+        targetHomeToday = CampManager.Instance.IsHomeToday(currentTarget);
+
+        // ดึงข้อมูลห้องล่าสุด
+        CampRoom room = CampManager.Instance.GetRoomOfNPC(currentTarget);
+
+        if (room == null)
+        {
+            Debug.LogWarning($"📞 ไม่พบห้องของ {targetName}");
+            return;
+        }
+
+        roomCode = room.roomCode;
+        phoneNumber = room.phoneNumber;
+
+        // ล้างรายชื่อเก่าก่อนดึงข้อมูลใหม่
+        peopleAtHome.Clear();
+        answeringNPC = null;
+        answeringName = "";
+
+        // ดึงคนที่อยู่บ้านในเวลาปัจจุบัน
+        List<CampResident> residents =
+            CampManager.Instance.GetResidentsAtHome(phoneNumber);
+
+        foreach (CampResident resident in residents)
+        {
+            if (resident == null || resident.npcData == null)
+                continue;
+
+            peopleAtHome.Add(resident.npcData);
+        }
+
+        peopleAtHomeCount = peopleAtHome.Count;
+
+        // เลือกคนรับสายจากสถานะล่าสุด
+        CampResident answeringResident =
+            CampManager.Instance.GetAnsweringResident(phoneNumber);
+
+        if (answeringResident != null &&
+            answeringResident.npcData != null)
+        {
+            answeringNPC = answeringResident.npcData;
+            answeringName = answeringNPC.npcName;
+        }
+
+        Debug.Log(
+            $"📞 REFRESH CAMP | ห้อง: {roomCode} | " +
+            $"คนอยู่บ้าน: {peopleAtHomeCount} | " +
+            $"คนรับสาย: {answeringName}"
+        );
+    }
+    
     // ==================================================
     // ล้างข้อมูลโทรศัพท์
     // ==================================================
@@ -367,11 +437,15 @@ public class PhoneManager : MonoBehaviour
 // Phone Greeting
 // ==================================================
 
+
     public void StartPhoneGreeting()
     {
+        // อัปเดตสถานะ Camp ก่อนเริ่มสนทนา
+        RefreshPhoneCampData();
+
         if (answeringNPC == null)
         {
-            Debug.LogWarning("📞 ไม่มี NPC รับสาย");
+            Debug.LogWarning("📞 ไม่มี NPC รับสายในห้องนี้");
             return;
         }
 
@@ -386,6 +460,7 @@ public class PhoneManager : MonoBehaviour
             }
         );
     }
+    
 
 // ==================================================
 // Phone Dialog จบ

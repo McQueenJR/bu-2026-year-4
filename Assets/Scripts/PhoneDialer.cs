@@ -143,7 +143,9 @@ public class PhoneDialer : MonoBehaviour
     Debug.Log(
         $"📞 เสียงรอสายจบแล้ว"
     );
-
+// ดึงสถานะ Camp ล่าสุดก่อนตรวจคนรับสาย
+    phoneManager.RefreshPhoneCampData();
+    
     Debug.Log(
         $"📞 เชื่อมต่อ Room: {phoneManager.roomCode}"
     );
