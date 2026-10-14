@@ -33,14 +33,7 @@ MonoBehaviour:
     - {fileID: 5871440678327768507, guid: fe3d6ce0366da644c9b1c195f05feea3, type: 3}
   idDigits:
     original: 67671
-    randomize: 0000000101
-  idNumber:
-    normal: 67671
-    useFake: 1
-    fakeValues:
-    - 67666
-    - 67631
-    - 67698
+    randomize: 0000000000
   firstName:
     normal: "\u0E2A\u0E21\u0E2B\u0E0D\u0E34\u0E07"
     useFake: 0
@@ -49,7 +42,7 @@ MonoBehaviour:
     - "\u0E40\u0E1E\u0E47\u0E0D\u0E28\u0E23\u0E35 "
     - "\u0E1A\u0E38\u0E29\u0E01\u0E23"
   lastName:
-    normal: "\u0E40\u0E23\u0E37\u0E2D\u0E19\u0E25\u0E49\u0E21"
+    normal: "\u0E40\u0E23\u0E37\u0E2D\u0E25\u0E49\u0E21"
     useFake: 0
     fakeValues:
     - "\u0E08\u0E34\u0E15\u0E15\u0E4C\u0E1B\u0E23\u0E30\u0E40\u0E2A\u0E23\u0E34\u0E10"
@@ -72,11 +65,12 @@ MonoBehaviour:
   reason:
     normal: " \u0E40\u0E1B\u0E47\u0E19\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E01\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E2D\u0E22\u0E39\u0E48\u0E41\u0E16\u0E27
       A2 \u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C 01"
+    normal2: "\u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E08\u0E32\u0E01\u0E07\u0E32\u0E19\u0E40\u0E01\u0E47\u0E1A\u0E01\u0E27\u0E32\u0E14\u0E2A\u0E34\u0E48\u0E07\u0E2A\u0E01\u0E1B\u0E23\u0E01"
     useFake: 0
     fakeValues:
-    - fake1
-    - fake2
-    - fake3
+    - "\u0E40\u0E1B\u0E47\u0E19\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E01\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E41\u0E16\u0E27
+      A1 \u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C 02"
+    - "\u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E08\u0E32\u0E01\u0E40\u0E25\u0E35\u0E49\u0E22\u0E07\u0E14\u0E39\u0E2A\u0E31\u0E15\u0E27\u0E4C"
   signature:
     normal: {fileID: 6849745177046654033, guid: 41183ac00e21b3c4abcf64ceb5c8d75d, type: 3}
     useFake: 0

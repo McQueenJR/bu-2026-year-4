@@ -33,14 +33,7 @@ MonoBehaviour:
     - {fileID: 3036427168233569950, guid: 7efcda7d8607f7147955091bacba329f, type: 3}
   idDigits:
     original: 27436
-    randomize: 0100000001
-  idNumber:
-    normal: ' 27436'
-    useFake: 1
-    fakeValues:
-    - ' 77462'
-    - ' 47422'
-    - ' 97418'
+    randomize: 0000000000
   firstName:
     normal: "\u0E19\u0E34\u0E20\u0E32\u0E1E\u0E23"
     useFake: 0
@@ -71,12 +64,13 @@ MonoBehaviour:
     - A3-02
   reason:
     normal: "\u0E40\u0E1B\u0E47\u0E19\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E01\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E41\u0E16\u0E27
-      A2 \u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C 03"
+      A1 \u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C 01"
+    normal2: "\u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E08\u0E32\u0E01\u0E07\u0E32\u0E19\u0E40\u0E01\u0E47\u0E1A\u0E1C\u0E31\u0E01"
     useFake: 0
     fakeValues:
-    - fake1
-    - fake2
-    - fake3
+    - "\u0E40\u0E1B\u0E47\u0E19\u0E1C\u0E39\u0E49\u0E1E\u0E31\u0E01\u0E2D\u0E32\u0E28\u0E31\u0E22\u0E41\u0E16\u0E27
+      A3 \u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C 01"
+    - "\u0E01\u0E25\u0E31\u0E1A\u0E21\u0E32\u0E08\u0E32\u0E01\u0E07\u0E32\u0E19\u0E0B\u0E48\u0E2D\u0E21\u0E44\u0E1F"
   signature:
     normal: {fileID: 6849745177046654033, guid: 41183ac00e21b3c4abcf64ceb5c8d75d, type: 3}
     useFake: 0

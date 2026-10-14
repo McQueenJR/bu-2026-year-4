@@ -30,7 +30,7 @@ public static class TempleDocumentGenerator
             lastName = RollField(data.lastName, "Last Name", data),
             occupation = RollField(data.occupation, "Occupation", data),
             tentNumber = RollField(data.tentNumber, "Tent Number", data),
-            reason = RollField(data.reason, "Reason", data),
+            reason = data.reason != null ? data.reason.Roll("Reason", data) : default,
  
             signature = signature,
             showSignature = signatureActive && signature.value != null

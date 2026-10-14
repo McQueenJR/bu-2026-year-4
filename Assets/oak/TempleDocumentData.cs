@@ -23,7 +23,8 @@ public class TempleDocumentData : ScriptableObject
     public AnomalyField<string> occupation = new AnomalyField<string>();
     [Tooltip("เต็นท์ประจำตัวของ NPC (คงที่) เช่น A3-01 — ค่า Fake = ห้องผิด")]
     public AnomalyField<string> tentNumber = new AnomalyField<string>();
-    public AnomalyField<string> reason = new AnomalyField<string>();
+    [Tooltip("เหตุผลจริง 2 ช่อง (สุ่ม 1 ใน 2) / ติ๊ก Use Fake = สุ่มจาก Fake Values แทน")]
+    public ReasonField reason = new ReasonField();
  
     [Header("Signature")]
     [Tooltip("จะ 'แสดงหรือไม่' ขึ้นกับสถานะเจ้าอาวาส (AbbotStatusManager), ส่วน 'ใช้รูปไหน' ขึ้นกับ Use Fake ตรงนี้")]
@@ -41,3 +42,4 @@ public class TempleDocumentData : ScriptableObject
         }
     }
 }
+ 

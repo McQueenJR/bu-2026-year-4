@@ -739,6 +739,10 @@ MonoBehaviour:
   applicant:
     npcData: {fileID: 0}
     displayData: {fileID: 0}
+    selectedGroup:
+      chance: 50
+      isGhost: 0
+      prefabs: []
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0

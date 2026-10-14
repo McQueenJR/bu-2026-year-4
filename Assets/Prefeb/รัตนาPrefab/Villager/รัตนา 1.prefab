@@ -468,8 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7521192592224718049, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
       propertyPath: m_Name
-      value: "\u0E19\u0E34\u0E20\u0E32\u0E1E\u0E23 \u0E17\u0E2D\u0E07\u0E14\u0E35 
-        Villager Variant"
+      value: "\u0E23\u0E31\u0E15\u0E19\u0E32 1"
       objectReference: {fileID: 0}
     - target: {fileID: 7890942607954239243, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
       propertyPath: m_Sprite
@@ -479,10 +478,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -3563179199658230996, guid: cb859a752735faf478ff4e20e01e3423, type: 3}
+    - target: {fileID: 8462731595490843096, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8767687600676411451, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -7248924385744413128, guid: cfc29c34d62d0e74194cab081bfc203e, type: 3}
+    - target: {fileID: 9127626750174441893, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.50075
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127626750174441893, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5416586077282926388, guid: f735859d02bee7c4b9b9dafc6949a050, type: 3}

@@ -262,7 +262,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
   m_SortingLayer: 3
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_MaskInteraction: 2
   m_Sprite: {fileID: -4087656163519524110, guid: f106834f700555e458541fd242934d88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -418,12 +418,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1920247156810515429, guid: c0efda53398a2704f9999f74ba2900d2, type: 3}
     - target: {fileID: 1807476316578826744, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.22109884
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807476316578826744, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.22109884
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807476316578826744, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.22109884
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807476316578826744, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.251
+      value: -0.237
       objectReference: {fileID: 0}
     - target: {fileID: 1807476316578826744, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.777
+      value: 2.921
       objectReference: {fileID: 0}
     - target: {fileID: 1989404757389835533, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_Controller
@@ -531,10 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5659499894291387253, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_Name
-      value: "\u0E20\u0E32\u0E19\u0E38\u0E27\u0E31\u0E12\u0E19\u0E4C \u0E41\u0E2A\u0E07\u0E17\u0E2D\u0E07    
-        \u0E1C\u0E35 - \u0E44\u0E21\u0E48\u0E21\u0E35\u0E41\u0E02\u0E19\u0E17\u0E31\u0E49\u0E072  
-        - \u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07
-        - \u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E38\u0E48\u0E43\u0E19\u0E40\u0E15\u0E47\u0E19\u0E17"
+      value: "\u0E20\u0E32\u0E19\u0E38\u0E27\u0E31\u0E12\u0E19\u0E4C  7"
       objectReference: {fileID: 0}
     - target: {fileID: 6024576563909428812, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_IsActive
