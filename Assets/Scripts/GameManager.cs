@@ -545,6 +545,15 @@ public class GameManager : MonoBehaviour
                 (npc.applicant != null && npc.applicant.isGhost) ||
                 npc.npcType == NPCType.Special;
 
+            if (CampaignStatsTracker.Instance != null)
+            {
+                CampaignStatsTracker.Instance.Record(
+                    currentNPC,
+                    isRobber,
+                    CampaignStatsTracker.Decision.Rejected);
+            }
+
+            
             if (isRobber)
                 robberRejected++;
             else
@@ -666,10 +675,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("จบวัน คะแนนรวม: " + score);
 
-        // ★ เช็ค GoodEnd ก่อน — ถ้าเข้าเงื่อนไขจะโหลดซีนฉากจบ
-        //   แทนการขึ้น EndDayUI
+        // ★ เดิม: CheckGoodEnd()
+        // ใหม่: ถ้าเป็นวันสุดท้าย → ตัดสินฉากจบ ห้ามขึ้น EndDayUI
         if (EndingManager.Instance != null &&
-            EndingManager.Instance.CheckGoodEnd())
+            EndingManager.Instance.TryResolveFinalDay())
         {
             return;
         }
@@ -713,6 +722,15 @@ public class GameManager : MonoBehaviour
         // ★ roll หายสาบสูญของคนที่โดนปุ่มแดงไล่ออกเมื่อคืน
         if (DeathTracker.Instance != null)
             DeathTracker.Instance.RollPendingVanish(currentDay);
+        
+        // ★ ตายหมดตอน roll หายสาบสูญ → Bad End ทันที ไม่รอ NPC คนแรกของวันถัดไป
+        if (EndingManager.Instance != null &&
+            EndingManager.Instance.CheckBadEnd())
+        {
+            if (endDayUI != null)
+                endDayUI.Hide();
+            return;
+        }
         
         // ---------- จบเกมเมื่อครบ 7 วัน ----------
         if (currentDay >= maxDay)
@@ -966,7 +984,17 @@ public class GameManager : MonoBehaviour
         bool isRobber =
             (npc.applicant != null && npc.applicant.isGhost) ||
             npc.npcType == NPCType.Special;
-
+        
+        if (CampaignStatsTracker.Instance != null)
+        {
+            CampaignStatsTracker.Instance.Record(
+                npcObj,
+                isRobber,
+                wasArrested
+                    ? CampaignStatsTracker.Decision.Arrested
+                    : CampaignStatsTracker.Decision.Passed);
+        }
+        
         if (!wasArrested)
         {
             if (isRobber)
