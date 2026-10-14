@@ -21,7 +21,7 @@ public class PhoneManager : MonoBehaviour
     public bool targetHasDocument;
 
     public int peopleAtHomeCount;
-
+    public CampRoom calledRoom;
     public List<NPCData> peopleAtHome =
         new List<NPCData>();
     [Header("Phone Question UI")]
@@ -336,6 +336,42 @@ public class PhoneManager : MonoBehaviour
         peopleAtHomeCount = 0;
 
         peopleAtHome.Clear();
+    }
+
+    public void RefreshPhoneCampDataForRoom(CampRoom room)
+    {
+        if (room == null || CampManager.Instance == null)
+            return;
+
+        calledRoom = room;
+        roomCode = room.roomCode;
+        phoneNumber = room.phoneNumber;
+
+        peopleAtHome.Clear();
+        answeringNPC = null;
+        answeringName = "";
+
+        List<CampResident> residents =
+            CampManager.Instance.GetResidentsAtHome(phoneNumber);
+
+        foreach (CampResident resident in residents)
+        {
+            if (resident == null || resident.npcData == null)
+                continue;
+
+            peopleAtHome.Add(resident.npcData);
+        }
+
+        peopleAtHomeCount = peopleAtHome.Count;
+
+        CampResident answer =
+            CampManager.Instance.GetAnsweringResident(phoneNumber);
+
+        if (answer != null && answer.npcData != null)
+        {
+            answeringNPC = answer.npcData;
+            answeringName = answeringNPC.npcName;
+        }
     }
 
 

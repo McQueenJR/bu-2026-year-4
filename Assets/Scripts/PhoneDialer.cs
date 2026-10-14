@@ -49,68 +49,69 @@ public class PhoneDialer : MonoBehaviour
     // CALL
     // ==================================================
 
+   
     public void Call()
     {
         // กำลังโทรอยู่แล้ว
         if (isCalling)
             return;
 
-        // ไม่มี PhoneManager
+        // ตรวจ PhoneManager
         if (phoneManager == null)
         {
-            Debug.LogError(
-                "📞 PhoneDialer ไม่มี PhoneManager"
-            );
-
+            Debug.LogError("📞 PhoneDialer ไม่มี PhoneManager");
             return;
         }
 
-        // ไม่มีเบอร์ห้อง
-        if (string.IsNullOrEmpty(phoneManager.phoneNumber))
+        // ตรวจ CampManager
+        if (CampManager.Instance == null)
         {
-            Debug.LogWarning(
-                "📞 ยังไม่มีเบอร์ห้องสำหรับ NPC คนนี้"
-            );
+            Debug.LogError("📞 ไม่มี CampManager");
+            return;
+        }
 
+        // ต้องกรอกเบอร์ก่อน
+        if (string.IsNullOrEmpty(currentNumber))
+        {
             displayText.text = "No Number";
             return;
         }
 
-        // ==========================================
-        // เช็กว่าเบอร์ที่กดตรงกับห้องของ NPC หรือไม่
-        // ==========================================
+        // ค้นหาห้องจากเบอร์ที่ผู้เล่นกด
+        CampRoom room =
+            CampManager.Instance.GetRoomByPhone(currentNumber);
 
-        if (currentNumber == phoneManager.phoneNumber)
+        // ไม่พบเบอร์นี้
+        if (room == null)
         {
-            isCalling = true;
-
-            displayText.text = "Calling...";
-
-            if (audioSource != null &&
-                callingSound != null)
-            {
-                audioSource.PlayOneShot(callingSound);
-            }
-
-            Debug.Log(
-                $"📞 โทรหา Room {phoneManager.roomCode}"
-            );
-
-            StartCoroutine(CallCampSequence());
-
+            displayText.text = "Wrong Number";
+            Debug.Log($"📞 ไม่พบห้องของเบอร์ {currentNumber}");
             return;
         }
 
-        // ==========================================
-        // เบอร์ผิด
-        // ==========================================
+        // บันทึกห้องปลายทาง
+        phoneManager.calledRoom = room;
+        phoneManager.roomCode = room.roomCode;
+        phoneManager.phoneNumber = room.phoneNumber;
 
-        displayText.text = "Wrong Number";
+        // เตรียมข้อมูลคนที่อยู่ในห้องปลายทาง
+        phoneManager.RefreshPhoneCampDataForRoom(room);
+
+        // เริ่มโทร
+        isCalling = true;
+        displayText.text = "Calling...";
+
+        if (audioSource != null && callingSound != null)
+            audioSource.PlayOneShot(callingSound);
 
         Debug.Log(
-            $"📞 เบอร์ผิด: {currentNumber}"
+            $"📞 โทรหา Room {room.roomCode} " +
+            $"เบอร์ {room.phoneNumber}"
         );
+
+        StartCoroutine(CallCampSequence());
     }
+
 
 
     // ==================================================
@@ -144,7 +145,9 @@ public class PhoneDialer : MonoBehaviour
         $"📞 เสียงรอสายจบแล้ว"
     );
 // ดึงสถานะ Camp ล่าสุดก่อนตรวจคนรับสาย
-    phoneManager.RefreshPhoneCampData();
+    phoneManager.RefreshPhoneCampDataForRoom(
+        phoneManager.calledRoom
+    );
     
     Debug.Log(
         $"📞 เชื่อมต่อ Room: {phoneManager.roomCode}"
