@@ -217,15 +217,20 @@ public class PhoneDialer : MonoBehaviour
     // เอาโทรศัพท์ลง
     // ==========================================
 
-    phoneManager.phonePanel.SetActive(false);
+    // เอาหน้าจอโทรศัพท์ลงก่อนเริ่มบทสนทนา
+    if (phoneManager.phonePanel != null)
+    {
+        phoneManager.phonePanel.SetActive(false);
+    }
 
-    phoneManager.telaphone.SetActive(true);
+    if (phoneManager.telaphone != null)
+    {
+        phoneManager.telaphone.SetActive(true);
+    }
 
+    Debug.Log("📞 ปิดหน้าจอโทรศัพท์แล้ว กำลังเริ่มบทสนทนา");
 
-    // ==========================================
-    // เปิด Dialog ของคนรับสาย
-    // ==========================================
-
+// เปิด Dialog ของคนรับสาย
     phoneManager.StartPhoneGreeting();
 }
     
@@ -255,22 +260,29 @@ public class PhoneDialer : MonoBehaviour
     // ==================================================
     // CLEAR
     // ==================================================
-
-    public void Clear()
-    {
-        currentNumber = "";
-        displayText.text = "";
-    }
+    
     
     public void FinishCalling()
     {
         isCalling = false;
 
-        Debug.Log("📞 วางสายแล้ว");
+        Debug.Log("📞 วางสายแล้ว รีเซ็ตสถานะโทรศัพท์");
 
         if (phoneManager != null)
         {
             phoneManager.ForceClosePhone();
         }
+        else
+        {
+            Clear();
+        }
+    }
+
+    public void Clear()
+    {
+        currentNumber = "";
+
+        if (displayText != null)
+            displayText.text = "";
     }
 }

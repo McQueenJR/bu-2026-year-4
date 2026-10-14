@@ -401,17 +401,26 @@ public class PhoneManager : MonoBehaviour
 
     public void ForceClosePhone()
     {
-        phonePanel.SetActive(false);
-        telaphone.SetActive(true);
+        if (phonePanel != null)
+            phonePanel.SetActive(false);
+
+        if (telaphone != null)
+            telaphone.SetActive(true);
 
         if (questionPanel != null)
             questionPanel.SetActive(false);
 
+        // รีเซ็ตสถานะบทสนทนา
         phoneGreetingActive = false;
         phoneQuestionAnswerActive = false;
 
+        // รีเซ็ตสถานะโทรศัพท์
         if (phoneDialer != null)
+        {
             phoneDialer.Clear();
+        }
+
+        Debug.Log("📞 ปิดโทรศัพท์และรีเซ็ตสถานะเรียบร้อย");
     }
 
 
@@ -452,14 +461,21 @@ public class PhoneManager : MonoBehaviour
         string[] messages
     )
     {
-        if (GameManager.Instance == null)
-            return;
-
-        if (GameManager.Instance.dialogManager == null)
+        if (GameManager.Instance == null ||
+            GameManager.Instance.dialogManager == null)
         {
             Debug.LogError(
-                "📞 ไม่มี DialogManager"
+                "📞 ไม่มี GameManager หรือ DialogManager → จบการโทร"
             );
+
+            if (phoneDialer != null)
+            {
+                phoneDialer.FinishCalling();
+            }
+            else
+            {
+                ForceClosePhone();
+            }
 
             return;
         }
@@ -474,14 +490,27 @@ public class PhoneManager : MonoBehaviour
 // ==================================================
 
 
+   
     public void StartPhoneGreeting()
     {
-        // อัปเดตสถานะ Camp ก่อนเริ่มสนทนา
+        // อัปเดตข้อมูล Camp ก่อนเริ่มสนทนา
         RefreshPhoneCampData();
 
         if (answeringNPC == null)
         {
-            Debug.LogWarning("📞 ไม่มี NPC รับสายในห้องนี้");
+            Debug.LogWarning(
+                "📞 ไม่มี NPC รับสาย → จบการโทร"
+            );
+
+            if (phoneDialer != null)
+            {
+                phoneDialer.FinishCalling();
+            }
+            else
+            {
+                ForceClosePhone();
+            }
+
             return;
         }
 
@@ -492,10 +521,11 @@ public class PhoneManager : MonoBehaviour
             answeringName,
             new string[]
             {
-                "สวัสดีครับ/ค่ะ"
+                "สวัสดี"
             }
         );
     }
+
     
 
 // ==================================================
