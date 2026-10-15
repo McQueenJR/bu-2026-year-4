@@ -220,33 +220,23 @@ public void GenerateTodayApplicants()
         ];
 
         TodayApplicant ghost = CreateGhostApplicant(
-            target,
-            usedPrefabsPerNPC
+            target, selectedTodayApplicants,usedPrefabsPerNPC
         );
 
         if (ghost == null ||
             ghost.spawnPrefab == null ||
             ghost.displayData == null)
+        {
             continue;
+        }
 
-        if (usedApplicantData.Contains(ghost.displayData))
-            continue;
-
-        if (!string.IsNullOrWhiteSpace(ghost.displayData.npcName) &&
-            usedApplicantNames.Contains(ghost.displayData.npcName))
-            continue;
-
+// ผีสามารถใช้ NPCData และชื่อซ้ำกับตัวจริงได้
         ghost.isInTodayList = false;
         ghost.isGhost = true;
         ghost.ghostTarget = target;
         ghost.hasEnteredToday = false;
 
         todayApplicants.Add(ghost);
-        usedApplicantData.Add(ghost.displayData);
-
-        if (!string.IsNullOrWhiteSpace(ghost.displayData.npcName))
-            usedApplicantNames.Add(ghost.displayData.npcName);
-
         ghostCreated++;
 
         Debug.Log(
@@ -414,62 +404,55 @@ private int GetGhostCount(List<TodayApplicant> applicants)
     return applicants.Count(x => x != null && x.isGhost);
 }
 
-    private TodayApplicant CreateGhostApplicant(
+
+private TodayApplicant CreateGhostApplicant(
     NPCData target,
+    List<TodayApplicant> selectedTodayApplicants,
     Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC)
 {
-    if (target == null)
+    if (target == null || selectedTodayApplicants == null)
         return null;
 
-    const int maxAttempts = 300;
-
-    for (int i = 0; i < maxAttempts; i++)
-    {
-        DataPrefabNPC source = ChooseAvailableNPC();
-
-        if (source == null)
-            return null;
-
-        NPCSpawnGroup group = ChooseSpawnGroup(source, false);
-
-        // ต้องใช้กลุ่มที่ตั้งค่า Is Ghost ไว้เท่านั้น
-        if (group == null || !group.isGhost)
-            continue;
-
-        TodayApplicant applicant = new TodayApplicant
-        {
-            npcData = source,
-            selectedGroup = group,
-            isGood = false,
-            isInTodayList = false,
-            isGhost = true,
-            hasEnteredToday = false
-        };
-
-        PrepareApplicantPrefab(applicant, usedPrefabsPerNPC);
-
-        if (applicant.spawnPrefab == null ||
-            applicant.displayData == null)
-            continue;
-
-        // สำคัญ: Target เป็น NPC จริงที่ Ghost ปลอมเป็น
-        applicant.ghostTarget = target;
-
-        Debug.Log(
-            $"[Ghost] {applicant.displayData.npcName} " +
-            $"ปลอมเป็น {target.npcName}"
-        );
-
-        return applicant;
-    }
-
-    Debug.LogWarning(
-        $"สร้าง Ghost ที่ปลอมเป็น {target.npcName} ไม่สำเร็จ " +
-        "โปรดตรวจ NPCSpawnGroup ที่ตั้ง Is Ghost"
+    // หา NPC ตัวจริงที่ผีจะปลอมเป็น
+    TodayApplicant original = selectedTodayApplicants.FirstOrDefault(x =>
+        x != null &&
+        x.displayData == target &&
+        x.spawnPrefab != null
     );
 
-    return null;
+    if (original == null)
+    {
+        Debug.LogWarning(
+            $"[Ghost] ไม่พบ NPC ต้นฉบับของ {target.npcName}"
+        );
+        return null;
+    }
+
+    // ใช้ Prefab และข้อมูลเดียวกับ NPC ต้นฉบับ
+    // แต่กำหนดสถานะ Applicant นี้ให้เป็น Ghost
+    TodayApplicant ghost = new TodayApplicant
+    {
+        npcData = original.npcData,
+        selectedGroup = original.selectedGroup,
+        spawnPrefab = original.spawnPrefab,
+        displayData = original.displayData,
+
+        isGood = false,
+        isInTodayList = false,
+        isGhost = true,
+        ghostTarget = target,
+        hasEnteredToday = false
+    };
+
+    Debug.Log(
+        $"[Ghost] ผีปลอมเป็น {target.npcName} | " +
+        $"Prefab={ghost.spawnPrefab.name} | Ghost=True"
+    );
+
+    return ghost;
 }
+
+    
 
     // =========================================================
     // รวบรวม NPC ที่มี Prefab และ NPCData ใช้งานได้
@@ -973,8 +956,17 @@ private int GetGhostCount(List<TodayApplicant> applicants)
 
         if (movement != null)
             movement.MoveTo(stopPoint.position);
+        
+        npcScript.data = applicant.displayData;
+        
+        Debug.Log(
+            $"[Spawn Debug] Display={applicant.displayData?.npcName} | " +
+            $"Target={applicant.ghostTarget?.npcName} | " +
+            $"IsGhost={applicant.isGhost} | " +
+            $"Prefab={applicant.spawnPrefab.name}"
+        );
     }
-
+   
     // =========================================================
     // รีเซ็ตวันใหม่
     // =========================================================
