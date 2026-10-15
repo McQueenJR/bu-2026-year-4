@@ -554,7 +554,7 @@ public class PhoneManager : MonoBehaviour
             answeringName,
             new string[]
             {
-                $"สวัสดีนี่ {targetName}"
+                $"สวัสดีนี่"
             }
         );
     }
@@ -628,6 +628,8 @@ public class PhoneManager : MonoBehaviour
         );
     }
     
+    
+    
     public void AskPeopleCount()
     {
         if (answeringNPC == null)
@@ -693,18 +695,27 @@ public class PhoneManager : MonoBehaviour
             }
         );
     }
-    
     public void CloseQuestionPanel()
     {
+        Debug.LogError("TEST 1: CloseQuestionPanel ถูกเรียกแล้ว");
+
         if (questionPanel != null)
             questionPanel.SetActive(false);
 
-        Debug.Log("📞 ปิด QuestionPanel → วางสาย");
-
         if (phoneDialer != null)
         {
+            Debug.LogError(
+                "TEST 2: PhoneDialer พบแล้ว | IsCalling = "
+                + phoneDialer.IsCalling
+            );
+
             phoneDialer.FinishCalling();
         }
+        else
+        {
+            Debug.LogError("TEST 2: phoneDialer เป็น NULL");
+        }
     }
+    
     
 }

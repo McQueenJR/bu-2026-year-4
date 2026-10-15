@@ -270,27 +270,34 @@ public class PhoneDialer : MonoBehaviour
     
     
     
+    
+   
     public void FinishCalling()
     {
-        Debug.Log("📞 FinishCalling: เริ่มวางสาย");
+        Debug.Log($"📞 ก่อนวางสาย: isCalling={isCalling}");
 
+        // เปลี่ยนสถานะก่อนทำอย่างอื่น
         isCalling = false;
 
+        // หยุด Coroutine รอสาย ถ้ายังทำงานอยู่
         if (callRoutine != null)
         {
             StopCoroutine(callRoutine);
             callRoutine = null;
         }
 
+        // ล้างเบอร์และข้อความบนจอ
         Clear();
 
+        Debug.Log($"📞 หลัง Reset: isCalling={isCalling}");
+
+        // ปิด UI โดยไม่เรียก CancelCall ซ้ำ
         if (phoneManager != null)
         {
             phoneManager.ForceClosePhone();
         }
-
-        Debug.Log($"📞 วางสายเสร็จ | IsCalling={isCalling}");
     }
+
 
 
     public void Clear()
@@ -300,4 +307,6 @@ public class PhoneDialer : MonoBehaviour
         if (displayText != null)
             displayText.text = "";
     }
+    
+    
 }
