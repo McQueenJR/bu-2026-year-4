@@ -375,7 +375,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 87016409
   m_SortingLayer: 3
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_MaskInteraction: 2
   m_Sprite: {fileID: -4658474612405359035, guid: 03a83e73f816deb459b7e547fc4fdd56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -594,10 +594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_Name
-      value: "\u0E2A\u0E21\u0E2B\u0E21\u0E32\u0E22 \u0E0A\u0E31\u0E22\u0E40\u0E08\u0E23\u0E34\u0E0D  
-        \u0E1C\u0E35 - \u0E44\u0E21\u0E48\u0E21\u0E35\u0E41\u0E02\u0E19\u0E17\u0E31\u0E49\u0E072  
-        - \u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07
-        - \u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A-\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E38\u0E48\u0E43\u0E19\u0E40\u0E15\u0E47\u0E19\u0E17"
+      value: "\u0E2A\u0E21\u0E2B\u0E21\u0E32\u0E22  7"
       objectReference: {fileID: 0}
     - target: {fileID: 3337185729373215986, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalScale.x
@@ -783,6 +780,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1253429324063291201, guid: 64137dfa266ef4b47a4cc98a1e10093f, type: 3}
+    - target: {fileID: 8179632994794811359, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8185283696382630133, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.52
