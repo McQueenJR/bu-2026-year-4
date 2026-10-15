@@ -224,10 +224,22 @@ public class SpawnManager : MonoBehaviour
 
         // -----------------------------------------------------
         // 3. สุ่มลำดับผู้สมัคร
+        //    ให้ NPC ใน Today List มาก่อน
+        //    แล้วจึงตามด้วย NPC นอก Today List
         // -----------------------------------------------------
-        todayApplicants = todayApplicants
+        List<TodayApplicant> todayListFirst = todayApplicants
+            .Where(x => x != null && x.isInTodayList)
             .OrderBy(_ => Random.value)
             .ToList();
+
+        List<TodayApplicant> normalApplicants = todayApplicants
+            .Where(x => x != null && !x.isInTodayList)
+            .OrderBy(_ => Random.value)
+            .ToList();
+
+        todayApplicants.Clear();
+        todayApplicants.AddRange(todayListFirst);
+        todayApplicants.AddRange(normalApplicants);
 
         // -----------------------------------------------------
         // 4. สร้างเอกสาร
