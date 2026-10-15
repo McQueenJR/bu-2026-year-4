@@ -33,9 +33,9 @@ MonoBehaviour:
     - {fileID: 6762758594895709917, guid: 8791ebeb7af5e97468180a59a8da9e6c, type: 3}
   idDigits:
     original: 20011
-    randomize: 0001000000
+    randomize: 0000000000
   firstName:
-    normal: "\u0E15\u0E32\u0E1A\u0E38\u0E0D "
+    normal: "\u0E1A\u0E38\u0E0D "
     useFake: 0
     fakeValues:
     - "\u0E2A\u0E33\u0E23\u0E32\u0E0D"

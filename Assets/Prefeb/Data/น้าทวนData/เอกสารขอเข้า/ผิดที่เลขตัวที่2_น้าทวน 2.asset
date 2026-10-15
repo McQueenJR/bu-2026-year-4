@@ -33,7 +33,7 @@ MonoBehaviour:
     - {fileID: 5356676936784179576, guid: d709bee2333c0394bab4488345e846a2, type: 3}
   idDigits:
     original: 99012
-    randomize: 0001000000
+    randomize: 0000000000
   firstName:
     normal: "\u0E17\u0E27\u0E19"
     useFake: 0

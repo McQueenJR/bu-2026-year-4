@@ -35,7 +35,7 @@ MonoBehaviour:
     original: 82272
     randomize: 0000000000
   firstName:
-    normal: "\u0E19\u0E49\u0E32\u0E15\u0E34\u0E48\u0E07"
+    normal: "\u0E15\u0E34\u0E48\u0E07"
     useFake: 0
     fakeValues:
     - "\u0E2D\u0E38\u0E17\u0E31\u0E22 "
