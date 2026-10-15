@@ -171,7 +171,8 @@ public class PhoneDialer : MonoBehaviour
     // ไม่มีคนอยู่ในห้อง
     // ==========================================
 
-    if (phoneManager.peopleAtHomeCount == 0)
+    if (phoneManager.peopleAtHomeCount == 0 ||
+        phoneManager.answeringNPC == null)
     {
         Debug.Log(
             "📞 ไม่มีคนรับสาย"

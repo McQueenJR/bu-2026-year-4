@@ -319,10 +319,12 @@ public class PhoneManager : MonoBehaviour
     // ล้างข้อมูลโทรศัพท์
     // ==================================================
 
+    
     public void ClearPhoneData()
     {
         currentTarget = null;
         answeringNPC = null;
+        calledRoom = null;
 
         targetName = "";
         answeringName = "";
@@ -334,32 +336,56 @@ public class PhoneManager : MonoBehaviour
         targetHasDocument = false;
 
         peopleAtHomeCount = 0;
-
         peopleAtHome.Clear();
+
+        phoneGreetingActive = false;
+        phoneQuestionAnswerActive = false;
     }
 
+
+    
+    
     public void RefreshPhoneCampDataForRoom(CampRoom room)
     {
-        if (room == null || CampManager.Instance == null)
-            return;
+        // ล้างข้อมูลเก่าก่อน
+        peopleAtHome.Clear();
+        answeringNPC = null;
+        answeringName = "";
+        peopleAtHomeCount = 0;
 
+        if (room == null)
+        {
+            calledRoom = null;
+            roomCode = "";
+            phoneNumber = "";
+
+            Debug.LogWarning("📞 CampRoom is null");
+            return;
+        }
+
+        if (CampManager.Instance == null)
+        {
+            Debug.LogError("📞 ไม่มี CampManager");
+            return;
+        }
+
+        // ใช้ห้องที่ผู้เล่นโทรหา
         calledRoom = room;
         roomCode = room.roomCode;
         phoneNumber = room.phoneNumber;
 
-        peopleAtHome.Clear();
-        answeringNPC = null;
-        answeringName = "";
-
         List<CampResident> residents =
             CampManager.Instance.GetResidentsAtHome(phoneNumber);
 
-        foreach (CampResident resident in residents)
+        if (residents != null)
         {
-            if (resident == null || resident.npcData == null)
-                continue;
+            foreach (CampResident resident in residents)
+            {
+                if (resident == null || resident.npcData == null)
+                    continue;
 
-            peopleAtHome.Add(resident.npcData);
+                peopleAtHome.Add(resident.npcData);
+            }
         }
 
         peopleAtHomeCount = peopleAtHome.Count;
@@ -372,7 +398,14 @@ public class PhoneManager : MonoBehaviour
             answeringNPC = answer.npcData;
             answeringName = answeringNPC.npcName;
         }
+
+        Debug.Log(
+            $"📞 Room={roomCode}, Phone={phoneNumber}, " +
+            $"People={peopleAtHomeCount}, Answering={answeringName}"
+        );
     }
+
+
 
 
     // ==================================================
@@ -491,25 +524,33 @@ public class PhoneManager : MonoBehaviour
 
 
    
+   
     public void StartPhoneGreeting()
     {
-        // อัปเดตข้อมูล Camp ก่อนเริ่มสนทนา
-        RefreshPhoneCampData();
+        // ต้องใช้ห้องที่ผู้เล่นโทรหา ไม่ใช่ห้องของ currentTarget
+        if (calledRoom == null)
+        {
+            Debug.LogWarning("📞 ไม่มีห้องปลายทางสำหรับการโทร");
+
+            if (phoneDialer != null)
+                phoneDialer.FinishCalling();
+            else
+                ForceClosePhone();
+
+            return;
+        }
+
+        // รีเฟรชข้อมูลจากห้องปลายทางเดิม
+        RefreshPhoneCampDataForRoom(calledRoom);
 
         if (answeringNPC == null)
         {
-            Debug.LogWarning(
-                "📞 ไม่มี NPC รับสาย → จบการโทร"
-            );
+            Debug.LogWarning("📞 ไม่มี NPC รับสาย → จบการโทร");
 
             if (phoneDialer != null)
-            {
                 phoneDialer.FinishCalling();
-            }
             else
-            {
                 ForceClosePhone();
-            }
 
             return;
         }
@@ -525,6 +566,7 @@ public class PhoneManager : MonoBehaviour
             }
         );
     }
+
 
     
 
