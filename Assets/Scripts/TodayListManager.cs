@@ -32,8 +32,7 @@ public class TodayListManager : MonoBehaviour
     // เรียกจากระบบตอนเริ่มวัน — สร้างรูป/ชื่อ ไม่มีเงื่อนไขจำกัด
     public void GenerateTodayList(List<NPCData> todayNPCs)
     {
-         if (spawnedPhotos.Count > 0)
-            return;
+        
         ClearTodayList();
 
         for (int i = 0; i < todayNPCs.Count && i < slots.Length; i++)
@@ -129,6 +128,7 @@ public class TodayListManager : MonoBehaviour
 
     public void ResetForNewDay()
     {
+        popup.SetActive(false);
         ClearTodayList();
     }
 
