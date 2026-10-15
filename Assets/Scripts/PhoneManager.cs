@@ -443,19 +443,11 @@ public class PhoneManager : MonoBehaviour
         if (questionPanel != null)
             questionPanel.SetActive(false);
 
-        // รีเซ็ตสถานะบทสนทนา
         phoneGreetingActive = false;
         phoneQuestionAnswerActive = false;
 
-        // รีเซ็ตสถานะโทรศัพท์
-        if (phoneDialer != null)
-        {
-            phoneDialer.Clear();
-        }
-
-        Debug.Log("📞 ปิดโทรศัพท์และรีเซ็ตสถานะเรียบร้อย");
+        Debug.Log("📞 ปิดโทรศัพท์เรียบร้อย");
     }
-
 
     // ==================================================
     // Helper สำหรับ Dialog

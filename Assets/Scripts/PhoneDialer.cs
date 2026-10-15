@@ -13,6 +13,8 @@ public class PhoneDialer : MonoBehaviour
     private bool isCalling = false;
     public bool IsCalling => isCalling;
 
+    private Coroutine callRoutine;
+    
     public AudioSource audioSource;
     public AudioClip numberButtonSound;
     public AudioClip callingSound;
@@ -109,7 +111,7 @@ public class PhoneDialer : MonoBehaviour
             $"เบอร์ {room.phoneNumber}"
         );
 
-        StartCoroutine(CallCampSequence());
+        callRoutine = StartCoroutine(CallCampSequence());
     }
 
 
@@ -233,6 +235,10 @@ public class PhoneDialer : MonoBehaviour
 
 // เปิด Dialog ของคนรับสาย
     phoneManager.StartPhoneGreeting();
+
+// จบ Coroutine ช่วงรอสายแล้ว แต่สายยังเปิดอยู่
+    callRoutine = null;
+    yield break;
 }
     
     
@@ -263,21 +269,29 @@ public class PhoneDialer : MonoBehaviour
     // ==================================================
     
     
+    
     public void FinishCalling()
     {
+        Debug.Log("📞 FinishCalling: เริ่มวางสาย");
+
         isCalling = false;
 
-        Debug.Log("📞 วางสายแล้ว รีเซ็ตสถานะโทรศัพท์");
+        if (callRoutine != null)
+        {
+            StopCoroutine(callRoutine);
+            callRoutine = null;
+        }
+
+        Clear();
 
         if (phoneManager != null)
         {
             phoneManager.ForceClosePhone();
         }
-        else
-        {
-            Clear();
-        }
+
+        Debug.Log($"📞 วางสายเสร็จ | IsCalling={isCalling}");
     }
+
 
     public void Clear()
     {
