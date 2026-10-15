@@ -554,7 +554,7 @@ public class PhoneManager : MonoBehaviour
             answeringName,
             new string[]
             {
-                "สวัสดี"
+                $"สวัสดีนี่ {targetName}"
             }
         );
     }
@@ -645,7 +645,7 @@ public class PhoneManager : MonoBehaviour
             answeringName,
             new string[]
             {
-                $"ตอนนี้ในห้องมี {peopleAtHomeCount} คนครับ/ค่ะ"
+                $"ตอนนี้ในห้องมี {peopleAtHomeCount} คน"
             }
         );
     }

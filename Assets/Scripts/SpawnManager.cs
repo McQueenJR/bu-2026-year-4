@@ -126,6 +126,10 @@ public class SpawnManager : MonoBehaviour
                 applicant.displayData == null)
                 continue;
 
+// Ghost ห้ามอยู่ใน Today List
+            if (applicant.isGhost)
+                continue;
+
             NPCData displayData = applicant.displayData;
 
             // ป้องกัน NPCData และชื่อซ้ำ
