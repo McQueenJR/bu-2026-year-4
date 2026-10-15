@@ -173,6 +173,20 @@ public class SpawnManager : MonoBehaviour
         // เพิ่ม NPC จาก Today List เข้า Applicant ประจำวัน
         todayApplicants.AddRange(todayListApplicants);
 
+        // เก็บ NPCData และชื่อที่ถูกใช้แล้ว
+        HashSet<NPCData> usedApplicantData = new(
+            todayApplicants
+                .Where(x => x != null && x.displayData != null)
+                .Select(x => x.displayData)
+        );
+
+        HashSet<string> usedApplicantNames = new(
+            todayApplicants
+                .Where(x => x != null && x.displayData != null &&
+                            !string.IsNullOrWhiteSpace(x.displayData.npcName))
+                .Select(x => x.displayData.npcName)
+        );
+
         // -----------------------------------------------------
         // 2. เติม NPC ที่เหลือให้ครบจำนวนที่ต้องตรวจจริง
         // -----------------------------------------------------
@@ -197,6 +211,14 @@ public class SpawnManager : MonoBehaviour
                 applicant.displayData == null)
                 continue;
 
+            // ป้องกัน NPCData หรือชื่อซ้ำ
+            if (usedApplicantData.Contains(applicant.displayData))
+                continue;
+
+            if (!string.IsNullOrWhiteSpace(applicant.displayData.npcName) &&
+                usedApplicantNames.Contains(applicant.displayData.npcName))
+                continue;
+            
             // ผู้สมัคร NPC จริงที่อยู่ Camp จะไม่ถูกนำมานับ
             // Ghost ยังคง Spawn ได้ตามระบบเดิม
             if (!applicant.isGhost &&
@@ -208,6 +230,12 @@ public class SpawnManager : MonoBehaviour
 
             applicant.hasEnteredToday = false;
             todayApplicants.Add(applicant);
+            
+            usedApplicantData.Add(applicant.displayData);
+
+            if (!string.IsNullOrWhiteSpace(applicant.displayData.npcName))
+                usedApplicantNames.Add(applicant.displayData.npcName);
+
         }
 
         if (todayApplicants.Count < requestedNPCCount)
