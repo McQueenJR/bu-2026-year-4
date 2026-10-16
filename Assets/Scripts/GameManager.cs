@@ -101,6 +101,11 @@ public class GameManager : MonoBehaviour
 
     public int villagerRejected = 0;
     public int robberRejected = 0;
+    
+    // คะแนนต่อ NPC 1 ตัว (ตามกติกาที่ตกลงไว้ ห้ามเปลี่ยนค่า)
+    private const int PointsCorrectDecision = 3;   // ปล่อยชาวบ้าน / กำจัดผี
+    private const int PointsReject = 1;            // ปฏิเสธ (ชาวบ้านหรือผี)
+    private const int PointsSevereMistake = -3;    // ฆ่าชาวบ้านผ่าน Emergency / ปล่อยผีเข้า
 
     [Header("End Day UI")]
     public EndDayUI endDayUI;
@@ -545,14 +550,22 @@ public class GameManager : MonoBehaviour
                 (npc.applicant != null && npc.applicant.isGhost) ||
                 npc.npcType == NPCType.Special;
 
-            if (CampaignStatsTracker.Instance != null)
-            {
-                CampaignStatsTracker.Instance.Record(
+            // คะแนน NPC ตัวนี้ = checklist + ปฏิเสธ (+1)
+            int npcPoints = CalcNpcPoints(currentNPC, PointsReject);
+            
+            // กันนับซ้ำ: NPC ตัวนี้ถูกตัดสินไปแล้ว → ไม่ทำซ้ำ
+            if (CampaignStatsTracker.Instance != null &&
+                !CampaignStatsTracker.Instance.Record(
                     currentNPC,
                     isRobber,
-                    CampaignStatsTracker.Decision.Rejected);
+                    CampaignStatsTracker.Decision.Rejected,
+                    currentDay,
+                    npcPoints))
+            {
+                return;
             }
-
+            
+            score += npcPoints;
             
             if (isRobber)
                 robberRejected++;
@@ -673,27 +686,27 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("จบวัน คะแนนรวม: " + score);
+        Debug.Log("จบวัน คะแนน NPC วันนี้: " + score);
 
-        // ★ เดิม: CheckGoodEnd()
-        // ใหม่: ถ้าเป็นวันสุดท้าย → ตัดสินฉากจบ ห้ามขึ้น EndDayUI
+        // วันสุดท้าย → ตัดสินฉากจบ ห้ามขึ้น EndDayUI
         if (EndingManager.Instance != null &&
             EndingManager.Instance.TryResolveFinalDay())
         {
             return;
         }
-        
-        int villagersKilled = 0;
 
-        if (CampManager.Instance != null)
-        {
-            villagersKilled = CampManager.Instance.villagersKilledToday;
-        }
+        // คะแนนรายวัน (ชั่วคราว: หักเฉพาะคนตายที่เกิดแล้ว หายสาบสูญยังไม่ roll)
+        int earned = score;
+        int max = npcProcessedCount * ScoreRankUtility.MaxPerNPC;
+
+        if (CampaignStatsTracker.Instance != null)
+            CampaignStatsTracker.Instance.GetDayPreview(currentDay, out earned, out max);
 
         if (endDayUI != null)
         {
             endDayUI.Show(
-                score,
+                earned,
+                max,
                 villagerPassed,
                 villagerArrested,
                 robberPassed,
@@ -722,6 +735,10 @@ public class GameManager : MonoBehaviour
         // ★ roll หายสาบสูญของคนที่โดนปุ่มแดงไล่ออกเมื่อคืน
         if (DeathTracker.Instance != null)
             DeathTracker.Instance.RollPendingVanish(currentDay);
+        
+        // ★ ปิดบัญชีคะแนนของวันนี้ (หลังรู้ผลหายสาบสูญแล้ว)
+        if (CampaignStatsTracker.Instance != null)
+            CampaignStatsTracker.Instance.FinalizeDay(currentDay);
         
         // ★ ตายหมดตอน roll หายสาบสูญ → Bad End ทันที ไม่รอ NPC คนแรกของวันถัดไป
         if (EndingManager.Instance != null &&
@@ -870,6 +887,10 @@ public class GameManager : MonoBehaviour
     // เรียกจาก PhoneDialer.Call() หลังกด 191 ถูกต้อง และโชว์ "Calling..." ค้างไว้แล้ว
     public void OnPoliceCalled()
     {
+        // กันเรียกซ้ำระหว่างลำดับตำรวจกำลังทำงาน
+        if (isPoliceSequenceActive)
+            return;
+
         StartCoroutine(PoliceSequence());
     }
 
@@ -984,68 +1005,89 @@ public class GameManager : MonoBehaviour
         bool isRobber =
             (npc.applicant != null && npc.applicant.isGhost) ||
             npc.npcType == NPCType.Special;
-        
-        if (CampaignStatsTracker.Instance != null)
-        {
-            CampaignStatsTracker.Instance.Record(
+
+        // คะแนนส่วนตัดสินใจ: ถูก +3 / ผิดร้ายแรง -3
+        //   ปล่อยชาวบ้าน +3 | จับผี +3 | ปล่อยผี -3 | จับชาวบ้าน -3
+        int decisionPoints;
+
+        if (!wasArrested)
+            decisionPoints = isRobber ? PointsSevereMistake : PointsCorrectDecision;
+        else
+            decisionPoints = isRobber ? PointsCorrectDecision : PointsSevereMistake;
+
+        int npcPoints = CalcNpcPoints(npcObj, decisionPoints);
+
+        // กันนับซ้ำ: NPC ตัวนี้ถูกตัดสินไปแล้ว → ไม่ทำซ้ำ
+        if (CampaignStatsTracker.Instance != null &&
+            !CampaignStatsTracker.Instance.Record(
                 npcObj,
                 isRobber,
                 wasArrested
                     ? CampaignStatsTracker.Decision.Arrested
-                    : CampaignStatsTracker.Decision.Passed);
+                    : CampaignStatsTracker.Decision.Passed,
+                currentDay,
+                npcPoints))
+        {
+            return;
         }
-        
+
+        score += npcPoints;
+
         if (!wasArrested)
         {
             if (isRobber)
-            {
                 robberPassed++;
-                score = 0;
-            }
             else
-            {
                 villagerPassed++;
-                score += 1;
-            }
         }
         else
         {
             if (isRobber)
             {
                 robberArrested++;
-                score += 1;
             }
             else
             {
                 villagerArrested++;
-                score = 0;
-                
-                // ★ นับเป็นตายจาก emergency (เรียกหมอผีมาฆ่าคน)
-                if (DeathTracker.Instance != null && npc.data != null)
+
+                // ★ ตายจาก emergency (เรียกหมอผีมาฆ่าคน)
+                //   ผ่าน CampManager เพื่อให้ aliveNPC เป็นตายจริง
+                //   (CampManager จะบันทึกลง DeathTracker ให้เอง)
+                if (npc.data != null)
                 {
-                    DeathTracker.Instance.RecordDeath(
-                        npc.data,
-                        DeathCause.EmergencyKill,
-                        currentDay,
-                        "ถูกหมอผีกำจัด"
-                    );
+                    const string detail = "ถูกหมอผีกำจัด";
+
+                    bool killed =
+                        CampManager.Instance != null &&
+                        CampManager.Instance.KillResident(
+                            npc.data, DeathCause.EmergencyKill, detail);
+
+                    // ไม่เจอในค่าย → บันทึกลงสมุดตรง ๆ เหมือนเดิม
+                    if (!killed && DeathTracker.Instance != null)
+                    {
+                        DeathTracker.Instance.RecordDeath(
+                            npc.data,
+                            DeathCause.EmergencyKill,
+                            currentDay,
+                            detail
+                        );
+                    }
                 }
             }
         }
 
+        npcProcessedCount++;
+    }
+
+    // คะแนน NPC 1 ตัว = checklist + ผลตัดสิน (ต่ำสุด 0 สูงสุด 8)
+    // ดึงแล้วเคลียร์คะแนน checklist ของ NPC ตัวนั้นทิ้งด้วย
+    private int CalcNpcPoints(GameObject npcObj, int decisionPoints)
+    {
+        int checklistPoints = 0;
+
         if (ChecklistManager.Instance != null)
         {
-            int checklistPoints =
-                ChecklistManager.Instance.GetChecklistScore(npcObj);
-
-            Debug.Log(
-                "ดึงคะแนน checklist ของ npcObj (key = " +
-                npcObj.GetInstanceID() +
-                ") ได้ = " +
-                checklistPoints
-            );
-
-            score += checklistPoints;
+            checklistPoints = ChecklistManager.Instance.GetChecklistScore(npcObj);
             ChecklistManager.Instance.ConsumeChecklistScore(npcObj);
         }
         else
@@ -1053,7 +1095,17 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("ChecklistManager.Instance เป็น null!");
         }
 
-        npcProcessedCount++;
+        int total = Mathf.Clamp(
+            checklistPoints + decisionPoints,
+            0,
+            ScoreRankUtility.MaxPerNPC);
+
+        Debug.Log(
+            $"[Score] {npcObj.name} | checklist {checklistPoints} " +
+            $"+ ตัดสิน {decisionPoints} → {total}"
+        );
+
+        return total;
     }
     
     public void TestCampCall()

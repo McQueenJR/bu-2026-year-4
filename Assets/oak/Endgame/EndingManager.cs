@@ -207,22 +207,33 @@ public class EndingManager : MonoBehaviour
         EndingSummaryData.HasData = true;
         EndingSummaryData.type = type;
 
-        EndingSummaryData.endDay = GameManager.Instance != null
+        int day = GameManager.Instance != null
             ? GameManager.Instance.currentDay : 0;
+
+        EndingSummaryData.endDay = day;
 
         CampaignStatsTracker s = CampaignStatsTracker.Instance;
 
         if (s != null)
         {
+            // ปิดบัญชีวันสุดท้าย (ถ้ายังไม่ปิด)
+            // Bad End กลางวัน = ใช้เท่าที่ตัดสินเสร็จจนถึงตอนนั้น
+            s.FinalizeDay(day);
+
             EndingSummaryData.ghostsEliminated = s.GhostsEliminated;
             EndingSummaryData.ghostsEntered = s.GhostsEntered;
             EndingSummaryData.ghostsRejected = s.GhostsRejected;
             EndingSummaryData.villagersWronglyJudged = s.VillagersWronglyJudged;
             EndingSummaryData.villagersRejected = s.VillagersRejected;
+
+            EndingSummaryData.scoreEarned = s.CampaignEarned;
+            EndingSummaryData.scoreMax = s.CampaignMax;
+            EndingSummaryData.rankText =
+                ScoreRankUtility.GetRank(s.CampaignEarned, s.CampaignMax);
         }
         else
         {
-            Debug.LogWarning("[Ending] ไม่มี CampaignStatsTracker ในซีน → สถิติเป็น 0");
+            Debug.LogWarning("[Ending] ไม่มี CampaignStatsTracker ในซีน → สถิติเป็น 0 แรงค์เป็น \"-\"");
         }
 
         if (DeathTracker.Instance != null)
@@ -230,8 +241,6 @@ public class EndingManager : MonoBehaviour
             EndingSummaryData.villagersKilledByGhost =
                 DeathTracker.Instance.GetCount(DeathCause.GhostTentKill);
         }
-
-        // แรงค์/คะแนน: รอระบบคะแนนรอบหน้า (ตอนนี้ rankText = "-")
     }
 
     private void LoadEndingScene(EndingType type, string sceneName)

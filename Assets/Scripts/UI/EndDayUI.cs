@@ -28,8 +28,10 @@ public class EndDayUI : MonoBehaviour
             nextDayButton.onClick.AddListener(OnNextDayClicked);
     }
 
+    // scoreEarned / scoreMax = คะแนนที่ได้ / คะแนนเต็มของวันนี้ (แรงค์คิดจากเปอร์เซ็นต์)
     public void Show(
-        int score,
+        int scoreEarned,
+        int scoreMax,
         int villagerPassed,
         int villagerArrested,
         int robberPassed,
@@ -62,8 +64,9 @@ public class EndDayUI : MonoBehaviour
             "ชาวบ้านถูกสังหาร : " + villagersKilled + " คน";
 
         rankText.text =
-            "แรงค์ : " + GetRank(score);
+            "แรงค์ : " + ScoreRankUtility.GetRank(scoreEarned, scoreMax);
     }
+    
 
     public void Hide()
     {
@@ -75,18 +78,5 @@ public class EndDayUI : MonoBehaviour
         GameManager.Instance.StartNextDay();
     }
 
-    private string GetRank(int score)
-    {
-        if (score <= 30) return "F";
-        if (score <= 32) return "D";
-        if (score <= 33) return "D+";
-        if (score <= 36) return "C";
-        if (score <= 39) return "C+";
-        if (score <= 42) return "B";
-        if (score <= 45) return "B+";
-        if (score <= 48) return "A";
-        if (score >= 55) return "S";
 
-        return "F";
-    }
 }

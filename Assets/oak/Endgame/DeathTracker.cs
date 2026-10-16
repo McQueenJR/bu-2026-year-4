@@ -106,6 +106,8 @@ public class DeathTracker : MonoBehaviour
 
         Debug.Log("===== ROLL หายสาบสูญ (คนถูกปฏิเสธเมื่อคืน) =====");
 
+        const string vanishDetail = "ถูกปฏิเสธแล้วหายสาบสูญระหว่างคืน";
+
         foreach (NPCData npc in pendingRejected)
         {
             // เผื่อตายจากสาเหตุอื่นไปแล้วระหว่างคืน
@@ -116,12 +118,22 @@ public class DeathTracker : MonoBehaviour
 
             if (roll < vanishChance)
             {
-                RecordDeath(
-                    npc,
-                    DeathCause.VanishedAfterReject,
-                    currentDay,
-                    "ถูกปฏิเสธแล้วหายสาบสูญระหว่างคืน"
-                );
+                // ★ ให้ CampManager ตัด aliveNPC แล้วมันจะเรียก RecordDeath ให้เอง
+                bool killed =
+                    CampManager.Instance != null &&
+                    CampManager.Instance.KillResident(
+                        npc, DeathCause.VanishedAfterReject, vanishDetail);
+
+                // ไม่เจอในค่าย (หรือไม่มี CampManager) → บันทึกลงสมุดตรง ๆ เหมือนเดิม
+                if (!killed)
+                {
+                    RecordDeath(
+                        npc,
+                        DeathCause.VanishedAfterReject,
+                        currentDay,
+                        vanishDetail
+                    );
+                }
             }
             else
             {
@@ -134,6 +146,7 @@ public class DeathTracker : MonoBehaviour
 
         pendingRejected.Clear();
     }
+
 
     // =====================================================
     // QUERY — คำนวณจาก list ตอนเรียก ไม่ถือ counter แยก

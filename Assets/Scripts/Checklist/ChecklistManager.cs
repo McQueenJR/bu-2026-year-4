@@ -255,8 +255,11 @@ public class ChecklistManager : MonoBehaviour
 
             bool correctAnswer = currentNPC.data.correctAnswers[i];
             bool playerAnswer = playerAnswers[i];
+            // ใหม่: ถูก +1 / ผิด -1 (ผลรวมติดลบได้ จะไปตัดที่ 0 ตอนรวมคะแนน NPC)
             if (playerAnswer == correctAnswer)
                 scoreThisNPC++;
+            else
+                scoreThisNPC--;
         }
 
         // เก็บ "คะแนนล่าสุดที่ส่ง" ของ NPC ตัวนี้ (ส่งซ้ำ = เขียนทับของเดิม)

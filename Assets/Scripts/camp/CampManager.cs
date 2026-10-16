@@ -350,33 +350,41 @@ public class CampManager : MonoBehaviour
         );
     }
 
-    // ==========================
+      // ==========================
     // NPC ตาย
+    // คืน true = ตายจริงในครั้งนี้ | false = ไม่เจอในค่าย หรือตายไปแล้ว
     // ==========================
-    // ==========================
-    // NPC ตาย
-    // ==========================
-    public void KillResident(
+    public bool KillResident(
         NPCData npc,
         DeathCause cause = DeathCause.GhostTentKill,
         string detail = "")
     {
         if (npc == null)
-            return;
+            return false;
 
-        if (!aliveNPC.ContainsKey(npc))
-            return;
+        // หา key ใน aliveNPC: reference ก่อน แล้วค่อยเทียบชื่อ
+        NPCData key = FindResidentKey(npc);
+
+        if (key == null)
+        {
+            Debug.LogWarning($"[Camp] KillResident: ไม่พบ {npc.npcName} ในค่าย");
+            return false;
+        }
 
         // กันนับซ้ำ
-        if (!aliveNPC[npc])
-            return;
+        if (!aliveNPC[key])
+            return false;
 
-        aliveNPC[npc] = false;
-        homeTodayNPC[npc] = false;
+        aliveNPC[key] = false;
+        homeTodayNPC[key] = false;
+
+        // นับ "ถูกผีฆ่าวันนี้" เฉพาะผีฆ่าในเต็นท์เท่านั้น
+        if (cause == DeathCause.GhostTentKill)
+            villagersKilledToday++;
+
         BuildRuntimeCamp();
-        villagersKilledToday++;
 
-        // ★ บันทึกสาเหตุการตายลงสมุดกลาง
+        // ★ บันทึกสาเหตุการตายลงสมุดกลาง (ทิศทางเดียว Camp → DeathTracker)
         if (DeathTracker.Instance != null)
         {
             int day = GameManager.Instance != null
@@ -387,9 +395,25 @@ public class CampManager : MonoBehaviour
         }
 
         Debug.Log(
-            $"💀 {npc.npcName} เสียชีวิตแล้ว " +
-            $"| ฆ่าวันนี้ = {villagersKilledToday}"
+            $"💀 {npc.npcName} เสียชีวิตแล้ว ({cause}) " +
+            $"| ผีฆ่าวันนี้ = {villagersKilledToday}"
         );
+
+        return true;
+    }
+
+    private NPCData FindResidentKey(NPCData npc)
+    {
+        if (aliveNPC.ContainsKey(npc))
+            return npc;
+
+        foreach (NPCData k in aliveNPC.Keys)
+        {
+            if (k != null && k.npcName == npc.npcName)
+                return k;
+        }
+
+        return null;
     }
 
     // ==========================
