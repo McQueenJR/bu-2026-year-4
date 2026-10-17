@@ -64,7 +64,7 @@ public class EndDayUI : MonoBehaviour
             "ชาวบ้านถูกสังหาร : " + villagersKilled + " คน";
 
         rankText.text =
-            "แรงค์ : " + ScoreRankUtility.GetRank(scoreEarned, scoreMax);
+            ScoreRankUtility.GetRank(scoreEarned, scoreMax);
     }
     
 
