@@ -580,6 +580,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.13
       objectReference: {fileID: 0}
+    - target: {fileID: 945961893690852220, guid: 8faa93c3e963785479ea1eee0c1e0045, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1166913926828496453, guid: 8faa93c3e963785479ea1eee0c1e0045, type: 3}
       propertyPath: m_Name
       value: "\u0E21\u0E32\u0E25\u0E35 \u0E28\u0E23\u0E35\u0E2A\u0E38\u0E02 1"
@@ -697,6 +701,7 @@ PrefabInstance:
     - {fileID: 5578506402124744932, guid: 8faa93c3e963785479ea1eee0c1e0045, type: 3}
     - {fileID: 4920603756272396689, guid: 8faa93c3e963785479ea1eee0c1e0045, type: 3}
     - {fileID: 4913595983065050183, guid: 8faa93c3e963785479ea1eee0c1e0045, type: 3}
+    - {fileID: 6981704785935420996, guid: 8faa93c3e963785479ea1eee0c1e0045, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8052603625508280940, guid: 8faa93c3e963785479ea1eee0c1e0045, type: 3}
       insertIndex: -1

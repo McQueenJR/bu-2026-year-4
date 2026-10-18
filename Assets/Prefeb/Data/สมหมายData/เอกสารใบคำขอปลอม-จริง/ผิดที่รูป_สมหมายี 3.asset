@@ -25,12 +25,12 @@ MonoBehaviour:
     - {fileID: -2510128510459142791, guid: 3ddeeb9cda88e7741bf0f7e1c0c91656, type: 3}
     - {fileID: -7070581221644151450, guid: 01b3fe68cdcd375418b3e5cb4a68e97a, type: 3}
   photo:
-    normal: {fileID: -8725691152394515027, guid: 8bd30c3e03cc3f049b1458569f325e5b, type: 3}
+    normal: {fileID: -5545645843760982718, guid: 6a458b7232beded4aa9f53cd683444f3, type: 3}
     useFake: 1
     fakeValues:
-    - {fileID: -6942380879698916353, guid: 2b887fb5637f0984aa1f682568c8da08, type: 3}
-    - {fileID: 7567636016395153034, guid: a426bce3b8dc5e044987fbf9daf272d5, type: 3}
-    - {fileID: 5871440678327768507, guid: fe3d6ce0366da644c9b1c195f05feea3, type: 3}
+    - {fileID: 8524070025652140477, guid: 96b8d7bc70422b9428516dece8b83b33, type: 3}
+    - {fileID: 1646106804340802781, guid: 066fb50dbc037374895f68252fbdb424, type: 3}
+    - {fileID: 6742286516824958470, guid: 5d00ed3c41aa5f748bd51244fe481b39, type: 3}
   idDigits:
     original: 11212
     randomize: 0000000000

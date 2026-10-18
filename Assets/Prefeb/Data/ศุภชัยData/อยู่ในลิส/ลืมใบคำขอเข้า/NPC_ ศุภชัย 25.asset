@@ -38,10 +38,14 @@ MonoBehaviour:
   applicantPhotoPrefab: {fileID: 0}
   templeDocumentData: {fileID: 11400000, guid: 14ff28d7eb7eb2a42acf1fd6998b93ca, type: 2}
   templeDocumentPrefab: {fileID: 0}
-  TodayPhotoPrefab: {fileID: 5993851925707921823, guid: 64d96e025f9164c4383ed62c8f2c2f61, type: 3}
+  TodayPhotoPrefab: {fileID: 5040446920154058853, guid: f318264c14ef7bf42bdaed29a69a1b24, type: 3}
   applicant:
     npcData: {fileID: 0}
     displayData: {fileID: 0}
+    selectedGroup:
+      chance: 50
+      isGhost: 0
+      prefabs: []
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0

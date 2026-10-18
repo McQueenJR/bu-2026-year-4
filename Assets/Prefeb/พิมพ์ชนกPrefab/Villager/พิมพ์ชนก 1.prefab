@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3633483988584338099, guid: 89ae13160c576344f82450f1935694c8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3282499
+      value: 1.4112656
       objectReference: {fileID: 0}
     - target: {fileID: 3633483988584338099, guid: 89ae13160c576344f82450f1935694c8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -687,6 +687,7 @@ PrefabInstance:
     - {fileID: 4682402123692327262, guid: 89ae13160c576344f82450f1935694c8, type: 3}
     - {fileID: 154120452656245233, guid: 89ae13160c576344f82450f1935694c8, type: 3}
     - {fileID: 2780426428939570864, guid: 89ae13160c576344f82450f1935694c8, type: 3}
+    - {fileID: 6085927836793436150, guid: 89ae13160c576344f82450f1935694c8, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6581703856837174238, guid: 89ae13160c576344f82450f1935694c8, type: 3}
       insertIndex: -1

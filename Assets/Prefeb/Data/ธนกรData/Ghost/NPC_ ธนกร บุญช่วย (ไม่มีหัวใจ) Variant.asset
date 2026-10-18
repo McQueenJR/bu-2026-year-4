@@ -38,10 +38,14 @@ MonoBehaviour:
   applicantPhotoPrefab: {fileID: 6353456728520481206, guid: f0a1f3d1a15b25248bc7c17447cfa433, type: 3}
   templeDocumentData: {fileID: 11400000, guid: e5ab694f7c16dc24484d2696c9f6e818, type: 2}
   templeDocumentPrefab: {fileID: 0}
-  TodayPhotoPrefab: {fileID: 6921753078679136934, guid: 575fef915c3d3bb47aabf0ff2be2eba0, type: 3}
+  TodayPhotoPrefab: {fileID: 6339446877483047018, guid: 3c2288c186a5a5343b340249628725b9, type: 3}
   applicant:
     npcData: {fileID: 0}
     displayData: {fileID: 0}
+    selectedGroup:
+      chance: 50
+      isGhost: 0
+      prefabs: []
     spawnPrefab: {fileID: 0}
     isGood: 0
     isInTodayList: 0
@@ -78,6 +82,7 @@ MonoBehaviour:
         value: {fileID: 0}
         isFake: 0
       showSignature: 0
+    hasTempleDocument: 1
     hasEnteredToday: 0
   greenDialogs:
   - "\u0E40\u0E2D\u0E2D... \u0E17\u0E33\u0E2B\u0E19\u0E49\u0E32\u0E17\u0E35\u0E48\u0E44\u0E14\u0E49\u0E14\u0E35"
@@ -146,4 +151,6 @@ MonoBehaviour:
     - "\u0E14\u0E39\u0E2D\u0E35\u0E01\u0E23\u0E2D\u0E1A\u0E2A\u0E34 \u0E2D\u0E32\u0E08\u0E08\u0E30\u0E21\u0E2D\u0E07\u0E02\u0E49\u0E32\u0E21\u0E44\u0E1B"
   selectedCheckQuestions: []
   correctAnswers: 0001000100
-  campID: 0
+  phoneGreetingDialogs: []
+  phonePeopleCountDialogs: []
+  phoneDocumentDialogs: []
