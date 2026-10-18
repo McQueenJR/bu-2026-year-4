@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfcf57e299931740a8398ef7bcc0748, type: 3}
   m_Name: NewspaperMissingDatabase
   m_EditorClassIdentifier: Assembly-CSharp::NewspaperMissingDatabase
-  entries: []
+  entries:
+  - villager: {fileID: 0}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: 0}
+  - villager: {fileID: 0}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: 0}
+  - villager: {fileID: 0}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: 0}
+  - villager: {fileID: 0}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: 0}
   fallbackText: "{name} \u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
   fallbackPhoto: {fileID: 21300000, guid: f203baf209a23a84fa8c9763b562d11c, type: 3}
