@@ -77,7 +77,7 @@ public class EndingSummaryUI : MonoBehaviour
             dateText.text = FormatDate(EndingSummaryData.endDay);
 
         if (rankText != null)
-            rankText.text = "แรงค์ : " + EndingSummaryData.rankText;
+            rankText.text =  EndingSummaryData.rankText;
 
         if (titleText != null)
             titleText.text = bad ? badTitle : goodTitle;
