@@ -781,6 +781,7 @@ MonoBehaviour:
       showSignature: 0
     hasTempleDocument: 1
     hasEnteredToday: 0
+    forgotDocument: 0
 --- !u!114 &1667472207342864691
 MonoBehaviour:
   m_ObjectHideFlags: 0

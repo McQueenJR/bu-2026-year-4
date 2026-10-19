@@ -619,7 +619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4181604918337184743, guid: da6221823aa26cb43a4123d9ae93e040, type: 3}
       propertyPath: notifyCheckpointOnArrival
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4378423673134519142, guid: da6221823aa26cb43a4123d9ae93e040, type: 3}
       propertyPath: data
@@ -722,7 +722,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4050408994059932443, guid: da6221823aa26cb43a4123d9ae93e040, type: 3}
+    - {fileID: 4378423673134519142, guid: da6221823aa26cb43a4123d9ae93e040, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7387196033468268886, guid: da6221823aa26cb43a4123d9ae93e040, type: 3}
     - {fileID: 623758618735004011, guid: da6221823aa26cb43a4123d9ae93e040, type: 3}
