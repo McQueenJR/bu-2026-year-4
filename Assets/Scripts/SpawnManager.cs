@@ -118,20 +118,7 @@ public void GenerateTodayApplicants()
     todayApplicants.AddRange(normalApplicants);
 
     // 6. สร้างเอกสารให้ NPC ทุกคน
-    int today = gameManager.currentDay;
-
-    foreach (TodayApplicant applicant in todayApplicants)
-    {
-        if (applicant == null || applicant.displayData == null)
-            continue;
-
-        applicant.hasTempleDocument = true;
-        applicant.templeDocument = TempleDocumentGenerator.Generate(
-            applicant.displayData.templeDocumentData,
-            today,
-            true
-        );
-    }
+    
 
     // 7. สุ่ม NPC ใน Today List หนึ่งคนให้ไม่มีเอกสาร
     // 8. UI แสดงรายชื่อ Today List ทั้งหมด
@@ -886,7 +873,22 @@ private TodayApplicant CreateGhostApplicant(
         if (!forgot && ShouldRollForgotDocument(a))
             forgot = Random.value < forgotDocumentChance;
 
-        a.hasTempleDocument = !forgot; 
+        a.hasTempleDocument = !forgot;
+
+        if (a.hasTempleDocument &&
+            a.displayData != null &&
+            a.displayData.templeDocumentData != null)
+        {
+            a.templeDocument = TempleDocumentGenerator.Generate(
+                a.displayData.templeDocumentData,
+                gameManager.currentDay,
+                true
+            );
+        }
+        else
+        {
+            a.templeDocument = null;
+        }
 
         return true;
     }
