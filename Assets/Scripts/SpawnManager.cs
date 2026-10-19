@@ -32,7 +32,7 @@ public class SpawnManager : MonoBehaviour
     private Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC = new();
     
     private int currentApplicantIndex = 0;
-
+   
     // =========================================================
     // เริ่มวันใหม่
     // =========================================================
@@ -804,7 +804,39 @@ private TodayApplicant CreateGhostApplicant(
         $"Prefab={applicant.spawnPrefab.name}"
     );
 }   // <<< ปิดฟังก์ชันตรงนี้ก่อน
+// ตัดสินว่าสปาวตัวนี้ต้องสุ่มลืมใบคำขอ 30% หรือไม่
+    private bool ShouldRollForgotDocument(TodayApplicant a)
+    {
+        NPCData real = GetNPCDataFromPrefabData(a.npcData);
+        if (CampManager.Instance == null || real == null) return false;
 
+        // เงื่อนไขตามเอกสารทั้ง 2 กรณี (มีบัดดี้ / ไม่มีบัดดี้แต่ตัวจริงอยู่แคมป์)
+        bool campCondition =
+            CampManager.Instance.HasBuddyInCamp(real) ||
+            CampManager.Instance.IsRealInCamp(real);
+
+        if (!campCondition) return false;
+
+        // พรีแฟบที่เลือกต้องเป็นแบบ "ปกติ" (ไม่ติ๊กช่องผิดปกติ ยกเว้นช่องใบคำขอ)
+        return IsPrefabLooksNormal(a.displayData);
+    }
+
+    private const int DocumentIndex = 3;   // ช่องใบคำขอใน correctAnswers
+
+// "ปกติ" = ไม่ติ๊กช่องผิดปกติเลย ยกเว้นช่องใบคำขอ (ติ๊กได้)
+    private bool IsPrefabLooksNormal(NPCData data)
+    {
+        if (data == null || data.correctAnswers == null) return false;
+
+        for (int i = 0; i < data.correctAnswers.Length; i++)
+        {
+            if (i == DocumentIndex) continue;   // ข้ามช่องใบคำขอ
+            if (data.correctAnswers[i]) return false;
+        }
+
+        return true;
+    }
+    
 // ResolveApplicantPrefab วางต่อข้างล่าง นอกฟังก์ชัน
     private bool ResolveApplicantPrefab(TodayApplicant a)
     {
@@ -836,9 +868,11 @@ private TodayApplicant CreateGhostApplicant(
 
         // เอกสาร
         bool forgot = currentPlan.forgotDocDPN.Contains(dpn);
-        a.hasTempleDocument = !forgot;
-        a.templeDocument = forgot ? null
-            : TempleDocumentGenerator.Generate(a.displayData.templeDocumentData, gameManager.currentDay, true);
+
+        if (!forgot && ShouldRollForgotDocument(a))
+            forgot = Random.value < forgotDocumentChance;
+
+        a.hasTempleDocument = !forgot; 
 
         return true;
     }

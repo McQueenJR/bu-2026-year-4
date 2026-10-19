@@ -88,8 +88,10 @@ public class CampManager : MonoBehaviour
     // ==========================
     public void StartNewDay(int day)
     {
+        
         villagersKilledToday = 0;
-
+        ghostEnteredRooms.Clear();
+        ghostInRoom.Clear();
         foreach (CampRoom room in campDatabase.rooms)
         {
             if (room == null) continue;
@@ -265,15 +267,25 @@ public class CampManager : MonoBehaviour
                     resident.npcData.npcName == npc.npcName)
                 {
                     // ใช้ NPCData ของ Camp เป็น key เสมอ
+                    
                     homeTodayNPC[resident.npcData] = true;
 
-                    Debug.Log(
-                        $"🏕️ {resident.npcData.npcName} เข้า Camp " +
-                        $"ห้อง {room.roomCode} → 🟢 อยู่ Camp"
-                    );
+// ห้องนี้มีผีอยู่ → คนที่เพิ่งเข้ามาตายทันที
+                    if (ghostEnteredRooms.Contains(room))
+                    {
+                        KillResident(
+                            resident.npcData,
+                            DeathCause.GhostTentKill,
+                            $"ห้อง {room.roomCode} (เข้าตามหลังผี)"
+                        );
+
+                        Debug.Log($"💀 {resident.npcData.npcName} เข้าห้อง {room.roomCode} ที่มีผี → ตาย");
+                    }
+
                     BuildRuntimeCamp();
                     PrintAllCamps();
                     return;
+                   
                 }
             }
         }
@@ -282,7 +294,35 @@ public class CampManager : MonoBehaviour
             $"❌ หา {npc.npcName} ใน CampManager ไม่เจอ"
         );
     }
+// ตัวจริงอยู่ในแคมป์วันนี้ไหม (มีชีวิต + อยู่แคมป์)
+    public bool IsRealInCamp(NPCData npc)
+    {
+        return npc != null && IsAlive(npc) && IsHomeToday(npc);
+    }
 
+// ในห้องของ NPC นี้ มีบัดดี้ (รูมเมต) อยู่แคมป์ตอนนี้ไหม
+    public bool HasBuddyInCamp(NPCData npc)
+    {
+        CampRoom room = GetRoomOfNPC(npc);
+        if (room == null) return false;
+
+        foreach (CampResident r in room.residents)
+        {
+            if (r == null || r.npcData == null) continue;
+            if (r.npcData == npc || r.npcData.npcName == npc.npcName) continue;
+
+            if (IsAlive(r.npcData) && IsHomeToday(r.npcData))
+                return true;
+        }
+
+        return false;
+    }
+
+// ลืมใบคำขอไว้ข้างในไหม (hasDocument = false คือลืม)
+    public bool ForgotDocumentInCamp(NPCData npc)
+    {
+        return npc != null && !HasDocumentInCamp(npc);
+    }
       // ==========================
     // NPC ตาย
     // คืน true = ตายจริงในครั้งนี้ | false = ไม่เจอในค่าย หรือตายไปแล้ว
@@ -599,7 +639,7 @@ public class CampManager : MonoBehaviour
         }
 
         // Ghost ถูก Resolve แล้ว
-        ghostEnteredRooms.Clear();
+        
 
         PrintAllCamps();
     }

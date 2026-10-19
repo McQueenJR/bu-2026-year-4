@@ -254,6 +254,15 @@ public class ChecklistManager : MonoBehaviour
             }
 
             bool correctAnswer = currentNPC.data.correctAnswers[i];
+
+// ลืมใบคำขอไว้ข้างใน → ช่องใบคำขอ (index 3) ต้องตอบ "ผิดปกติ"
+            if (i == 3 &&
+                currentNPC.applicant != null &&
+                !currentNPC.applicant.hasTempleDocument)
+            {
+                correctAnswer = true;
+            }
+            
             bool playerAnswer = playerAnswers[i];
             // ใหม่: ถูก +1 / ผิด -1 (ผลรวมติดลบได้ จะไปตัดที่ 0 ตอนรวมคะแนน NPC)
             if (playerAnswer == correctAnswer)

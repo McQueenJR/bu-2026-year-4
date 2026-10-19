@@ -25,4 +25,6 @@ public class TodayApplicant
 
     [HideInInspector]
     public bool hasEnteredToday = false;
+    
+    public bool forgotDocument;   // ลืมใบคำขอไว้ข้างใน
 }
