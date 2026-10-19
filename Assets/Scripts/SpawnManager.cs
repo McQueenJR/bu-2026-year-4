@@ -84,6 +84,7 @@ public void GenerateTodayApplicants()
 
     foreach (DataPrefabNPC dpn in currentPlan.spawnOrder)
     {
+        
         bool inList = currentPlan.listDPN.Contains(dpn);
 
         // ครั้งแรกที่ DPN ใน List โผล่ = ตัวจริง, ครั้งต่อ ๆ ไป = ผี
@@ -96,6 +97,7 @@ public void GenerateTodayApplicants()
             isGhost = isGhost,
             hasEnteredToday = false
         });
+        
     }
 
     gameManager.npcPerDay = todayApplicants.Count;
@@ -220,7 +222,19 @@ private DailyPlan BuildDailyPlan(int requestedNPCCount, int slotCount)
     plan.spawnOrder.AddRange(slots);
     plan.spawnOrder.AddRange(plan.extraDPN);
     plan.spawnOrder = plan.spawnOrder.OrderBy(_ => Random.value).ToList();
+// ---------- ใครไม่ได้สปาว = เข้าแคมป์ทั้งหมด ----------
+    if (CampManager.Instance != null)
+    {
+        HashSet<DataPrefabNPC> willSpawn = new(plan.spawnOrder);
 
+        foreach (DataPrefabNPC d in GetAllAvailableNPCs())
+        {
+            bool spawns = willSpawn.Contains(d);
+
+            foreach (NPCData data in GetAllNPCDataOfDPN(d))
+                CampManager.Instance.SetHomeToday(data, !spawns);
+        }
+    }
     Debug.Log(
         "[Plan] ลำดับสปาว: " +
         string.Join(", ", plan.spawnOrder.Select(d => d.name)) +
