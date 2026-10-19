@@ -88,85 +88,29 @@ public class CampManager : MonoBehaviour
     // ==========================
     public void StartNewDay(int day)
     {
-        
         villagersKilledToday = 0;
-        
-        // รีเซ็ตเอกสารของทุกคนก่อนสุ่มวันใหม่
+
         foreach (CampRoom room in campDatabase.rooms)
         {
-            if (room == null)
-                continue;
+            if (room == null) continue;
 
             foreach (CampResident resident in room.residents)
             {
-                if (resident == null || resident.npcData == null)
-                    continue;
-
+                if (resident == null || resident.npcData == null) continue;
                 resident.hasDocument = true;
             }
         }
-        
+
+        // รีเซ็ตทุกคนเป็น "ไม่อยู่ Camp" รอ SpawnManager มาเซ็ตทีหลัง
+        foreach (NPCData npc in new List<NPCData>(homeTodayNPC.Keys))
+            homeTodayNPC[npc] = false;
+
         Debug.Log($"===== CAMP DAY {day} =====");
-
-        // NPC ที่ยังมีชีวิต
-        List<NPCData> aliveList = new List<NPCData>();
-
-        foreach (NPCData npc in aliveNPC.Keys)
-        {
-            if (aliveNPC[npc])
-            {
-                aliveList.Add(npc);
-            }
-            else
-            {
-                // NPC ที่ตายแล้ว
-                homeTodayNPC[npc] = false;
-            }
-        }
-
-        // จำนวน NPC ที่จะออกมาวัดวันนี้ = 9-11 ตัว
-        int spawnCount = Random.Range(9, Mathf.Min(11, aliveList.Count) + 1);
-
-        // สุ่มลำดับ NPC
-        for (int i = 0; i < aliveList.Count; i++)
-        {
-            int randomIndex = Random.Range(i, aliveList.Count);
-
-            NPCData temp = aliveList[i];
-            aliveList[i] = aliveList[randomIndex];
-            aliveList[randomIndex] = temp;
-        }
-
-        // กำหนดสถานะ
-        for (int i = 0; i < aliveList.Count; i++)
-        {
-            NPCData npc = aliveList[i];
-
-            bool comeToTemple = i < spawnCount;
-
-            homeTodayNPC[npc] = !comeToTemple;
-
-            Debug.Log(
-                $"{npc.npcName} : " +
-                (comeToTemple ? "ออกมาวัด" : "อยู่ Camp")
-            );
-        }
-
-        Debug.Log(
-            $"วันนี้ NPC มีชีวิต = {aliveList.Count} | " +
-            $"ออกมาวัด = {spawnCount} | " +
-            $"อยู่ Camp = {aliveList.Count - spawnCount}"
-        );
-
-// สร้าง Runtime Camp จาก CampDatabase
         BuildRuntimeCamp();
-
-        PrintAllCamps();
     }
-
-    // ==========================
-    // หา Room จากเบอร์โทร
-    // ==========================
+// ==========================
+// หา Room จากเบอร์โทร
+// ==========================
     public CampRoom GetRoomByPhone(string phoneNumber)
     {
         if (campDatabase == null)
@@ -181,9 +125,9 @@ public class CampManager : MonoBehaviour
         return null;
     }
 
-    // ==========================
-    // หา Room ของ NPC
-    // ==========================
+// ==========================
+// หา Room ของ NPC
+// ==========================
     public CampRoom GetRoomOfNPC(NPCData npc)
     {
         if (campDatabase == null)
@@ -198,47 +142,19 @@ public class CampManager : MonoBehaviour
             return null;
         }
 
-        Debug.Log(
-            $"📞 กำลังหา Room ของ NPC: [{npc.npcName}]"
-        );
-
         foreach (CampRoom room in campDatabase.rooms)
         {
             if (room == null)
                 continue;
 
-            Debug.Log(
-                $"📞 ตรวจ Room [{room.roomCode}] " +
-                $"เบอร์ [{room.phoneNumber}]"
-            );
-
             foreach (CampResident resident in room.residents)
             {
-                if (resident == null ||
-                    resident.npcData == null)
+                if (resident == null || resident.npcData == null)
                     continue;
 
-                Debug.Log(
-                    $"   └ Resident: [{resident.npcData.npcName}]"
-                );
-
-                if (resident.npcData == npc)
+                if (resident.npcData == npc ||
+                    resident.npcData.npcName == npc.npcName)
                 {
-                    Debug.Log(
-                        $"📞 ✅ เจอจาก Reference: " +
-                        $"{room.roomCode} / {room.phoneNumber}"
-                    );
-
-                    return room;
-                }
-
-                if (resident.npcData.npcName == npc.npcName)
-                {
-                    Debug.Log(
-                        $"📞 ✅ เจอจากชื่อ: " +
-                        $"{room.roomCode} / {room.phoneNumber}"
-                    );
-
                     return room;
                 }
             }
@@ -249,6 +165,23 @@ public class CampManager : MonoBehaviour
         );
 
         return null;
+    }
+    
+    
+// SpawnManager เรียกใช้เพื่อกำหนดสถานะแคมป์
+    public void SetHomeToday(NPCData npc, bool isHome)
+    {
+        if (npc == null) return;
+
+        NPCData key = FindResidentKey(npc);
+        if (key == null)
+        {
+            Debug.LogWarning($"[Camp] SetHomeToday: ไม่พบ {npc.npcName}");
+            return;
+        }
+
+        // คนตายอยู่แคมป์ไม่ได้
+        homeTodayNPC[key] = aliveNPC[key] && isHome;
     }
 
     // ==========================

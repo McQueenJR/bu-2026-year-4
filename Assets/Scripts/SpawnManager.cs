@@ -17,13 +17,9 @@ public class SpawnManager : MonoBehaviour
     public TodayListManager todayListManager;
     
     
-    [Header("Today List Spawn Settings")]
+    [Header("Today List + Ghost Settings")]
     [Min(0)]
-    public int todayListRealSpawnCount = 3;
-
-    [Header("Ghost Spawn Settings")]
-    [Min(0)]
-    public int ghostsPerDay = 5;
+    public int todayListPlusGhostCount = 8;   // จริงจาก List + ผี รวมกัน
 
 
     // NPC ที่จัดไว้สำหรับวันนี้
@@ -36,7 +32,13 @@ public class SpawnManager : MonoBehaviour
     // =========================================================
     // เริ่มวันใหม่
     // =========================================================
-    
+   private class DailyPlan
+{
+    public List<DataPrefabNPC> listDPN = new();
+    public List<DataPrefabNPC> extraDPN = new();
+    public List<DataPrefabNPC> campDPN = new();
+}
+
 public void GenerateTodayApplicants()
 {
     todayApplicants.Clear();
@@ -44,9 +46,7 @@ public void GenerateTodayApplicants()
 
     if (allData == null || gameManager == null)
     {
-        Debug.LogError(
-            "SpawnManager: ยังไม่ได้กำหนด allData หรือ gameManager"
-        );
+        Debug.LogError("SpawnManager: ยังไม่ได้กำหนด allData หรือ gameManager");
         return;
     }
 
@@ -55,268 +55,122 @@ public void GenerateTodayApplicants()
         allData.maxNPCPerDay + 1
     );
 
-    Dictionary<DataPrefabNPC, HashSet<GameObject>>
-        usedPrefabsPerNPC = new();
+    Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC = new();
 
-    List<DataPrefabNPC> allNPCs = GetAllAvailableNPCs();
-
-    if (allNPCs.Count == 0)
+    if (GetAllAvailableNPCs().Count == 0)
     {
         Debug.LogError("SpawnManager: ไม่มี NPC ที่พร้อมใช้งาน");
         gameManager.npcPerDay = 0;
         return;
     }
 
-    int slotCount = todayListManager != null &&
-                    todayListManager.slots != null
-        ? todayListManager.slots.Length
-        : 0;
-
-    int availableTodayListMax = Mathf.Min(
-        allData.maxTodayList,
-        requestedNPCCount,
-        slotCount
-    );
-
-    int availableTodayListMin = Mathf.Min(
-        allData.minTodayList,
-        availableTodayListMax
-    );
-
-    int requestedTodayListCount = availableTodayListMax > 0
-        ? Random.Range(
-            Mathf.Max(0, availableTodayListMin),
-            availableTodayListMax + 1
-        )
-        : 0;
-
-    // 1. สร้างรายชื่อ Today List ทั้งหมด
-    HashSet<NPCData> usedTodayListData = new();
-    HashSet<string> usedTodayListNames = new();
-
-    List<TodayApplicant> todayListApplicants = new();
-
+    int slotCount = todayListManager != null && todayListManager.slots != null
+        ? todayListManager.slots.Length : 0;
     int attempts = 0;
     const int maxAttempts = 3000;
+    
+    DailyPlan plan = BuildDailyPlan(requestedNPCCount, slotCount);
 
-    while (todayListApplicants.Count < requestedTodayListCount &&
-           attempts++ < maxAttempts)
+    // 1. สร้าง Applicant ของ Today List (1 DPN = 1 คน)
+    List<TodayApplicant> todayListApplicants = new();
+
+    foreach (DataPrefabNPC source in plan.listDPN)
     {
-        DataPrefabNPC source = ChooseAvailableNPC();
+        TodayApplicant applicant = null;
 
-        if (source == null)
-            break;
-
-        NPCSpawnGroup group = ChooseSpawnGroup(source, true);
-
-        if (group == null)
-            continue;
-
-        TodayApplicant applicant = new TodayApplicant
+        for (int i = 0; i < 20 && applicant == null; i++)
         {
-            npcData = source,
-            selectedGroup = group,
-            isGood = group == source.todayGood,
-            isInTodayList = true,
-            isGhost = group.isGhost,
-            hasEnteredToday = false
-        };
+            NPCSpawnGroup group = ChooseSpawnGroup(source, true);
+            if (group == null || group.isGhost) continue;
 
-        PrepareApplicantPrefab(applicant, usedPrefabsPerNPC);
+            TodayApplicant a = new TodayApplicant
+            {
+                npcData = source,
+                selectedGroup = group,
+                isGood = group == source.todayGood,
+                isInTodayList = true,
+                isGhost = false,
+                hasEnteredToday = false
+            };
 
-        if (applicant.spawnPrefab == null ||
-            applicant.displayData == null)
-            continue;
+            PrepareApplicantPrefab(a, usedPrefabsPerNPC);
 
-        // Ghost ห้ามอยู่ใน Today List
-        if (applicant.isGhost)
-            continue;
+            if (a.spawnPrefab == null || a.displayData == null) continue;
 
-        NPCData data = applicant.displayData;
+            if (a.displayData.TodayPhotoPrefab == null)
+            {
+                Debug.LogWarning($"Today List: {a.displayData.npcName} ไม่มี TodayPhotoPrefab");
+                continue;
+            }
 
-        if (usedTodayListData.Contains(data))
-            continue;
-
-        if (!string.IsNullOrWhiteSpace(data.npcName) &&
-            usedTodayListNames.Contains(data.npcName))
-            continue;
-
-        if (CampManager.Instance != null &&
-            CampManager.Instance.IsHomeToday(data))
-            continue;
-
-        if (data.TodayPhotoPrefab == null)
-        {
-            Debug.LogWarning(
-                $"Today List: {data.npcName} ไม่มี TodayPhotoPrefab"
-            );
-            continue;
+            applicant = a;
         }
 
-        usedTodayListData.Add(data);
-
-        if (!string.IsNullOrWhiteSpace(data.npcName))
-            usedTodayListNames.Add(data.npcName);
-
-        todayListApplicants.Add(applicant);
+        if (applicant != null)
+            todayListApplicants.Add(applicant);
     }
 
-    // 2. สุ่มเลือกเฉพาะ NPC จริงที่จะ Spawn จาก Today List
+    // 2. NPC ใน Today List ทุกตัวจะ Spawn จริง
     List<TodayApplicant> selectedTodayApplicants =
         todayListApplicants
             .OrderBy(_ => Random.value)
-            .Take(Mathf.Min(
-                todayListRealSpawnCount,
-                requestedNPCCount
-            ))
+            .Take(Mathf.Min(todayListApplicants.Count, requestedNPCCount))
             .ToList();
-
-    // กันไม่ให้รายชื่อ Today List ที่ไม่ได้ถูกเลือก
-    // หลุดไป Spawn ในส่วน NPC ปกติ
-    HashSet<NPCData> reservedTodayData = new(
-        todayListApplicants
-            .Where(x => x != null && x.displayData != null)
-            .Select(x => x.displayData)
-    );
-
-    HashSet<string> reservedTodayNames = new(
-        todayListApplicants
-            .Where(x => x != null &&
-                        x.displayData != null &&
-                        !string.IsNullOrWhiteSpace(x.displayData.npcName))
-            .Select(x => x.displayData.npcName)
-    );
 
     todayApplicants.AddRange(selectedTodayApplicants);
 
-    HashSet<NPCData> usedApplicantData = new(
-        selectedTodayApplicants
-            .Where(x => x.displayData != null)
-            .Select(x => x.displayData)
-    );
-
-    HashSet<string> usedApplicantNames = new(
-        selectedTodayApplicants
-            .Where(x => x.displayData != null &&
-                        !string.IsNullOrWhiteSpace(x.displayData.npcName))
-            .Select(x => x.displayData.npcName)
-    );
-
-    // 3. สร้าง Ghost ที่ปลอมเป็น NPC จริงใน Today List
+    // 3. Ghost ปลอมเป็นคนที่ถูกเลือก
     List<NPCData> ghostTargets = selectedTodayApplicants
         .Where(x => x.displayData != null)
         .Select(x => x.displayData)
         .ToList();
 
+    // ผี = ฐาน 8 - จำนวน NPC จริงใน List (ห้ามเกินจำนวนที่ต้องการวันนี้)
+    int ghostsToday = Mathf.Clamp(
+        todayListPlusGhostCount - selectedTodayApplicants.Count,
+        0,
+        requestedNPCCount - selectedTodayApplicants.Count
+    );
+
     int ghostCreated = 0;
     attempts = 0;
 
-    while (ghostCreated < ghostsPerDay &&
+    while (ghostCreated < ghostsToday &&
            ghostTargets.Count > 0 &&
            attempts++ < maxAttempts)
     {
-        NPCData target = ghostTargets[
-            Random.Range(0, ghostTargets.Count)
-        ];
+        NPCData target = ghostTargets[Random.Range(0, ghostTargets.Count)];
 
         TodayApplicant ghost = CreateGhostApplicant(
-            target, selectedTodayApplicants,usedPrefabsPerNPC
+            target, selectedTodayApplicants, usedPrefabsPerNPC
         );
 
-        if (ghost == null ||
-            ghost.spawnPrefab == null ||
-            ghost.displayData == null)
-        {
-            continue;
-        }
-
-// ผีสามารถใช้ NPCData และชื่อซ้ำกับตัวจริงได้
-        ghost.isInTodayList = false;
-        ghost.isGhost = true;
-        ghost.ghostTarget = target;
-        ghost.hasEnteredToday = false;
+        if (ghost == null) continue;
 
         todayApplicants.Add(ghost);
         ghostCreated++;
-
-        Debug.Log(
-            $"[Ghost] {ghost.displayData.npcName} " +
-            $"ปลอมเป็น {target.npcName}"
-        );
     }
 
-    // 4. เติม NPC ที่เหลือจากกลุ่ม Normal
-    attempts = 0;
-
-    while (todayApplicants.Count < requestedNPCCount &&
-           attempts++ < maxAttempts)
+    // 4. NPC ปกติจาก Extra DPN (1 DPN = 1 คน)
+    foreach (DataPrefabNPC source in plan.extraDPN)
     {
-        DataPrefabNPC source = ChooseAvailableNPC();
-
-        if (source == null)
-            break;
-
-        TodayApplicant applicant = CreateApplicant(source, false);
-
-        if (applicant == null)
-            continue;
-
-
-       
-
-        PrepareApplicantPrefab(applicant, usedPrefabsPerNPC);
-
-        if (applicant.spawnPrefab == null ||
-            applicant.displayData == null)
-            continue;
-
-        NPCData data = applicant.displayData;
-
-        // ห้ามใช้ NPC ที่ถูกจองไว้ใน Today List
-        if (reservedTodayData.Contains(data))
-            continue;
-
-        if (!string.IsNullOrWhiteSpace(data.npcName) &&
-            reservedTodayNames.Contains(data.npcName))
-            continue;
-
-        if (usedApplicantData.Contains(data))
-            continue;
-
-        if (!string.IsNullOrWhiteSpace(data.npcName) &&
-            usedApplicantNames.Contains(data.npcName))
-            continue;
-
-        if (!applicant.isGhost &&
-            CampManager.Instance != null &&
-            CampManager.Instance.IsHomeToday(data))
-            continue;
-
-        // Ghost ที่มาจากกลุ่ม Normal ต้องมีเป้าหมายจริง
-        if (applicant.isGhost)
+        for (int i = 0; i < 20; i++)
         {
-            if (ghostTargets.Count == 0)
-                continue;
+            TodayApplicant a = CreateApplicant(source, false);
+            if (a == null || a.isGhost) continue;
 
-            applicant.ghostTarget = ghostTargets[
-                Random.Range(0, ghostTargets.Count)
-            ];
+            PrepareApplicantPrefab(a, usedPrefabsPerNPC);
+            if (a.spawnPrefab == null || a.displayData == null) continue;
+
+            todayApplicants.Add(a);
+            break;
         }
-
-        applicant.hasEnteredToday = false;
-        todayApplicants.Add(applicant);
-
-        usedApplicantData.Add(data);
-
-        if (!string.IsNullOrWhiteSpace(data.npcName))
-            usedApplicantNames.Add(data.npcName);
     }
 
     if (todayApplicants.Count < requestedNPCCount)
     {
         Debug.LogWarning(
-            $"SpawnManager: สร้าง NPC ได้ {todayApplicants.Count}/" +
-            $"{requestedNPCCount} คน อาจมี NPC หรือ Ghost ไม่เพียงพอ"
+            $"SpawnManager: สร้าง NPC ได้ {todayApplicants.Count}/{requestedNPCCount} คน"
         );
     }
 
@@ -346,7 +200,6 @@ public void GenerateTodayApplicants()
             continue;
 
         applicant.hasTempleDocument = true;
-
         applicant.templeDocument = TempleDocumentGenerator.Generate(
             applicant.displayData.templeDocumentData,
             today,
@@ -358,15 +211,12 @@ public void GenerateTodayApplicants()
     if (selectedTodayApplicants.Count > 0)
     {
         TodayApplicant noDocumentApplicant =
-            selectedTodayApplicants[
-                Random.Range(0, selectedTodayApplicants.Count)
-            ];
+            selectedTodayApplicants[Random.Range(0, selectedTodayApplicants.Count)];
 
         noDocumentApplicant.hasTempleDocument = false;
         noDocumentApplicant.templeDocument = null;
 
-        if (CampManager.Instance != null &&
-            noDocumentApplicant.displayData != null)
+        if (CampManager.Instance != null && noDocumentApplicant.displayData != null)
         {
             CampManager.Instance.SetDocumentInCamp(
                 noDocumentApplicant.displayData,
@@ -376,7 +226,6 @@ public void GenerateTodayApplicants()
     }
 
     // 8. UI แสดงรายชื่อ Today List ทั้งหมด
-    // ไม่ใช่แค่คนที่ถูกเลือกให้ Spawn
     List<NPCData> todayListData = todayListApplicants
         .Where(x => x != null && x.displayData != null)
         .Select(x => x.displayData)
@@ -395,7 +244,70 @@ public void GenerateTodayApplicants()
     );
 
     if (CampManager.Instance != null)
+    {
+        CampManager.Instance.BuildRuntimeCamp();
         CampManager.Instance.PrintAllCamps();
+    }
+}
+
+private DailyPlan BuildDailyPlan(int requestedNPCCount, int slotCount)
+{
+    DailyPlan plan = new();
+
+    List<DataPrefabNPC> pool = GetAllAvailableNPCs()
+        .OrderBy(_ => Random.value)
+        .ToList();
+
+    const int poolSize = 10;
+    if (pool.Count > poolSize)
+        pool = pool.Take(poolSize).ToList();
+
+    int listCount = Random.Range(allData.minTodayList, allData.maxTodayList + 1);
+    listCount = Mathf.Min(listCount, slotCount, pool.Count);
+
+    int extraCount = requestedNPCCount - todayListPlusGhostCount;
+    extraCount = Mathf.Clamp(extraCount, 0, pool.Count - listCount);
+
+    plan.listDPN.AddRange(pool.Take(listCount));
+    plan.extraDPN.AddRange(pool.Skip(listCount).Take(extraCount));
+    plan.campDPN.AddRange(pool.Skip(listCount + extraCount));
+
+    if (CampManager.Instance != null)
+    {
+        foreach (var dpn in plan.listDPN.Concat(plan.extraDPN))
+            foreach (var data in GetAllNPCDataOfDPN(dpn))
+                CampManager.Instance.SetHomeToday(data, false);
+
+        foreach (var dpn in plan.campDPN)
+            foreach (var data in GetAllNPCDataOfDPN(dpn))
+                CampManager.Instance.SetHomeToday(data, true);
+    }
+
+    return plan;
+}
+
+private List<NPCData> GetAllNPCDataOfDPN(DataPrefabNPC dpn)
+{
+    List<NPCData> result = new();
+    if (dpn == null) return result;
+
+    NPCSpawnGroup[] groups = { dpn.todayGood, dpn.todayBad, dpn.normalGood, dpn.normalBad };
+
+    foreach (var group in groups)
+    {
+        if (group == null || group.prefabs == null) continue;
+
+        foreach (var pc in group.prefabs)
+        {
+            if (pc == null || pc.prefab == null) continue;
+
+            NPC npc = pc.prefab.GetComponent<NPC>();
+            if (npc != null && npc.data != null && !result.Contains(npc.data))
+                result.Add(npc.data);
+        }
+    }
+
+    return result;
 }
 
 
