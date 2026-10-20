@@ -148,17 +148,29 @@ public class Document1Manager : MonoBehaviour
         
         StopAllCoroutines();
         isAnimating = false;
-        ShowFrontInstant(0);
+        ShowFrontInstant(GetSafeFrontIndex());
     }
 
     public void CloseDocument()
     {
+        // หยุดแอนิเมชันที่ค้างอยู่ ไม่ให้เปลี่ยนหน้าต่อหลังปิดเอกสาร
+        StopAllCoroutines();
+        isAnimating = false;
+        
         if (documentRoot != null) documentRoot.SetActive(false);
         DraggableSortOrder.NotifyClosed();
         
         if (sfxOpenClose != null) sfxOpenClose.Play();
     }
 
+    // กัน index หลุดช่วง
+    int GetSafeFrontIndex()
+    {
+        if (flattenedPages == null || flattenedPages.Length == 0) return 0;
+        if (frontMasterIndex < 0 || frontMasterIndex >= flattenedPages.Length) return 0;
+        return frontMasterIndex;
+    }
+    
     void ShowFrontInstant(int idx)
     {
         if (flattenedPages == null || flattenedPages.Length == 0) return;
@@ -170,12 +182,12 @@ public class Document1Manager : MonoBehaviour
             bool isFront = (i == idx);
             flattenedPages[i].SetActive(isFront);
 
-            if (isFront)
-            {
-                flattenedPages[i].transform.localPosition = restLocalPositions[i];
-                if (displayClick != null)
-                    displayClick.SetPageBaseOrder(flattenedPages[i], frontBaseOrder);
-            }
+            // คืนตำแหน่งทุกหน้า (กันหน้าที่ค้างตำแหน่งข้างจากแอนิเมชันที่ถูกตัด)
+            flattenedPages[i].transform.localPosition = restLocalPositions[i];
+
+            // หน้าที่แสดง = front, หน้าอื่น = back กันซ้อนกัน
+            if (displayClick != null)
+                displayClick.SetPageBaseOrder(flattenedPages[i], isFront ? frontBaseOrder : backBaseOrder);
         }
         frontMasterIndex = idx;
 
