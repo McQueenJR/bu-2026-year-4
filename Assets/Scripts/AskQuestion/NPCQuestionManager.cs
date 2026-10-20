@@ -25,6 +25,22 @@ public class NPCQuestionManager : MonoBehaviour
     public AudioSource openPanelSource;
     public AudioSource sendSource;
 
+    [Header("NPC ลืมยื่นใบคำขอเข้าวัด")]
+    [Tooltip("โอกาส (%) ที่ NPC ที่มีเอกสารจริงจะลืมยื่น (0 = ไม่มีใครลืม, 100 = ลืมทุกคน ใช้ทดสอบ)")]
+    [Range(0f, 100f)]
+    public float forgotDocumentChance = 25f;
+
+    [Tooltip("ข้อความส่วนกลาง ใช้ร่วมกับ NPC ทุกตัว (ใส่หลายอันจะสุ่มเล่น)")]
+    [TextArea(2, 5)]
+    public string[] forgotDocumentMessages = { "ขอโทษที ลืมส่งเอกสาร" };
+
+    // index ของปุ่ม buttonEntryDoc ใน AskQuestion
+    private const int EntryDocQuestionIndex = 3;
+
+    // true = บทสนทนาที่เล่นอยู่คือ "ลืมยื่น" → จบแล้วต้องวางเอกสารบนโต๊ะ
+    private bool pendingForgotDocumentPlacement = false;
+    
+    
     // NPC ที่กำลังถูกถามอยู่ตอนนี้
     private NPC currentAskingNPC;
     
@@ -148,12 +164,25 @@ public class NPCQuestionManager : MonoBehaviour
 
     private void AskQuestion(int questionIndex)
     {
+        pendingForgotDocumentPlacement = false;
+        
         if (currentAskingNPC == null || currentAskingNPC.data == null)
         {
             Debug.LogWarning("ยังไม่มี NPC ที่กำลังถาม");
             return;
         }
+        if (questionIndex == EntryDocQuestionIndex &&
+            ShouldPlayForgotDocumentDialog(currentAskingNPC))
+        {
+            if (dialogManager == null)
+            {
+                Debug.LogError("NPCQuestionManager ไม่มี DialogManager");
+                return;
+            }
 
+            PlayForgotDocumentDialog(currentAskingNPC);
+            return;
+        }
         if (currentAskingNPC.data.selectedCheckQuestions == null ||
             questionIndex >= currentAskingNPC.data.selectedCheckQuestions.Length)
         {
@@ -192,14 +221,71 @@ public class NPCQuestionManager : MonoBehaviour
         );
     }
 
+    // =====================================================
+    // NPC ลืมยื่นใบคำขอเข้าวัด
+    // =====================================================
 
+    // เล่นบทสนทนากลางเมื่อ NPC มีเอกสารจริง + ถูกสุ่มให้ลืม + เอกสารยังไม่ถูกวางบนโต๊ะ
+    // วางแล้ว = ถามครั้งต่อไปใช้บทสนทนาจาก NPCData ตามระบบเดิม
+    private bool ShouldPlayForgotDocumentDialog(NPC npc)
+    {
+        if (npc == null || npc.applicant == null)
+            return false;
+
+        TodayApplicant a = npc.applicant;
+
+        return a.forgotDocument &&
+               a.hasTempleDocument &&
+               a.templeDocument != null &&
+               !a.documentPlacedOnDesk;
+    }
+
+    private void PlayForgotDocumentDialog(NPC npc)
+    {
+        string message = "ขอโทษที ลืมส่งเอกสาร";
+
+        if (forgotDocumentMessages != null && forgotDocumentMessages.Length > 0)
+        {
+            string picked = forgotDocumentMessages[
+                Random.Range(0, forgotDocumentMessages.Length)
+            ];
+
+            if (!string.IsNullOrWhiteSpace(picked))
+                message = picked;
+        }
+
+        PlaySound(sendSource);
+
+        NPCMouthAnimation mouth = npc.GetComponentInChildren<NPCMouthAnimation>();
+        if (mouth != null)
+            dialogManager.SetTalkingNPC(mouth);
+
+        ClosePanel();
+
+        pendingForgotDocumentPlacement = true;
+
+        // ใช้ Dialog แบบ Checklist เดิม → จบแล้ว DialogManager เรียก AskDialogFinished()
+        dialogManager.StartChecklistDialog(npc.data.npcName, message);
+    }
+    
+    
     // =====================================================
     // DialogManager เรียกกลับตอน dialog คำถามจบ
     // =====================================================
 
     public void AskDialogFinished()
     {
+        NPC finishedNPC = currentAskingNPC;
         currentAskingNPC = null;
+
+        // จบบทสนทนา "ลืมยื่น" → นำเอกสารจริงมาวางบนโต๊ะ
+        if (pendingForgotDocumentPlacement)
+        {
+            pendingForgotDocumentPlacement = false;
+
+            if (GameManager.Instance != null)
+                GameManager.Instance.PlaceForgottenDocumentOnDesk(finishedNPC);
+        }
     }
     
 

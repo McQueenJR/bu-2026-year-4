@@ -205,6 +205,8 @@ public class GameManager : MonoBehaviour
                     $"มีเอกสาร"
                 );
             }
+            // สุ่มว่า NPC ที่มีเอกสารจริงจะลืมยื่นหรือไม่
+            DecideForgotDocument(npcScript.applicant);
         }
         if (phoneManager != null &&
             npcScript != null &&
@@ -220,6 +222,73 @@ public class GameManager : MonoBehaviour
     }
     
 
+    // =========================
+    // FORGOT DOCUMENT
+    // =========================
+
+    // ตัดสินครั้งเดียวต่อ applicant
+    // เฉพาะ NPC ที่มีเอกสารจริงเท่านั้น (เคสเอกสารอยู่ Camp จะไม่ถูกเลือก)
+    private void DecideForgotDocument(TodayApplicant applicant)
+    {
+        if (applicant == null || applicant.forgotDocumentDecided)
+            return;
+
+        applicant.forgotDocumentDecided = true;
+        applicant.forgotDocument = false;
+        applicant.documentPlacedOnDesk = false;
+
+        if (!applicant.hasTempleDocument || applicant.templeDocument == null)
+            return;
+
+        // ค่า % ตั้งที่ NPCQuestionManager (ไม่มี = ปิดระบบ)
+        float chancePercent = NPCQuestionManager.Instance != null
+            ? NPCQuestionManager.Instance.forgotDocumentChance
+            : 0f;
+
+        if (chancePercent <= 0f)
+            return;
+
+        if (Random.value < chancePercent / 100f)
+        {
+            applicant.forgotDocument = true;
+
+            Debug.Log(
+                $"📄😅 {applicant.displayData?.npcName} มีเอกสาร แต่ลืมยื่น"
+            );
+        }
+    }
+
+    // เรียกจาก NPCQuestionManager หลังบทสนทนา "ลืมยื่น" จบ
+    // นำเอกสารจริงมาวางบนโต๊ะ (ใช้ SpawnDocument เดิม)
+    public void PlaceForgottenDocumentOnDesk(NPC npc)
+    {
+        if (npc == null || currentNPC == null)
+            return;
+
+        if (npc.gameObject != currentNPC)
+            return;
+
+        if (currentState != NPCState.Inspecting)
+            return;
+
+        TodayApplicant a = npc.applicant;
+
+        if (a == null)
+            return;
+
+        if (!a.forgotDocument || a.documentPlacedOnDesk)
+            return;
+
+        if (!a.hasTempleDocument || a.templeDocument == null)
+            return;
+
+        SpawnDocument();
+
+        if (currentDocument != null)
+            a.documentPlacedOnDesk = true;
+    }
+    
+    
     // =========================
     // DIALOG
     // =========================
@@ -258,6 +327,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("Dialog จบ");
 
 
+        // NPC ที่ลืมยื่นเอกสาร → ยังไม่วางเอกสารบนโต๊ะ
+        NPC forgotCheckNpc = currentNPC.GetComponent<NPC>();
+
+        if (forgotCheckNpc != null &&
+            forgotCheckNpc.applicant != null &&
+            forgotCheckNpc.applicant.forgotDocument)
+        {
+            return;
+        }
+        
+        
          //   SpawnBag();
          SpawnDocument();
 

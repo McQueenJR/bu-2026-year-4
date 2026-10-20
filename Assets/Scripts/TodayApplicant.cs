@@ -25,6 +25,13 @@ public class TodayApplicant
 
     [HideInInspector]
     public bool hasEnteredToday = false;
-    
-    public bool forgotDocument;   // ลืมใบคำขอไว้ข้างใน
+
+    [HideInInspector]
+    public bool forgotDocumentDecided = false;   // สุ่มตัดสินแล้วหรือยัง
+
+    [HideInInspector]
+    public bool forgotDocument = false;          // มีเอกสารจริง แต่ลืมยื่น
+
+    [HideInInspector]
+    public bool documentPlacedOnDesk = false;    // เอกสารถูกวางบนโต๊ะแล้ว // ลืมใบคำขอไว้ข้างใน
 }
