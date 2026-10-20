@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c7f84a5fbe2b043800c0de66c1d9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewspaperView
+  paperRenderer: {fileID: 561834422003708408}
   dateText: {fileID: 3142189360077643352}
   newsText: {fileID: 4021242638573881105}
   missingText: {fileID: 7122524101869814214}
