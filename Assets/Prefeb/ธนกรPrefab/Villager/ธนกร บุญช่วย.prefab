@@ -679,7 +679,9 @@ MonoBehaviour:
       showSignature: 0
     hasTempleDocument: 1
     hasEnteredToday: 0
+    forgotDocumentDecided: 0
     forgotDocument: 0
+    documentPlacedOnDesk: 0
 --- !u!114 &7466308853699907839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2165,7 +2167,7 @@ GameObject:
   - component: {fileID: 6172943035997139791}
   m_Layer: 0
   m_Name: "BG\u0E15\u0E31\u0E27"
-  m_TagString: Untagged
+  m_TagString: XRay_Inner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2233,7 +2235,7 @@ SpriteRenderer:
   m_SortingLayerID: 936554571
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_MaskInteraction: 2
+  m_MaskInteraction: 1
   m_Sprite: {fileID: 5813371204196106217, guid: 21a9e37e6371e5d49b3157b675999242, type: 3}
   m_Color: {r: 0.36862746, g: 0.05882353, b: 0.05882353, a: 1}
   m_FlipX: 0

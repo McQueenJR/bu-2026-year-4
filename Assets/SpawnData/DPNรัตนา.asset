@@ -40,17 +40,15 @@ MonoBehaviour:
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 657517abebf58f141bff92f2aa2e666e, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: b9244eea21d43a9448589089609bb2a5, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 98ec1616e81800a43acf5eceee986103, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: ca5881b8c32904e4da707ba7ce3d0934, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 8fa0b09b9c658e241b35d46868457db9, type: 3}
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 65e28f53ea7b62243ba934464c3f8b1e, type: 3}
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 885a3207753d0cd43be0e109629a5501, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: adbfdb4bf7017e845af9aa6c9c5287dc, type: 3}
-      chance: 9
-    - prefab: {fileID: 3491317367100003562, guid: 5b6801bf4436ff446b2dbfcef45930f9, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 883a68c80365c1641909241b9fc18b10, type: 3}
       chance: 9
     - prefab: {fileID: 3491317367100003562, guid: 834ee9bc62308994382afb135b1c48a1, type: 3}
       chance: 9
@@ -86,8 +84,6 @@ MonoBehaviour:
     chance: 35
     isGhost: 1
     prefabs:
-    - prefab: {fileID: 3491317367100003562, guid: a1910c4680fdb6440b052b40ac09c01a, type: 3}
-      chance: 7
     - prefab: {fileID: 3491317367100003562, guid: c0213b0bee5b2be49b12ca9ce320dab4, type: 3}
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 0b03dca76e747034799f9dc994c03a8c, type: 3}
@@ -110,15 +106,15 @@ MonoBehaviour:
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 37130ed9a84d5fa47aac16ff689d49cb, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: eee4b920e94d58a46ab7b7f695c45310, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 2f7fc763fbe6db943bb430280a67b3ea, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: 50eb4f7e41bd17441abd9f42b655e1e2, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 18f700642e11683498400d0ccf583d14, type: 3}
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 6296919bb3a80c94b93f830a091a49e3, type: 3}
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 6e4b09928291a394cafc01dacb514dbe, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: faa4fda261b790149af239a97c92e9dc, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 614bedfe959378b4691f1dbece341eba, type: 3}
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: 4df71d7319917264da2f3c736c329407, type: 3}
       chance: 7
@@ -130,9 +126,9 @@ MonoBehaviour:
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: f5f157f5cf2b6484a85eec45496bf145, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: 09832cfb0cc5b23468db59dfc5dbc28c, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 4a4ced650cf5eb5489f580147dce09f2, type: 3}
       chance: 7
-    - prefab: {fileID: 3491317367100003562, guid: d919a46369f584e4b985177b495b40a0, type: 3}
+    - prefab: {fileID: 3491317367100003562, guid: 4be572a1eecec6549a290de115e65e3b, type: 3}
       chance: 7
     - prefab: {fileID: 3491317367100003562, guid: d9af3652f1500ad4f8e90eb8009c3e30, type: 3}
       chance: 7

@@ -86,6 +86,9 @@ MonoBehaviour:
       showSignature: 0
     hasTempleDocument: 1
     hasEnteredToday: 0
+    forgotDocumentDecided: 0
+    forgotDocument: 0
+    documentPlacedOnDesk: 0
   greenDialogs:
   - "\u0E02\u0E2D\u0E1A\u0E04\u0E38\u0E13 \u0E04\u0E38\u0E13\u0E2A\u0E31\u0E07\u0E40\u0E01\u0E15\u0E44\u0E14\u0E49\u0E14\u0E35"
   - "\u0E07\u0E31\u0E49\u0E19\u0E1C\u0E21\u0E44\u0E1B\u0E1E\u0E31\u0E01\u0E01\u0E48\u0E2D\u0E19\u0E19\u0E30
@@ -161,7 +164,7 @@ MonoBehaviour:
     - "\u0E0A\u0E37\u0E48\u0E2D\u0E1C\u0E21\u0E15\u0E49\u0E2D\u0E07\u0E2D\u0E22\u0E39\u0E48\u0E15\u0E23\u0E07\u0E19\u0E31\u0E49\u0E19
       \u0E1C\u0E21\u0E44\u0E21\u0E48\u0E40\u0E04\u0E22\u0E1E\u0E25\u0E32\u0E14\u0E40\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E41\u0E1A\u0E1A\u0E19\u0E35\u0E49"
   selectedCheckQuestions: []
-  correctAnswers: 0000000000
+  correctAnswers: 0001000000
   phoneGreetingDialogs: []
   phonePeopleCountDialogs: []
   phoneDocumentDialogs: []

@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 7672078393770604672}
   m_Layer: 0
   m_Name: "BG\u0E15\u0E31\u0E27"
-  m_TagString: Untagged
+  m_TagString: XRay_Inner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,7 +572,7 @@ SpriteRenderer:
   m_SortingLayerID: 936554571
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_Sprite: {fileID: 5813371204196106217, guid: 21a9e37e6371e5d49b3157b675999242, type: 3}
   m_Color: {r: 0.36862746, g: 0.05882353, b: 0.05882353, a: 1}
   m_FlipX: 0
@@ -1133,7 +1133,8 @@ PrefabInstance:
       propertyPath: breathingAmount
       value: 0.01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6569615706811130605, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7471968967064047097, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     - {fileID: 8791191592628904625, guid: a31f4397ff91e7249baf8b5672562337, type: 3}

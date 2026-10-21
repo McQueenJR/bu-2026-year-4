@@ -14,26 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DataPrefabNPC
   todayGood:
     chance: 7
+    isGhost: 0
     prefabs:
     - prefab: {fileID: 8379800548220292905, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       chance: 100
   todayBad:
     chance: 37
+    isGhost: 1
     prefabs:
-    - prefab: {fileID: 8379800548220292905, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
+    - prefab: {fileID: 8379800548220292905, guid: 732bae48577272c44bf576b088c9de7b, type: 3}
+      chance: 100
+    - prefab: {fileID: 8379800548220292905, guid: 749aef9373aef324ca0971ab5aa003dc, type: 3}
+      chance: 100
+    - prefab: {fileID: 8379800548220292905, guid: abab0e0a665f79e458b995b2923cbaf9, type: 3}
+      chance: 100
+    - prefab: {fileID: 8379800548220292905, guid: 41e786028822e3a4ba1e2391abc11cb7, type: 3}
+      chance: 100
+    - prefab: {fileID: 8379800548220292905, guid: ce09b67acb9e7fc4db6a0a6e5a8a335e, type: 3}
       chance: 100
   normalGood:
     chance: 55
+    isGhost: 0
     prefabs:
-    - prefab: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+    - prefab: {fileID: 8379800548220292905, guid: 3622c50db3ee6764a936134aa84241c9, type: 3}
       chance: 43
   normalBad:
     chance: 35
+    isGhost: 1
     prefabs:
-    - prefab: {fileID: 544997767607268783, guid: 39c6d33e6c9755040acc172559e52356, type: 3}
+    - prefab: {fileID: 8379800548220292905, guid: 1b204e3d393f4f9448fb33054e1b285f, type: 3}
       chance: 0
-    - prefab: {fileID: 6134953775173375829, guid: 3cbd7df5e3803a645a4e36361e6c0c03, type: 3}
+    - prefab: {fileID: 8379800548220292905, guid: 959c1455e1e3ec34bab0e8c33401067b, type: 3}
       chance: 0
-    - prefab: {fileID: 5732943905157268380, guid: 8340cb35c53b378449ea5708d0926473, type: 3}
+    - prefab: {fileID: 8379800548220292905, guid: 39a2e31df2e0396449a321f1d77aea16, type: 3}
       chance: 0
-  roleType: 0
+    - prefab: {fileID: 8379800548220292905, guid: 9c401d84431d43e498551e2ab6972fec, type: 3}
+      chance: 0
+    - prefab: {fileID: 8379800548220292905, guid: 022ccb9f01f216d41a5283d0e7ba20e4, type: 3}
+      chance: 0

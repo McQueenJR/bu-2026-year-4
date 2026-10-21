@@ -14,22 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DataPrefabNPC
   todayGood:
     chance: 7
+    isGhost: 0
     prefabs:
     - prefab: {fileID: 7907558890952648851, guid: 7bbc264b6cc58f343a1f5f63e3c95a1d, type: 3}
       chance: 100
   todayBad:
     chance: 37
+    isGhost: 1
     prefabs:
-    - prefab: {fileID: 7907558890952648851, guid: 7bbc264b6cc58f343a1f5f63e3c95a1d, type: 3}
+    - prefab: {fileID: 7907558890952648851, guid: dcd6d007aec14f745b0c59d7d38eda0c, type: 3}
+      chance: 100
+    - prefab: {fileID: 7907558890952648851, guid: d9c743758a2c47a4aa83ad8f7f4e7a5b, type: 3}
+      chance: 100
+    - prefab: {fileID: 7907558890952648851, guid: 54550024ee7110446aa77f74fed831e1, type: 3}
+      chance: 100
+    - prefab: {fileID: 7907558890952648851, guid: 7dca72a1443e9744d9a6d2d2f644430f, type: 3}
+      chance: 100
+    - prefab: {fileID: 7907558890952648851, guid: d5a7eb4dc336212408031f183f656b94, type: 3}
       chance: 100
   normalGood:
     chance: 55
+    isGhost: 0
     prefabs:
-    - prefab: {fileID: 2918932109497190852, guid: a39e1c4273e700f45bd8c20c2b0e841f, type: 3}
+    - prefab: {fileID: 7907558890952648851, guid: 02bd86b48c9ed504fa700d6747bfc378, type: 3}
       chance: 20
   normalBad:
     chance: 35
+    isGhost: 1
     prefabs:
-    - prefab: {fileID: 2910441343679088732, guid: e8a26263257616e43b70478ce9d46709, type: 3}
+    - prefab: {fileID: 7907558890952648851, guid: 9939a5d239fef764e9b6f1cd0d9ec2b6, type: 3}
       chance: 31
-  roleType: 1
+    - prefab: {fileID: 7907558890952648851, guid: d8481e1e8bb3f844989e3fbcbc683abe, type: 3}
+      chance: 31
+    - prefab: {fileID: 7907558890952648851, guid: 1b4869da86e05cc44926a454b932ccb7, type: 3}
+      chance: 31
+    - prefab: {fileID: 7907558890952648851, guid: 335e3459cfa19574e94e8213eb9e77dc, type: 3}
+      chance: 31
+    - prefab: {fileID: 7907558890952648851, guid: f67fc3f50faa374409b6229a5814a507, type: 3}
+      chance: 31
