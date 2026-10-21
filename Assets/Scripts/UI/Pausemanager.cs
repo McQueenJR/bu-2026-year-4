@@ -1,5 +1,9 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using TMPro;
+using System.Collections.Generic;
 
 public class PauseManager : MonoBehaviour
 {
@@ -12,26 +16,36 @@ public class PauseManager : MonoBehaviour
     [Header("Scenes")]
     public string mainMenuSceneName = "MainMenu";
 
+    [Header("Clickable Text")]
+    public TMP_Text resumeText;   // ข้อความ Resume
+    public TMP_Text settingsText; // ข้อความ Settings ในหน้า Pause
+    public TMP_Text mainMenuText; // ข้อความ Main Menu
+
     void Awake()
     {
         // กันไม่ให้ timeScale ค้างจากซีนก่อนหน้า (เผื่อเคย pause แล้วเปลี่ยนซีนไป)
         Time.timeScale = 1f;
         IsPaused = false;
+
         if (pausePanel != null)
             pausePanel.SetActive(false);
+
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
+    }
+
+    void Start()
+    {
+        // เพิ่มตัวตรวจจับคลิกให้ข้อความโดยอัตโนมัติ
+        RegisterClick(resumeText, Resume);
+        RegisterClick(settingsText, OpenSettings);
+        RegisterClick(mainMenuText, GoToMainMenu);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // ถ้าอยู่หน้า Settings ให้กด ESC ครั้งแรกกลับไปหน้า Pause ก่อน ไม่ใช่ Resume เลย
-            if (settingsPanel != null && settingsPanel.activeSelf)
-            {
-                CloseSettings();
-                return;
-            }
-
             if (IsPaused)
                 Resume();
             else
@@ -39,10 +53,44 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    // เพิ่ม Event Trigger ให้ข้อความคลิกได้
+    void RegisterClick(TMP_Text text, UnityEngine.Events.UnityAction action)
+    {
+        if (text == null)
+            return;
+
+        // ข้อความต้องรับ Raycast จากเมาส์ได้
+        text.raycastTarget = true;
+
+        // เพิ่ม Event Trigger หากยังไม่มี
+        EventTrigger trigger = text.GetComponent<EventTrigger>();
+
+        if (trigger == null)
+            trigger = text.gameObject.AddComponent<EventTrigger>();
+
+        if (trigger.triggers == null)
+            trigger.triggers = new List<EventTrigger.Entry>();
+
+        // ป้องกันการเพิ่ม Pointer Click ซ้ำ
+        trigger.triggers.RemoveAll(
+            entry => entry.eventID == EventTriggerType.PointerClick
+        );
+
+        EventTrigger.Entry clickEntry = new EventTrigger.Entry();
+        clickEntry.eventID = EventTriggerType.PointerClick;
+        clickEntry.callback.AddListener((eventData) => action.Invoke());
+
+        trigger.triggers.Add(clickEntry);
+    }
+
     public void Pause()
     {
         if (pausePanel != null)
             pausePanel.SetActive(true);
+
+        // ปิด Settings เมื่อเปิด Pause ใหม่
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
 
         Time.timeScale = 0f; // หยุดเวลาทั้งเกม
         IsPaused = true;
@@ -53,11 +101,14 @@ public class PauseManager : MonoBehaviour
         if (pausePanel != null)
             pausePanel.SetActive(false);
 
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
+
         Time.timeScale = 1f; // เดินเวลาต่อ
         IsPaused = false;
     }
 
-    // เรียกจากปุ่ม "Main Menu" ใน pause panel
+    // เรียกจากข้อความ "Main Menu" ใน pause panel
     public void GoToMainMenu()
     {
         Time.timeScale = 1f; // ต้องรีเซ็ตก่อนเปลี่ยนซีนเสมอ ไม่งั้นซีนถัดไปจะค้างเวลาไปด้วย
@@ -65,23 +116,14 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
-    // เรียกจากปุ่ม "Settings" ใน pause panel
+    // เรียกจากข้อความ "Settings" ใน pause panel
     public void OpenSettings()
     {
-        if (pausePanel != null)
-            pausePanel.SetActive(false);
-
         if (settingsPanel != null)
             settingsPanel.SetActive(true);
-    }
 
-    // เรียกจากปุ่ม "Back" ในหน้า settings
-    public void CloseSettings()
-    {
-        if (settingsPanel != null)
-            settingsPanel.SetActive(false);
-
+        // ให้เมนู Pause อยู่ด้านหน้าหน้า Settings
         if (pausePanel != null)
-            pausePanel.SetActive(true);
+            pausePanel.transform.SetAsLastSibling();
     }
 }
