@@ -519,26 +519,16 @@ public class PhoneManager : MonoBehaviour
    
     public void StartPhoneGreeting()
     {
-        // ต้องใช้ห้องที่ผู้เล่นโทรหา ไม่ใช่ห้องของ currentTarget
         if (calledRoom == null)
         {
-            Debug.LogWarning("📞 ไม่มีห้องปลายทางสำหรับการโทร");
-
-            if (phoneDialer != null)
-                phoneDialer.FinishCalling();
-            else
-                ForceClosePhone();
-
+            ForceClosePhone();
             return;
         }
 
-        // รีเฟรชข้อมูลจากห้องปลายทางเดิม
         RefreshPhoneCampDataForRoom(calledRoom);
 
         if (answeringNPC == null)
         {
-            Debug.LogWarning("📞 ไม่มี NPC รับสาย → จบการโทร");
-
             if (phoneDialer != null)
                 phoneDialer.FinishCalling();
             else
@@ -554,7 +544,7 @@ public class PhoneManager : MonoBehaviour
             answeringName,
             new string[]
             {
-                $"สวัสดีนี่"
+                $"สวัสดี นี่ {answeringName} "
             }
         );
     }
@@ -568,48 +558,24 @@ public class PhoneManager : MonoBehaviour
 
     public void PhoneDialogFinished()
     {
-        Debug.Log(
-            $"📞 Phone Dialog จบ | Target: {targetName}"
-        );
-
-        // =========================
-        // B พูด Greeting จบ
-        // =========================
         if (phoneGreetingActive)
         {
             phoneGreetingActive = false;
-
-            Debug.Log(
-                "📞 B พูดสวัสดีจบ → เปิด Question Panel"
-            );
-
             ShowPhoneQuestions();
-
             return;
         }
 
-        // =========================
-        // B ตอบคำถามจบ
-        // =========================
         if (phoneQuestionAnswerActive)
         {
             phoneQuestionAnswerActive = false;
-
-            Debug.Log(
-                "📞 B ตอบคำถามจบ → กลับไปเลือกคำถาม"
-            );
-
             ShowPhoneQuestions();
-
             return;
         }
 
-        // =========================
-        // ไม่มี Dialog ต่อแล้ว
-        // =========================
         if (phoneDialer != null)
             phoneDialer.FinishCalling();
     }
+    
     public void ShowPhoneQuestions()
     {
         if (questionPanel == null)
@@ -654,47 +620,39 @@ public class PhoneManager : MonoBehaviour
     
     public void AskDocument()
     {
-        if (answeringNPC == null)
-            return;
-
-        if (currentTarget == null)
-            return;
-
-        questionPanel.SetActive(false);
+        if (questionPanel != null)
+            questionPanel.SetActive(false);
 
         phoneQuestionAnswerActive = true;
 
-        bool hasDocument =
-            CampManager.Instance.HasDocumentInCamp(
-                currentTarget
-            );
+        bool hasDocument = false;
 
-        Debug.Log(
-            $"📞 ถาม: เอกสารของ {targetName} อยู่ไหน? " +
-            $"→ hasDocument = {hasDocument}"
-        );
-
-        string answer;
-
-        if (hasDocument)
+        if (calledRoom != null)
         {
-            answer =
-                $"เอกสารของ {targetName} อยู่ที่นี่ครับ/ค่ะ";
+            foreach (CampResident resident in calledRoom.residents)
+            {
+                if (resident == null || resident.npcData == null)
+                    continue;
+
+                if (CampManager.Instance != null &&
+                    CampManager.Instance.HasDocumentInCamp(resident.npcData))
+                {
+                    hasDocument = true;
+                    break;
+                }
+            }
         }
-        else
-        {
-            answer =
-                $"ไม่มีเอกสารของ {targetName} อยู่ที่นี่ครับ/ค่ะ";
-        }
+
+        string answer = hasDocument
+            ? "มีเอกสารอยู่ในห้อง"
+            : "ไม่มีเอกสารอยู่ในห้อง";
 
         StartPhoneDialog(
             answeringName,
-            new string[]
-            {
-                answer
-            }
+            new string[] { answer }
         );
     }
+    
     public void CloseQuestionPanel()
     {
         Debug.LogError("TEST 1: CloseQuestionPanel ถูกเรียกแล้ว");
