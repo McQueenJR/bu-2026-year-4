@@ -42,7 +42,6 @@ public class SpawnManager : MonoBehaviour
     public List<DataPrefabNPC> extraDPN = new();
     public List<DataPrefabNPC> campDPN = new();
     
-    public HashSet<DataPrefabNPC> forgotDocDPN = new();   
     public List<DataPrefabNPC> spawnOrder = new();
 }
 
@@ -117,10 +116,10 @@ public void GenerateTodayApplicants()
     todayApplicants.AddRange(todayListFirst);
     todayApplicants.AddRange(normalApplicants);
 
-    // 6. สร้างเอกสารให้ NPC ทุกคน
+   
     
 
-    // 7. สุ่ม NPC ใน Today List หนึ่งคนให้ไม่มีเอกสาร
+    
     // 8. UI แสดงรายชื่อ Today List ทั้งหมด
     List<NPCData> todayListData = currentPlan.listDPN
         .Select(d => GetNPCDataFromPrefabData(d))
@@ -183,14 +182,7 @@ private DailyPlan BuildDailyPlan(int requestedNPCCount, int slotCount)
             foreach (var data in GetAllNPCDataOfDPN(dpn))
                 CampManager.Instance.SetHomeToday(data, true);
     }
-// ---------- ลืมใบคำขอ ----------
-// เฉพาะคนที่ไม่เข้าแคมป์ (List + Extra) มีโอกาส 30%
-    foreach (var dpn in plan.listDPN.Concat(plan.extraDPN))
-    {
-        if (Random.value < forgotDocumentChance)
-            plan.forgotDocDPN.Add(dpn);
-    }
-
+// การลืมใบคำขอจะตัดสินตอนเลือก Prefab จริงใน ResolveApplicantPrefab
 // ---------- เลือก DPN 8 อัน จากตัวใน List ----------
 // DPN ซ้ำได้ (ยังไม่เลือก prefab)
     List<DataPrefabNPC> slots = new();
@@ -222,12 +214,7 @@ private DailyPlan BuildDailyPlan(int requestedNPCCount, int slotCount)
                 CampManager.Instance.SetHomeToday(data, !spawns);
         }
     }
-    Debug.Log(
-        "[Plan] ลำดับสปาว: " +
-        string.Join(", ", plan.spawnOrder.Select(d => d.name)) +
-        " | ลืมใบคำขอ: " +
-        string.Join(", ", plan.forgotDocDPN.Select(d => d.name))
-    );
+    Debug.Log("[Plan] ลำดับสปาว: " + string.Join(", ", plan.spawnOrder.Select(d => d.name)));
     
     return plan;
 }
@@ -804,42 +791,51 @@ private TodayApplicant CreateGhostApplicant(
         $"IsGhost={applicant.isGhost} | " +
         $"Prefab={applicant.spawnPrefab.name}"
     );
-}   // <<< ปิดฟังก์ชันตรงนี้ก่อน
-// ตัดสินว่าสปาวตัวนี้ต้องสุ่มลืมใบคำขอ 30% หรือไม่
-    private bool ShouldRollForgotDocument(TodayApplicant a)
-    {
-        NPCData real = GetNPCDataFromPrefabData(a.npcData);
-        if (CampManager.Instance == null || real == null) return false;
-
-        // เงื่อนไขตามเอกสารทั้ง 2 กรณี (มีบัดดี้ / ไม่มีบัดดี้แต่ตัวจริงอยู่แคมป์)
-        bool campCondition =
-            CampManager.Instance.HasBuddyInCamp(real) ||
-            CampManager.Instance.IsRealInCamp(real);
-
-        if (!campCondition) return false;
-
-        // พรีแฟบที่เลือกต้องเป็นแบบ "ปกติ" (ไม่ติ๊กช่องผิดปกติ ยกเว้นช่องใบคำขอ)
-        return IsPrefabLooksNormal(a.displayData);
-    }
-
+}   
+// // ตรวจว่าข้อมูล NPC ผิดปกติเฉพาะช่องใบคำขอหรือไม่
     private const int DocumentIndex = 3;   // ช่องใบคำขอใน correctAnswers
 
-// "ปกติ" = ไม่ติ๊กช่องผิดปกติเลย ยกเว้นช่องใบคำขอ (ติ๊กได้)
-    private bool IsPrefabLooksNormal(NPCData data)
+    private bool HasDocumentAbnormality(NPCData data)
     {
-        if (data == null || data.correctAnswers == null) return false;
+        return data != null &&
+               data.correctAnswers != null &&
+               data.correctAnswers.Length > DocumentIndex &&
+               data.correctAnswers[DocumentIndex];
+    }
+
+    private bool HasOnlyDocumentAbnormality(NPCData data)
+    {
+        if (!HasDocumentAbnormality(data)) return false;
 
         for (int i = 0; i < data.correctAnswers.Length; i++)
         {
-            if (i == DocumentIndex) continue;   // ข้ามช่องใบคำขอ
-            if (data.correctAnswers[i]) return false;
+            if (i != DocumentIndex && data.correctAnswers[i])
+                return false;
         }
 
         return true;
     }
-    
-// ResolveApplicantPrefab วางต่อข้างล่าง นอกฟังก์ชัน
-    private bool ResolveApplicantPrefab(TodayApplicant a)
+
+    // ลืมเอกสารได้เฉพาะ NPC Data ที่ผิดปกติช่องใบคำขอ
+    // ผิดปกติเฉพาะใบคำขอ: ต้องมีตัวจริงอยู่ในแคมป์
+    // มีความผิดปกติอื่นร่วมด้วย: ต้องมีตัวจริงหรือบัดดี้อยู่ในแคมป์
+    private bool ShouldRollForgotDocument(TodayApplicant applicant)
+    {
+        if (applicant == null || CampManager.Instance == null)
+        if (applicant == null || !applicant.isGhost || CampManager.Instance == null)
+            return false;
+
+        NPCData real = GetNPCDataFromPrefabData(applicant.npcData);
+        if (!HasDocumentAbnormality(real))
+            return false;
+
+        bool realInCamp = CampManager.Instance.IsRealInCamp(real);
+        if (HasOnlyDocumentAbnormality(real))
+            return realInCamp;
+
+        return realInCamp || CampManager.Instance.HasBuddyInCamp(real);
+    }
+private bool ResolveApplicantPrefab(TodayApplicant a)
     {
         DataPrefabNPC dpn = a.npcData;
 
@@ -867,11 +863,16 @@ private TodayApplicant CreateGhostApplicant(
         if (a.isGhost)
             a.ghostTarget = GetNPCDataFromPrefabData(dpn);
 
-        // เอกสาร
-        bool forgot = currentPlan.forgotDocDPN.Contains(dpn);
-
-        if (!forgot && ShouldRollForgotDocument(a))
+        bool forgot;
+        if (a.isGhost)
+        {
+            forgot = ShouldRollForgotDocument(a) &&
+                     Random.value < forgotDocumentChance;
+        }
+        else
+        {
             forgot = Random.value < forgotDocumentChance;
+        }
 
         a.hasTempleDocument = !forgot;
 
@@ -901,3 +902,7 @@ private TodayApplicant CreateGhostApplicant(
         currentApplicantIndex = 0;
     }
 }
+
+
+
+
