@@ -42,6 +42,10 @@ public class ChecklistManager : MonoBehaviour
     // เก็บคะแนน checklist ล่าสุดที่ "กดส่ง" ของ NPC แต่ละคน
     private Dictionary<GameObject, int> npcChecklistScores = new Dictionary<GameObject, int>();
 
+    // ผลรายข้อของ NPC แต่ละคน (คีย์และการเขียนทับเหมือน npcChecklistScores)
+    private Dictionary<GameObject, List<ChecklistItemResult>> npcChecklistItems =
+        new Dictionary<GameObject, List<ChecklistItemResult>>();
+    
     // NPC ที่กำลังตรวจ
     private NPC currentNPC;
     
@@ -152,12 +156,31 @@ public class ChecklistManager : MonoBehaviour
     public void ConsumeChecklistScore(GameObject npc)
     {
         if (npc != null)
+        {
             npcChecklistScores.Remove(npc);
+            npcChecklistItems.Remove(npc);
+        }
     }
 
     public void ResetAllChecklistScores()
     {
         npcChecklistScores.Clear();
+        npcChecklistItems.Clear();
+    }
+
+    // อ่านผลรายข้อของ NPC (คืนสำเนา) false = NPC ตัวนี้ยังไม่เคยส่ง Checklist
+    public bool TryGetChecklistItems(GameObject npc, out List<ChecklistItemResult> items)
+    {
+        items = null;
+
+        if (npc != null &&
+            npcChecklistItems.TryGetValue(npc, out List<ChecklistItemResult> found))
+        {
+            items = new List<ChecklistItemResult>(found);
+            return true;
+        }
+
+        return false;
     }
 
     // =====================================================
@@ -244,7 +267,7 @@ public class ChecklistManager : MonoBehaviour
             return;
 
         int scoreThisNPC = 0;
-
+        List<ChecklistItemResult> itemResults = new List<ChecklistItemResult>();
         for (int i = 0; i < 5; i++)
         {
             if (!answered[i])
@@ -264,6 +287,15 @@ public class ChecklistManager : MonoBehaviour
             }
             
             bool playerAnswer = playerAnswers[i];
+            
+            // ★ เก็บผลรายข้อ (correctAnswer คือค่าหลังเงื่อนไขลืมเอกสารแล้ว ตรงกับที่คิดคะแนน)
+            itemResults.Add(new ChecklistItemResult
+            {
+                itemIndex = i,
+                playerAnswerAbnormal = playerAnswer,
+                correctAnswerAbnormal = correctAnswer
+            });
+            
             // ใหม่: ถูก +1 / ผิด -1 (ผลรวมติดลบได้ จะไปตัดที่ 0 ตอนรวมคะแนน NPC)
             if (playerAnswer == correctAnswer)
                 scoreThisNPC++;
@@ -273,6 +305,7 @@ public class ChecklistManager : MonoBehaviour
 
         // เก็บ "คะแนนล่าสุดที่ส่ง" ของ NPC ตัวนี้ (ส่งซ้ำ = เขียนทับของเดิม)
         npcChecklistScores[currentNPC.gameObject] = scoreThisNPC;
+        npcChecklistItems[currentNPC.gameObject] = itemResults;   // ส่งซ้ำ = เขียนทับ
         Debug.Log("บันทึกคะแนน checklist ของ " + currentNPC.data.npcName + " = " + scoreThisNPC + " | key = " + currentNPC.gameObject.GetInstanceID());
         checklistScore = scoreThisNPC;
 

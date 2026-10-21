@@ -774,7 +774,10 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
+        
+        
+        // ★ DailyReport: เก็บรายชื่อคนตายของวันนี้ก่อนแสดงหน้าสรุป
+        SnapshotDeadVillagersForReport();
         // คะแนนรายวัน (ชั่วคราว: หักเฉพาะคนตายที่เกิดแล้ว หายสาบสูญยังไม่ roll)
         int earned = score;
         int max = npcProcessedCount * ScoreRankUtility.MaxPerNPC;
@@ -1116,7 +1119,13 @@ public class GameManager : MonoBehaviour
         if (!wasArrested)
         {
             if (isRobber)
+            {
                 robberPassed++;
+
+                // ★ DailyReport: ผีที่ได้รับอนุญาตให้ผ่าน
+                //   (อยู่หลัง Record() ผ่านด่านกันซ้ำแล้วเท่านั้น)
+                AddGhostPassedToReport(npc);
+            }
             else
                 villagerPassed++;
         }
@@ -1168,6 +1177,10 @@ public class GameManager : MonoBehaviour
         if (ChecklistManager.Instance != null)
         {
             checklistPoints = ChecklistManager.Instance.GetChecklistScore(npcObj);
+
+            // ★ DailyReport: เก็บผลรายข้อ "ก่อน" Consume (ไม่เปลี่ยนวิธีคิดคะแนน)
+            SaveChecklistToReport(npcObj, checklistPoints);
+
             ChecklistManager.Instance.ConsumeChecklistScore(npcObj);
         }
         else
@@ -1186,6 +1199,143 @@ public class GameManager : MonoBehaviour
         );
 
         return total;
+    }
+    
+        // =========================
+    // DAILY REPORT (snapshot รายวัน)
+    // =========================
+
+    // ชื่อที่แสดง: ghostTarget (ตัวตนที่ผีใช้) → ถ้าไม่มี ใช้ displayData → สุดท้ายใช้ npc.data
+    private void AddGhostPassedToReport(NPC npc)
+    {
+        if (npc == null || CampaignStatsTracker.Instance == null)
+            return;
+
+        TodayApplicant a = npc.applicant;
+
+        string shownName = null;
+
+        if (a != null && a.ghostTarget != null)
+            shownName = a.ghostTarget.npcName;
+        else if (a != null && a.displayData != null)
+            shownName = a.displayData.npcName;
+        else if (npc.data != null)
+            shownName = npc.data.npcName;
+
+        CampaignStatsTracker.Instance
+            .GetOrCreateDailyReport(currentDay)
+            .AddGhostPassed(shownName);
+
+        Debug.Log(
+            $"[DailyReport] ผีผ่าน วัน {currentDay} → แสดงชื่อ '{shownName}' | " +
+            $"ghostTarget={a?.ghostTarget?.npcName} | displayData={a?.displayData?.npcName}"
+        );
+    }
+
+    // รายชื่อชาวบ้านที่ตายของวันนี้ (ไม่ซ้ำ) เก็บครั้งเดียวต่อวัน
+    // หายสาบสูญยังไม่ roll ตอนนี้ จึงไม่ถูกรวม (ตามที่ตกลงไว้)
+    private void SnapshotDeadVillagersForReport()
+    {
+        if (CampaignStatsTracker.Instance == null || DeathTracker.Instance == null)
+            return;
+
+        DailyReport report =
+            CampaignStatsTracker.Instance.GetOrCreateDailyReport(currentDay);
+
+        if (report.deadSnapshotTaken)
+            return;
+
+        List<string> names = new();
+
+        foreach (DeathRecord r in DeathTracker.Instance.GetRecords())
+        {
+            if (r == null || r.npcData == null)
+                continue;
+
+            if (r.day != currentDay)
+                continue;
+
+            if (!names.Contains(r.npcData.npcName))
+                names.Add(r.npcData.npcName);
+        }
+
+        report.SetDeadVillagers(names);
+
+        Debug.Log(
+            $"[DailyReport] วัน {currentDay} | " +
+            $"ผีที่ผ่าน: [{string.Join(", ", report.ghostsPassed)}] | " +
+            $"ตาย: [{string.Join(", ", report.villagersDead)}]"
+        );
+    }
+    
+        // ชื่อที่ผู้เล่นเห็นตอนตรวจ: ผี → ชื่อตัวตนที่ใช้ (ghostTarget) / ชาวบ้าน → ชื่อของตัวเอง
+    private string GetShownNpcName(NPC npc)
+    {
+        if (npc == null)
+            return "?";
+
+        TodayApplicant a = npc.applicant;
+
+        if (a != null && a.isGhost && a.ghostTarget != null)
+            return a.ghostTarget.npcName;
+
+        if (a != null && a.displayData != null)
+            return a.displayData.npcName;
+
+        return npc.data != null ? npc.data.npcName : "?";
+    }
+
+    private void SaveChecklistToReport(GameObject npcObj, int checklistPoints)
+    {
+        if (npcObj == null ||
+            CampaignStatsTracker.Instance == null ||
+            ChecklistManager.Instance == null)
+            return;
+
+        DailyReport report =
+            CampaignStatsTracker.Instance.GetOrCreateDailyReport(currentDay);
+
+        int key = npcObj.GetInstanceID();
+
+        bool hasItems = ChecklistManager.Instance.TryGetChecklistItems(
+            npcObj, out List<ChecklistItemResult> items);
+
+        // เรียกซ้ำหลังผล Checklist ถูกเคลียร์แล้ว → ห้ามเขียนทับแถวเดิมด้วย "ไม่ได้ส่ง"
+        if (!hasItems && report.checklists.Exists(c => c.npcKey == key))
+            return;
+
+        report.SetChecklist(new NpcChecklistRecord
+        {
+            npcKey = key,
+            displayName = GetShownNpcName(npcObj.GetComponent<NPC>()),
+            submitted = hasItems,
+            items = hasItems ? items : new List<ChecklistItemResult>()
+        });
+
+        if (hasItems)
+        {
+            int correct = 0;
+            string marks = "";
+
+            foreach (ChecklistItemResult r in items)
+            {
+                if (r.IsCorrect) correct++;
+                marks += r.IsCorrect ? "✓" : "✗";
+            }
+
+            Debug.Log(
+                $"[DailyReport] Checklist วัน {currentDay} | {GetShownNpcName(npcObj.GetComponent<NPC>())} | " +
+                $"{marks} | ถูก {correct}-ผิด {items.Count - correct} = {correct - (items.Count - correct)} " +
+                $"(คะแนนจริง {checklistPoints})"
+            );
+        }
+        else
+        {
+            Debug.Log(
+                $"[DailyReport] Checklist วัน {currentDay} | " +
+                $"{GetShownNpcName(npcObj.GetComponent<NPC>())} | ไม่ได้ส่ง Checklist"
+            );
+        }
     }
     
     public void TestCampCall()

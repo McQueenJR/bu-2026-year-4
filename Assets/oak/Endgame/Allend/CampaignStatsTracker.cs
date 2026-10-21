@@ -28,6 +28,9 @@ public class CampaignStatsTracker : MonoBehaviour
     private readonly Dictionary<int, int> dayJudged = new();
 
     private readonly HashSet<int> finalizedDays = new();
+    
+    // รายงานรายวัน (snapshot) แยกตามวัน ไม่ถูกรีเซ็ตเมื่อขึ้นวันใหม่
+    private readonly Dictionary<int, DailyReport> dailyReports = new();
 
     // กันหักคนตายซ้ำ (คนเดียวกันหักได้ครั้งเดียว)
     private readonly HashSet<string> deductedNames = new();
@@ -41,7 +44,28 @@ public class CampaignStatsTracker : MonoBehaviour
     {
         return d.TryGetValue(key, out int v) ? v : 0;
     }
+    
+    // รายงานของวันนั้น ถ้ายังไม่มีจะสร้างให้ (ใช้ตอนบันทึก)
+    public DailyReport GetOrCreateDailyReport(int day)
+    {
+        if (!dailyReports.TryGetValue(day, out DailyReport report))
+        {
+            report = new DailyReport(day);
+            dailyReports[day] = report;
 
+            Debug.Log($"[DailyReport] สร้างรายงานวัน {day}");
+        }
+
+        return report;
+    }
+
+    // รายงานของวันนั้น ถ้าไม่มีคืน null (ใช้ตอนแสดงผล ไม่สร้างใหม่)
+    public DailyReport GetDailyReport(int day)
+    {
+        dailyReports.TryGetValue(day, out DailyReport report);
+        return report;
+    }
+    
     // =====================================================
     // บันทึกผลตัดสิน NPC 1 ตัว
     // คืน false = NPC ตัวนี้ถูกนับไปแล้ว (หรือข้อมูลไม่ครบ) → ผู้เรียกไม่ต้องทำซ้ำ
