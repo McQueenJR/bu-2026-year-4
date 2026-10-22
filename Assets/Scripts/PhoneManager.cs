@@ -618,30 +618,14 @@ public class PhoneManager : MonoBehaviour
         );
     }
     
-    public void AskDocument()
+        public void AskDocument()
     {
         if (questionPanel != null)
             questionPanel.SetActive(false);
 
         phoneQuestionAnswerActive = true;
 
-        bool hasDocument = false;
-
-        if (calledRoom != null)
-        {
-            foreach (CampResident resident in calledRoom.residents)
-            {
-                if (resident == null || resident.npcData == null)
-                    continue;
-
-                if (CampManager.Instance != null &&
-                    CampManager.Instance.HasDocumentInCamp(resident.npcData))
-                {
-                    hasDocument = true;
-                    break;
-                }
-            }
-        }
+        bool hasDocument = IsCurrentNPCDocumentInCalledRoom();
 
         string answer = hasDocument
             ? "มีเอกสารอยู่ในห้อง"
@@ -651,6 +635,76 @@ public class PhoneManager : MonoBehaviour
             answeringName,
             new string[] { answer }
         );
+    }
+
+    // เอกสารของ NPC ที่ยืนหน้าโต๊ะ อยู่ในห้องที่โทรไปหรือไม่
+    private bool IsCurrentNPCDocumentInCalledRoom()
+    {
+        NPC npc = null;
+
+        if (GameManager.Instance != null &&
+            GameManager.Instance.currentNPC != null)
+        {
+            npc = GameManager.Instance.currentNPC.GetComponent<NPC>();
+        }
+
+        // หา NPC หน้าโต๊ะไม่เจอ → ใช้ตรรกะเดิมทุกอย่าง
+        if (npc == null || npc.data == null || npc.applicant == null)
+            return HasAnyDocumentInCalledRoom_Legacy();
+
+        TodayApplicant a = npc.applicant;
+
+        // ถือเอกสารมาด้วย = เอกสารไม่ได้อยู่ในห้อง
+        if (a.hasTempleDocument)
+        {
+            Debug.Log("📞 NPC ถือเอกสารมาด้วย → ไม่มีเอกสารในห้อง");
+            return false;
+        }
+
+        if (calledRoom == null)
+            return false;
+
+        // Ghost: เอกสารเป็นของตัวจริงที่ปลอมเป็น (ghostTarget)
+        NPCData owner = (a.isGhost && a.ghostTarget != null)
+            ? a.ghostTarget
+            : npc.data;
+
+        foreach (CampResident resident in calledRoom.residents)
+        {
+            if (resident == null || resident.npcData == null)
+                continue;
+
+            if (resident.npcData == owner ||
+                resident.npcData.npcName == owner.npcName)
+            {
+                Debug.Log("📞 เอกสารของ " + owner.npcName + " อยู่ในห้อง " + roomCode);
+                return true;
+            }
+        }
+
+        Debug.Log("📞 ห้อง " + roomCode + " ไม่ใช่ห้องของ " + owner.npcName);
+        return false;
+    }
+
+    // ตรรกะเดิมของ AskDocument (ใช้เป็น fallback เท่านั้น)
+    private bool HasAnyDocumentInCalledRoom_Legacy()
+    {
+        if (calledRoom == null)
+            return false;
+
+        foreach (CampResident resident in calledRoom.residents)
+        {
+            if (resident == null || resident.npcData == null)
+                continue;
+
+            if (CampManager.Instance != null &&
+                CampManager.Instance.HasDocumentInCamp(resident.npcData))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     
     public void CloseQuestionPanel()

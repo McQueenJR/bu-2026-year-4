@@ -27,7 +27,7 @@ MonoBehaviour:
     photo: {fileID: -3006310509758610673, guid: 6d98a33b733f5f04486ca397378e1a9e, type: 3}
   - villager: {fileID: 11400000, guid: e4929784ee3eb4048ba455d5d48ce166, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 369157847330924672, guid: 58fcfb7cf51e0bd4dbed83b8b1bc384a, type: 3}
+    photo: {fileID: 796425728880128339, guid: dee9c2011e51c2c4f9cf95e3fe012f9c, type: 3}
   - villager: {fileID: 11400000, guid: 50815bf818fa27c488a0edb26b8c4ab1, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
     photo: {fileID: 8859114364735230762, guid: d7b58977faec0d04ca3bfbf08658079d, type: 3}
@@ -57,7 +57,7 @@ MonoBehaviour:
     photo: {fileID: -5545645843760982718, guid: 6a458b7232beded4aa9f53cd683444f3, type: 3}
   - villager: {fileID: 11400000, guid: d66eb5478bff6424bb237c34ddbbb63b, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: -2060527009405821810, guid: 9df8315ba300a6d4983d40436c567fc1, type: 3}
+    photo: {fileID: 4565594088306269354, guid: 4f75d3680fbd5c340aab3d6b3be98266, type: 3}
   - villager: {fileID: 11400000, guid: 97485a434956eaf459b0b147a5254de0, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
     photo: {fileID: 1646106804340802781, guid: 066fb50dbc037374895f68252fbdb424, type: 3}

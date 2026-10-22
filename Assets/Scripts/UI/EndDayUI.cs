@@ -70,8 +70,10 @@ public class EndDayUI : MonoBehaviour
 
     [Tooltip("ต้องมี 5 ช่อง เรียงตามแถว: ชื่อรายการ / ช่องปกติ / ช่องผิดปกติ")]
     public TMP_Text[] checklistItemNameTexts = new TMP_Text[5];
-    public TMP_Text[] checklistNormalMarkTexts = new TMP_Text[5];
-    public TMP_Text[] checklistAbnormalMarkTexts = new TMP_Text[5];
+
+    [Tooltip("ต้องมี 5 ช่อง เรียงตามแถว")]
+    public Image[] checklistNormalMarkImages = new Image[5];
+    public Image[] checklistAbnormalMarkImages = new Image[5];
 
     public string[] checklistItemLabels =
     {
@@ -87,12 +89,11 @@ public class EndDayUI : MonoBehaviour
     public string checklistPageFormat = "{n}/{total}";
     public string emptyChecklistText = "วันนี้ไม่มีการตรวจ NPC";
     public string notSubmittedText = "ไม่ได้ส่ง Checklist";
-
-    [Tooltip("ถ้าฟอนต์ไม่มีตัว ✓ ✗ (ขึ้นเป็นกล่อง) เปลี่ยนเป็น / และ X ได้")]
-    public string correctMarkSymbol = "✓";
-    public string wrongMarkSymbol = "✗";
-    public Color correctMarkColor = new Color(0.1f, 0.7f, 0.1f, 1f);
-    public Color wrongMarkColor = new Color(0.85f, 0.1f, 0.1f, 1f);
+    
+    [Header("Checklist Sprites")]
+    public Sprite emptyBoxSprite;   // กรอบเปล่า
+    public Sprite greenTickSprite;  // กรอบ + ติ๊กเขียว
+    public Sprite redTickSprite;    // กรอบ + ติ๊กแดง
 
     // รายการ Checklist ของวันที่กำลังแสดง (อ่านอย่างเดียว) และ NPC ที่เปิดดูอยู่
     private List<NpcChecklistRecord> checklistRecords = new List<NpcChecklistRecord>();
@@ -332,31 +333,48 @@ public class EndDayUI : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             TMP_Text nameText = GetTextAt(checklistItemNameTexts, i);
-            TMP_Text normalText = GetTextAt(checklistNormalMarkTexts, i);
-            TMP_Text abnormalText = GetTextAt(checklistAbnormalMarkTexts, i);
+            Image normalImg = GetImageAt(checklistNormalMarkImages, i);
+            Image abnormalImg = GetImageAt(checklistAbnormalMarkImages, i);
 
             if (nameText != null &&
                 checklistItemLabels != null &&
                 i < checklistItemLabels.Length)
                 nameText.text = checklistItemLabels[i];
 
-            if (normalText != null) normalText.text = "";
-            if (abnormalText != null) abnormalText.text = "";
+            // รีเซ็ตเป็นกรอบเปล่าก่อนเสมอ กันของ NPC คนก่อนค้าง
+            SetMark(normalImg, emptyBoxSprite);
+            SetMark(abnormalImg, emptyBoxSprite);
 
             ChecklistItemResult item = rec.items.Find(r => r.itemIndex == i);
-
             if (item == null)
                 continue;
 
-            // เครื่องหมายอยู่ในช่องที่ผู้เล่นเลือก ✓ เขียว = ถูก/ได้คะแนน, ✗ แดง = ผิด
-            TMP_Text target = item.playerAnswerAbnormal ? abnormalText : normalText;
+            bool playerAbnormal = item.playerAnswerAbnormal;
+            bool correctAbnormal = item.correctAnswerAbnormal;
 
-            if (target == null)
-                continue;
+            // ช่องที่ผู้เล่นเลือก: ถูก = เขียว, ผิด = แดง
+            Sprite playerSprite = (playerAbnormal == correctAbnormal)
+                ? greenTickSprite
+                : redTickSprite;
 
-            target.text = item.IsCorrect ? correctMarkSymbol : wrongMarkSymbol;
-            target.color = item.IsCorrect ? correctMarkColor : wrongMarkColor;
+            SetMark(playerAbnormal ? abnormalImg : normalImg, playerSprite);
+
+            // ตอบผิด -> โชว์ช่องเฉลยเป็นติ๊กเขียวด้วย
+            if (playerAbnormal != correctAbnormal)
+                SetMark(correctAbnormal ? abnormalImg : normalImg, greenTickSprite);
         }
+    }
+
+    private static void SetMark(Image img, Sprite sprite)
+    {
+        if (img == null) return;
+        img.sprite = sprite;
+        img.enabled = sprite != null;
+    }
+
+    private static Image GetImageAt(Image[] array, int index)
+    {
+        return array != null && index < array.Length ? array[index] : null;
     }
 
     private void UpdateChecklistNav(int index, int total)
