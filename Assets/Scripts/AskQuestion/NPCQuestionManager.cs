@@ -34,6 +34,19 @@ public class NPCQuestionManager : MonoBehaviour
     [TextArea(2, 5)]
     public string[] forgotDocumentMessages = { "ขอโทษที ลืมส่งเอกสาร" };
 
+    //เพิ่มเข้ามา22/10
+    [Header("NPC ลืมเอกสารไว้ในบ้าน")]
+    [Tooltip("ข้อความส่วนกลางสำหรับ NPC ที่ลืมเอกสารไว้ในบ้าน สุ่ม 1 ข้อความต่อ NPC 1 คน แล้วจำไว้ ถามซ้ำได้ข้อความเดิม (เพิ่ม/ลบ/แก้ได้ที่นี่)")]
+    [TextArea(2, 5)]
+    public string[] forgotDocumentInHouseMessages =
+    {
+        "ฉันน่าจะลืมเอกสารไว้ข้างในบ้าน",
+        "เอกสารของฉันยังอยู่ในห้องหรือเปล่านะ",
+        "ฉันจำได้ว่ายังไม่ได้เอาเอกสารออกมาจากบ้าน"
+    };
+
+    [Tooltip("ปิด = Ghost จะไม่พูดประโยคลืมเอกสารในบ้าน (ค่าเริ่มต้นปลอดภัย)")]
+    public bool allowGhostForgotInHouseDialog = false;
     // index ของปุ่ม buttonEntryDoc ใน AskQuestion
     private const int EntryDocQuestionIndex = 3;
 
@@ -183,6 +196,23 @@ public class NPCQuestionManager : MonoBehaviour
             PlayForgotDocumentDialog(currentAskingNPC);
             return;
         }
+        
+        //เพิ่มเข้ามา 22-10
+        
+        // ★ NPC ลืมเอกสารไว้ "ในบ้าน" (แยกจากเคสลืมไว้กับตัวข้างบน เคสเดิมมีสิทธิ์ก่อน)
+        if (questionIndex == EntryDocQuestionIndex &&
+            ShouldPlayForgotDocumentInHouseDialog(currentAskingNPC))
+        {
+            if (dialogManager == null)
+            {
+                Debug.LogError("NPCQuestionManager ไม่มี DialogManager");
+                return;
+            }
+
+            PlayForgotDocumentInHouseDialog(currentAskingNPC);
+            return;
+        }
+        
         if (currentAskingNPC.data.selectedCheckQuestions == null ||
             questionIndex >= currentAskingNPC.data.selectedCheckQuestions.Length)
         {
@@ -266,6 +296,103 @@ public class NPCQuestionManager : MonoBehaviour
 
         // ใช้ Dialog แบบ Checklist เดิม → จบแล้ว DialogManager เรียก AskDialogFinished()
         dialogManager.StartChecklistDialog(npc.data.npcName, message);
+    }
+    
+    
+    // =====================================================
+    // NPC ลืมเอกสารไว้ "ในบ้าน"
+    // =====================================================
+
+    // เงื่อนไข: CampManager บอกว่าเอกสารไม่อยู่กับตัว (hasDocument = false)
+    // และไม่ชนกับเคส "ลืมไว้กับตัว" เดิม / เอกสารยังไม่ถูกวางบนโต๊ะ
+    private bool ShouldPlayForgotDocumentInHouseDialog(NPC npc)
+    {
+        if (npc == null || npc.data == null || npc.applicant == null)
+            return false;
+
+        TodayApplicant a = npc.applicant;
+
+        // มีเอกสารติดตัว = ไม่ใช่เคส "ลืมไว้ในบ้าน"
+        // (SpawnManager ตั้ง hasTempleDocument = false เมื่อสุ่มให้ลืมไว้ในบ้าน)
+        if (a.hasTempleDocument)
+            return false;
+
+        // กันซ้อนกับเคสลืมไว้กับตัวเดิม
+        if (a.forgotDocument)
+            return false;
+
+        // เอกสารถูกวางบนโต๊ะแล้ว ไม่ต้องพูดว่าลืมในบ้านอีก
+        if (a.documentPlacedOnDesk)
+            return false;
+
+        if (a.isGhost && !allowGhostForgotInHouseDialog)
+            return false;
+
+        Debug.Log("[InHouse] " + npc.data.npcName + " ลืมเอกสารไว้ในบ้าน → ใช้ข้อความใหม่");
+        return true;
+    }
+    
+    //เพิ่มเข้ามา 22-10
+    // เล่นบทสนทนา "ลืมเอกสารไว้ในบ้าน"
+    // ★ ไม่ตั้ง pendingForgotDocumentPlacement → จบแล้วจะไม่วางเอกสารบนโต๊ะ
+    private void PlayForgotDocumentInHouseDialog(NPC npc)
+    {
+        string message = GetForgotDocumentInHouseMessage(npc.applicant);
+
+        PlaySound(sendSource);
+
+        NPCMouthAnimation mouth = npc.GetComponentInChildren<NPCMouthAnimation>();
+        if (mouth != null)
+            dialogManager.SetTalkingNPC(mouth);
+
+        ClosePanel();
+
+        // กันพลาด: เคสนี้ห้ามไปเรียก PlaceForgottenDocumentOnDesk ตอนจบ
+        pendingForgotDocumentPlacement = false;
+
+        dialogManager.StartChecklistDialog(npc.data.npcName, message);
+    }
+
+    // สุ่มข้อความครั้งแรกแล้วเก็บไว้กับ NPC คนนั้น (TodayApplicant) ครั้งต่อไปใช้ข้อความเดิม
+    private string GetForgotDocumentInHouseMessage(TodayApplicant a)
+    {
+        if (!string.IsNullOrWhiteSpace(a.forgotDocumentInHouseMessage))
+            return a.forgotDocumentInHouseMessage;
+
+        string picked = "ฉันน่าจะลืมเอกสารไว้ข้างในบ้าน";   // ข้อความสำรอง ถ้ารายการว่าง
+
+        if (forgotDocumentInHouseMessages != null)
+        {
+            // นับเฉพาะช่องที่ไม่ว่าง
+            int validCount = 0;
+            for (int i = 0; i < forgotDocumentInHouseMessages.Length; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(forgotDocumentInHouseMessages[i]))
+                    validCount++;
+            }
+
+            if (validCount > 0)
+            {
+                int target = Random.Range(0, validCount);
+
+                for (int i = 0; i < forgotDocumentInHouseMessages.Length; i++)
+                {
+                    if (string.IsNullOrWhiteSpace(forgotDocumentInHouseMessages[i]))
+                        continue;
+
+                    if (target == 0)
+                    {
+                        picked = forgotDocumentInHouseMessages[i];
+                        break;
+                    }
+
+                    target--;
+                }
+            }
+        }
+
+        a.forgotDocumentInHouseMessage = picked;
+        return picked;
     }
     
     

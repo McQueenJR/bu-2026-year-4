@@ -323,6 +323,40 @@ public class CampManager : MonoBehaviour
     {
         return npc != null && !HasDocumentInCamp(npc);
     }
+    
+    
+    // อ่านสถานะเอกสารในแคมป์แบบปลอดภัย (อ่านอย่างเดียว ไม่เขียนค่า)
+    // คืน true  = พบ NPC ในฐานข้อมูล และ hasDocument ถูกใส่ใน out
+    // คืน false = ไม่พบ NPC ในฐานข้อมูล (ต่างจาก ForgotDocumentInCamp ที่จะนับว่า "ลืม")
+    public bool TryGetDocumentInCamp(NPCData npc, out bool hasDocument)
+    {
+        hasDocument = true;
+
+        if (npc == null || campDatabase == null)
+            return false;
+
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            if (room == null)
+                continue;
+
+            foreach (CampResident resident in room.residents)
+            {
+                if (resident == null || resident.npcData == null)
+                    continue;
+
+                if (resident.npcData == npc ||
+                    resident.npcData.npcName == npc.npcName)
+                {
+                    hasDocument = resident.hasDocument;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    
       // ==========================
     // NPC ตาย
     // คืน true = ตายจริงในครั้งนี้ | false = ไม่เจอในค่าย หรือตายไปแล้ว

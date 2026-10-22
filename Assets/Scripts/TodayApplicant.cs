@@ -34,4 +34,7 @@ public class TodayApplicant
 
     [HideInInspector]
     public bool documentPlacedOnDesk = false;    // เอกสารถูกวางบนโต๊ะแล้ว // ลืมใบคำขอไว้ข้างใน
+    
+    [HideInInspector]
+    public string forgotDocumentInHouseMessage = "";   // ข้อความ "ลืมเอกสารไว้ในบ้าน" ที่สุ่มแล้ว (ว่าง = ยังไม่สุ่ม)
 }
