@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8f2083a0b87a6408a5397ebfca5f2c, type: 3}
+  m_Name: "DPN.\u0E1C\u0E35\u0E1B\u0E2D\u0E1B"
+  m_EditorClassIdentifier: Assembly-CSharp::DataPrefabNPC
+  todayGood:
+    chance: 7
+    isGhost: 0
+    prefabs:
+    - prefab: {fileID: 7115765175551629987, guid: 4636aa0e5a68e1045bc7e859e88641cf, type: 3}
+      chance: 100
+  todayBad:
+    chance: 37
+    isGhost: 1
+    prefabs:
+    - prefab: {fileID: 7115765175551629987, guid: 71cc673dfc47d73409a47ff0e8bfd646, type: 3}
+      chance: 100
+    - prefab: {fileID: 7115765175551629987, guid: ea3f5d834b459d54888f8a34eecc3aa4, type: 3}
+      chance: 100
+    - prefab: {fileID: 7115765175551629987, guid: 381fce2dc9fd4674ca56508c5401e5d1, type: 3}
+      chance: 100
+    - prefab: {fileID: 7115765175551629987, guid: 3285a4ec079a27b47bf8bb57e3417760, type: 3}
+      chance: 100
+    - prefab: {fileID: 7115765175551629987, guid: c5dbeb1df09df9c438827e13bf65ef51, type: 3}
+      chance: 100
+  normalGood:
+    chance: 55
+    isGhost: 0
+    prefabs:
+    - prefab: {fileID: 7115765175551629987, guid: cdd4563652827d749bcf2675dabeffae, type: 3}
+      chance: 43
+  normalBad:
+    chance: 35
+    isGhost: 1
+    prefabs:
+    - prefab: {fileID: 7115765175551629987, guid: d87362895914d4542b50e9f4bfd7462c, type: 3}
+      chance: 0
+    - prefab: {fileID: 7115765175551629987, guid: 35c0e1a582562334eb7a781e26c3d6cf, type: 3}
+      chance: 0
+    - prefab: {fileID: 7115765175551629987, guid: 4424bc9ecea15b64c9bbfd47dabae417, type: 3}
+      chance: 0
+    - prefab: {fileID: 7115765175551629987, guid: 8447cdb107a7fdf4b97d956fac96bed6, type: 3}
+      chance: 0
+    - prefab: {fileID: 7115765175551629987, guid: 93f173b01939c5649b36724ff472be8d, type: 3}
+      chance: 0
