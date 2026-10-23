@@ -11,6 +11,9 @@ public class AbbotStatusManager : MonoBehaviour
     [Tooltip("-1 = ยังมีชีวิตอยู่ / ค่าอื่น = วันที่เจ้าอาวาสตาย")]
     [SerializeField] private int deathDay = -1;
 
+    [Header("ตัวตนเจ้าอาวาส")]
+    [Tooltip("ต้องตรงกับ npcName ใน NPCData ของเจ้าอาวาสสุจิโตเป๊ะ ๆ")]
+    [SerializeField] private string abbotNpcName = "";
     public bool IsAlive => deathDay < 0;
     public int DeathDay => deathDay;
 
@@ -18,7 +21,20 @@ public class AbbotStatusManager : MonoBehaviour
     {
         Instance = this;
     }
+    public bool IsAbbot(NPCData npc)
+    {
+        return npc != null &&
+               !string.IsNullOrEmpty(abbotNpcName) &&
+               npc.npcName == abbotNpcName;
+    }
 
+    // DeathTracker เรียกทุกครั้งที่มีการบันทึกการตาย
+    // ไม่ใช่เจ้าอาวาส = ไม่ทำอะไร (คนอื่นตายแล้วลายเซ็นไม่หาย)
+    public void NotifyNpcDied(NPCData npc, int day)
+    {
+        if (IsAbbot(npc))
+            MarkDead(day);
+    }
     // เรียกจากที่ไหนก็ได้ในอนาคต เมื่อเจ้าอาวาสตาย เช่น AbbotStatusManager.Instance.MarkDead(GameManager.Instance.currentDay);
     public void MarkDead(int day)
     {

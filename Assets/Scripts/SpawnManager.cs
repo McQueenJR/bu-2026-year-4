@@ -880,10 +880,15 @@ private bool ResolveApplicantPrefab(TodayApplicant a)
             a.displayData != null &&
             a.displayData.templeDocumentData != null)
         {
+            // ลายเซ็นสุจิโต: เปิดได้ถึงวันที่เจ้าอาวาสตาย (รวมวันนั้น)
+            bool signatureActive =
+                AbbotStatusManager.Instance == null ||
+                AbbotStatusManager.Instance.ShouldShowSignature(gameManager.currentDay);
+
             a.templeDocument = TempleDocumentGenerator.Generate(
                 a.displayData.templeDocumentData,
                 gameManager.currentDay,
-                true
+                signatureActive
             );
         }
         else

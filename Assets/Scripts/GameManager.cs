@@ -121,6 +121,10 @@ public class GameManager : MonoBehaviour
         currentDay = 1;
         currentHour = startHour;
         
+        // เริ่มเกมใหม่ → เจ้าอาวาสกลับมามีชีวิต
+        if (AbbotStatusManager.Instance != null)
+            AbbotStatusManager.Instance.ResetForNewGame();
+        
         if (CampManager.Instance != null)
         {
             CampManager.Instance.StartNewDay(currentDay);

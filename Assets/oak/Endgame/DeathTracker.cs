@@ -73,6 +73,10 @@ public class DeathTracker : MonoBehaviour
         }
 
         records.Add(new DeathRecord(npc, cause, day, detail));
+        
+        // ถ้าคนที่ตายคือเจ้าอาวาส → บันทึกวันตายสำหรับกฎลายเซ็น
+        if (AbbotStatusManager.Instance != null)
+            AbbotStatusManager.Instance.NotifyNpcDied(npc, day);
 
         Debug.Log(
             $"💀 [DeathTracker] {npc.npcName} | {cause} | " +
