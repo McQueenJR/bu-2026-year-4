@@ -17,17 +17,16 @@ public class TodayListDisplayClick : MonoBehaviour
     private Renderer[] allRenderers;
     private int[] baseSortingOrders;
 
+    private int currentBoost = 0; // order ที่ถูกบวกอยู่ตอนนี้
+
     private void Awake()
     {
         mainCamera = Camera.main;
-        halfExtents = CalculateHalfExtents();
         originalZ = transform.position.z;
         originalPosition = transform.position;
 
-        allRenderers = GetComponentsInChildren<Renderer>();
-        baseSortingOrders = new int[allRenderers.Length];
-        for (int i = 0; i < allRenderers.Length; i++)
-            baseSortingOrders[i] = allRenderers[i].sortingOrder;
+        CacheRenderers();
+        halfExtents = CalculateHalfExtents();
 
         DraggableSortOrder.OnOrderOverflow += ResetSortingOrder;
     }
@@ -37,23 +36,85 @@ public class TodayListDisplayClick : MonoBehaviour
         DraggableSortOrder.OnOrderOverflow -= ResetSortingOrder;
     }
 
-    // =========================
-    // เช็คปุ่มกลางทุกเฟรม ไม่ต้องพึ่ง OnMouseDown ของใครทั้งนั้น
-    // ทำงานเฉพาะตอน GameObject นี้ active (คือตอน popup เปิดอยู่เท่านั้น)
-    // =========================
+    // ทุกครั้งที่ popup เปิดใหม่ ให้กลับตำแหน่งเดิมและ order เดิม
+    private void OnEnable()
+    {
+        if (allRenderers != null)
+            ResetSortingOrder();
+    }
+
+    // เช็คปุ่มกลางทุกเฟรม (ทำงานเฉพาะตอน popup active)
     private void Update()
     {
         if (Input.GetMouseButtonDown(2))
             TryToggleMarkUnderMouse();
     }
 
+    // ---------- cache / reset ----------
+
+    private void CacheRenderers()
+    {
+        allRenderers = GetComponentsInChildren<Renderer>(true);
+        baseSortingOrders = new int[allRenderers.Length];
+        for (int i = 0; i < allRenderers.Length; i++)
+            baseSortingOrders[i] = allRenderers[i].sortingOrder;
+    }
+
     public void ResetSortingOrder()
     {
-        for (int i = 0; i < allRenderers.Length; i++)
-            allRenderers[i].sortingOrder = baseSortingOrders[i];
+        currentBoost = 0;
+
+        if (allRenderers != null)
+        {
+            for (int i = 0; i < allRenderers.Length; i++)
+                if (allRenderers[i] != null)
+                    allRenderers[i].sortingOrder = baseSortingOrders[i];
+        }
 
         transform.position = originalPosition;
     }
+
+    // เรียกหลังสร้าง prefab ลูกใหม่
+    public void RefreshSpriteCache()
+    {
+        // 1) เอา boost ออกจาก renderer เดิมที่ยังอยู่
+        if (allRenderers != null)
+        {
+            for (int i = 0; i < allRenderers.Length; i++)
+                if (allRenderers[i] != null)
+                    allRenderers[i].sortingOrder = baseSortingOrders[i];
+        }
+
+        // 2) cache ใหม่
+        CacheRenderers();
+
+        // 3) ถ้าพาเนลเคยถูกดันขึ้นมาแล้ว ให้ลูกใหม่ตามขึ้นไปด้วย
+        if (currentBoost > 0)
+        {
+            for (int i = 0; i < allRenderers.Length; i++)
+                allRenderers[i].sortingOrder = currentBoost + baseSortingOrders[i];
+        }
+
+        halfExtents = CalculateHalfExtents();
+    }
+
+    private void BringToFront()
+    {
+        int order = DraggableSortOrder.GetNextOrder();
+        currentBoost = order;
+
+        for (int i = 0; i < allRenderers.Length; i++)
+        {
+            if (allRenderers[i] != null)
+                allRenderers[i].sortingOrder = order + baseSortingOrders[i];
+        }
+
+        Vector3 pos = transform.position;
+        pos.z = originalZ - (order * 0.0001f);
+        transform.position = pos;
+    }
+
+    // ---------- mouse ----------
 
     private void OnMouseDown()
     {
@@ -115,8 +176,6 @@ public class TodayListDisplayClick : MonoBehaviour
             TodayListManager.Instance.CloseTodayList();
     }
 
-    // หา Mark ที่อยู่ใต้ตำแหน่งเมาส์ แล้วสั่ง toggle ให้ตรงๆ
-    // ไม่สนใจว่า raycast ปกติจะเลือกใครเป็นผู้ชนะ
     private void TryToggleMarkUnderMouse()
     {
         Vector3 worldPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -157,28 +216,5 @@ public class TodayListDisplayClick : MonoBehaviour
         pos.x = Mathf.Clamp(pos.x, b.min.x + halfExtents.x, b.max.x - halfExtents.x);
         pos.y = Mathf.Clamp(pos.y, b.min.y + halfExtents.y, b.max.y - halfExtents.y);
         return pos;
-    }
-
-    private void BringToFront()
-    {
-        int order = DraggableSortOrder.GetNextOrder();
-
-        for (int i = 0; i < allRenderers.Length; i++)
-        {
-            if (allRenderers[i] != null)
-                allRenderers[i].sortingOrder = order + baseSortingOrders[i];
-        }
-
-        Vector3 pos = transform.position;
-        pos.z = originalZ - (order * 0.0001f);
-        transform.position = pos;
-    }
-
-    public void RefreshSpriteCache()
-    {
-        allRenderers = GetComponentsInChildren<Renderer>();
-        baseSortingOrders = new int[allRenderers.Length];
-        for (int i = 0; i < allRenderers.Length; i++)
-            baseSortingOrders[i] = allRenderers[i].sortingOrder;
     }
 }

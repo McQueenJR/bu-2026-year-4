@@ -31,55 +31,72 @@ public class TodayListManager : MonoBehaviour
 
     // เรียกจากระบบตอนเริ่มวัน — สร้างรูป/ชื่อ ไม่มีเงื่อนไขจำกัด
     public void GenerateTodayList(List<NPCData> todayNPCs)
+{
+    // หา display ตั้งแต่ต้น (true = หาเจอแม้ popup ปิดอยู่)
+    TodayListDisplayClick display = popup.GetComponentInChildren<TodayListDisplayClick>(true);
+
+    // คืน order/ตำแหน่งของพาเนลเป็นค่าเริ่มต้นก่อน
+    if (display != null)
+        display.ResetSortingOrder();
+
+    ClearTodayList();
+
+    // order ของกระดาษ BG ไว้บังคับให้ลูกอยู่เหนือกว่าเสมอ
+    SpriteRenderer bg = display != null ? display.GetComponent<SpriteRenderer>() : null;
+    int baseOrder = bg != null ? bg.sortingOrder : 0;
+
+    for (int i = 0; i < todayNPCs.Count && i < slots.Length; i++)
     {
-        
-        ClearTodayList();
+        GameObject photo = Instantiate(todayNPCs[i].TodayPhotoPrefab, slots[i]);
+        photo.transform.localPosition = Vector3.zero;
+        photo.transform.localScale = Vector3.one;
 
-        for (int i = 0; i < todayNPCs.Count && i < slots.Length; i++)
+        // ให้รูปอยู่เหนือกระดาษเสมอ
+        foreach (var r in photo.GetComponentsInChildren<Renderer>())
+            r.sortingOrder = Mathf.Max(r.sortingOrder, baseOrder + 1);
+
+        spawnedPhotos.Add(photo);
+
+        if (namePrefab != null)
         {
-            GameObject photo = Instantiate(todayNPCs[i].TodayPhotoPrefab, slots[i]);
-            photo.transform.localPosition = Vector3.zero;
-            photo.transform.localScale = Vector3.one;
-            spawnedPhotos.Add(photo);
+            GameObject nameObj = Instantiate(namePrefab, slots[i]);
+            nameObj.transform.localPosition = nameOffset;
+            nameObj.transform.localScale = Vector3.one;
 
-            if (namePrefab != null)
+            TextMeshPro tmp = nameObj.GetComponent<TextMeshPro>();
+            if (tmp != null)
+                tmp.text = todayNPCs[i].npcName;
+
+            Renderer photoRenderer = photo.GetComponentInChildren<Renderer>();
+            Renderer textRenderer = nameObj.GetComponent<Renderer>();
+
+            if (photoRenderer != null && textRenderer != null)
             {
-                GameObject nameObj = Instantiate(namePrefab, slots[i]);
-                nameObj.transform.localPosition = nameOffset;
-                nameObj.transform.localScale = Vector3.one;
-
-                TextMeshPro tmp = nameObj.GetComponent<TextMeshPro>();
-                if (tmp != null)
-                    tmp.text = todayNPCs[i].npcName;
-
-                Renderer photoRenderer = photo.GetComponentInChildren<Renderer>();
-                Renderer textRenderer = nameObj.GetComponent<Renderer>();
-
-                if (photoRenderer != null && textRenderer != null)
-                {
-                    textRenderer.sortingLayerID = photoRenderer.sortingLayerID;
-                    textRenderer.sortingOrder = photoRenderer.sortingOrder + 1;
-                }
-
-                spawnedPhotos.Add(nameObj);
+                textRenderer.sortingLayerID = photoRenderer.sortingLayerID;
+                textRenderer.sortingOrder = photoRenderer.sortingOrder + 1;
             }
-            if (markColliderPrefab != null)
-            {
-                GameObject markObj = Instantiate(markColliderPrefab, photo.transform);
-                markObj.transform.localPosition = Vector3.zero;
-                //markObj.transform.localScale = Vector3.one;
-                // ให้มันใช้ scale ที่ตั้งไว้ใน prefab เองแทน
-                
-                spawnedPhotos.Add(markObj);
-            }
+
+            spawnedPhotos.Add(nameObj);
         }
 
-        TodayListDisplayClick display = popup.GetComponentInChildren<TodayListDisplayClick>();
-        if (display != null)
-            display.RefreshSpriteCache();
-        
-        Physics2D.SyncTransforms();
+        if (markColliderPrefab != null)
+        {
+            GameObject markObj = Instantiate(markColliderPrefab, photo.transform);
+            markObj.transform.localPosition = Vector3.zero;
+
+            // ให้กากบาทอยู่เหนือรูปเสมอ
+            foreach (var r in markObj.GetComponentsInChildren<Renderer>())
+                r.sortingOrder = Mathf.Max(r.sortingOrder, baseOrder + 2);
+
+            spawnedPhotos.Add(markObj);
+        }
     }
+
+    if (display != null)
+        display.RefreshSpriteCache();
+
+    Physics2D.SyncTransforms();
+}
 
     // เรียกจากตอนผู้เล่นคลิกไอคอน — แค่เปิด popup มี 3 เงื่อนไขป้องกัน
     public void OpenTodayList()
@@ -134,9 +151,13 @@ public class TodayListManager : MonoBehaviour
 
     private void ClearTodayList()
     {
-        foreach (GameObject photo in spawnedPhotos)
-            Destroy(photo);
-
+        foreach (GameObject obj in spawnedPhotos)
+        {
+            if (obj == null) continue;
+            obj.SetActive(false);
+            obj.transform.SetParent(null);
+            Destroy(obj);
+        }
         spawnedPhotos.Clear();
     }
 }
