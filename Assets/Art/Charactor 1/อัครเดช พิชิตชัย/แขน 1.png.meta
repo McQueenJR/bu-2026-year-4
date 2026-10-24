@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 55966b7cc10faf844be0b9df13d807cf
+guid: 5a8a13561bf858b41993a1ace1510235
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2335183459261830359
-    second: "\u0E41\u0E1F\u0E49\u0E21_A4-03_0"
+      213: -3563179199658230996
+    second: "\u0E41\u0E02\u0E19_0"
+  - first:
+      213: -461245149036053514
+    second: "\u0E41\u0E02\u0E19_1"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0E41\u0E1F\u0E49\u0E21_A4-03_0"
+      name: "\u0E41\u0E02\u0E19_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 730
+        y: 252
+        width: 83
+        height: 397
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d45baedbfc386020800000000000000
-      internalID: 2335183459261830359
+      spriteID: c2b7f4d756b0d8ec0800000000000000
+      internalID: -3563179199658230996
       vertices: []
       indices: 
       edges: []
@@ -125,7 +128,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f1300ca16798ecf4695d063ffc8bbfa9
+    spriteID: f96579087563ee94e837feb8c3785278
     internalID: 0
     vertices: []
     indices: 
@@ -137,7 +140,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1920.0,"y":1080.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      "\u0E41\u0E1F\u0E49\u0E21_A4-03_0": 2335183459261830359
+      "\u0E41\u0E02\u0E19_0": -3563179199658230996
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

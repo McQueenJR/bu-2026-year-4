@@ -1814,6 +1814,7 @@ MonoBehaviour:
     forgotDocumentDecided: 0
     forgotDocument: 0
     documentPlacedOnDesk: 0
+    forgotDocumentInHouseMessage: 
 --- !u!4 &3061513912551609920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2230973119353925988, guid: a31f4397ff91e7249baf8b5672562337, type: 3}

@@ -682,6 +682,7 @@ MonoBehaviour:
     forgotDocumentDecided: 0
     forgotDocument: 0
     documentPlacedOnDesk: 0
+    forgotDocumentInHouseMessage: 
 --- !u!114 &7466308853699907839
 MonoBehaviour:
   m_ObjectHideFlags: 0

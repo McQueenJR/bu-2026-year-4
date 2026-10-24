@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 5827790539553656473, guid: b94e5439edda42a44b0dc442446cc2cd, type: 3}
+    - target: {fileID: 5176312085779732203, guid: eb214e4665918d24ea14c2d0a643278c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6230990212406098541, guid: eb214e4665918d24ea14c2d0a643278c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.32306
@@ -106,11 +110,7 @@ PrefabInstance:
       objectReference: {fileID: -7057540570176626024, guid: 5edf5a4edfda1e6418a6884d704b51a3, type: 3}
     - target: {fileID: 6540626571707286482, guid: eb214e4665918d24ea14c2d0a643278c, type: 3}
       propertyPath: m_Name
-      value: "\u0E27\u0E23\u0E1E\u0E25 \u0E17\u0E2D\u0E07\u0E14\u0E35 \u0E1C\u0E35
-        - \u0E1B\u0E32\u0E01\u0E15\u0E32\u0E15\u0E31\u0E27\u0E2D\u0E37\u0E48\u0E19
-        -\u0E44\u0E21\u0E48\u0E2D\u0E22\u0E39\u0E48\u0E43\u0E19\u0E25\u0E34\u0E2A
-        - \u0E43\u0E1A\u0E04\u0E33\u0E02\u0E2D\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07
-        - \u0E44\u0E21\u0E48\u0E2D\u0E22\u0E38\u0E48\u0E43\u0E19\u0E40\u0E15\u0E49\u0E19\u0E17\u0E37"
+      value: "\u0E27\u0E23\u0E1E\u0E25 20\u0E37"
       objectReference: {fileID: 0}
     - target: {fileID: 8182259357833159548, guid: eb214e4665918d24ea14c2d0a643278c, type: 3}
       propertyPath: m_Sprite

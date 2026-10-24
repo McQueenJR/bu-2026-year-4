@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u0E27\u0E23\u0E1E\u0E25    6"
       objectReference: {fileID: 0}
+    - target: {fileID: 6024576563909428812, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7332798718359614427, guid: 72c4e123540e686488d96f24a4522c6e, type: 3}
       propertyPath: m_SortingOrder
       value: 2
