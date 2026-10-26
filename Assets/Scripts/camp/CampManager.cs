@@ -428,7 +428,12 @@ public class CampManager : MonoBehaviour
     // ==========================
     public bool IsAlive(NPCData npc)
     {
-        return aliveNPC.ContainsKey(npc) && aliveNPC[npc];
+        if (npc == null)
+            return false;
+
+        // Prefab NPCData と CampDatabase の参照が異なる場合も、同じ NPC 名で照合する。
+        NPCData key = FindResidentKey(npc);
+        return key != null && aliveNPC.TryGetValue(key, out bool isAlive) && isAlive;
     }
 
     public bool IsHomeToday(NPCData npc)

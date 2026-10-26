@@ -107,3 +107,24 @@ MonoBehaviour:
       documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
+  - roomCode: "\u0E2B\u0E49\u0E2D\u0E07\u0E1E\u0E23\u0E30"
+    phoneNumber: 7987
+    residents:
+    - npcData: {fileID: 11400000, guid: 176e00c83f7707f47ba84fdce70703ea, type: 2}
+      hasDocument: 1
+      documentHolder: {fileID: 0}
+      isAlive: 1
+      isHomeToday: 0
+    - npcData: {fileID: 11400000, guid: 2b5b939794e8e6b498fb4ac79eb2bab2, type: 2}
+      hasDocument: 1
+      documentHolder: {fileID: 0}
+      isAlive: 1
+      isHomeToday: 0
+  - roomCode: "\u0E2B\u0E49\u0E2D\u0E07\u0E1C\u0E35\u0E1E\u0E34\u0E40\u0E28\u0E29"
+    phoneNumber: 7987
+    residents:
+    - npcData: {fileID: 11400000, guid: 176e00c83f7707f47ba84fdce70703ea, type: 2}
+      hasDocument: 1
+      documentHolder: {fileID: 0}
+      isAlive: 1
+      isHomeToday: 0

@@ -75,8 +75,6 @@ public void GenerateTodayApplicants()
     int attempts = 0;
     const int maxAttempts = 3000;
     
-    DailyPlan plan = BuildDailyPlan(requestedNPCCount, slotCount);
-
     currentPlan = BuildDailyPlan(requestedNPCCount, slotCount);
 
     HashSet<DataPrefabNPC> seen = new();
@@ -154,13 +152,8 @@ private DailyPlan BuildDailyPlan(int requestedNPCCount, int slotCount)
 {
     DailyPlan plan = new();
 
-    List<DataPrefabNPC> pool = GetAllAvailableNPCs()
-        .OrderBy(_ => Random.value)
-        .ToList();
-
     const int poolSize = 10;
-    if (pool.Count > poolSize)
-        pool = pool.Take(poolSize).ToList();
+    List<DataPrefabNPC> pool = BuildWeightedNPCPool(poolSize);
 
     int listCount = Random.Range(allData.minTodayList, allData.maxTodayList + 1);
     listCount = Mathf.Min(listCount, slotCount, pool.Count);
@@ -326,10 +319,13 @@ private TodayApplicant CreateGhostApplicant(
 
                 if (data == null)
                     continue;
-
-                if (CampManager.Instance != null &&
+// ตรวจสถานะค่ายเฉพาะชาวบ้าน
+                if (role == allData.villager &&
+                    CampManager.Instance != null &&
                     !CampManager.Instance.IsAlive(data))
+                {
                     continue;
+                }
 
                 result.Add(entry.npc);
             }
@@ -345,26 +341,39 @@ private TodayApplicant CreateGhostApplicant(
     // =========================================================
     // เลือก Role -> NPC โดยใช้ Chance
     // =========================================================
-    private DataPrefabNPC ChooseAvailableNPC()
+    private List<DataPrefabNPC> BuildWeightedNPCPool(int maxCount)
     {
-        RoleGroup role = ChooseRole();
+        List<DataPrefabNPC> selected = new();
+        int targetCount = Mathf.Max(0, maxCount);
 
-        if (role == null)
-            return null;
+        while (selected.Count < targetCount)
+        {
+            DataPrefabNPC npc = ChooseAvailableNPC(selected);
+            if (npc == null)
+                break;
 
-        return ChooseNPC(role);
+            selected.Add(npc);
+        }
+
+        return selected;
     }
 
-    private RoleGroup ChooseRole()
+    private DataPrefabNPC ChooseAvailableNPC(List<DataPrefabNPC> excludedNPCs)
+    {
+        RoleGroup role = ChooseRole(excludedNPCs);
+        return role == null ? null : ChooseNPC(role, excludedNPCs);
+    }
+
+    private RoleGroup ChooseRole(List<DataPrefabNPC> excludedNPCs)
     {
         if (allData == null)
             return null;
 
         List<RoleGroup> roles = new();
 
-        AddRoleIfAvailable(roles, allData.villager);
-        AddRoleIfAvailable(roles, allData.monk);
-        AddRoleIfAvailable(roles, allData.special);
+        AddRoleIfAvailable(roles, allData.villager, excludedNPCs);
+        AddRoleIfAvailable(roles, allData.monk, excludedNPCs);
+        AddRoleIfAvailable(roles, allData.special, excludedNPCs);
 
         if (roles.Count == 0)
             return null;
@@ -372,7 +381,7 @@ private TodayApplicant CreateGhostApplicant(
         int totalWeight = roles.Sum(r => Mathf.Max(0, r.spawnChance));
 
         if (totalWeight <= 0)
-            return roles[Random.Range(0, roles.Count)];
+            return null;
 
         int random = Random.Range(0, totalWeight);
         int current = 0;
@@ -390,9 +399,10 @@ private TodayApplicant CreateGhostApplicant(
 
     private void AddRoleIfAvailable(
         List<RoleGroup> roles,
-        RoleGroup role)
+        RoleGroup role,
+        List<DataPrefabNPC> excludedNPCs)
     {
-        if (role == null || role.npcs == null)
+        if (role == null || role.spawnChance <= 0 || role.npcs == null)
             return;
 
         bool hasAvailableNPC = role.npcs.Any(entry =>
@@ -400,11 +410,23 @@ private TodayApplicant CreateGhostApplicant(
             if (entry == null || entry.npc == null || entry.chance <= 0)
                 return false;
 
+            if (excludedNPCs != null && excludedNPCs.Contains(entry.npc))
+                return false;
+
             NPCData data = GetNPCDataFromPrefabData(entry.npc);
 
-            return data != null &&
-                   (CampManager.Instance == null ||
-                    CampManager.Instance.IsAlive(data));
+            if (data == null)
+                return false;
+
+// เช็กการมีชีวิตเฉพาะชาวบ้านที่อยู่ใน CampDatabase
+            if (role == allData.villager &&
+                CampManager.Instance != null &&
+                !CampManager.Instance.IsAlive(data))
+            {
+                return false;
+            }
+
+            return true;
         });
 
         if (hasAvailableNPC)
@@ -414,7 +436,7 @@ private TodayApplicant CreateGhostApplicant(
     // =========================================================
     // เลือก NPC ภายใน Role โดยใช้ NPCGroupChance.chance
     // =========================================================
-    private DataPrefabNPC ChooseNPC(RoleGroup role)
+    private DataPrefabNPC ChooseNPC(RoleGroup role, List<DataPrefabNPC> excludedNPCs)
     {
         if (role == null || role.npcs == null)
             return null;
@@ -424,6 +446,9 @@ private TodayApplicant CreateGhostApplicant(
         foreach (NPCGroupChance entry in role.npcs)
         {
             if (entry == null || entry.npc == null || entry.chance <= 0)
+                continue;
+
+            if (excludedNPCs != null && excludedNPCs.Contains(entry.npc))
                 continue;
 
             NPCData data = GetNPCDataFromPrefabData(entry.npc);
@@ -444,7 +469,7 @@ private TodayApplicant CreateGhostApplicant(
         int totalWeight = available.Sum(n => n.chance);
 
         if (totalWeight <= 0)
-            return available[Random.Range(0, available.Count)].npc;
+            return null;
 
         int random = Random.Range(0, totalWeight);
         int current = 0;
