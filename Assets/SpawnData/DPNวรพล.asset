@@ -46,9 +46,9 @@ MonoBehaviour:
       chance: 7
     - prefab: {fileID: 6540626571707286482, guid: a11baecf390dff5409ed0dd20ddcfb64, type: 3}
       chance: 7
-    - prefab: {fileID: 7841454775233743223, guid: dab1bc9e9b173a5468fa303a336face1, type: 3}
+    - prefab: {fileID: 7841454775233743223, guid: c29c2113efe3e744bb8c37e13b8aa9e8, type: 3}
       chance: 7
-    - prefab: {fileID: 7841454775233743223, guid: 4295bd91dc533074cbd6de95003caefe, type: 3}
+    - prefab: {fileID: 7841454775233743223, guid: 09b2fdee1c47e8547b15ab9e4c7a9a94, type: 3}
       chance: 9
     - prefab: {fileID: 5659499894291387253, guid: ac62ce4d4a92e694f8493ba6416b121d, type: 3}
       chance: 9
