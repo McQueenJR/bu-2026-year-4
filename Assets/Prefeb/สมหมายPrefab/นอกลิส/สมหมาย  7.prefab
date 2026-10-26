@@ -690,6 +690,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.52
       objectReference: {fileID: 0}
+    - target: {fileID: 141959264547846721, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 220840883277192986, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_TagString
       value: XRay_Inner
@@ -824,7 +828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5604811342339616944, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.85858
+      value: 0.7512575
       objectReference: {fileID: 0}
     - target: {fileID: 5604811342339616944, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       propertyPath: m_LocalScale.y
