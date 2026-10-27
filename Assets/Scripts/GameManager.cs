@@ -102,10 +102,11 @@ public class GameManager : MonoBehaviour
     public int villagerRejected = 0;
     public int robberRejected = 0;
     
-    // คะแนนต่อ NPC 1 ตัว (ตามกติกาที่ตกลงไว้ ห้ามเปลี่ยนค่า)
-    private const int PointsCorrectDecision = 3;   // ปล่อยชาวบ้าน / กำจัดผี
-    private const int PointsReject = 1;            // ปฏิเสธ (ชาวบ้านหรือผี)
-    private const int PointsSevereMistake = -3;    // ฆ่าชาวบ้านผ่าน Emergency / ปล่อยผีเข้า
+    // [ENDING-SCORE] คะแนนต่อ NPC 1 ตัว: ตัดสิน 80% + เช็คลิสต์ 20% (ค่าจริงอยู่ที่ ScoreRankUtility)
+    private const int PointsCorrectDecision = ScoreRankUtility.PointsCorrectDecision;   // ปล่อยชาวบ้าน / กำจัดผี
+    private const int PointsRejectGhost = ScoreRankUtility.PointsRejectGhost;           // ปฏิเสธผี
+    private const int PointsRejectVillager = ScoreRankUtility.PointsRejectVillager;     // ปฏิเสธชาวบ้านทั่วไป
+    // ผิดร้ายแรง (ปล่อยผี / Emergency ใส่ชาวบ้าน / ปล่อยชาวบ้านเข้าห้องที่มีผี) = NPC ตัวนั้นได้ 0
 
     [Header("End Day UI")]
     public EndDayUI endDayUI;
@@ -634,8 +635,14 @@ public class GameManager : MonoBehaviour
                 (npc.applicant != null && npc.applicant.isGhost) ||
                 npc.npcType == NPCType.Special;
 
-            // คะแนน NPC ตัวนี้ = checklist + ปฏิเสธ (+1)
-            int npcPoints = CalcNpcPoints(currentNPC, PointsReject);
+            // [ENDING-SCORE] คะแนน NPC ตัวนี้ = checklist + ปฏิเสธ
+            //   ปฏิเสธผี 14 | ปฏิเสธชาวบ้านทั่วไป 6 | ปฏิเสธชาวบ้านที่ห้องมีผีแล้ว = ตัดสินถูก 20
+            int rejectPoints =
+                isRobber ? PointsRejectGhost
+                : IsVillagerRoomHaunted(npc) ? PointsCorrectDecision
+                : PointsRejectVillager;
+
+            int npcPoints = CalcNpcPoints(currentNPC, rejectPoints);
             
             // กันนับซ้ำ: NPC ตัวนี้ถูกตัดสินไปแล้ว → ไม่ทำซ้ำ
             if (CampaignStatsTracker.Instance != null &&
@@ -1093,16 +1100,23 @@ public class GameManager : MonoBehaviour
             (npc.applicant != null && npc.applicant.isGhost) ||
             npc.npcType == NPCType.Special;
 
-        // คะแนนส่วนตัดสินใจ: ถูก +3 / ผิดร้ายแรง -3
-        //   ปล่อยชาวบ้าน +3 | จับผี +3 | ปล่อยผี -3 | จับชาวบ้าน -3
-        int decisionPoints;
+        // [ENDING-SCORE] ผลตัดสิน → คะแนนส่วนตัดสินใจ (20) หรือผิดร้ายแรง (NPC ตัวนี้ 0)
+        //   ปล่อยชาวบ้าน (ห้องปลอดภัย) 20 | กำจัดผีด้วย Emergency 20 + เช็คลิสต์เต็มอัตโนมัติ
+        //   ปล่อยผี / Emergency ใส่ชาวบ้าน / ปล่อยชาวบ้านเข้าห้องที่มีผีแล้ว = ผิดร้ายแรง (0)
+        bool severe;
+        bool fullChecklist = false;
 
         if (!wasArrested)
-            decisionPoints = isRobber ? PointsSevereMistake : PointsCorrectDecision;
+        {
+            severe = isRobber || IsVillagerRoomHaunted(npc);
+        }
         else
-            decisionPoints = isRobber ? PointsCorrectDecision : PointsSevereMistake;
+        {
+            severe = !isRobber;
+            fullChecklist = isRobber;
+        }
 
-        int npcPoints = CalcNpcPoints(npcObj, decisionPoints);
+        int npcPoints = CalcNpcPoints(npcObj, PointsCorrectDecision, severe, fullChecklist);
 
         // กันนับซ้ำ: NPC ตัวนี้ถูกตัดสินไปแล้ว → ไม่ทำซ้ำ
         if (CampaignStatsTracker.Instance != null &&
@@ -1172,9 +1186,24 @@ public class GameManager : MonoBehaviour
         npcProcessedCount++;
     }
 
-    // คะแนน NPC 1 ตัว = checklist + ผลตัดสิน (ต่ำสุด 0 สูงสุด 8)
+    // [ENDING-SCORE] ห้องของชาวบ้านคนนี้มีผีเข้าไปแล้ววันนี้หรือไม่
+    private bool IsVillagerRoomHaunted(NPC npc)
+    {
+        return npc != null &&
+               npc.data != null &&
+               CampManager.Instance != null &&
+               CampManager.Instance.IsGhostInRoomOf(npc.data);
+    }
+
+    // [ENDING-SCORE] คะแนน NPC 1 ตัว = ตัดสิน + เช็คลิสต์ (ต่ำสุด 0 สูงสุด 25)
+    //   severe = ผิดร้ายแรง → NPC ตัวนี้ได้ 0 ทั้งก้อน (เช็คลิสต์ไม่ช่วย)
+    //   fullChecklist = กำจัดผีถูกด้วย Emergency → เช็คลิสต์เต็มอัตโนมัติ
     // ดึงแล้วเคลียร์คะแนน checklist ของ NPC ตัวนั้นทิ้งด้วย
-    private int CalcNpcPoints(GameObject npcObj, int decisionPoints)
+    private int CalcNpcPoints(
+        GameObject npcObj,
+        int decisionPoints,
+        bool severe = false,
+        bool fullChecklist = false)
     {
         int checklistPoints = 0;
 
@@ -1182,7 +1211,7 @@ public class GameManager : MonoBehaviour
         {
             checklistPoints = ChecklistManager.Instance.GetChecklistScore(npcObj);
 
-            // ★ DailyReport: เก็บผลรายข้อ "ก่อน" Consume (ไม่เปลี่ยนวิธีคิดคะแนน)
+            // ★ DailyReport: เก็บผลรายข้อ "ก่อน" Consume (เก็บค่าที่ผู้เล่นทำจริง)
             SaveChecklistToReport(npcObj, checklistPoints);
 
             ChecklistManager.Instance.ConsumeChecklistScore(npcObj);
@@ -1192,19 +1221,28 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("ChecklistManager.Instance เป็น null!");
         }
 
-        int total = Mathf.Clamp(
-            checklistPoints + decisionPoints,
-            0,
-            ScoreRankUtility.MaxPerNPC);
+        // Emergency กำจัดผีถูก → เช็คลิสต์เต็มอัตโนมัติ (ได้ไม่น้อยกว่าที่ติ๊กไว้)
+        if (fullChecklist)
+            checklistPoints = ScoreRankUtility.MaxChecklistPoints;
+
+        checklistPoints = Mathf.Clamp(
+            checklistPoints, 0, ScoreRankUtility.MaxChecklistPoints);
+
+        int total = severe
+            ? 0
+            : Mathf.Clamp(
+                checklistPoints + decisionPoints,
+                0,
+                ScoreRankUtility.MaxPerNPC);
 
         Debug.Log(
             $"[Score] {npcObj.name} | checklist {checklistPoints} " +
-            $"+ ตัดสิน {decisionPoints} → {total}"
+            $"+ ตัดสิน {decisionPoints} | ผิดร้ายแรง={severe} | เช็คลิสต์เต็มอัตโนมัติ={fullChecklist} → {total}"
         );
 
         return total;
     }
-    
+
         // =========================
     // DAILY REPORT (snapshot รายวัน)
     // =========================
@@ -1329,8 +1367,8 @@ public class GameManager : MonoBehaviour
 
             Debug.Log(
                 $"[DailyReport] Checklist วัน {currentDay} | {GetShownNpcName(npcObj.GetComponent<NPC>())} | " +
-                $"{marks} | ถูก {correct}-ผิด {items.Count - correct} = {correct - (items.Count - correct)} " +
-                $"(คะแนนจริง {checklistPoints})"
+                $"{marks} | ถูก {correct} ผิด {items.Count - correct} " +
+                $"(คะแนนเช็คลิสต์จริง {checklistPoints})"
             );
         }
         else

@@ -296,11 +296,9 @@ public class ChecklistManager : MonoBehaviour
                 correctAnswerAbnormal = correctAnswer
             });
             
-            // ใหม่: ถูก +1 / ผิด -1 (ผลรวมติดลบได้ จะไปตัดที่ 0 ตอนรวมคะแนน NPC)
+            // [ENDING-SCORE] ถูก +1 / ผิด 0 (ไม่ติดลบ) — เช็คลิสต์เป็นคะแนนเสริม 20% สูงสุด 5
             if (playerAnswer == correctAnswer)
                 scoreThisNPC++;
-            else
-                scoreThisNPC--;
         }
 
         // เก็บ "คะแนนล่าสุดที่ส่ง" ของ NPC ตัวนี้ (ส่งซ้ำ = เขียนทับของเดิม)

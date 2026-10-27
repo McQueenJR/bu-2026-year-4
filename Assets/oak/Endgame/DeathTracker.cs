@@ -41,8 +41,8 @@ public class DeathTracker : MonoBehaviour
 
     [Header("หายสาบสูญ (ปุ่มแดง)")]
     [Range(0f, 100f)]
-    [Tooltip("โอกาส % ที่ชาวบ้านที่ถูกปฏิเสธจะหายสาบสูญระหว่างคืน")]
-    public float vanishChance = 50f;
+    [Tooltip("[ENDING-SCORE] ทุกคืนจะสุ่มเลือก 1 คนจากคนที่ถูกปฏิเสธ แล้วคนนั้นหายสาบสูญด้วยโอกาส % นี้ (100 = หายแน่ทุกคืนที่มีคนถูกปฏิเสธ)")]
+    public float vanishChance = 100f;
 
     // สมุดบันทึกการตาย
     private readonly List<DeathRecord> records = new();
@@ -101,54 +101,58 @@ public class DeathTracker : MonoBehaviour
     }
 
     // =====================================================
-    // เรียกตอนเริ่มวันใหม่ — roll หายสาบสูญของคนที่ถูกไล่ออกเมื่อคืน
+    // [ENDING-SCORE] เรียกตอนจบคืน — สุ่มหายสาบสูญ "1 คนต่อวัน"
+    // เลือก 1 คนจากชาวบ้านที่ถูกปุ่มแดงไล่ออก (ไม่ roll ทุกคนแล้ว)
+    // รายชื่อว่าง = ไม่มีใครหาย | เรียกซ้ำในคืนเดียวกันไม่เป็นไร (รายชื่อถูกล้างแล้ว)
     // =====================================================
     public void RollPendingVanish(int currentDay)
     {
         if (pendingRejected.Count == 0)
             return;
 
-        Debug.Log("===== ROLL หายสาบสูญ (คนถูกปฏิเสธเมื่อคืน) =====");
+        Debug.Log("===== หายสาบสูญ (สุ่ม 1 คนจากคนที่ถูกปฏิเสธเมื่อคืน) =====");
 
         const string vanishDetail = "ถูกปฏิเสธแล้วหายสาบสูญระหว่างคืน";
 
-        foreach (NPCData npc in pendingRejected)
-        {
-            // เผื่อตายจากสาเหตุอื่นไปแล้วระหว่างคืน
-            if (IsDead(npc))
-                continue;
-
-            float roll = Random.Range(0f, 100f);
-
-            if (roll < vanishChance)
-            {
-                // ★ ให้ CampManager ตัด aliveNPC แล้วมันจะเรียก RecordDeath ให้เอง
-                bool killed =
-                    CampManager.Instance != null &&
-                    CampManager.Instance.KillResident(
-                        npc, DeathCause.VanishedAfterReject, vanishDetail);
-
-                // ไม่เจอในค่าย (หรือไม่มี CampManager) → บันทึกลงสมุดตรง ๆ เหมือนเดิม
-                if (!killed)
-                {
-                    RecordDeath(
-                        npc,
-                        DeathCause.VanishedAfterReject,
-                        currentDay,
-                        vanishDetail
-                    );
-                }
-            }
-            else
-            {
-                Debug.Log(
-                    $"🌙 {npc.npcName} รอดจากการถูกไล่ออก " +
-                    $"(roll {roll:F1} ≥ {vanishChance})"
-                );
-            }
-        }
+        // เก็บเฉพาะคนที่ยังไม่ตายจากสาเหตุอื่น
+        List<NPCData> candidates = pendingRejected.FindAll(n => !IsDead(n));
 
         pendingRejected.Clear();
+
+        if (candidates.Count == 0)
+            return;
+
+        NPCData npc = candidates[Random.Range(0, candidates.Count)];
+
+        float roll = Random.Range(0f, 100f);
+
+        if (roll >= vanishChance)
+        {
+            Debug.Log(
+                $"🌙 {npc.npcName} ถูกสุ่มแต่รอดจากการหายสาบสูญ " +
+                $"(roll {roll:F1} ≥ {vanishChance})"
+            );
+            return;
+        }
+
+        // ★ ให้ CampManager ตัด aliveNPC แล้วมันจะเรียก RecordDeath ให้เอง
+        bool killed =
+            CampManager.Instance != null &&
+            CampManager.Instance.KillResident(
+                npc, DeathCause.VanishedAfterReject, vanishDetail);
+
+        // ไม่เจอในค่าย (หรือไม่มี CampManager) → บันทึกลงสมุดตรง ๆ เหมือนเดิม
+        if (!killed)
+        {
+            RecordDeath(
+                npc,
+                DeathCause.VanishedAfterReject,
+                currentDay,
+                vanishDetail
+            );
+        }
+
+        Debug.Log($"🌫️ {npc.npcName} หายสาบสูญ (สุ่มจาก {candidates.Count} คน)");
     }
 
 

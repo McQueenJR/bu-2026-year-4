@@ -69,7 +69,7 @@ public class CampaignStatsTracker : MonoBehaviour
     // =====================================================
     // บันทึกผลตัดสิน NPC 1 ตัว
     // คืน false = NPC ตัวนี้ถูกนับไปแล้ว (หรือข้อมูลไม่ครบ) → ผู้เรียกไม่ต้องทำซ้ำ
-    // npcPoints = คะแนน NPC ตัวนี้ที่ GameManager คิดแล้ว (0–8)
+    // npcPoints = คะแนน NPC ตัวนี้ที่ GameManager คิดแล้ว (0–25) [ENDING-SCORE]
     // =====================================================
     public bool Record(
         GameObject npcObj,
@@ -132,7 +132,7 @@ public class CampaignStatsTracker : MonoBehaviour
     }
 
     // =====================================================
-    // ปิดบัญชีของวัน: max(0, คะแนน NPC − 2 × คนตายของวันนั้น) แล้วบวกเข้าแคมเปญ
+    // ปิดบัญชีของวัน: max(0, คะแนน NPC − 5 × คนตายของวันนั้น) แล้วบวกเข้าแคมเปญ [ENDING-SCORE]
     // เรียกซ้ำกี่ครั้งก็ได้ วันเดียวกันนับครั้งเดียว
     // =====================================================
     public void FinalizeDay(int day)
@@ -161,8 +161,9 @@ public class CampaignStatsTracker : MonoBehaviour
         );
     }
 
-    // นับชาวบ้านที่ตายของวันนั้นจาก DeathTracker
-    // GhostTentKill + VanishedAfterReject เท่านั้น (EmergencyKill ไม่หักซ้ำ เพราะมี -3 อยู่แล้ว)
+    // [ENDING-SCORE] นับชาวบ้านที่ตายของวันนั้นจาก DeathTracker "ทุกสาเหตุ"
+    // GhostTentKill + VanishedAfterReject + EmergencyKill (ชาวบ้านตายทุกคนหัก NightDeathPenalty เท่ากัน)
+    // คนเดียวกันหักได้ครั้งเดียว (deductedNames)
     private int CountNightDeaths(int day, bool markDeducted)
     {
         if (DeathTracker.Instance == null)
@@ -179,7 +180,8 @@ public class CampaignStatsTracker : MonoBehaviour
                 continue;
 
             if (r.cause != DeathCause.GhostTentKill &&
-                r.cause != DeathCause.VanishedAfterReject)
+                r.cause != DeathCause.VanishedAfterReject &&
+                r.cause != DeathCause.EmergencyKill)
                 continue;
 
             string name = r.npcData.npcName;

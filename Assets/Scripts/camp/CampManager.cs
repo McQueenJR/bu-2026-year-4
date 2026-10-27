@@ -767,6 +767,35 @@ public class CampManager : MonoBehaviour
         );
     }
     
+    // [ENDING-SCORE] ห้องของ NPC คนนี้ "มีผีเข้าไปแล้ววันนี้" หรือไม่ (อ่านอย่างเดียว)
+    // ใช้ตัดสินคะแนน: ชาวบ้านที่ห้องมีผี → ปฏิเสธ = ถูก / ปล่อย = ผิดร้ายแรง
+    // (ghostEnteredRooms ถูกล้างตอน StartNewDay)
+    public bool IsGhostInRoomOf(NPCData npc)
+    {
+        if (npc == null || campDatabase == null || ghostEnteredRooms.Count == 0)
+            return false;
+
+        foreach (CampRoom room in campDatabase.rooms)
+        {
+            if (room == null)
+                continue;
+
+            foreach (CampResident resident in room.residents)
+            {
+                if (resident == null || resident.npcData == null)
+                    continue;
+
+                if (resident.npcData == npc ||
+                    resident.npcData.npcName == npc.npcName)
+                {
+                    return ghostEnteredRooms.Contains(room);
+                }
+            }
+        }
+
+        return false;
+    }
+
     // นับชาวบ้านที่ยังมีชีวิตทั้งหมด (เงื่อนไขฉากจบ)
     public int GetAliveVillagerCount()
     {
