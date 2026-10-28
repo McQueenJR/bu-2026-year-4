@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 3897096585732801018, guid: c121f8581d9c63d46abd4eea4e879e7d, type: 3}
+    - target: {fileID: 420405132762644728, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1859830856531440300, guid: 1d945ec0b17d5ee40adeb98eb9e268dc, type: 3}
+    - target: {fileID: 860533518047665127, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7814765690185103239, guid: 6a2d0a49e4ee28843ac03d35035f3c20, type: 3}
+    - target: {fileID: 1881980432280863244, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3217709427692025813, guid: 6df306f9ba820f5499bd7cfd12c09a89, type: 3}
     - target: {fileID: 2139500578248298593, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -52,6 +64,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5101378090404221889, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 595564972833658009, guid: e7cbacd0330092441ba71091fec44910, type: 3}
     - target: {fileID: 6041752590904816743, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.07
@@ -92,9 +108,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6701665854067810072, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3222470766248613712, guid: ee4e4cc1118fc81459f14580316b5370, type: 3}
     - target: {fileID: 6873768859452820952, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
       propertyPath: m_Name
-      value: "\u0E15\u0E32\u0E1A\u0E38\u0E0D \u0E21\u0E32\u0E25\u0E31\u0E22 \u0E1C\u0E35\u0E1E\u0E34\u0E40\u0E28\u0E29 "
+      value: "\u0E15\u0E32\u0E1A\u0E38\u0E0D \u0E22\u0E39\u0E19\u0E35\u0E04"
       objectReference: {fileID: 0}
     - target: {fileID: 7604841152278453224, guid: 4bd3ea1ea79775e46a2ab621391fc345, type: 3}
       propertyPath: m_Controller

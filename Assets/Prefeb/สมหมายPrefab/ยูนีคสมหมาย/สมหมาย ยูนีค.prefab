@@ -16,10 +16,18 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 789915878535632756, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3217709427692025813, guid: 6df306f9ba820f5499bd7cfd12c09a89, type: 3}
     - target: {fileID: 1328621093255311383, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1530642543623624064, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1859830856531440300, guid: 1d945ec0b17d5ee40adeb98eb9e268dc, type: 3}
     - target: {fileID: 1537339052335965052, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -96,11 +104,18 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5614127138963409504, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3222470766248613712, guid: ee4e4cc1118fc81459f14580316b5370, type: 3}
     - target: {fileID: 5732223808204118176, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
       propertyPath: m_Name
-      value: "\u0E2A\u0E21\u0E2B\u0E21\u0E32\u0E22 \u0E0A\u0E31\u0E22\u0E40\u0E08\u0E23\u0E34\u0E0D 
-        \u0E1C\u0E35\u0E1E\u0E34\u0E40\u0E28\u0E29 "
+      value: "\u0E2A\u0E21\u0E2B\u0E21\u0E32\u0E22 \u0E22\u0E39\u0E19\u0E35\u0E04"
       objectReference: {fileID: 0}
+    - target: {fileID: 6207023708697642681, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 595564972833658009, guid: e7cbacd0330092441ba71091fec44910, type: 3}
     - target: {fileID: 6872210542737335260, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.16080248
@@ -124,6 +139,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7171963023454431786, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
+    - {fileID: 5919706206856740251, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2523433ac00ff014abf7a48d09ef23be, type: 3}
