@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 2895184795626082428}
   - component: {fileID: 3843813495636856009}
   m_Layer: 0
-  m_Name: "\u0E40\u0E2B\u0E22\u0E35\u0E22\u0E1A"
+  m_Name: Yeab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1628804599942152174
 Transform:
   m_ObjectHideFlags: 0
