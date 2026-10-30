@@ -20,6 +20,7 @@ public static class TempleDocumentGenerator
         return new TempleDocumentRuntime
         {
             generatedDay = currentDay,
+            documentType = data.documentType,
  
             paper = data.paperBackground.Roll(),
             logo = RollField(data.logo, "Logo", data),

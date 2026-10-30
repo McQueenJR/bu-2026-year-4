@@ -9,7 +9,10 @@ public class DocumentPopupManager : MonoBehaviour
 
     [Header("Template เอกสารขอเข้าวัด (ระบบใหม่ — prefab เดียวใช้กับ NPC ทุกตัว)")]
     public GameObject templeDocumentTemplatePrefab;
-
+    
+    [Header("Template เอกสารพระ (DocumentType = Monk)")]
+    public GameObject templeDocumentMonkPrefab;
+    
     [Header("กันเอกสารลากออกนอกจอ")]
     public BoxCollider2D documentDragBoundary;
 
@@ -33,17 +36,41 @@ public class DocumentPopupManager : MonoBehaviour
             return false;
         }
 
-        if (templeDocumentTemplatePrefab == null)
-        {
-            Debug.LogError("DocumentPopupManager ยังไม่ได้ใส่ Temple Document Template Prefab");
+        GameObject prefab = ResolveTemplatePrefab(applicant.templeDocument.documentType);
+
+        if (prefab == null)
             return false;
-        }
 
         if (!CanOpen())
             return false;
 
-        ShowDocument(templeDocumentTemplatePrefab, applicant.templeDocument);
+        ShowDocument(prefab, applicant.templeDocument);
         return true;
+    }
+    
+    
+    // เลือก Template ตามประเภทเอกสาร (ไม่ fallback เงียบ ๆ ถ้าลืมใส่ prefab ของประเภทนั้น)
+    private GameObject ResolveTemplatePrefab(TempleDocumentType type)
+    {
+        switch (type)
+        {
+            case TempleDocumentType.Monk:
+                if (templeDocumentMonkPrefab == null)
+                {
+                    Debug.LogError("DocumentPopupManager ยังไม่ได้ใส่ Temple Document Monk Prefab (เอกสารประเภท Monk)", this);
+                    return null;
+                }
+                return templeDocumentMonkPrefab;
+
+            case TempleDocumentType.Villager:
+            default:
+                if (templeDocumentTemplatePrefab == null)
+                {
+                    Debug.LogError("DocumentPopupManager ยังไม่ได้ใส่ Temple Document Template Prefab", this);
+                    return null;
+                }
+                return templeDocumentTemplatePrefab;
+        }
     }
 
     // =========================================================

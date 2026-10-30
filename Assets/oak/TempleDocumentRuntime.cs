@@ -8,7 +8,8 @@ using UnityEngine;
 public class TempleDocumentRuntime
 {
     public int generatedDay;
-
+    public TempleDocumentType documentType;    // คัดลอกจาก TempleDocumentData (ไม่สุ่ม) ใช้เลือก Prefab
+    
     [Header("Paper / Images")]
     public Sprite paper;                       // null = ใช้กระดาษใน Template
     public FieldValue<Sprite> logo;
@@ -34,7 +35,7 @@ public class TempleDocumentRuntime
 
     public override string ToString()
     {
-        return $"วัน {generatedDay} | ID:{Show(idNumber)} | ชื่อ:{Show(firstName)} | สกุล:{Show(lastName)}" +
+        return $"วัน {generatedDay} | ประเภท:{documentType} | ID:{Show(idNumber)} | ชื่อ:{Show(firstName)} | สกุล:{Show(lastName)}" +
                $" | อาชีพ:{Show(occupation)}" +
                $" | เต็นท์:{Show(tentNumber)} | เหตุผล:{Show(reason)}" +
                $" | รูป:{Show(photo)} | โลโก้:{Show(logo)}" +

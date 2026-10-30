@@ -6,6 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Temple Document Data", menuName = "Game/Temple Document Data")]
 public class TempleDocumentData : ScriptableObject
 {
+    [Header("Document Type")]
+    [Tooltip("ประเภทเอกสาร: Villager = ชาวบ้าน (ค่าเริ่มต้น) / Monk = พระ → ใช้เลือก Prefab ใน DocumentPopupManager\n" +
+             "ช่องของพระใช้ slot เดิม: Last Name = ฉายา, Occupation = ตำแหน่ง")]
+    public TempleDocumentType documentType = TempleDocumentType.Villager;
+    
+    
     [Header("Paper")]
     [Tooltip("ไม่ติ๊ก / list ว่าง = ใช้กระดาษของ Template prefab | ติ๊ก+มีหลายรูป = สุ่ม 1 รูป")]
     public PaperVariantField paperBackground = new PaperVariantField();
@@ -38,7 +44,7 @@ public class TempleDocumentData : ScriptableObject
         for (int i = 0; i < 5; i++)
         {
             TempleDocumentRuntime doc = TempleDocumentGenerator.Generate(this, 1, true);
-            Debug.Log($"[{name}] สุ่มครั้งที่ {i + 1}: {doc}", this);
+            Debug.Log($"[{name}] ({documentType}) สุ่มครั้งที่ {i + 1}: {doc}", this);
         }
     }
 }
