@@ -132,6 +132,6 @@ public class NewspaperView : MonoBehaviour
         if (target == null)
             return;
 
-        target.text = value ?? string.Empty;
+        target.text = ThaiWordBreaker.Process(value);
     }
 }
