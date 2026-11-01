@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
     [Header("Phone")]
     public PhoneManager phoneManager;
     
-    
+    [Header("Special Event")]
+    public SpecialEventManager specialEventManager;
 
     public enum NPCState
     {
@@ -183,10 +184,30 @@ public class GameManager : MonoBehaviour
         currentState = NPCState.Inspecting;
         greenDialogTriggered = false;
 
+        // เพิ่มใหม่: ตรวจว่าเป็น NPC อีเวนต์พิเศษหรือไม่
+        SpecialEventNPC special = npc.GetComponent<SpecialEventNPC>();
+
+        if (special != null && special.IsSpecialEvent)
+        {
+            if (specialEventManager != null)
+            {
+                specialEventManager.StartSpecialEvent(
+                    npc,
+                    special.eventConfig
+                );
+                return;
+            }
+            else
+            {
+                Debug.LogError(
+                    "SpecialEventManager is not assigned in GameManager!"
+                );
+            }
+        }
+
         // ==========================================
         // เช็กเอกสารของ NPC เมื่อถึงจุดตรวจ
         // ==========================================
-
         currentNPCMissingDocument = false;
 
         NPC npcScript = npc.GetComponent<NPC>();
@@ -210,9 +231,11 @@ public class GameManager : MonoBehaviour
                     $"มีเอกสาร"
                 );
             }
+
             // สุ่มว่า NPC ที่มีเอกสารจริงจะลืมยื่นหรือไม่
             DecideForgotDocument(npcScript.applicant);
         }
+
         if (phoneManager != null &&
             npcScript != null &&
             npcScript.applicant != null &&
@@ -342,6 +365,23 @@ public class GameManager : MonoBehaviour
             return;
         }
         
+        SpecialEventNPC special =
+            currentNPC != null
+                ? currentNPC.GetComponent<SpecialEventNPC>()
+                : null;
+
+        if (special != null && special.IsSpecialEvent)
+        {
+            if (specialEventManager != null)
+            {
+                specialEventManager.OnSpecialDialogFinished(
+                    currentNPC,
+                    special.eventConfig
+                );
+            }
+
+            return;
+        }
         
          //   SpawnBag();
          SpawnDocument();
