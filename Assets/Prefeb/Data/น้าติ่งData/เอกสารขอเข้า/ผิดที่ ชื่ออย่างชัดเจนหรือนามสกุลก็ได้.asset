@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aeae08560d70df499011451b7cf17e0, type: 3}
   m_Name: "\u0E1C\u0E34\u0E14\u0E17\u0E35\u0E48 \u0E0A\u0E37\u0E48\u0E2D\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E0A\u0E31\u0E14\u0E40\u0E08\u0E19\u0E2B\u0E23\u0E37\u0E2D\u0E19\u0E32\u0E21\u0E2A\u0E01\u0E38\u0E25\u0E01\u0E47\u0E44\u0E14\u0E49"
   m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
+  documentType: 0
   paperBackground:
     useCustomPaper: 0
     variants: []
@@ -41,7 +42,7 @@ MonoBehaviour:
     - "\u0E1B\u0E23\u0E30\u0E08\u0E31\u0E01\u0E29\u0E4C "
     - "\u0E0A\u0E33\u0E19\u0E32\u0E0D"
   lastName:
-    normal: "\u0E2A\u0E32\u0E22\u0E19\u0E49\u0E33"
+    normal: "\u0E2A\u0E32\u0E22\u0E19\u0E4D\u0E49\u0E32"
     useFake: 1
     fakeValues:
     - "\u0E28\u0E23\u0E35\u0E17\u0E2D\u0E07\u0E41\u0E17\u0E49 "

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: "\u0E1C\u0E34\u0E14\u0E17\u0E35\u0E48  \u0E1C\u0E34\u0E14\u0E0A\u0E37\u0E48\u0E2D\u0E40\u0E25\u0E47\u0E01\u0E19\u0E49\u0E2D\u0E22
     \u0E2B\u0E23\u0E37\u0E2D\u0E19\u0E32\u0E21\u0E2A\u0E01\u0E38\u0E25\u0E01\u0E47\u0E44\u0E14\u0E49"
   m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
+  documentType: 0
   paperBackground:
     useCustomPaper: 0
     variants: []
@@ -42,7 +43,7 @@ MonoBehaviour:
     - "\u0E17\u0E27\u0E35\u0E1B"
     - "\u0E17\u0E27\u0E35\u0E28\u0E31\u0E01\u0E14\u0E34\u0E4C"
   lastName:
-    normal: "\u0E2A\u0E32\u0E22\u0E19\u0E49\u0E33  "
+    normal: "\u0E2A\u0E32\u0E22\u0E19\u0E4D\u0E49\u0E32"
     useFake: 1
     fakeValues:
     - "\u0E2A\u0E32\u0E22\u0E17\u0E2D\u0E07"

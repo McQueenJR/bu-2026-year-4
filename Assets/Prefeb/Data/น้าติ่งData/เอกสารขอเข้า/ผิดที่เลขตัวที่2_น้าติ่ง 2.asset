@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: "\u0E1C\u0E34\u0E14\u0E17\u0E35\u0E48\u0E40\u0E25\u0E02\u0E15\u0E31\u0E27\u0E17\u0E35\u0E482_\u0E19\u0E49\u0E32\u0E15\u0E34\u0E48\u0E07
     2"
   m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
+  documentType: 0
   paperBackground:
     useCustomPaper: 0
     variants: []
@@ -33,7 +34,7 @@ MonoBehaviour:
     - {fileID: -1118316910032322874, guid: c50558f879fe97d43a337142e02eb166, type: 3}
   idDigits:
     original: 82272
-    randomize: 0001000000
+    randomize: 0000000000
   firstName:
     normal: "\u0E15\u0E34\u0E48\u0E07"
     useFake: 0
@@ -42,7 +43,7 @@ MonoBehaviour:
     - "\u0E1B\u0E23\u0E30\u0E08\u0E31\u0E01\u0E29\u0E4C "
     - "\u0E0A\u0E33\u0E19\u0E32\u0E0D"
   lastName:
-    normal: "\u0E2A\u0E32\u0E22\u0E19\u0E49\u0E33"
+    normal: "\u0E2A\u0E32\u0E22\u0E19\u0E4D\u0E49\u0E32"
     useFake: 0
     fakeValues:
     - "\u0E28\u0E23\u0E35\u0E17\u0E2D\u0E07\u0E41\u0E17\u0E49 "

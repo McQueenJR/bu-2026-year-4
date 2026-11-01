@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aeae08560d70df499011451b7cf17e0, type: 3}
+  m_Name: "\u0E1C\u0E34\u0E14\u0E17\u0E35\u0E48\u0E25\u0E32\u0E22\u0E40\u0E0B\u0E47\u0E19"
+  m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
+  documentType: 1
+  paperBackground:
+    useCustomPaper: 1
+    variants:
+    - {fileID: 21300000, guid: 7933b90c69598c84393b21d8a53a3c89, type: 3}
+  logo:
+    normal: {fileID: 7332877267196587869, guid: 5550b8550169ac64883e034fc7a11759, type: 3}
+    useFake: 0
+    fakeValues:
+    - {fileID: 6017210087554621937, guid: 152962ed8b776454d80bf9d98b4e2750, type: 3}
+    - {fileID: -4696693758605869302, guid: 6dbfe99e95a4c134288155076e6744d4, type: 3}
+    - {fileID: -2510128510459142791, guid: 3ddeeb9cda88e7741bf0f7e1c0c91656, type: 3}
+  photo:
+    normal: {fileID: -8249845090624731353, guid: db4176144a3b0cb4b828f82a7304b05e, type: 3}
+    useFake: 0
+    fakeValues:
+    - {fileID: -2789803726070256786, guid: 8579c6e16a8c1394aa84a633094e57c1, type: 3}
+    - {fileID: 35167083320122691, guid: 221169fcd90a9dd49b0b06290906625b, type: 3}
+    - {fileID: -887465950266007429, guid: 73e362a7b4de6d247b594bb0e1be3ce9, type: 3}
+  idDigits:
+    original: 71095
+    randomize: 0000000000
+  firstName:
+    normal: "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32\u0E1E\u0E23\u0E2B\u0E21"
+    useFake: 0
+    fakeValues:
+    - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32\u0E1E\u0E38\u0E17\u0E18"
+    - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32\u0E42\u0E1E\u0E18\u0E34\u0E4C"
+    - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32\u0E1E\u0E23\u0E0A\u0E31\u0E22"
+  lastName:
+    normal: "\u0E27\u0E23\u0E27\u0E31\u0E07\u0E42\u0E2A"
+    useFake: 0
+    fakeValues:
+    - "\u0E27\u0E23\u0E18\u0E31\u0E21\u0E42\u0E21"
+    - "\u0E2A\u0E34\u0E23\u0E34\u0E27\u0E31\u0E07\u0E42\u0E2A"
+    - "\u0E18\u0E31\u0E21\u0E21\u0E27\u0E31\u0E07\u0E42\u0E2A"
+  occupation:
+    normal: "\u0E1E\u0E23\u0E30\u0E1C\u0E39\u0E49\u0E43\u0E2B\u0E0D\u0E48"
+    useFake: 0
+    fakeValues:
+    - "\u0E1E\u0E23\u0E30\u0E40\u0E16\u0E23\u0E30"
+    - "\u0E1E\u0E23\u0E30\u0E17\u0E35\u0E48\u0E1B\u0E23\u0E36\u0E01\u0E29\u0E32"
+    - "\u0E1E\u0E23\u0E30\u0E1E\u0E35\u0E48\u0E40\u0E25\u0E35\u0E49\u0E22\u0E07"
+  tentNumber:
+    normal: A5-01
+    useFake: 0
+    fakeValues:
+    - A5-03
+    - 'A4-02 '
+    - A3-01
+  reason:
+    normal: "\u0E40\u0E1B\u0E47\u0E19\u0E1E\u0E23\u0E30\u0E1C\u0E39\u0E49\u0E43\u0E2B\u0E0D\u0E48\u0E1B\u0E23\u0E30\u0E08\u0E33\u0E27\u0E31\u0E14
+      \u0E2D\u0E32\u0E28\u0E31\u0E22\u0E2D\u0E22\u0E39\u0E48\u0E01\u0E38\u0E0F\u0E34
+      A5 \u0E40\u0E15\u0E47\u0E19\u0E17\u0E4C 01"
+    normal2: ' '
+    useFake: 0
+    fakeValues:
+    - fake1
+    - fake2
+    - fake3
+  signature:
+    normal: {fileID: 6849745177046654033, guid: 41183ac00e21b3c4abcf64ceb5c8d75d, type: 3}
+    useFake: 1
+    fakeValues:
+    - {fileID: 1641539370542077800, guid: b6aff11ce647b1542a31d640bee2c04d, type: 3}
+    - {fileID: -1625968434930672485, guid: dab7c20fc235e55418d263324e6d6fca, type: 3}
