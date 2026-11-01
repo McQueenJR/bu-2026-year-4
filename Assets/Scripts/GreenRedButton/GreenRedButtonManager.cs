@@ -90,6 +90,7 @@ public class GreenRedButtonManager : MonoBehaviour
     {
         if (decisionButtonsPanel != null)
             decisionButtonsPanel.SetActive(true);
+        InteractionLock.SetDecisionPhase(true);
         
         if (showButtonsSound != null)
             showButtonsSound.Play();
@@ -99,5 +100,6 @@ public class GreenRedButtonManager : MonoBehaviour
     {
         if (decisionButtonsPanel != null)
             decisionButtonsPanel.SetActive(false);
+        InteractionLock.SetDecisionPhase(false);
     }
 }

@@ -8,6 +8,10 @@ public class WorldButton : MonoBehaviour
     public float hoverScale = 1.05f;
     public float pressScale = 0.95f;
 
+    [Header("Interaction Lock")]
+    [Tooltip("ติ๊กเฉพาะ Emergency / Green / Red")]
+    public bool allowDuringDecision = false;
+    
     [Header("Event")]
     public UnityEvent onClick;
 
@@ -20,7 +24,7 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (InteractionLock.IsLocked)
+        if (InteractionLock.IsBlockedFor(allowDuringDecision))
             return;
 
         if (EventSystem.current.IsPointerOverGameObject())
@@ -36,7 +40,7 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (InteractionLock.IsLocked)
+        if (InteractionLock.IsBlockedFor(allowDuringDecision))
             return;
 
         if (EventSystem.current.IsPointerOverGameObject())
@@ -48,7 +52,7 @@ public class WorldButton : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        if (InteractionLock.IsLocked)
+        if (InteractionLock.IsBlockedFor(allowDuringDecision))
             return;
 
         if (EventSystem.current.IsPointerOverGameObject()) 

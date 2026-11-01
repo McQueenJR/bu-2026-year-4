@@ -78,6 +78,9 @@ public class EmergencyManager : MonoBehaviour
 
             gameManager.emergencyMode = true;
             
+            if (GreenRedButtonManager.Instance != null)
+                GreenRedButtonManager.Instance.HideDecisionButtons();
+            
             if (NPCSoundManager.Instance != null)
                 NPCSoundManager.Instance.SetMuteWalk(true);
 

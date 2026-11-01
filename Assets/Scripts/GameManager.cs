@@ -184,6 +184,9 @@ public class GameManager : MonoBehaviour
         currentState = NPCState.Inspecting;
         greenDialogTriggered = false;
 
+        if (GreenRedButtonManager.Instance != null)
+                    GreenRedButtonManager.Instance.HideDecisionButtons();
+        
         // เพิ่มใหม่: ตรวจว่าเป็น NPC อีเวนต์พิเศษหรือไม่
         SpecialEventNPC special = npc.GetComponent<SpecialEventNPC>();
 

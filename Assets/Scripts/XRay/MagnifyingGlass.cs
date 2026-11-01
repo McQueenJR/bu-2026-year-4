@@ -198,6 +198,9 @@ public class MagnifyingGlass : MonoBehaviour
 
     private void PickUp()
     {
+        if (InteractionLock.IsBlockedFor(false))
+            return;
+        
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
             return;
         

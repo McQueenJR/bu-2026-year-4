@@ -55,6 +55,9 @@ public class Matchbox : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (InteractionLock.IsBlockedFor(false))
+            return;
+        
         if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding) 
             return;
         
