@@ -283,7 +283,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4167768981188455261}
   - component: {fileID: 7577209439520253880}
-  - component: {fileID: 7606896497038067107}
   m_Layer: 0
   m_Name: "BG\u0E2B\u0E31\u0E27"
   m_TagString: XRay_Inner
@@ -300,12 +299,12 @@ Transform:
   m_GameObject: {fileID: 5736285403286469497}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.36635, y: -3.20062, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8472422154746078979}
-  m_Father: {fileID: 11429107224522863}
+  m_Father: {fileID: 2420000113699780465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7577209439520253880
 SpriteRenderer:
@@ -366,22 +365,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &7606896497038067107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736285403286469497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
-  breathingAmount: 0.02
-  breathingSpeed: 1.9
-  breathingDelay: 0
-  smoothBreathing: 1
 --- !u!1 &6341364174313961472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,16 +1214,17 @@ PrefabInstance:
     - {fileID: 2216390078516856973, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     - {fileID: 7798849055733299065, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     - {fileID: 8064067235310940824, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+    - {fileID: 1828313175324932399, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7140584972879749969, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4167768981188455261}
     - targetCorrespondingSourceObject: {fileID: 4802385097006261327, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6497276670623261241}
     - targetCorrespondingSourceObject: {fileID: 4802385097006261327, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7454940797548813143}
+    - targetCorrespondingSourceObject: {fileID: 4802385097006261327, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4167768981188455261}
     - targetCorrespondingSourceObject: {fileID: 2230973119353925988, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8749898572673729884}
@@ -1255,11 +1239,6 @@ PrefabInstance:
       addedObject: {fileID: 1625418585381238989}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
---- !u!4 &11429107224522863 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7140584972879749969, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
-  m_PrefabInstance: {fileID: 7147474864319419198}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2420000113699780465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4802385097006261327, guid: a31f4397ff91e7249baf8b5672562337, type: 3}

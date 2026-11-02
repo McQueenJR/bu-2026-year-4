@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7061606346000722520}
   - component: {fileID: 1207136327432375367}
-  - component: {fileID: 513183200486346103}
   m_Layer: 0
   m_Name: "BG\u0E2B\u0E31\u0E27"
   m_TagString: XRay_Inner
@@ -93,22 +92,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &513183200486346103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101218533908658574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
-  breathingAmount: 0.01
-  breathingSpeed: 2
-  breathingDelay: 0
-  smoothBreathing: 1
 --- !u!1 &5271757412882568696
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +813,7 @@ PrefabInstance:
     - {fileID: 8902643187760806093, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     - {fileID: 7798849055733299065, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     - {fileID: 8064067235310940824, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
+    - {fileID: 1828313175324932399, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7140584972879749969, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
       insertIndex: -1

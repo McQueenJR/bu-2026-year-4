@@ -760,8 +760,7 @@ PrefabInstance:
       objectReference: {fileID: -3563179199658230996, guid: 4c8260387d033174db9350f2f6389e10, type: 3}
     - target: {fileID: 8379800548220292905, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       propertyPath: m_Name
-      value: "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32\u0E1E\u0E23\u0E2B\u0E21 \u0E27\u0E23\u0E27\u0E31\u0E07\u0E42\u0E2A
-        Variant"
+      value: "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32\u0E1E\u0E23\u0E2B\u0E21  1"
       objectReference: {fileID: 0}
     - target: {fileID: 8716468108165248662, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -812,6 +811,7 @@ PrefabInstance:
     - {fileID: 2591809233967546160, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
     - {fileID: 6271340524231507672, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
     - {fileID: 525513993570554569, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
+    - {fileID: 8213769093744859518, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 845030137432589056, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       insertIndex: -1

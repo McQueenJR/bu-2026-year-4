@@ -594,8 +594,8 @@ PrefabInstance:
       objectReference: {fileID: -3563179199658230996, guid: 845e11708ffb44648a56fb4b12816f11, type: 3}
     - target: {fileID: 8379800548220292905, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       propertyPath: m_Name
-      value: "\u0E2B\u0E25\u0E27\u0E07\u0E1E\u0E35\u0E48\u0E2A\u0E21\u0E1B\u0E2D\u0E07
-        \u0E2D\u0E20\u0E34\u0E1B\u0E38\u0E0D\u0E42\u0E0D Variant"
+      value: "\u0E2B\u0E25\u0E27\u0E07\u0E1E\u0E35\u0E48\u0E2A\u0E21\u0E1B\u0E2D\u0E07 
+        1"
       objectReference: {fileID: 0}
     - target: {fileID: 8716468108165248662, guid: c1afadbcf9b94f244976c37fc2cf411f, type: 3}
       propertyPath: m_LocalPosition.x

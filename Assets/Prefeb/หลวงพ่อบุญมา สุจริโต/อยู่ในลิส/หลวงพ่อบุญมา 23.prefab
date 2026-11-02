@@ -101,7 +101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6595572976475224878}
   - component: {fileID: 8803585145588856676}
-  - component: {fileID: 8276791038322537766}
   m_Layer: 0
   m_Name: "BG\u0E2B\u0E31\u0E27"
   m_TagString: XRay_Inner
@@ -184,22 +183,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &8276791038322537766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1923054483572810248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a088505d984ee5c44b4e411e3eb569ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCBreathing
-  breathingAmount: 0.02
-  breathingSpeed: 1.9
-  breathingDelay: 0
-  smoothBreathing: 1
 --- !u!1 &4022409280686703318
 GameObject:
   m_ObjectHideFlags: 0
