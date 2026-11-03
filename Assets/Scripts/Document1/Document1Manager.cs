@@ -45,6 +45,24 @@ public class Document1Manager : MonoBehaviour
     public AudioSource sfxOpenClose;
     public AudioSource sfxPageChange;
 
+    private void OnEnable()
+    {
+        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
+    }
+
+    private void OnDisable()
+    {
+        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
+    }
+
+    private void HandlePhoneOpened()
+    {
+        // ปิดเฉพาะตอนเอกสารเปิดอยู่จริง
+        // ไม่งั้น NotifyClosed() จะถูกเรียกโดยไม่มี NotifyOpened คู่กัน
+        if (documentRoot != null && documentRoot.activeSelf)
+            CloseDocument();
+    }
+    
     void Start()
     {
         BuildFlattenedList();
@@ -114,6 +132,10 @@ public class Document1Manager : MonoBehaviour
             return;
         
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+        
+        // ★ เพิ่ม: กันกดตอนโทรศัพท์เปิดอยู่
+        if (PhoneManager.IsPhoneOpen)
             return;
         
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ

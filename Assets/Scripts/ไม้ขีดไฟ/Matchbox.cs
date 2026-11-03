@@ -58,6 +58,9 @@ public class Matchbox : MonoBehaviour
         if (InteractionLock.IsBlockedFor(false))
             return;
         
+        if (PhoneManager.IsPhoneOpen)
+            return;
+        
         if (MagnifyingGlass.Instance != null && MagnifyingGlass.Instance.IsHolding) 
             return;
         

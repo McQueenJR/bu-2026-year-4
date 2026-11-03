@@ -35,6 +35,9 @@ public class EmergencyManager : MonoBehaviour
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
             return;
         
+        if (PhoneManager.IsPhoneOpen)
+            return;
+        
         // กันกดระหว่าง police sequence กำลังทำงานอยู่
         if (gameManager.isPoliceSequenceActive)
         {

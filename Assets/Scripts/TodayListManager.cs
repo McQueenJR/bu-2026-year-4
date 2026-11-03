@@ -28,7 +28,25 @@ public class TodayListManager : MonoBehaviour
         Instance = this;
         popup.SetActive(false);
     }
+    private void OnEnable()
+    {
+        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
+    }
 
+    private void OnDisable()
+    {
+        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
+    }
+
+    private void HandlePhoneOpened()
+    {
+        // ปิดเฉพาะตอน popup เปิดอยู่จริง
+        // เพราะ CloseTodayList() เล่นเสียงปิดทุกครั้งที่ถูกเรียก
+        // ถ้าไม่เช็ค จะมีเสียงปิดดังทั้งที่ไม่ได้เปิดอะไรอยู่
+        if (popup != null && popup.activeSelf)
+            CloseTodayList();
+    }
+    
     // เรียกจากระบบตอนเริ่มวัน — สร้างรูป/ชื่อ ไม่มีเงื่อนไขจำกัด
     public void GenerateTodayList(List<NPCData> todayNPCs)
 {
@@ -107,6 +125,9 @@ public class TodayListManager : MonoBehaviour
 
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
          return;
+        
+        if (PhoneManager.IsPhoneOpen)
+            return;
 
         if (GameManager.Instance != null)
         {

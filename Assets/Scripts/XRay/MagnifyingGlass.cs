@@ -204,6 +204,9 @@ public class MagnifyingGlass : MonoBehaviour
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
             return;
         
+        if (PhoneManager.IsPhoneOpen)
+            return;
+        
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
         if (GameManager.Instance != null)
         {

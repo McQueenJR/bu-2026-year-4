@@ -31,6 +31,15 @@ public class PhoneManager : MonoBehaviour
     
     
     public static PhoneManager Instance;
+    
+    // สถานะ: โทรศัพท์เปิดอยู่ไหม (อ่านจาก phonePanel ตรงๆ จึงไม่ต้องมีตัวแปรซ้ำที่ต้องคอยซิงก์)
+    public static bool IsPhoneOpen =>
+        Instance != null &&
+        Instance.phonePanel != null &&
+        Instance.phonePanel.activeSelf;
+
+// ประกาศว่า "โทรศัพท์เปิดแล้ว" ให้ตัวอื่นฟังแล้วปิดตัวเอง
+    public static event System.Action OnPhoneOpened;
 
 
     // ==================================================
@@ -89,6 +98,7 @@ public class PhoneManager : MonoBehaviour
 
         telaphone.SetActive(false);
         phonePanel.SetActive(true);
+        OnPhoneOpened?.Invoke();   // ★ เพิ่ม
     }
 
 

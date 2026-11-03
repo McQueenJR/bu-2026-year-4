@@ -23,6 +23,29 @@ public class DocumentPopupManager : MonoBehaviour
         Instance = this;
         popup.SetActive(false);
     }
+    
+    private void OnEnable()
+    {
+        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
+    }
+
+    private void OnDisable()
+    {
+        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
+    }
+
+    private void HandlePhoneOpened()
+    {
+        // ปิดเฉพาะตอน popup เปิดอยู่จริง (กันเสียงปิดดังโดยไม่มีอะไรเปิด)
+        if (popup == null || !popup.activeSelf)
+            return;
+
+        // เสียงปิดเอกสาร เหมือนตอนผู้เล่นคลิกขวาปิดเอง (ไม่อยากได้เสียงก็ลบ 2 บรรทัดนี้)
+        if (NPCSoundManager.Instance != null)
+            NPCSoundManager.Instance.PlayDocumentClose();
+
+        Close();
+    }
 
     // =========================================================
     // ระบบใหม่: เปิดเอกสารจากข้อมูลที่สุ่มไว้แล้วของ applicant
@@ -101,6 +124,9 @@ public class DocumentPopupManager : MonoBehaviour
             return false;
 
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return false;
+        
+        if (PhoneManager.IsPhoneOpen)
             return false;
 
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ

@@ -60,7 +60,23 @@ public class ChecklistManager : MonoBehaviour
     {
         Instance = this;
     }
+    private void OnEnable()
+    {
+        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
+    }
 
+    private void OnDisable()
+    {
+        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
+    }
+
+    private void HandlePhoneOpened()
+    {
+        // ปิดเฉพาะตอนที่ Checklist เปิดอยู่จริง
+        // ไม่งั้น DraggableSortOrder.NotifyClosed() จะถูกเรียกทั้งที่ไม่เคย NotifyOpened
+        if (checklistPanel != null && checklistPanel.activeSelf)
+            CloseChecklist();
+    }
     private void Start()
     {
         if (checklistPanel != null)
@@ -199,6 +215,10 @@ public class ChecklistManager : MonoBehaviour
             return;
         
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+        
+        // กันกดตอนโทรศัพท์เปิดอยู่
+        if (PhoneManager.IsPhoneOpen)
             return;
         
         if (GameManager.Instance.isPoliceSequenceActive)
