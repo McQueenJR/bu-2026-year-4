@@ -38,6 +38,18 @@ public class SpawnManager : MonoBehaviour
     [Header("Daily Spawn Settings")]
     public bool useDailySpawnSettings = false;
     public List<DailySpawnSetting> dailySpawnSettings = new();
+
+    [System.Serializable]
+    public class SpecialGhostPrefabChance
+    {
+        [Tooltip("ต้องตรงกับ Prefab ใน SpecialEventManager ของ Event นี้")]
+        public GameObject prefab;
+        [Tooltip("โอกาสเกิดในแต่ละวัน 1-7 (%)")]
+        [Range(0f, 100f)] public float spawnChance = 10f;
+    }
+
+    [Header("Special Ghost Events (Days 1-7)")]
+    public List<SpecialGhostPrefabChance> specialGhostPrefabs = new();
     
     
     [Header("Today List + Ghost Settings")]
@@ -57,8 +69,7 @@ public class SpawnManager : MonoBehaviour
     private int currentApplicantIndex = 0;
     private readonly Dictionary<TodayApplicant, SpecialEventManager.SpecialEventConfig> dailySpecialEventApplicants = new();
     
-    [Header("Special Event")]
-    public SpecialEventManager specialEventManager;
+   
    
     // =========================================================
     // เริ่มวันใหม่
@@ -84,14 +95,9 @@ public void GenerateTodayApplicants()
     }
 
     dailySpecialEventApplicants.Clear();
-    if (specialEventManager != null)
-    {
-        gameManager.specialEventManager = specialEventManager;
-        specialEventManager.ResetDailyCounts();
-    }
+    
 
-    SpecialEventManager.SpecialEventConfig dailySpecialEvent =
-        RollDailySpecialEvent();
+    
 
     DailySpawnSetting setting = GetDailySpawnSetting();
 
@@ -113,12 +119,7 @@ public void GenerateTodayApplicants()
 
     Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC = new();
 
-    if (GetAllAvailableNPCs().Count == 0 && dailySpecialEvent == null)
-    {
-        Debug.LogError("SpawnManager: ไม่มี NPC ที่พร้อมใช้งาน");
-        gameManager.npcPerDay = 0;
-        return;
-    }
+    
 
     int slotCount = todayListManager != null && todayListManager.slots != null
         ? todayListManager.slots.Length : 0;
@@ -148,31 +149,8 @@ public void GenerateTodayApplicants()
     }
 
     // ถ้าสุ่ม Event ติด ให้เพิ่ม Prefab พิเศษเป็นผู้มาตรวจของวันนี้
-    if (dailySpecialEvent != null && dailySpecialEvent.npcPrefab != null)
-    {
-        NPC eventNPC = dailySpecialEvent.npcPrefab.GetComponent<NPC>();
-        if (eventNPC != null && eventNPC.data != null)
-        {
-            TodayApplicant eventApplicant = new TodayApplicant
-            {
-                npcData = FindDataPrefabForEventPrefab(dailySpecialEvent.npcPrefab),
-                displayData = eventNPC.data,
-                spawnPrefab = dailySpecialEvent.npcPrefab,
-                isGood = false,
-                isInTodayList = false,
-                isGhost = false,
-                hasEnteredToday = false
-            };
-
-            todayApplicants.Add(eventApplicant);
-            dailySpecialEventApplicants[eventApplicant] = dailySpecialEvent;
-            Debug.Log($"[SpecialEvent] สุ่มติดวัน {gameManager.currentDay}: {dailySpecialEvent.eventName}");
-        }
-        else
-        {
-            Debug.LogError($"[SpecialEvent] Prefab ของ {dailySpecialEvent.eventName} ต้องมี NPC และ NPCData");
-        }
-    }
+    
+    
 
     gameManager.npcPerDay = todayApplicants.Count;
 
@@ -230,34 +208,7 @@ public void GenerateTodayApplicants()
         CampManager.Instance.PrintAllCamps();
     }
 }
-private SpecialEventManager.SpecialEventConfig RollDailySpecialEvent()
-{
-    // สุ่มเฉพาะ 7 วันแรก โดยใช้ spawnChance (%) ของ SpecialEventConfig
-    if (specialEventManager == null || gameManager == null ||
-        gameManager.currentDay < 1 || gameManager.currentDay > 7)
-        return null;
 
-    List<SpecialEventManager.SpecialEventConfig> events =
-        specialEventManager.GetEnabledEvents()
-            .Where(e => e.npcPrefab != null && e.maxCount > 0 && e.spawnChance > 0f)
-            .OrderBy(_ => Random.value)
-            .ToList();
-
-    foreach (SpecialEventManager.SpecialEventConfig eventConfig in events)
-    {
-        NPC npc = eventConfig.npcPrefab.GetComponent<NPC>();
-        if (npc == null || npc.data == null)
-        {
-            Debug.LogError($"[SpecialEvent] {eventConfig.eventName} Prefab ต้องมี NPC และ NPCData");
-            continue;
-        }
-
-        if (specialEventManager.RollSpawnChance(eventConfig))
-            return eventConfig;
-    }
-
-    return null;
-}
 
 private DataPrefabNPC FindDataPrefabForEventPrefab(GameObject prefab)
 {
@@ -473,14 +424,13 @@ private TodayApplicant CreateGhostApplicant(
     // =========================================================
     private bool IsSpecialEventPrefab(GameObject prefab)
 {
-    return prefab != null && specialEventManager != null &&
-        specialEventManager.GetEnabledEvents().Any(e => e.npcPrefab == prefab);
+    return prefab != null && specialGhostPrefabs != null &&
+        specialGhostPrefabs.Any(item => item != null && item.prefab == prefab);
 }
 
 private bool IsDedicatedSpecialEventNPC(DataPrefabNPC dpn)
 {
-    if (dpn == null || specialEventManager == null)
-        return false;
+    
 
     NPCSpawnGroup[] groups =
     {
@@ -1007,18 +957,7 @@ private List<DataPrefabNPC> GetAllAvailableNPCs()
         
         
     );
-
-    if (specialEventManager != null)
-    {
-        if (isScheduledSpecialEvent)
-        {
-            SpecialEventNPC marker = npc.GetComponent<SpecialEventNPC>();
-            if (marker == null)
-                marker = npc.AddComponent<SpecialEventNPC>();
-            marker.eventConfig = scheduledEventConfig;
-        }
-        // Event ที่ตั้งค่าไว้จะถูกกำหนดจากการสุ่มตอนเริ่มวันเท่านั้น
-    }
+    
 
     NPC npcScript = npc.GetComponent<NPC>();
 
