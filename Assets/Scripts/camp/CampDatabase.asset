@@ -26,6 +26,19 @@ MonoBehaviour:
       documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
+  - roomCode: A1-02
+    phoneNumber: 7679
+    residents:
+    - npcData: {fileID: 11400000, guid: 1d1aaec74c1ff2b40935dcf3ee0b49d8, type: 2}
+      hasDocument: 1
+      documentHolder: {fileID: 0}
+      isAlive: 0
+      isHomeToday: 0
+    - npcData: {fileID: 11400000, guid: 36a4eb84f9bd971449efb41d24b1e4b9, type: 2}
+      hasDocument: 1
+      documentHolder: {fileID: 0}
+      isAlive: 0
+      isHomeToday: 0
   - roomCode: A1-03
     phoneNumber: 4344
     residents:
@@ -104,31 +117,29 @@ MonoBehaviour:
       documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
-  - roomCode: "\u0E2B\u0E49\u0E2D\u0E07\u0E1E\u0E23\u0E30"
-    phoneNumber: 0
+  - roomCode: "\u0E01\u0E38\u0E0E\u0E341"
+    phoneNumber: 0001
     residents:
     - npcData: {fileID: 11400000, guid: 176e00c83f7707f47ba84fdce70703ea, type: 2}
       hasDocument: 1
       documentHolder: {fileID: 0}
-      isAlive: 1
-      isHomeToday: 0
-    - npcData: {fileID: 11400000, guid: 2b5b939794e8e6b498fb4ac79eb2bab2, type: 2}
-      hasDocument: 1
-      documentHolder: {fileID: 0}
-      isAlive: 1
+      isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 0c30ee7f11023b4478d0c53f8205691a, type: 2}
       hasDocument: 1
       documentHolder: {fileID: 0}
-      isAlive: 1
+      isAlive: 0
+      isHomeToday: 0
+  - roomCode: "\u0E01\u0E38\u0E0E\u0E342"
+    phoneNumber: 0002
+    residents:
+    - npcData: {fileID: 11400000, guid: 2b5b939794e8e6b498fb4ac79eb2bab2, type: 2}
+      hasDocument: 1
+      documentHolder: {fileID: 0}
+      isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: dc9f6ac6c1774504a8db78bc4ed97c85, type: 2}
       hasDocument: 1
       documentHolder: {fileID: 0}
-      isAlive: 1
-      isHomeToday: 0
-    - npcData: {fileID: 11400000, guid: c5ac984adcd42bc4383ca9b1f420f365, type: 2}
-      hasDocument: 1
-      documentHolder: {fileID: 0}
-      isAlive: 1
+      isAlive: 0
       isHomeToday: 0
