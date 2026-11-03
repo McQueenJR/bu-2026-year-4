@@ -17,7 +17,7 @@ MonoBehaviour:
     isGhost: 0
     prefabs:
     - prefab: {fileID: 2083295734745886584, guid: a31f4397ff91e7249baf8b5672562337, type: 3}
-      chance: 19
+      chance: 100
   todayBad:
     chance: 37
     isGhost: 1
