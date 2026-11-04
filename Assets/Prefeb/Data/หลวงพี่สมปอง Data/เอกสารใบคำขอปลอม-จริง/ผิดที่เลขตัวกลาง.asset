@@ -16,7 +16,7 @@ MonoBehaviour:
   paperBackground:
     useCustomPaper: 1
     variants:
-    - {fileID: 21300000, guid: 7933b90c69598c84393b21d8a53a3c89, type: 3}
+    - {fileID: -3936007019482362991, guid: 7147dbf192079fd45815187d6cfd1307, type: 3}
   logo:
     normal: {fileID: 7332877267196587869, guid: 5550b8550169ac64883e034fc7a11759, type: 3}
     useFake: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     - {fileID: -887465950266007429, guid: 73e362a7b4de6d247b594bb0e1be3ce9, type: 3}
   idDigits:
     original: 77747
-    randomize: 0000010000
+    randomize: 0000000000
   firstName:
     normal: "\u0E2B\u0E25\u0E27\u0E07\u0E1E\u0E35\u0E48\u0E2A\u0E21\u0E1B\u0E2D\u0E07"
     useFake: 0

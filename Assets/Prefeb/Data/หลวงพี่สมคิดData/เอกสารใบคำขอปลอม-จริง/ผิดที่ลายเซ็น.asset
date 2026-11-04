@@ -16,7 +16,7 @@ MonoBehaviour:
   paperBackground:
     useCustomPaper: 1
     variants:
-    - {fileID: 21300000, guid: 7933b90c69598c84393b21d8a53a3c89, type: 3}
+    - {fileID: -3936007019482362991, guid: 7147dbf192079fd45815187d6cfd1307, type: 3}
   logo:
     normal: {fileID: 7332877267196587869, guid: 5550b8550169ac64883e034fc7a11759, type: 3}
     useFake: 0
