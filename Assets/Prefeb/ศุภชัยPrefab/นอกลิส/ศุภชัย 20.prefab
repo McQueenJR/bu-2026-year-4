@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12dee38520f09846906fd272d3f0fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomBlendModes.SpriteBlendingMode
-  blendMode: 2
+  blendMode: 0
 --- !u!1 &7194265209810594126
 GameObject:
   m_ObjectHideFlags: 0

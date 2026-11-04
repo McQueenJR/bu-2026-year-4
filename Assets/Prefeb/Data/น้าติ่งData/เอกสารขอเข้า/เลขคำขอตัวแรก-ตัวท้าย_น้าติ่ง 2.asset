@@ -26,7 +26,7 @@ MonoBehaviour:
     - {fileID: -2510128510459142791, guid: 3ddeeb9cda88e7741bf0f7e1c0c91656, type: 3}
     - {fileID: -7070581221644151450, guid: 01b3fe68cdcd375418b3e5cb4a68e97a, type: 3}
   photo:
-    normal: {fileID: 369157847330924672, guid: 58fcfb7cf51e0bd4dbed83b8b1bc384a, type: 3}
+    normal: {fileID: 796425728880128339, guid: dee9c2011e51c2c4f9cf95e3fe012f9c, type: 3}
     useFake: 0
     fakeValues:
     - {fileID: 8524070025652140477, guid: 96b8d7bc70422b9428516dece8b83b33, type: 3}
