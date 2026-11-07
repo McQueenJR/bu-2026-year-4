@@ -787,9 +787,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewspaperView
   paperRenderer: {fileID: 6570412163622641700}
   dateText: {fileID: 5731403220198779224}
-  newsText: {fileID: 3694992077818597568}
-  missingText: {fileID: 728568036596744957}
-  reportText: {fileID: 124047780660055305}
+  newsText: {fileID: 7778031949830480654}
+  missingText: {fileID: 8737564958649102219}
+  reportText: {fileID: 139357478325358201}
   newsImage:
     target: {fileID: 0}
     maxSize: {x: 4, y: 2}

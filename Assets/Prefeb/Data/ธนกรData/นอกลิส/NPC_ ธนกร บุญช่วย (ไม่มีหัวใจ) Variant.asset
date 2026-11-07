@@ -53,6 +53,7 @@ MonoBehaviour:
     ghostTarget: {fileID: 0}
     templeDocument:
       generatedDay: 0
+      documentType: 0
       paper: {fileID: 0}
       logo:
         value: {fileID: 0}
