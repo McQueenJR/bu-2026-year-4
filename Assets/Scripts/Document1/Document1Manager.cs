@@ -45,20 +45,11 @@ public class Document1Manager : MonoBehaviour
     public AudioSource sfxOpenClose;
     public AudioSource sfxPageChange;
 
-    private void OnEnable()
-    {
-        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
-    }
+    private void OnEnable()  { DisplayEvents.OnCloseAll += HandleCloseAll; }
+    private void OnDisable() { DisplayEvents.OnCloseAll -= HandleCloseAll; }
 
-    private void OnDisable()
+    private void HandleCloseAll()
     {
-        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
-    }
-
-    private void HandlePhoneOpened()
-    {
-        // ปิดเฉพาะตอนเอกสารเปิดอยู่จริง
-        // ไม่งั้น NotifyClosed() จะถูกเรียกโดยไม่มี NotifyOpened คู่กัน
         if (documentRoot != null && documentRoot.activeSelf)
             CloseDocument();
     }

@@ -24,23 +24,14 @@ public class DocumentPopupManager : MonoBehaviour
         popup.SetActive(false);
     }
     
-    private void OnEnable()
-    {
-        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
-    }
+    private void OnEnable()  { DisplayEvents.OnCloseAll += HandleCloseAll; }
+    private void OnDisable() { DisplayEvents.OnCloseAll -= HandleCloseAll; }
 
-    private void OnDisable()
+    private void HandleCloseAll()
     {
-        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
-    }
-
-    private void HandlePhoneOpened()
-    {
-        // ปิดเฉพาะตอน popup เปิดอยู่จริง (กันเสียงปิดดังโดยไม่มีอะไรเปิด)
         if (popup == null || !popup.activeSelf)
             return;
 
-        // เสียงปิดเอกสาร เหมือนตอนผู้เล่นคลิกขวาปิดเอง (ไม่อยากได้เสียงก็ลบ 2 บรรทัดนี้)
         if (NPCSoundManager.Instance != null)
             NPCSoundManager.Instance.PlayDocumentClose();
 

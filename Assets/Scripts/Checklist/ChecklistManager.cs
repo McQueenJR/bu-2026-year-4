@@ -60,23 +60,15 @@ public class ChecklistManager : MonoBehaviour
     {
         Instance = this;
     }
-    private void OnEnable()
-    {
-        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
-    }
+    private void OnEnable()  { DisplayEvents.OnCloseAll += HandleCloseAll; }
+    private void OnDisable() { DisplayEvents.OnCloseAll -= HandleCloseAll; }
 
-    private void OnDisable()
+    private void HandleCloseAll()
     {
-        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
-    }
-
-    private void HandlePhoneOpened()
-    {
-        // ปิดเฉพาะตอนที่ Checklist เปิดอยู่จริง
-        // ไม่งั้น DraggableSortOrder.NotifyClosed() จะถูกเรียกทั้งที่ไม่เคย NotifyOpened
         if (checklistPanel != null && checklistPanel.activeSelf)
             CloseChecklist();
     }
+    
     private void Start()
     {
         if (checklistPanel != null)

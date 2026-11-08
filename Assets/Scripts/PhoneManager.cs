@@ -37,9 +37,7 @@ public class PhoneManager : MonoBehaviour
         Instance != null &&
         Instance.phonePanel != null &&
         Instance.phonePanel.activeSelf;
-
-// ประกาศว่า "โทรศัพท์เปิดแล้ว" ให้ตัวอื่นฟังแล้วปิดตัวเอง
-    public static event System.Action OnPhoneOpened;
+    
 
 
     // ==================================================
@@ -98,7 +96,7 @@ public class PhoneManager : MonoBehaviour
 
         telaphone.SetActive(false);
         phonePanel.SetActive(true);
-        OnPhoneOpened?.Invoke();   // ★ เพิ่ม
+        DisplayEvents.CloseAll();
     }
 
 

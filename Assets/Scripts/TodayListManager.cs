@@ -28,21 +28,11 @@ public class TodayListManager : MonoBehaviour
         Instance = this;
         popup.SetActive(false);
     }
-    private void OnEnable()
-    {
-        PhoneManager.OnPhoneOpened += HandlePhoneOpened;
-    }
+    private void OnEnable()  { DisplayEvents.OnCloseAll += HandleCloseAll; }
+    private void OnDisable() { DisplayEvents.OnCloseAll -= HandleCloseAll; }
 
-    private void OnDisable()
+    private void HandleCloseAll()
     {
-        PhoneManager.OnPhoneOpened -= HandlePhoneOpened;
-    }
-
-    private void HandlePhoneOpened()
-    {
-        // ปิดเฉพาะตอน popup เปิดอยู่จริง
-        // เพราะ CloseTodayList() เล่นเสียงปิดทุกครั้งที่ถูกเรียก
-        // ถ้าไม่เช็ค จะมีเสียงปิดดังทั้งที่ไม่ได้เปิดอะไรอยู่
         if (popup != null && popup.activeSelf)
             CloseTodayList();
     }
