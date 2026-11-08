@@ -13,7 +13,12 @@ public class XRaySystem : MonoBehaviour
     // 2 = ทะลุทั้งร่าง
     private int currentLevel = 0;
 
+    [Header("Scroll")]
+    [Tooltip("เวลาพักระหว่างการเลื่อนแต่ละครั้ง (กันทัชแพดเลื่อนทีเดียวข้ามหลายระดับ)")]
+    [SerializeField] private float scrollCooldown = 0.12f;
 
+    private float nextScrollTime = 0f;
+    
     private void Update()
     {
         if (magnifyingGlass == null)
@@ -23,35 +28,23 @@ public class XRaySystem : MonoBehaviour
         if (!magnifyingGlass.IsHolding)
             return;
 
+        // เลื่อนล้อเมาส์: ขึ้น = ระดับสูงขึ้น / ลง = ระดับต่ำลง
+        float scroll = Input.mouseScrollDelta.y;
 
-        // ==========================================
-        // กด 1 = ปกติ
-        // ==========================================
+        if (Mathf.Abs(scroll) < 0.01f)
+            return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetLevel(0);
-        }
+        if (Time.unscaledTime < nextScrollTime)
+            return;
 
+        // หยุดที่ขอบ: เลื่อนเกิน 0-2 แล้วไม่เปลี่ยนอะไร
+        int newLevel = Mathf.Clamp(currentLevel + (scroll > 0f ? 1 : -1), 0, 2);
 
-        // ==========================================
-        // กด 2 = ทะลุเสื้อผ้า
-        // ==========================================
+        if (newLevel == currentLevel)
+            return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetLevel(1);
-        }
-
-
-        // ==========================================
-        // กด 3 = ทะลุทั้งร่าง
-        // ==========================================
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetLevel(2);
-        }
+        nextScrollTime = Time.unscaledTime + scrollCooldown;
+        SetLevel(newLevel);
     }
 
 
