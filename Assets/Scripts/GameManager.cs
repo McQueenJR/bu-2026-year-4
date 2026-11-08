@@ -1,4 +1,7 @@
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEngine.InputSystem;
+#endif
 using System.Collections;
 using System.Collections.Generic;
 
@@ -112,6 +115,12 @@ public class GameManager : MonoBehaviour
     [Header("End Day UI")]
     public EndDayUI endDayUI;
 
+#if UNITY_EDITOR
+    [Header("Developer Tools (Editor Only)")]
+    [SerializeField] private bool enableDeveloperHotkeys = true;
+    private bool devSkipDayTriggered = false;
+#endif
+
 
     void Awake()
     {
@@ -143,6 +152,170 @@ public class GameManager : MonoBehaviour
         spawner.GenerateTodayApplicants();
         BeginNPCFlowOfTheDay();
     }
+
+#if UNITY_EDITOR
+    // =====================================================
+    // DEVELOPER HOTKEYS (Unity Editor only)
+    // F1 = NPC truth/debug log
+    // F2 = Force Approve (ข้ามบทพูด/คัตซีน)
+    // F3 = Force Reject (ข้ามบทพูด/คัตซีน)
+    // F4 = Force End Day (ข้าม NPC ที่เหลือ)
+    // =====================================================
+    private void Update()
+    {
+        if (!enableDeveloperHotkeys || Keyboard.current == null)
+            return;
+
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
+            DevLogCurrentNPC();
+
+        if (Keyboard.current.f2Key.wasPressedThisFrame)
+            DevForceApprove();
+
+        if (Keyboard.current.f3Key.wasPressedThisFrame)
+            DevForceReject();
+
+        if (Keyboard.current.f4Key.wasPressedThisFrame)
+            DevSkipDay();
+    }
+
+    private bool DevCanDecide()
+    {
+        if (currentNPC == null)
+        {
+            Debug.LogWarning("[DEV] ไม่มี NPC ปัจจุบัน");
+            return false;
+        }
+
+        if (currentState != NPCState.Inspecting)
+        {
+            Debug.LogWarning($"[DEV] ยังตัดสินใจไม่ได้ State ปัจจุบัน: {currentState}");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void DevLogCurrentNPC()
+    {
+        if (currentNPC == null)
+        {
+            Debug.LogWarning("[DEV F1] ไม่มี NPC ปัจจุบัน");
+            return;
+        }
+
+        NPC npc = currentNPC.GetComponent<NPC>();
+        if (npc == null || npc.data == null)
+        {
+            Debug.LogWarning("[DEV F1] NPC ไม่มี Component NPC หรือ NPCData");
+            return;
+        }
+
+        bool isGhost = npc.applicant != null && npc.applicant.isGhost;
+        string shownName = npc.data.npcName;
+        if (isGhost && npc.applicant.ghostTarget != null)
+            shownName = npc.applicant.ghostTarget.npcName;
+        else if (npc.applicant != null && npc.applicant.displayData != null)
+            shownName = npc.applicant.displayData.npcName;
+
+        bool[] answers = npc.data.correctAnswers;
+        string[] labels =
+        {
+            "Appearance",
+            "Magnifying Glass",
+            "Matchbox",
+            "Entry Document",
+            "Today List"
+        };
+
+        System.Text.StringBuilder log = new System.Text.StringBuilder();
+        log.AppendLine("========== NPC DEBUG (F1) ==========");
+        log.AppendLine($"NPC: {shownName}");
+        log.AppendLine($"Prefab/Object: {currentNPC.name}");
+        log.AppendLine($"Type: {(isGhost ? "GHOST" : "PERSON")}");
+        log.AppendLine($"Ghost Target: {(npc.applicant != null && npc.applicant.ghostTarget != null ? npc.applicant.ghostTarget.npcName : "None")}");
+        log.AppendLine("[CHECKLIST TRUTH]");
+
+        for (int i = 0; i < labels.Length; i++)
+        {
+            if (answers == null || i >= answers.Length)
+            {
+                log.AppendLine($"{labels[i]}: UNKNOWN (ไม่มี correctAnswers[{i}])");
+                continue;
+            }
+
+            bool abnormal = answers[i];
+
+            // ใช้เงื่อนไขเดียวกับ ChecklistManager.SubmitChecklist()
+            if (i == 3 && npc.applicant != null && !npc.applicant.hasTempleDocument)
+                abnormal = true;
+
+            log.AppendLine($"{labels[i]}: {(abnormal ? "ABNORMAL" : "NORMAL")}");
+        }
+
+        log.AppendLine($"SUMMARY: {(isGhost ? "GHOST" : "PERSON")}");
+        log.AppendLine("====================================");
+        Debug.Log(log.ToString(), currentNPC);
+    }
+
+    private void DevForceApprove()
+    {
+        if (!DevCanDecide())
+            return;
+
+        Debug.Log("[DEV F2] Force Approve → เรียก ReleaseCurrentNPC() โดยตรง");
+        ReleaseCurrentNPC();
+    }
+
+    private void DevForceReject()
+    {
+        if (!DevCanDecide())
+            return;
+
+        Debug.Log("[DEV F3] Force Reject → เรียก RejectCurrentNPC() โดยตรง");
+        RejectCurrentNPC();
+    }
+
+    private void DevSkipDay()
+    {
+        if (devSkipDayTriggered)
+        {
+            Debug.LogWarning("[DEV F4] ข้ามวันไปแล้ว รอเริ่มวันถัดไปก่อน");
+            return;
+        }
+
+        if (currentState == NPCState.Leaving)
+        {
+            Debug.LogWarning("[DEV F4] NPC กำลังเดินออก กรุณารอให้การตัดสินใจปัจจุบันจบก่อน");
+            return;
+        }
+
+        // ปิด Checklist หากเปิดอยู่
+        if (ChecklistManager.Instance != null &&
+            ChecklistManager.Instance.checklistPanel != null &&
+            ChecklistManager.Instance.checklistPanel.activeSelf)
+        {
+            ChecklistManager.Instance.CloseChecklist();
+        }
+
+        if (GreenRedButtonManager.Instance != null)
+            GreenRedButtonManager.Instance.HideDecisionButtons();
+
+        // ข้าม NPC ที่ค้างอยู่โดยไม่บันทึกการตัดสินใจหรือคะแนน
+        if (currentNPC != null)
+        {
+            DestroyBagAndSlideBack();
+            Destroy(currentNPC);
+            currentNPC = null;
+        }
+
+        currentState = NPCState.WalkingToCheckpoint;
+        devSkipDayTriggered = true;
+
+        Debug.Log("[DEV F4] Force End Day → ข้าม NPC ที่เหลือและเปิดสรุปวัน");
+        EndGame();
+    }
+#endif
 
     // =========================
     // BUTTON
@@ -863,6 +1036,9 @@ public class GameManager : MonoBehaviour
 
     public void StartNextDay()
     {
+#if UNITY_EDITOR
+        devSkipDayTriggered = false;
+#endif
         
         if (CampManager.Instance != null)
         {
