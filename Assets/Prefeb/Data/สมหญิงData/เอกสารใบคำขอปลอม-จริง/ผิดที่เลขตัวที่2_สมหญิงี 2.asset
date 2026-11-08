@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: "\u0E1C\u0E34\u0E14\u0E17\u0E35\u0E48\u0E40\u0E25\u0E02\u0E15\u0E31\u0E27\u0E17\u0E35\u0E482_\u0E2A\u0E21\u0E2B\u0E0D\u0E34\u0E07\u0E35
     2"
   m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
+  documentType: 0
   paperBackground:
     useCustomPaper: 0
     variants: []
@@ -25,12 +26,12 @@ MonoBehaviour:
     - {fileID: -2510128510459142791, guid: 3ddeeb9cda88e7741bf0f7e1c0c91656, type: 3}
     - {fileID: -7070581221644151450, guid: 01b3fe68cdcd375418b3e5cb4a68e97a, type: 3}
   photo:
-    normal: {fileID: 3260012051259583393, guid: f4e7659385b633e4d8528b6c7d70c5f9, type: 3}
+    normal: {fileID: 3260012051259583393, guid: ae597639968470141a7e2cc3543b21a8, type: 3}
     useFake: 0
     fakeValues:
-    - {fileID: -2060527009405821810, guid: 9df8315ba300a6d4983d40436c567fc1, type: 3}
-    - {fileID: -6786812637432337627, guid: 63b92e47d2b1c6d43a97ac4916b1424c, type: 3}
-    - {fileID: 580784244978496784, guid: 140aa0335a4832549b08e2e28026d5bb, type: 3}
+    - {fileID: -2060527009405821810, guid: d9d358c22d9fe53479b7a4e8f4b7f80f, type: 3}
+    - {fileID: -6786812637432337627, guid: eeeb199b5fbfec34ca8ff3e6cf66a567, type: 3}
+    - {fileID: 5444407229649833629, guid: 19a25f43169d91046b92e1fafb4df624, type: 3}
   idDigits:
     original: 67671
     randomize: 0001000000

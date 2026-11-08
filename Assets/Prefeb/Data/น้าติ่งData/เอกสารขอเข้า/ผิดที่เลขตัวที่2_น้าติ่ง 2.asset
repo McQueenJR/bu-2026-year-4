@@ -26,15 +26,15 @@ MonoBehaviour:
     - {fileID: -2510128510459142791, guid: 3ddeeb9cda88e7741bf0f7e1c0c91656, type: 3}
     - {fileID: -7070581221644151450, guid: 01b3fe68cdcd375418b3e5cb4a68e97a, type: 3}
   photo:
-    normal: {fileID: 796425728880128339, guid: dee9c2011e51c2c4f9cf95e3fe012f9c, type: 3}
+    normal: {fileID: 369157847330924672, guid: c07b3844f8f90e94bb0042f0c8debfa2, type: 3}
     useFake: 0
     fakeValues:
-    - {fileID: 8524070025652140477, guid: 96b8d7bc70422b9428516dece8b83b33, type: 3}
-    - {fileID: -5188268749997036616, guid: 1b102c98cbac1a748a6e7baa5a07bd0e, type: 3}
-    - {fileID: -1118316910032322874, guid: c50558f879fe97d43a337142e02eb166, type: 3}
+    - {fileID: 8524070025652140477, guid: 1fa97089e5ababc4c9d05c285964ec6b, type: 3}
+    - {fileID: -5188268749997036616, guid: ffbdf1fe6be22f242a3f95fc96940da0, type: 3}
+    - {fileID: -1118316910032322874, guid: adf9b0ee748c9854d8d395c37d9ad653, type: 3}
   idDigits:
     original: 82272
-    randomize: 0000000000
+    randomize: 0001000000
   firstName:
     normal: "\u0E15\u0E34\u0E48\u0E07"
     useFake: 0

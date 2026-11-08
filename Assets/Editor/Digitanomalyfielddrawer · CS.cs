@@ -1,8 +1,11 @@
 using UnityEditor;
 using UnityEngine;
  
-// ต้องอยู่ในโฟลเดอร์ชื่อ Editor (เช่น Assets/Scripts/Editor/)
+// ต้องอยู่ในโฟลเดอร์ชื่อ Editor (เช่น Assets/Editor/)
+// ใช้คู่กับ DigitAnomalyField เวอร์ชัน bool[] randomize
 // วาด 5 คอลัมน์: ช่องเลขด้านบน + checkbox ด้านล่าง คั่นด้วยเส้นแนวตั้ง
+// ★ เวอร์ชันนี้สั่ง Apply + SetDirty + SaveAssetIfDirty ทุกครั้งที่ติ๊ก/พิมพ์
+//   → ค่าถูกเขียนลงไฟล์ .asset ทันที ไม่ขึ้นกับว่าจะกด Save หรือไม่
 [CustomPropertyDrawer(typeof(DigitAnomalyField))]
 public class DigitAnomalyFieldDrawer : PropertyDrawer
 {
@@ -31,7 +34,7 @@ public class DigitAnomalyFieldDrawer : PropertyDrawer
         Rect header = new Rect(position.x, position.y, position.width, HeaderH);
         EditorGUI.LabelField(header, "ID Number");
  
-        // พื้นที่ 5 คอลัมน์
+        // พื้นที่ N คอลัมน์
         Rect area = EditorGUI.IndentedRect(new Rect(position.x, position.y + HeaderH, position.width, DigitH + ToggleH));
         float colW = area.width / N;
  
@@ -49,7 +52,8 @@ public class DigitAnomalyFieldDrawer : PropertyDrawer
         };
  
         Color lineColor = new Color(0.5f, 0.5f, 0.5f, 0.8f);
-        bool digitsChanged = false;
+ 
+        EditorGUI.BeginChangeCheck();
  
         for (int i = 0; i < N; i++)
         {
@@ -66,10 +70,7 @@ public class DigitAnomalyFieldDrawer : PropertyDrawer
             {
                 char c = input[input.Length - 1];
                 if (char.IsDigit(c) && c != chars[i])
-                {
                     chars[i] = c;
-                    digitsChanged = true;
-                }
             }
  
             // checkbox แยกแต่ละหลัก
@@ -78,8 +79,18 @@ public class DigitAnomalyFieldDrawer : PropertyDrawer
             flag.boolValue = EditorGUI.Toggle(toggleRect, new GUIContent("", $"ติ๊ก = สุ่มหลักที่ {i + 1}"), flag.boolValue);
         }
  
-        if (digitsChanged)
-            origProp.stringValue = new string(chars);
+        string newOriginal = new string(chars);
+        if (newOriginal != origProp.stringValue)
+            origProp.stringValue = newOriginal;
+ 
+        if (EditorGUI.EndChangeCheck())
+        {
+            property.serializedObject.ApplyModifiedProperties();
+            Object target = property.serializedObject.targetObject;
+            EditorUtility.SetDirty(target);
+            // เขียนลงไฟล์ .asset ทันที ไม่ต้องรอกด Save (กันค่าที่ติ๊กหายเอง)
+            AssetDatabase.SaveAssetIfDirty(target);
+        }
  
         EditorGUI.EndProperty();
     }

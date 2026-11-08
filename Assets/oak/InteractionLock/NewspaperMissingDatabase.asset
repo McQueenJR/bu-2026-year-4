@@ -15,51 +15,63 @@ MonoBehaviour:
   entries:
   - villager: {fileID: 11400000, guid: 5ba0ad581ff6caa4bb0c6f8dc6a106f4, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 6742286516824958470, guid: 5d00ed3c41aa5f748bd51244fe481b39, type: 3}
+    photo: {fileID: -1097477927146764087, guid: 963e8b7bba0fea94bbdf75d6508bdafd, type: 3}
   - villager: {fileID: 11400000, guid: fc194d58af0b1b6488cf0061f4d58abd, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: -5188268749997036616, guid: 1b102c98cbac1a748a6e7baa5a07bd0e, type: 3}
+    photo: {fileID: -5188268749997036616, guid: ffbdf1fe6be22f242a3f95fc96940da0, type: 3}
   - villager: {fileID: 11400000, guid: 6563465fd5f56654986a6c76a0b31144, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: -1118316910032322874, guid: c50558f879fe97d43a337142e02eb166, type: 3}
+    photo: {fileID: -1118316910032322874, guid: adf9b0ee748c9854d8d395c37d9ad653, type: 3}
   - villager: {fileID: 11400000, guid: c353afea1fa1c1f4186b42b859d873ee, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: -3006310509758610673, guid: 6d98a33b733f5f04486ca397378e1a9e, type: 3}
+    photo: {fileID: -3006310509758610673, guid: 79d4706316900f64dbbf856b5e76676b, type: 3}
   - villager: {fileID: 11400000, guid: e4929784ee3eb4048ba455d5d48ce166, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 796425728880128339, guid: dee9c2011e51c2c4f9cf95e3fe012f9c, type: 3}
+    photo: {fileID: 369157847330924672, guid: c07b3844f8f90e94bb0042f0c8debfa2, type: 3}
   - villager: {fileID: 11400000, guid: 50815bf818fa27c488a0edb26b8c4ab1, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 8859114364735230762, guid: d7b58977faec0d04ca3bfbf08658079d, type: 3}
+    photo: {fileID: 8859114364735230762, guid: b793bcbc10956a94fa00a0f1cc735aec, type: 3}
   - villager: {fileID: 11400000, guid: a366f3d826387cb4b9afbe73cf378030, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 580784244978496784, guid: 140aa0335a4832549b08e2e28026d5bb, type: 3}
+    photo: {fileID: 5444407229649833629, guid: 19a25f43169d91046b92e1fafb4df624, type: 3}
   - villager: {fileID: 11400000, guid: dd03d6292a0e3404bbc12b9f35e5c2fe, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 7017121268936897127, guid: 46d045bbacc21004aa300615f942104e, type: 3}
+    photo: {fileID: -4152594217866913221, guid: a14626f0569d325448b38ef3e928a29b, type: 3}
   - villager: {fileID: 11400000, guid: 36a4eb84f9bd971449efb41d24b1e4b9, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 9061422802178222510, guid: aeecb8f852a5e694aaee488bb6b071c5, type: 3}
+    photo: {fileID: 9061422802178222510, guid: 9778f5117de8bbb41a2ff6a9f3656f17, type: 3}
   - villager: {fileID: 11400000, guid: 1d1aaec74c1ff2b40935dcf3ee0b49d8, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: -6786812637432337627, guid: 63b92e47d2b1c6d43a97ac4916b1424c, type: 3}
+    photo: {fileID: -6786812637432337627, guid: eeeb199b5fbfec34ca8ff3e6cf66a567, type: 3}
   - villager: {fileID: 11400000, guid: 7884119caacc0f14caa21c2996939455, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 8524070025652140477, guid: 96b8d7bc70422b9428516dece8b83b33, type: 3}
+    photo: {fileID: 8524070025652140477, guid: 1fa97089e5ababc4c9d05c285964ec6b, type: 3}
   - villager: {fileID: 11400000, guid: edbba2f7696022b42a1de59ed4066673, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 6786558419401422303, guid: 409c5e39a80faee45b60123aa09e10e1, type: 3}
+    photo: {fileID: 6786558419401422303, guid: 00a95a23c6bf38f4495a5fa2548668df, type: 3}
   - villager: {fileID: 11400000, guid: f59b3d9145d0fac47bce65b3396e0c49, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 3260012051259583393, guid: f4e7659385b633e4d8528b6c7d70c5f9, type: 3}
+    photo: {fileID: 3260012051259583393, guid: ae597639968470141a7e2cc3543b21a8, type: 3}
   - villager: {fileID: 11400000, guid: 291af383af9911c4999b737ee8257c8f, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: -5545645843760982718, guid: 6a458b7232beded4aa9f53cd683444f3, type: 3}
+    photo: {fileID: -5545645843760982718, guid: fbd50b29e3aa1e94fbeaf7ad1724493d, type: 3}
   - villager: {fileID: 11400000, guid: d66eb5478bff6424bb237c34ddbbb63b, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 4565594088306269354, guid: 4f75d3680fbd5c340aab3d6b3be98266, type: 3}
+    photo: {fileID: -2060527009405821810, guid: d9d358c22d9fe53479b7a4e8f4b7f80f, type: 3}
   - villager: {fileID: 11400000, guid: 97485a434956eaf459b0b147a5254de0, type: 2}
     missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
-    photo: {fileID: 1646106804340802781, guid: 066fb50dbc037374895f68252fbdb424, type: 3}
+    photo: {fileID: 1646106804340802781, guid: c7d8f6bbec791764cab02237e48225ee, type: 3}
+  - villager: {fileID: 11400000, guid: 2b5b939794e8e6b498fb4ac79eb2bab2, type: 2}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: -6411071130926189471, guid: 9f6f874919ded084f81e0833612a85ba, type: 3}
+  - villager: {fileID: 11400000, guid: 176e00c83f7707f47ba84fdce70703ea, type: 2}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: -887465950266007429, guid: 99bb5428a6777ef459af594a8bfaf559, type: 3}
+  - villager: {fileID: 11400000, guid: dc9f6ac6c1774504a8db78bc4ed97c85, type: 2}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: -2789803726070256786, guid: ad83d9791be8f524585c8197997c1e7c, type: 3}
+  - villager: {fileID: 11400000, guid: 0c30ee7f11023b4478d0c53f8205691a, type: 2}
+    missingText: "\u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
+    photo: {fileID: 35167083320122691, guid: dda8f6ca09fcb414fa2afdca601b4bd6, type: 3}
   fallbackText: "{name} \u0E2B\u0E32\u0E22\u0E15\u0E31\u0E27\u0E44\u0E1B\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E44\u0E23\u0E49\u0E23\u0E48\u0E2D\u0E07\u0E23\u0E2D\u0E22"
   fallbackPhoto: {fileID: 21300000, guid: f203baf209a23a84fa8c9763b562d11c, type: 3}

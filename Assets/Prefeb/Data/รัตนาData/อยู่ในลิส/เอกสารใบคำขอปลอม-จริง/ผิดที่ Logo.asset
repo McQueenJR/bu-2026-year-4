@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aeae08560d70df499011451b7cf17e0, type: 3}
   m_Name: "\u0E1C\u0E34\u0E14\u0E17\u0E35\u0E48 Logo"
   m_EditorClassIdentifier: Assembly-CSharp::TempleDocumentData
+  documentType: 0
   paperBackground:
     useCustomPaper: 0
     variants: []
@@ -24,12 +25,12 @@ MonoBehaviour:
     - {fileID: -2510128510459142791, guid: 3ddeeb9cda88e7741bf0f7e1c0c91656, type: 3}
     - {fileID: -7070581221644151450, guid: 01b3fe68cdcd375418b3e5cb4a68e97a, type: 3}
   photo:
-    normal: {fileID: -6786812637432337627, guid: 63b92e47d2b1c6d43a97ac4916b1424c, type: 3}
+    normal: {fileID: -6786812637432337627, guid: eeeb199b5fbfec34ca8ff3e6cf66a567, type: 3}
     useFake: 0
     fakeValues:
-    - {fileID: -2060527009405821810, guid: 9df8315ba300a6d4983d40436c567fc1, type: 3}
-    - {fileID: 9061422802178222510, guid: aeecb8f852a5e694aaee488bb6b071c5, type: 3}
-    - {fileID: -3006310509758610673, guid: 6d98a33b733f5f04486ca397378e1a9e, type: 3}
+    - {fileID: -2060527009405821810, guid: d9d358c22d9fe53479b7a4e8f4b7f80f, type: 3}
+    - {fileID: 9061422802178222510, guid: 9778f5117de8bbb41a2ff6a9f3656f17, type: 3}
+    - {fileID: -3006310509758610673, guid: 79d4706316900f64dbbf856b5e76676b, type: 3}
   idDigits:
     original: 62961
     randomize: 0000000000
