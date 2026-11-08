@@ -14,6 +14,8 @@ public class CampManager : MonoBehaviour
     // สถานะระหว่างเล่นเกม
     private Dictionary<NPCData, bool> aliveNPC = new();
     private Dictionary<NPCData, bool> homeTodayNPC = new();
+    // วันที่ที่แต่ละคนตาย (ใช้แยก "ตายวันนี้" ออกจาก "ตายไปตั้งแต่วันก่อน")
+    private Dictionary<NPCData, int> deathDayNPC = new();
     private List<CampRoom> ghostEnteredRooms = new();
 
     private Dictionary<CampRoom, NPCData> ghostInRoom = new();
@@ -69,6 +71,7 @@ public class CampManager : MonoBehaviour
 
         aliveNPC.Clear();
         homeTodayNPC.Clear();
+        deathDayNPC.Clear();
 
         foreach (CampRoom room in campDatabase.rooms)
         {
@@ -384,6 +387,9 @@ public class CampManager : MonoBehaviour
 
         aliveNPC[key] = false;
         homeTodayNPC[key] = false;
+        deathDayNPC[key] = GameManager.Instance != null
+            ? GameManager.Instance.currentDay
+            : 0;
 
         // นับ "ถูกผีฆ่าวันนี้" เฉพาะผีฆ่าในเต็นท์เท่านั้น
         if (cause == DeathCause.GhostTentKill)
@@ -434,6 +440,28 @@ public class CampManager : MonoBehaviour
         // Prefab NPCData と CampDatabase の参照が異なる場合も、同じ NPC 名で照合する。
         NPCData key = FindResidentKey(npc);
         return key != null && aliveNPC.TryGetValue(key, out bool isAlive) && isAlive;
+    }
+
+    // ตายจริง = ลงทะเบียนในค่ายแล้ว และถูกฆ่าแล้ว
+    // (ต่างจาก !IsAlive ที่คืน true ให้ NPCData ที่ไม่อยู่ในค่ายด้วย)
+    public bool IsKnownDead(NPCData npc)
+    {
+        if (npc == null)
+            return false;
+
+        NPCData key = FindResidentKey(npc);
+        return key != null && aliveNPC.TryGetValue(key, out bool alive) && !alive;
+    }
+
+    // ตายก่อนวันที่ระบุ (ตายตั้งแต่วันก่อน ๆ) — คนที่เพิ่งตายวันนี้จะคืน false
+    // ใช้ให้คนที่ถูกจัดคิวมาวันนี้แล้วยังมาได้ แต่วันถัดไปจะไม่ถูกสุ่มอีก
+    public bool IsDeadBeforeDay(NPCData npc, int day)
+    {
+        if (!IsKnownDead(npc))
+            return false;
+
+        NPCData key = FindResidentKey(npc);
+        return !deathDayNPC.TryGetValue(key, out int diedOn) || diedOn < day;
     }
 
     public bool IsHomeToday(NPCData npc)

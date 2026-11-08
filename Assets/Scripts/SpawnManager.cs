@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -117,9 +116,8 @@ public void GenerateTodayApplicants()
         maxNPC + 1
     );
 
-    Dictionary<DataPrefabNPC, HashSet<GameObject>> usedPrefabsPerNPC = new();
-
-    
+    // รีเซ็ต Prefab ที่ใช้ไปแล้วของวันก่อน (เดิมประกาศตัวแปร local ชื่อซ้ำกับ field เลยไม่เคยถูกล้าง)
+    usedPrefabsPerNPC.Clear();
 
     int slotCount = todayListManager != null && todayListManager.slots != null
         ? todayListManager.slots.Length : 0;
@@ -154,26 +152,20 @@ public void GenerateTodayApplicants()
 
     gameManager.npcPerDay = todayApplicants.Count;
 
-    // 5. ให้ NPC ใน Today List มาก่อน
-    List<TodayApplicant> todayListFirst = todayApplicants
-        .Where(x => x != null && x.isInTodayList)
-        .OrderBy(_ => Random.value)
-        .ToList();
-
+    // 5. สุ่มลำดับทั้งหมด (ตัวใน List / ผี / ตัวปกติ ปนกัน) ยกเว้น Event พิเศษที่ยังมาก่อน
     List<TodayApplicant> eventApplicants = todayApplicants
         .Where(x => x != null && dailySpecialEventApplicants.ContainsKey(x))
         .ToList();
 
-    List<TodayApplicant> normalApplicants = todayApplicants
-        .Where(x => x != null && !x.isInTodayList &&
-                    !dailySpecialEventApplicants.ContainsKey(x))
-        .OrderBy(_ => Random.value)
+    List<TodayApplicant> otherApplicants = todayApplicants
+        .Where(x => x != null && !dailySpecialEventApplicants.ContainsKey(x))
         .ToList();
+
+    ShuffleAvoidingAdjacentDuplicates(otherApplicants);
 
     todayApplicants.Clear();
     todayApplicants.AddRange(eventApplicants);
-    todayApplicants.AddRange(todayListFirst);
-    todayApplicants.AddRange(normalApplicants);
+    todayApplicants.AddRange(otherApplicants);
 
    
     
@@ -195,12 +187,6 @@ public void GenerateTodayApplicants()
         $"Today List ทั้งหมด={todayListData.Count} | " +
         $"Ghost={GetGhostCount(todayApplicants)}"
     );
-
-    if (CampManager.Instance != null)
-    {
-        CampManager.Instance.BuildRuntimeCamp();
-        CampManager.Instance.PrintAllCamps();
-    }
 
     if (CampManager.Instance != null)
     {
@@ -265,6 +251,14 @@ private DailyPlan BuildDailyPlan(int requestedNPCCount, int slotCount)
 
     // สุ่ม NPC จากระบบเดิม
     List<DataPrefabNPC> pool = BuildWeightedNPCPool(10);
+
+    if (CampManager.Instance != null && allData.villager != null && allData.villager.npcs != null)
+    {
+        IEnumerable<string> deadNames = allData.villager.npcs
+            .Where(e => e != null && e.npc != null && IsDeadVillager(allData.villager, e.npc))
+            .Select(e => e.npc.name);
+        Debug.Log("[Plan] ชาวบ้านที่ตายแล้ว (ไม่ถูกสุ่ม): " + string.Join(", ", deadNames));
+    }
 
     // จำนวน Today List
     int minList = setting != null
@@ -472,9 +466,7 @@ private List<DataPrefabNPC> GetAllAvailableNPCs()
                 if (data == null)
                     continue;
 // ตรวจสถานะค่ายเฉพาะชาวบ้าน
-                if (role == allData.villager &&
-                    CampManager.Instance != null &&
-                    !CampManager.Instance.IsAlive(data))
+                if (IsDeadVillager(role, entry.npc))
                 {
                     continue;
                 }
@@ -488,6 +480,66 @@ private List<DataPrefabNPC> GetAllAvailableNPCs()
         AddRoleNPCs(allData.special);
 
         return result;
+    }
+
+
+    // =========================================================
+    // สลับลำดับแบบสุ่ม และพยายามไม่ให้ DPN เดียวกัน (ตัวจริง/ผี) ออกติดกัน
+    // =========================================================
+    private void ShuffleAvoidingAdjacentDuplicates(List<TodayApplicant> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
+
+        for (int i = 1; i < list.Count; i++)
+        {
+            if (list[i].npcData != list[i - 1].npcData)
+                continue;
+
+            for (int j = i + 1; j < list.Count; j++)
+            {
+                if (list[j].npcData != list[i - 1].npcData)
+                {
+                    (list[i], list[j]) = (list[j], list[i]);
+                    break;
+                }
+            }
+        }
+    }
+
+    // =========================================================
+    // ชาวบ้านที่ถูกฆ่าแล้ว (เช็คทุก NPCData ในกลุ่มที่ไม่ใช่ผี ไม่ใช่แค่ตัวแรกที่เจอ)
+    // =========================================================
+    private bool IsDeadVillager(RoleGroup role, DataPrefabNPC dpn)
+    {
+        if (role != allData.villager || dpn == null || CampManager.Instance == null)
+            return false;
+
+        // ตายวันนี้ยังนับว่าไม่ตาย (มาได้ถ้าถูกจัดคิวไว้แล้ว) / ตายวันก่อนหน้าถึงจะถูกตัดออก
+        int today = gameManager != null ? gameManager.currentDay : int.MaxValue;
+
+        NPCSpawnGroup[] groups = { dpn.todayGood, dpn.todayBad, dpn.normalGood, dpn.normalBad };
+
+        foreach (NPCSpawnGroup group in groups)
+        {
+            if (group == null || group.prefabs == null || group.isGhost)
+                continue;
+
+            foreach (NPCPrefabChance pc in group.prefabs)
+            {
+                if (pc == null || pc.prefab == null)
+                    continue;
+
+                NPC npc = pc.prefab.GetComponent<NPC>();
+                if (npc != null && npc.data != null && CampManager.Instance.IsDeadBeforeDay(npc.data, today))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     // =========================================================
@@ -571,9 +623,7 @@ private List<DataPrefabNPC> GetAllAvailableNPCs()
                 return false;
 
 // เช็กการมีชีวิตเฉพาะชาวบ้านที่อยู่ใน CampDatabase
-            if (role == allData.villager &&
-                CampManager.Instance != null &&
-                !CampManager.Instance.IsAlive(data))
+            if (IsDeadVillager(role, entry.npc))
             {
                 return false;
             }
@@ -609,9 +659,7 @@ private List<DataPrefabNPC> GetAllAvailableNPCs()
             if (data == null)
                 continue;
 
-            if (role == allData.villager &&
-                CampManager.Instance != null &&
-                !CampManager.Instance.IsAlive(data))
+            if (IsDeadVillager(role, entry.npc))
                 continue;
 
             available.Add(entry);
@@ -1058,6 +1106,17 @@ private bool ResolveApplicantPrefab(TodayApplicant a)
         if (a.isGhost)
             a.ghostTarget = GetNPCDataFromPrefabData(dpn);
 
+        // กันชนสุดท้าย: ห้ามคนที่ตายตั้งแต่วันก่อน (หรือผีที่ปลอมเป็นคนนั้น) ออกมา ไม่ว่าจะอยู่ Role ไหน
+        if (CampManager.Instance != null)
+        {
+            NPCData who = a.isGhost ? a.ghostTarget : a.displayData;
+            if (CampManager.Instance.IsDeadBeforeDay(who, gameManager.currentDay))
+            {
+                Debug.LogWarning($"[Spawn] ข้าม {who.npcName} เพราะตายไปตั้งแต่วันก่อน");
+                return false;
+            }
+        }
+
         bool forgot;
         if (a.isGhost)
         {
@@ -1102,7 +1161,3 @@ private bool ResolveApplicantPrefab(TodayApplicant a)
         currentApplicantIndex = 0;
     }
 }
-
-
-
-
