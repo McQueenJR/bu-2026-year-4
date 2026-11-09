@@ -22,6 +22,15 @@ public class EndingManager : MonoBehaviour
     [Tooltip("ถ้าผู้เล่นกด Emergency ฆ่าชาวบ้านผิด ไม่เกินกี่คน ถึงจะเข้า Bad End ได้")]
     public int emergencyKillLimit = 6;
 
+    [Header("Live Status")]
+    [SerializeField] private int liveCampAlive;          // ชาวบ้านในค่ายที่เหลือ (จาก CampManager)
+    [SerializeField] private int liveEmergencyKills;     // ตายจาก Emergency (จาก DeathTracker)
+    [SerializeField] private int liveTotalDeaths;        // ตายรวมทุกสาเหตุ (จาก DeathTracker)
+    [SerializeField] private int liveGhostKills;         // ผีฆ่าในเต็นท์
+    [SerializeField] private int liveVanished;           // หายสาบสูญ
+    [SerializeField] private string liveBadEndStatus;    // สถานะเทียบกับเงื่อนไข
+    
+    
     [Header("Bad End Sequence")]
     public GameObject badEndNPCPrefab;
     public BadEndDialogueData badEndDialogue;
@@ -50,6 +59,27 @@ public class EndingManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+    
+    void Update()
+    {
+        if (CampManager.Instance != null)
+            liveCampAlive = CampManager.Instance.GetAliveVillagerCount();
+
+        if (DeathTracker.Instance != null)
+        {
+            liveEmergencyKills = DeathTracker.Instance.GetCount(DeathCause.EmergencyKill);
+            liveTotalDeaths    = DeathTracker.Instance.GetTotalDeaths();
+            liveGhostKills     = DeathTracker.Instance.GetCount(DeathCause.GhostTentKill);
+            liveVanished       = DeathTracker.Instance.GetCount(DeathCause.VanishedAfterReject);
+        }
+
+        bool aliveReached = liveCampAlive <= aliveVillagerThreshold;
+        bool emergencyOk  = liveEmergencyKills <= emergencyKillLimit;
+
+        liveBadEndStatus =
+            $"เหลือ {liveCampAlive}/เกณฑ์ ≤{aliveVillagerThreshold} ({(aliveReached ? "ถึง" : "ยังไม่ถึง")}) | " +
+            $"Emergency {liveEmergencyKills}/≤{emergencyKillLimit} ({(emergencyOk ? "ผ่าน" : "เกิน")})";
     }
 
     // =====================================================
