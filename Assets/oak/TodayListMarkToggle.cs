@@ -51,6 +51,9 @@ public class TodayListMarkToggle : MonoBehaviour
         isMarked = !isMarked;
         if (sr != null)
             sr.enabled = isMarked;
+        
+        if (TodayListManager.Instance != null)
+            TodayListManager.Instance.PlayMarkSound(isMarked);
     }
 
     public void ResetMark()

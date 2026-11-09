@@ -20,6 +20,8 @@ public class TodayListManager : MonoBehaviour
     [Header("SOUND")]
     public AudioSource openSound;
     public AudioSource closeSound;
+    public AudioSource markOnSound;
+    public AudioSource markOffSound;
 
     private List<GameObject> spawnedPhotos = new List<GameObject>();
 
@@ -152,6 +154,13 @@ public class TodayListManager : MonoBehaviour
         if (closeSound != null)
             closeSound.Play();
         popup.SetActive(false);
+    }
+    
+    public void PlayMarkSound(bool marked)
+    {
+        AudioSource s = marked ? markOnSound : markOffSound;
+        if (s != null)
+            s.Play();
     }
 
     public void ResetForNewDay()
