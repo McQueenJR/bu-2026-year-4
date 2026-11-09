@@ -16,6 +16,8 @@ public class CampManager : MonoBehaviour
     private Dictionary<NPCData, bool> homeTodayNPC = new();
     // วันที่ที่แต่ละคนตาย (ใช้แยก "ตายวันนี้" ออกจาก "ตายไปตั้งแต่วันก่อน")
     private Dictionary<NPCData, int> deathDayNPC = new();
+   
+    private HashSet<NPCData> deadAtDayStart = null;
     private List<CampRoom> ghostEnteredRooms = new();
 
     private Dictionary<CampRoom, NPCData> ghostInRoom = new();
@@ -477,7 +479,30 @@ public class CampManager : MonoBehaviour
             return false;
 
         NPCData key = FindResidentKey(npc);
+
+        
+        if (deadAtDayStart != null)
+            return deadAtDayStart.Contains(key);
+
         return !deathDayNPC.TryGetValue(key, out int diedOn) || diedOn < day;
+    }
+    
+    public void SnapshotDeadAtDayStart()
+    {
+        deadAtDayStart = new HashSet<NPCData>();
+
+        foreach (KeyValuePair<NPCData, bool> entry in aliveNPC)
+        {
+            if (entry.Key != null && !entry.Value)
+                deadAtDayStart.Add(entry.Key);
+        }
+
+        List<string> names = new();
+        foreach (NPCData d in deadAtDayStart)
+            names.Add(d.npcName);
+
+        Debug.Log("[Camp] Snapshot คนตายก่อนเริ่มวัน: " +
+                  (names.Count == 0 ? "(ไม่มี)" : string.Join(", ", names)));
     }
 
     public bool IsHomeToday(NPCData npc)

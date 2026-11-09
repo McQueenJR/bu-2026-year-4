@@ -94,6 +94,10 @@ public void GenerateTodayApplicants()
     }
 
     dailySpecialEventApplicants.Clear();
+
+    // จดรายชื่อคนที่ตายแล้ว 
+    if (CampManager.Instance != null)
+        CampManager.Instance.SnapshotDeadAtDayStart();
     
 
     
@@ -515,10 +519,11 @@ private List<DataPrefabNPC> GetAllAvailableNPCs()
     // =========================================================
     private bool IsDeadVillager(RoleGroup role, DataPrefabNPC dpn)
     {
-        if (role != allData.villager || dpn == null || CampManager.Instance == null)
+        // เช็คทุก Role: คนที่ค่ายจะไม่ถูกนับว่าตายอยู่แล้ว 
+        if (dpn == null || CampManager.Instance == null)
             return false;
 
-        // ตายวันนี้ยังนับว่าไม่ตาย (มาได้ถ้าถูกจัดคิวไว้แล้ว) / ตายวันก่อนหน้าถึงจะถูกตัดออก
+        // ตายวันนี้ยังนับว่าไม่ตาย  / ตายวันก่อนหน้าถึงจะถูกตัดออก
         int today = gameManager != null ? gameManager.currentDay : int.MaxValue;
 
         NPCSpawnGroup[] groups = { dpn.todayGood, dpn.todayBad, dpn.normalGood, dpn.normalBad };
