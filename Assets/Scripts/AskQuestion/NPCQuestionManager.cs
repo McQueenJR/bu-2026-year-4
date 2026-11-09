@@ -63,6 +63,15 @@ public class NPCQuestionManager : MonoBehaviour
         Instance = this;
     }
 
+    private void OnEnable()  { DisplayEvents.OnCloseAll += HandleCloseAll; }
+    private void OnDisable() { DisplayEvents.OnCloseAll -= HandleCloseAll; }
+
+    private void HandleCloseAll()
+    {
+        if (askPanel != null && askPanel.activeSelf)
+            ClosePanel();
+    }
+    
     private void Start()
     {
         if (askPanel != null)
@@ -93,6 +102,9 @@ public class NPCQuestionManager : MonoBehaviour
             return;
         
         if (Matchbox.Instance != null && Matchbox.Instance.IsHolding)
+            return;
+        
+        if (PhoneManager.IsPhoneOpen)
             return;
         
         // กันกดระหว่างมี dialog เปิดอยู่ / กำลังเรียกตำรวจ / NPC ยังไม่ถึงจุดตรวจ
