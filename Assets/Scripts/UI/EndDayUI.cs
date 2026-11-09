@@ -133,6 +133,9 @@ public class EndDayUI : MonoBehaviour
         int villagersKilled)
     {
         panel.SetActive(true);
+        
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayEndDayMusic();
 
         villagerPassedText.text =
             "ชาวบ้านเข้าหมู่บ้าน : " + villagerPassed + " คน";

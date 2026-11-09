@@ -1207,6 +1207,9 @@ public class GameManager : MonoBehaviour
 
         if (endDayUI != null)
             endDayUI.Hide();
+        
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayGameplayBGM();
 
         // รีเซ็ตเวลา
         currentHour = startHour;
