@@ -682,8 +682,7 @@ public class PhoneManager : MonoBehaviour
             if (resident == null || resident.npcData == null)
                 continue;
 
-            if (resident.npcData == owner ||
-                resident.npcData.npcName == owner.npcName)
+            if (resident.ContainsNPCData(owner))
             {
                 Debug.Log("📞 เอกสารของ " + owner.npcName + " อยู่ในห้อง " + roomCode);
                 return true;

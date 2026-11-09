@@ -157,8 +157,7 @@ public class CampManager : MonoBehaviour
                 if (resident == null || resident.npcData == null)
                     continue;
 
-                if (resident.npcData == npc ||
-                    resident.npcData.npcName == npc.npcName)
+                if (resident.ContainsNPCData(npc))
                 {
                     return room;
                 }
@@ -230,7 +229,7 @@ public class CampManager : MonoBehaviour
 
         foreach (CampResident resident in room.residents)
         {
-            if (resident.npcData != npc)
+            if (!resident.ContainsNPCData(npc))
                 roommates.Add(resident);
         }
 
@@ -266,8 +265,7 @@ public class CampManager : MonoBehaviour
                     continue;
 
                 // Reference ตรงกัน หรือชื่อเดียวกัน
-                if (resident.npcData == npc ||
-                    resident.npcData.npcName == npc.npcName)
+                if (resident.ContainsNPCData(npc))
                 {
                     // ใช้ NPCData ของ Camp เป็น key เสมอ
                     
@@ -312,7 +310,7 @@ public class CampManager : MonoBehaviour
         foreach (CampResident r in room.residents)
         {
             if (r == null || r.npcData == null) continue;
-            if (r.npcData == npc || r.npcData.npcName == npc.npcName) continue;
+            if (r.ContainsNPCData(npc)) continue;
 
             if (IsAlive(r.npcData) && IsHomeToday(r.npcData))
                 return true;
@@ -348,8 +346,7 @@ public class CampManager : MonoBehaviour
                 if (resident == null || resident.npcData == null)
                     continue;
 
-                if (resident.npcData == npc ||
-                    resident.npcData.npcName == npc.npcName)
+                if (resident.ContainsNPCData(npc))
                 {
                     hasDocument = resident.hasDocument;
                     return true;
@@ -404,7 +401,7 @@ public class CampManager : MonoBehaviour
                 ? GameManager.Instance.currentDay
                 : 0;
 
-            DeathTracker.Instance.RecordDeath(npc, cause, day, detail);
+            DeathTracker.Instance.RecordDeath(key, cause, day, detail);
         }
 
         Debug.Log(
@@ -417,6 +414,9 @@ public class CampManager : MonoBehaviour
 
     private NPCData FindResidentKey(NPCData npc)
     {
+        if (npc == null)
+            return null;
+
         if (aliveNPC.ContainsKey(npc))
             return npc;
 
@@ -424,6 +424,22 @@ public class CampManager : MonoBehaviour
         {
             if (k != null && k.npcName == npc.npcName)
                 return k;
+        }
+
+        if (campDatabase != null)
+        {
+            foreach (CampRoom room in campDatabase.rooms)
+            {
+                if (room == null || room.residents == null)
+                    continue;
+
+                foreach (CampResident resident in room.residents)
+                {
+                    if (resident != null && resident.npcData != null &&
+                        resident.ContainsNPCData(npc))
+                        return resident.npcData;
+                }
+            }
         }
 
         return null;
@@ -733,8 +749,7 @@ public class CampManager : MonoBehaviour
                     resident.npcData == null)
                     continue;
 
-                if (resident.npcData == npc ||
-                    resident.npcData.npcName == npc.npcName)
+                if (resident.ContainsNPCData(npc))
                 {
                     return resident.hasDocument;
                 }
@@ -775,8 +790,7 @@ public class CampManager : MonoBehaviour
                 if (resident == null || resident.npcData == null)
                     continue;
 
-                if (resident.npcData == npc ||
-                    resident.npcData.npcName == npc.npcName)
+                if (resident.ContainsNPCData(npc))
                 {
                     resident.hasDocument = hasDocument;
 
@@ -813,8 +827,7 @@ public class CampManager : MonoBehaviour
                 if (resident == null || resident.npcData == null)
                     continue;
 
-                if (resident.npcData == npc ||
-                    resident.npcData.npcName == npc.npcName)
+                if (resident.ContainsNPCData(npc))
                 {
                     return ghostEnteredRooms.Contains(room);
                 }
