@@ -16,9 +16,10 @@ public class EndingManager : MonoBehaviour
     [Tooltip("สำรองสำหรับฉากจบอนาคต — ตอนนี้ Bad End มาก่อนเสมอ ไม่ได้ใช้")]
     public string fallbackSceneName = "";
 
-    [Header("Bad End Conditions (สำรองสำหรับฉากจบอนาคต ไม่บล็อก Bad End แล้ว)")]
+    [Header("Bad End Conditions (เช็คหลัง NPC เดินออกจากจุดตรวจ)")]
+    [Tooltip("ชาวบ้านในค่ายเหลือ ≤ ค่านี้ → เข้า Bad End (0 = ตายหมด, ค่ายมี 20 ตั้ง 17 = ตาย 3 คนก็จบ)")]
     public int aliveVillagerThreshold = 0;
-    public int ghostPlusVanishLimit = 999;
+    [Tooltip("ถ้าผู้เล่นกด Emergency ฆ่าชาวบ้านผิด ไม่เกินกี่คน ถึงจะเข้า Bad End ได้")]
     public int emergencyKillLimit = 6;
 
     [Header("Bad End Sequence")]
@@ -115,10 +116,22 @@ public class EndingManager : MonoBehaviour
 
         int alive = CampManager.Instance.GetAliveVillagerCount();
 
-        if (alive > 0)
+        int emergencyKills = DeathTracker.Instance != null
+            ? DeathTracker.Instance.GetCount(DeathCause.EmergencyKill)
+            : 0;
+
+        // เงื่อนไข 1: ชาวบ้านเหลือ ≤ เกณฑ์
+        bool aliveReached = alive <= aliveVillagerThreshold;
+
+        // เงื่อนไข 2: Emergency ฆ่าผิดไม่เกินลิมิต
+        bool emergencyOk = emergencyKills <= emergencyKillLimit;
+
+        if (!aliveReached || !emergencyOk)
             return false;
 
-        Debug.Log("[Ending] ชาวบ้านตายหมด → BAD END");
+        Debug.Log($"[Ending] BAD END | ชาวบ้านเหลือ {alive} (≤ {aliveVillagerThreshold}) " +
+                  $"| Emergency ฆ่าผิด {emergencyKills} (≤ {emergencyKillLimit})");
+
         StartBadEnd();
         return true;
     }
