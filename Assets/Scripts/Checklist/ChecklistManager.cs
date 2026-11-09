@@ -152,6 +152,40 @@ public class ChecklistManager : MonoBehaviour
     
 
     // =====================================================
+    // DEVELOPER
+    // =====================================================
+    public bool TryGetPlayerAnswers(GameObject npcObject, out bool[] answers, out bool[] answeredFlags)
+    {
+        answers = new bool[5];
+        answeredFlags = new bool[5];
+
+        if (npcObject == null)
+            return false;
+
+        if (currentNPC != null && currentNPC.gameObject == npcObject)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                answers[i] = playerAnswers[i];
+                answeredFlags[i] = answered[i];
+            }
+            return true;
+        }
+
+        if (npcAnswerStates.TryGetValue(npcObject, out ChecklistAnswerState state))
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                answers[i] = state.answers[i];
+                answeredFlags[i] = state.answered[i];
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    // =====================================================
     // SCORE
     // =====================================================
     public int GetChecklistScore(GameObject npc)

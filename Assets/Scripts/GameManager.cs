@@ -119,6 +119,8 @@ public class GameManager : MonoBehaviour
     [Header("Developer Tools (Editor Only)")]
     [SerializeField] private bool enableDeveloperHotkeys = true;
     private bool devSkipDayTriggered = false;
+    private bool showNPCStatusWindow = false;
+    private Rect npcStatusWindowRect = new Rect(20, 80, 520, 390);
 #endif
 
 
@@ -160,6 +162,7 @@ public class GameManager : MonoBehaviour
     // F2 = Force Approve (ข้ามบทพูด/คัตซีน)
     // F3 = Force Reject (ข้ามบทพูด/คัตซีน)
     // F4 = Force End Day (ข้าม NPC ที่เหลือ)
+    // F5 = Toggle NPC status window (player checklist + NPC type)
     // =====================================================
     private void Update()
     {
@@ -177,6 +180,118 @@ public class GameManager : MonoBehaviour
 
         if (Keyboard.current.f4Key.wasPressedThisFrame)
             DevSkipDay();
+
+        if (Keyboard.current.f5Key.wasPressedThisFrame)
+            showNPCStatusWindow = !showNPCStatusWindow;
+    }
+
+    private void OnGUI()
+    {
+        if (!enableDeveloperHotkeys || !showNPCStatusWindow)
+            return;
+
+        npcStatusWindowRect = GUI.Window(
+            9051,
+            npcStatusWindowRect,
+            DrawNPCStatusWindow,
+            "NPC STATUS (F5)"
+        );
+    }
+
+    private void DrawNPCStatusWindow(int windowID)
+    {
+        if (currentNPC == null)
+        {
+            GUILayout.Label("ไม่มี NPC อยู่ที่จุดตรวจ");
+            GUILayout.Space(8);
+            GUILayout.Label("กด F5 เพื่อปิดหน้าต่างนี้");
+            GUI.DragWindow();
+            return;
+        }
+
+        NPC npc = currentNPC.GetComponent<NPC>();
+        if (npc == null)
+        {
+            GUILayout.Label("ไม่พบ Component NPC");
+            GUI.DragWindow();
+            return;
+        }
+
+        bool isGhost = npc.applicant != null && npc.applicant.isGhost;
+        string npcName = currentNPC.name;
+        if (npc.applicant != null && npc.applicant.displayData != null)
+            npcName = npc.applicant.displayData.npcName;
+        else if (npc.data != null)
+            npcName = npc.data.npcName;
+
+        GUILayout.Label("NPC: " + npcName);
+        GUILayout.Label("ประเภท: " + (isGhost ? "ผี (GHOST)" : "คน (PERSON)"));
+        GUILayout.Space(8);
+
+        bool[] playerAnswers = null;
+        bool[] answeredFlags = null;
+        bool hasPlayerAnswers = ChecklistManager.Instance != null &&
+            ChecklistManager.Instance.TryGetPlayerAnswers(currentNPC, out playerAnswers, out answeredFlags);
+        bool[] correctAnswers = npc.data != null ? npc.data.correctAnswers : null;
+
+        string[] labels =
+        {
+            "รูปลักษณ์ภายนอก",
+            "แว่นขยาย",
+            "ไม้ขีดไฟ",
+            "ใบคำขอเข้าวัด",
+            "รายชื่อคนที่มาวันนี้"
+        };
+
+        GUILayout.Label("CHECKLIST DEBUG");
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("รายการ", GUILayout.Width(165));
+        GUILayout.Label("เฉลย (Inspector)", GUILayout.Width(125));
+        GUILayout.Label("ผู้เล่นตอบ", GUILayout.Width(120));
+        GUILayout.EndHorizontal();
+
+        for (int i = 0; i < labels.Length; i++)
+        {
+            bool hasCorrectAnswer = correctAnswers != null && i < correctAnswers.Length;
+            bool correctAnswer = hasCorrectAnswer && correctAnswers[i];
+
+            // ใช้เงื่อนไขเดียวกับ ChecklistManager.SubmitChecklist()
+            if (i == 3 && npc.applicant != null && !npc.applicant.hasTempleDocument)
+            {
+                correctAnswer = true;
+                hasCorrectAnswer = true;
+            }
+
+            string truthText = !hasCorrectAnswer ? "ไม่มีเฉลย" :
+                (correctAnswer ? "ผิดปกติ" : "ปกติ");
+
+            string playerText = "ยังไม่ได้ติ๊ก";
+            if (hasPlayerAnswers && playerAnswers != null && answeredFlags != null &&
+                i < playerAnswers.Length && i < answeredFlags.Length && answeredFlags[i])
+            {
+                playerText = playerAnswers[i] ? "ผิดปกติ" : "ปกติ";
+            }
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(labels[i], GUILayout.Width(165));
+            GUILayout.Label(truthText, GUILayout.Width(125));
+            GUILayout.Label(playerText, GUILayout.Width(120));
+            GUILayout.EndHorizontal();
+        }
+
+        int answeredCount = 0;
+        if (hasPlayerAnswers && answeredFlags != null)
+        {
+            for (int i = 0; i < Mathf.Min(5, answeredFlags.Length); i++)
+                if (answeredFlags[i]) answeredCount++;
+        }
+
+        GUILayout.Space(8);
+        GUILayout.Label("ตอบแล้ว: " + answeredCount + "/5 ข้อ");
+        GUILayout.Label("เฉลยอ้างอิง Correct Answers ใน NPCData");
+        GUILayout.Space(8);
+        GUILayout.Label("กด F5 เพื่อปิดหน้าต่างนี้");
+        GUI.DragWindow();
     }
 
     private bool DevCanDecide()
