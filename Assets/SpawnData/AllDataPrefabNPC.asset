@@ -24,7 +24,7 @@ MonoBehaviour:
     - npc: {fileID: 11400000, guid: e11dca32546cc914eaad3978d8664d4f, type: 2}
       chance: 6
     - npc: {fileID: 11400000, guid: 376f102a78ad33f4bb89fe672bf362a0, type: 2}
-      chance: 100
+      chance: 10
     - npc: {fileID: 11400000, guid: 066fe417bc583764f839b1af4bd3827f, type: 2}
       chance: 6
     - npc: {fileID: 11400000, guid: 56b6d79eb7e670e4f9399b91653e4d8f, type: 2}
