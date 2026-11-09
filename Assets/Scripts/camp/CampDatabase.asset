@@ -17,149 +17,169 @@ MonoBehaviour:
     phoneNumber: 4617
     residents:
     - npcData: {fileID: 11400000, guid: 7884119caacc0f14caa21c2996939455, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 523f8f5cd16f7e3409b329555e92779a, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 523f8f5cd16f7e3409b329555e92779a, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: c353afea1fa1c1f4186b42b859d873ee, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: e99fe732eeb538540a647f5086d952c6, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: e99fe732eeb538540a647f5086d952c6, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A1-02
     phoneNumber: 9722
     residents:
     - npcData: {fileID: 11400000, guid: 1d1aaec74c1ff2b40935dcf3ee0b49d8, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: f0f49d78251470947b5e1b485aeafbfa, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: f0f49d78251470947b5e1b485aeafbfa, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 36a4eb84f9bd971449efb41d24b1e4b9, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 98f0d87d0a0084c45955f29febf734f1, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 98f0d87d0a0084c45955f29febf734f1, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A1-03
     phoneNumber: 4344
     residents:
     - npcData: {fileID: 11400000, guid: a366f3d826387cb4b9afbe73cf378030, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 92a1bb9aae5404642b94fe9d0051d5a4, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 92a1bb9aae5404642b94fe9d0051d5a4, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 6563465fd5f56654986a6c76a0b31144, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: be4356317feaf2f43a0b493a8f062105, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: be4356317feaf2f43a0b493a8f062105, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A2-01
     phoneNumber: 1981
     residents:
     - npcData: {fileID: 11400000, guid: edbba2f7696022b42a1de59ed4066673, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 6b86affe4c0f5334dba848d00b520a8e, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 6b86affe4c0f5334dba848d00b520a8e, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: f59b3d9145d0fac47bce65b3396e0c49, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 0780436abab3eab4f86fdf753b1a856d, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 0780436abab3eab4f86fdf753b1a856d, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A2-02
     phoneNumber: 7679
     residents:
     - npcData: {fileID: 11400000, guid: d66eb5478bff6424bb237c34ddbbb63b, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 56618d8cdb88c624592a37d368bbfe32, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 56618d8cdb88c624592a37d368bbfe32, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: dd03d6292a0e3404bbc12b9f35e5c2fe, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: e29c24d8b752b5542a5b5b7c477ada77, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: e29c24d8b752b5542a5b5b7c477ada77, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A2-03
     phoneNumber: 3123
     residents:
     - npcData: {fileID: 11400000, guid: 5ba0ad581ff6caa4bb0c6f8dc6a106f4, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: b8496ff0840d7de4e993d5fb1e4cddd1, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: b8496ff0840d7de4e993d5fb1e4cddd1, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 97485a434956eaf459b0b147a5254de0, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: a7c845d93307d7f46bbb8cc4bf76b8cb, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: a7c845d93307d7f46bbb8cc4bf76b8cb, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A3-01
     phoneNumber: 4949
     residents:
     - npcData: {fileID: 11400000, guid: 291af383af9911c4999b737ee8257c8f, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 96a851b2559168c48964377f228b5d6c, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 96a851b2559168c48964377f228b5d6c, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: fc194d58af0b1b6488cf0061f4d58abd, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 50a83cc1ce6cf57439711577eefae240, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 50a83cc1ce6cf57439711577eefae240, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: A3-02
     phoneNumber: 8412
     residents:
     - npcData: {fileID: 11400000, guid: e4929784ee3eb4048ba455d5d48ce166, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 35d67b5a4aac12b4bb97f83d815475ec, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 35d67b5a4aac12b4bb97f83d815475ec, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 50815bf818fa27c488a0edb26b8c4ab1, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: a5126a07fcaed984b8bb54c64c497fe2, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: a5126a07fcaed984b8bb54c64c497fe2, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: "\u0E01\u0E38\u0E0E\u0E341"
     phoneNumber: 0001
     residents:
     - npcData: {fileID: 11400000, guid: 176e00c83f7707f47ba84fdce70703ea, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: f1d0d996d3ccd89468a03329f7bfc310, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: f1d0d996d3ccd89468a03329f7bfc310, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: 0c30ee7f11023b4478d0c53f8205691a, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: c91a7b082df4ce449834522723d78f78, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: c91a7b082df4ce449834522723d78f78, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
   - roomCode: "\u0E01\u0E38\u0E0E\u0E342"
     phoneNumber: 0002
     residents:
     - npcData: {fileID: 11400000, guid: 2b5b939794e8e6b498fb4ac79eb2bab2, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 97e9664ef49bb684aa6401a3320949ff, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 97e9664ef49bb684aa6401a3320949ff, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
     - npcData: {fileID: 11400000, guid: dc9f6ac6c1774504a8db78bc4ed97c85, type: 2}
-      additionalNpcData: []
+      additionalNpcData:
+      - {fileID: 11400000, guid: 2c772b9ec69041947a5165d04e10507f, type: 2}
       hasDocument: 1
-      documentHolder: {fileID: 11400000, guid: 2c772b9ec69041947a5165d04e10507f, type: 2}
+      documentHolder: {fileID: 0}
       isAlive: 0
       isHomeToday: 0
