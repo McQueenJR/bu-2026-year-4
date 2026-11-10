@@ -1,5 +1,5 @@
 using UnityEngine;
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 using UnityEngine.InputSystem;
 #endif
 using System.Collections;
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
     [Header("End Day UI")]
     public EndDayUI endDayUI;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     [Header("Developer Tools (Editor Only)")]
     [SerializeField] private bool enableDeveloperHotkeys = true;
     private bool devSkipDayTriggered = false;
@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
         BeginNPCFlowOfTheDay();
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     // =====================================================
     // DEVELOPER HOTKEYS (Unity Editor only)
     // F1 = NPC truth/debug log
@@ -1151,7 +1151,7 @@ public class GameManager : MonoBehaviour
 
     public void StartNextDay()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         devSkipDayTriggered = false;
 #endif
         
