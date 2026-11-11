@@ -156,7 +156,7 @@ public void GenerateTodayApplicants()
 
     gameManager.npcPerDay = todayApplicants.Count;
 
-    // 5. สุ่มลำดับทั้งหมด (ตัวใน List / ผี / ตัวปกติ ปนกัน) ยกเว้น Event พิเศษที่ยังมาก่อน
+ 
     List<TodayApplicant> eventApplicants = todayApplicants
         .Where(x => x != null && dailySpecialEventApplicants.ContainsKey(x))
         .ToList();
@@ -164,8 +164,6 @@ public void GenerateTodayApplicants()
     List<TodayApplicant> otherApplicants = todayApplicants
         .Where(x => x != null && !dailySpecialEventApplicants.ContainsKey(x))
         .ToList();
-
-    ShuffleAvoidingAdjacentDuplicates(otherApplicants);
 
     todayApplicants.Clear();
     todayApplicants.AddRange(eventApplicants);
@@ -1064,24 +1062,29 @@ private List<DataPrefabNPC> GetAllAvailableNPCs()
         return true;
     }
 
-    // ลืมเอกสารได้เฉพาะ NPC Data ที่ผิดปกติช่องใบคำขอ
-    // ผิดปกติเฉพาะใบคำขอ: ต้องมีตัวจริงอยู่ในแคมป์
-    // มีความผิดปกติอื่นร่วมด้วย: ต้องมีตัวจริงหรือบัดดี้อยู่ในแคมป์
+    
+    
     private bool ShouldRollForgotDocument(TodayApplicant applicant)
     {
-        if (applicant == null || CampManager.Instance == null)
         if (applicant == null || !applicant.isGhost || CampManager.Instance == null)
             return false;
 
-        NPCData real = GetNPCDataFromPrefabData(applicant.npcData);
-        if (!HasDocumentAbnormality(real))
+       
+        NPCData prefabData = applicant.displayData;
+        if (!HasOnlyDocumentAbnormality(prefabData))
             return false;
 
-        bool realInCamp = CampManager.Instance.IsRealInCamp(real);
-        if (HasOnlyDocumentAbnormality(real))
-            return realInCamp;
+        // ตัวจริงที่ผีปลอมเป็น
+        NPCData real = applicant.ghostTarget != null
+            ? applicant.ghostTarget
+            : GetNPCDataFromPrefabData(applicant.npcData);
+        if (real == null)
+            return false;
 
-        return realInCamp || CampManager.Instance.HasBuddyInCamp(real);
+        if (CampManager.Instance.HasBuddyInCamp(real))
+            return true;
+
+        return CampManager.Instance.IsRealInCamp(real);
     }
 private bool ResolveApplicantPrefab(TodayApplicant a)
     {
